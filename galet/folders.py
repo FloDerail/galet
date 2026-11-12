@@ -27,6 +27,29 @@ _SVG = """<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewB
 """
 
 
+def palette(settings):
+    """The folder colours offered in menus (editable in Settings → Folders)."""
+    custom = settings.get("folder_palette")
+    if isinstance(custom, list) and custom:
+        return [(str(c.get("name", "")), str(c.get("color"))) for c in custom if isinstance(c, dict) and c.get("color")]
+    return list(PALETTE)
+
+
+def effective_color(item, settings, tagstore):
+    """Colour to draw a folder with: its own colour, else its tag's colour (optional),
+    else the default folder colour (optional), else None (theme icon)."""
+    if not item.is_dir:
+        return None
+    if item.folder_color:
+        return item.folder_color
+    if settings.get("folder_color_from_tags"):
+        for tag in item.tags:
+            color = tagstore.color_of(tag)
+            if color:
+                return color
+    return settings.get("default_folder_color") or None
+
+
 def _darker(color, factor=0.78):
     value = color.lstrip("#")
     red, green, blue = (int(value[i:i + 2], 16) for i in (0, 2, 4))

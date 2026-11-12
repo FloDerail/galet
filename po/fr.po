@@ -1051,3 +1051,93 @@ msgstr "Code source"
 
 msgid "A Finder-inspired file manager with tabs, columns and colour tags.\nFree and open source software."
 msgstr "Un gestionnaire de fichiers inspiré du Finder, avec onglets, colonnes et tags de couleur.\nLogiciel libre et open source."
+
+msgid "No tag suggestion"
+msgstr "Aucune suggestion de tag"
+
+msgid "Suggested Tags"
+msgstr "Tags suggérés"
+
+msgid "Untick what you don't want, then apply."
+msgstr "Décochez ce que vous ne voulez pas, puis appliquez."
+
+msgid "Suggest Tags (AI)"
+msgstr "Suggérer des tags (IA)"
+
+msgid "Folder Colours"
+msgstr "Couleurs des dossiers"
+
+msgid "Right-click a folder → Folder Colour to colour it."
+msgstr "Clic droit sur un dossier → Couleur du dossier pour le colorer."
+
+msgid "Colour folders with their tag colour"
+msgstr "Colorer les dossiers avec la couleur de leur tag"
+
+msgid "A folder tagged “Red” shows a red folder icon"
+msgstr "Un dossier avec le tag « Rouge » s’affiche en rouge"
+
+msgid "Theme icon"
+msgstr "Icône du thème"
+
+msgid "Default colour of all folders"
+msgstr "Couleur par défaut de tous les dossiers"
+
+msgid "Add a Folder Colour"
+msgstr "Ajouter une couleur de dossier"
+
+msgid "Colours in the Menu"
+msgstr "Couleurs proposées dans le menu"
+
+msgid "Reset"
+msgstr "Réinitialiser"
+
+msgid "Remove"
+msgstr "Supprimer"
+
+msgid "AI"
+msgstr "IA"
+
+msgid "Local AI (optional)"
+msgstr "IA locale (facultative)"
+
+msgid "Search in plain language and get tag suggestions. Galet only talks to Ollama running on your own computer: your files never leave it."
+msgstr "Recherchez en langage naturel et obtenez des suggestions de tags. Galet ne communique qu’avec Ollama installé sur votre ordinateur : vos fichiers ne le quittent jamais."
+
+msgid "Enable AI features"
+msgstr "Activer les fonctions d’IA"
+
+msgid "Ollama address"
+msgstr "Adresse d’Ollama"
+
+msgid "Model"
+msgstr "Modèle"
+
+msgid "Refresh the list of models"
+msgstr "Actualiser la liste des modèles"
+
+msgid "Install Ollama"
+msgstr "Installer Ollama"
+
+msgid "In a terminal: install Ollama, then download a model."
+msgstr "Dans un terminal : installez Ollama, puis téléchargez un modèle."
+
+msgid "Group By"
+msgstr "Grouper par"
+
+msgid "Contents"
+msgstr "Contenu"
+
+msgid "Also search inside documents (text, PDF, office files)"
+msgstr "Chercher aussi dans le contenu des documents (texte, PDF, bureautique)"
+
+msgid "Ask the local AI (Ollama)"
+msgstr "Demander à l’IA locale (Ollama)"
+
+msgid "Describe what you are looking for, e.g. “PDF invoices from this week”"
+msgstr "Décrivez ce que vous cherchez, par ex. « les factures PDF de cette semaine »"
+
+msgid "Asking the local AI…"
+msgstr "Question posée à l’IA locale…"
+
+msgid "The local AI is not available: {error}"
+msgstr "L’IA locale n’est pas disponible : {error}"

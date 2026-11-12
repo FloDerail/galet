@@ -272,10 +272,12 @@ def _extract(window, items):
                 try:
                     shutil.unpack_archive(item.path, target)
                 except (shutil.ReadError, ValueError):
-                    tool = shutil.which("7z")
+                    from .sandbox import find_program
+
+                    tool = find_program("7z")
                     if tool is None:
                         raise OSError(_("unsupported archive format"))
-                    subprocess.run([tool, "x", "-y", f"-o{target}", item.path], check=True,
+                    subprocess.run([*tool, "x", "-y", f"-o{target}", item.path], check=True,
                                    stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
                 _flatten_single_folder(target)
                 created.append(target)

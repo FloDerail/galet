@@ -2,8 +2,11 @@
 and smart folders (saved searches shown in the sidebar)."""
 
 import os
+import re
+import subprocess
 import threading
 import time
+import zipfile
 
 from gi.repository import Gio, GLib, GObject
 
@@ -19,6 +22,52 @@ DOCUMENT_HINTS = ("text/", "pdf", "opendocument", "msword", "officedocument", "m
                   "rtf", "epub", "markdown")
 ARCHIVE_EXTENSIONS = (".zip", ".tar", ".gz", ".tgz", ".bz2", ".xz", ".7z", ".rar", ".zst")
 MAX_RESULTS = 3000
+MAX_TEXT_BYTES = 8 * 1024 * 1024
+MAX_DOCUMENT_BYTES = 60 * 1024 * 1024
+TEXT_EXTENSIONS = (".txt", ".md", ".csv", ".tsv", ".log", ".json", ".xml", ".html", ".htm", ".py", ".js", ".ts",
+                   ".css", ".sh", ".c", ".h", ".cpp", ".java", ".rs", ".go", ".php", ".rb", ".yml", ".yaml",
+                   ".ini", ".conf", ".tex", ".srt", ".rtf")
+OFFICE_PARTS = {
+    ".odt": ("content.xml",), ".ods": ("content.xml",), ".odp": ("content.xml",), ".odg": ("content.xml",),
+    ".docx": ("word/document.xml",), ".xlsx": ("xl/sharedStrings.xml",), ".pptx": ("ppt/slides/",),
+}
+_TAGS = re.compile(r"<[^>]+>")
+PDFTOTEXT = None  # resolved on first use (host program when running in Flatpak)
+
+
+def _pdftotext():
+    global PDFTOTEXT
+    if PDFTOTEXT is None:
+        from .sandbox import find_program
+
+        PDFTOTEXT = find_program("pdftotext") or []
+    return PDFTOTEXT
+
+
+def document_text(path, size):
+    """Plain text of a document for content search ("" if unsupported)."""
+    lower = path.lower()
+    try:
+        if lower.endswith(TEXT_EXTENSIONS) and size <= MAX_TEXT_BYTES:
+            with open(path, "rb") as handle:
+                return handle.read(MAX_TEXT_BYTES).decode("utf-8", "ignore")
+        if size > MAX_DOCUMENT_BYTES:
+            return ""
+        if lower.endswith(".pdf") and _pdftotext():
+            result = subprocess.run([*_pdftotext(), "-q", "-l", "80", path, "-"], capture_output=True, timeout=15,
+                                    check=False)
+            return result.stdout.decode("utf-8", "ignore")
+        extension = os.path.splitext(lower)[1]
+        if extension in OFFICE_PARTS:
+            parts = []
+            with zipfile.ZipFile(path) as archive:
+                for name in archive.namelist():
+                    if any(name == p or (p.endswith("/") and name.startswith(p)) for p in OFFICE_PARTS[extension]):
+                        parts.append(_TAGS.sub(" ", archive.read(name).decode("utf-8", "ignore")))
+            return " ".join(parts)
+    except (OSError, zipfile.BadZipFile, subprocess.SubprocessError, KeyError):
+        return ""
+    return ""
 SKIPPED_ROOT_DIRS = {"/proc", "/sys", "/dev", "/run", "/snap", "/tmp/.X11-unix"}
 
 
@@ -62,20 +111,24 @@ def date_matches(date, mtime, now=None):
 class SearchQuery:
     """What to look for. ``root`` is a local folder path ("" = home folder)."""
 
-    __slots__ = ("text", "root", "kind", "date")
+    __slots__ = ("text", "root", "kind", "date", "content", "recursive")
 
-    def __init__(self, text="", root="", kind="any", date="any"):
+    def __init__(self, text="", root="", kind="any", date="any", content=False, recursive=True):
         self.text = text.strip()
         self.root = root or GLib.get_home_dir()
         self.kind = kind
         self.date = date
+        self.content = bool(content)
+        self.recursive = bool(recursive)
 
     def to_dict(self):
-        return {"text": self.text, "root": self.root, "kind": self.kind, "date": self.date}
+        return {"text": self.text, "root": self.root, "kind": self.kind, "date": self.date,
+                "content": self.content, "recursive": self.recursive}
 
     @classmethod
     def from_dict(cls, data):
-        return cls(data.get("text", ""), data.get("root", ""), data.get("kind", "any"), data.get("date", "any"))
+        return cls(data.get("text", ""), data.get("root", ""), data.get("kind", "any"), data.get("date", "any"),
+                   data.get("content", False), data.get("recursive", True))
 
     def __eq__(self, other):
         return isinstance(other, SearchQuery) and self.to_dict() == other.to_dict()
@@ -136,10 +189,18 @@ class SearchModel(GObject.Object):
                     is_dir = entry.is_dir(follow_symlinks=False)
                 except OSError:
                     continue
-                if is_dir and entry.path not in SKIPPED_ROOT_DIRS and not os.path.ismount(entry.path):
+                if (is_dir and query.recursive and entry.path not in SKIPPED_ROOT_DIRS
+                        and not os.path.ismount(entry.path)):
                     stack.append(entry.path)
                 if needle and needle not in fold(name):
-                    continue
+                    if not query.content or is_dir:
+                        continue
+                    try:
+                        size = entry.stat(follow_symlinks=False).st_size
+                    except OSError:
+                        continue
+                    if needle not in fold(document_text(entry.path, size)):
+                        continue
                 if query.kind != "any":
                     content_type = "inode/directory" if is_dir else Gio.content_type_guess(name, None)[0]
                     if not kind_matches(query.kind, content_type, is_dir, name):

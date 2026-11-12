@@ -165,8 +165,8 @@ class PathBar(Gtk.ScrolledWindow):
 class FolderColorPicker(Gtk.Box):
     """Row of folder colours in the context menu (first button = default colour)."""
 
-    def __init__(self, tagstore, current, on_pick):
-        from .folders import PALETTE
+    def __init__(self, tagstore, current, on_pick, settings=None):
+        from .folders import PALETTE, palette
 
         super().__init__(spacing=0, halign=Gtk.Align.CENTER, margin_top=2, margin_bottom=2)
         self.add_css_class("tag-picker")
@@ -175,7 +175,7 @@ class FolderColorPicker(Gtk.Box):
         reset.add_css_class("circular")
         reset.connect("clicked", lambda _b: on_pick(None))
         self.append(reset)
-        for name, color in PALETTE:
+        for name, color in (palette(settings) if settings is not None else PALETTE):
             dots = TagDots(tagstore, size=16)
             dots.set_colors([color])
             dots.marked = color == current

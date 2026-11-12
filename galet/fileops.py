@@ -1,6 +1,5 @@
 """File operations: open, rename, trash, copy/move with progress, undo."""
 
-import shutil
 import subprocess
 import threading
 
@@ -79,11 +78,13 @@ def open_terminal(window, gfile):
     path = gfile.get_path() if gfile else None
     if not path:
         return
+    from .sandbox import find_program
+
     for program in ("ptyxis", "kgx", "gnome-terminal", "xdg-terminal-exec"):
-        executable = shutil.which(program)
-        if executable:
+        command = find_program(program)
+        if command:
             args = [] if program == "xdg-terminal-exec" else [f"--working-directory={path}"]
-            subprocess.Popen([executable, *args], cwd=path, start_new_session=True)
+            subprocess.Popen([*command, *args], cwd=path, start_new_session=True)
             return
     window.toast(_("No terminal application found."))
 

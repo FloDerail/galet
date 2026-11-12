@@ -31,7 +31,9 @@ GVFS_ROOT = os.path.join(GLib.get_user_runtime_dir(), "gvfs") + os.sep
 
 def _load_thumbnailers():
     table = {}
-    dirs = [Path(d) / "thumbnailers" for d in GLib.get_system_data_dirs()]
+    from .sandbox import IN_FLATPAK, data_dirs
+
+    dirs = [Path(d) / "thumbnailers" for d in data_dirs()]
     dirs.insert(0, Path(GLib.get_user_data_dir()) / "thumbnailers")
     for directory in dirs:
         for path in sorted(directory.glob("*.thumbnailer")):
@@ -42,7 +44,7 @@ def _load_thumbnailers():
             except (configparser.Error, KeyError, UnicodeDecodeError):
                 continue
             try_exec = section.get("TryExec")
-            if try_exec and not GLib.find_program_in_path(try_exec):
+            if try_exec and not IN_FLATPAK and not GLib.find_program_in_path(try_exec):
                 continue
             command = section.get("Exec")
             if not command:
@@ -110,14 +112,17 @@ class Thumbnailer:
         if target.exists():
             return str(target)
         CACHE.mkdir(parents=True, exist_ok=True)
-        with tempfile.TemporaryDirectory(prefix="galet-thumb-") as tmp:
+        # The temporary folder lives in the cache so host programs can write to it.
+        with tempfile.TemporaryDirectory(prefix="galet-thumb-", dir=str(CACHE.parent)) as tmp:
             output = os.path.join(tmp, "thumb.png")
             args = []
             for part in shlex.split(command):
                 part = (part.replace("%s", str(SIZE)).replace("%u", uri)
                         .replace("%i", path).replace("%o", output))
                 args.append(part)
-            completed = subprocess.run(args, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+            from .sandbox import host_command
+
+            completed = subprocess.run(host_command(args), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                                        timeout=30, check=False)
             if completed.returncode != 0 or not os.path.exists(output):
                 FAIL_DIR.mkdir(parents=True, exist_ok=True)

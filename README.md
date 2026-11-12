@@ -52,6 +52,7 @@ staying a native GTK4 / libadwaita application that blends in with GNOME and Zor
 **Search, Spotlight-style**
 - Filter the current folder, or search **all subfolders** / your **whole home folder**, by name,
   kind (documents, images, PDF, music, videos, archives…) and date.
+- **Search inside documents**: text files, PDF, LibreOffice and Word/Excel/PowerPoint files.
 - Save a search as a **Smart Folder** in the sidebar.
 
 **Network**
@@ -75,11 +76,22 @@ staying a native GTK4 / libadwaita application that blends in with GNOME and Zor
   **Go** shortcuts (<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>H</kbd>/<kbd>D</kbd>/<kbd>O</kbd>, <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>L</kbd>…),
   **Merge All Windows**, drag a tab out to open it in a new window.
 
+**Folders**
+- **Group by** kind, date or tag in the **icon view** too.
+- Folders can **take the colour of their tag**, a **default colour** for all folders, and your own
+  **folder colour palette** (Settings → Folders).
+
+**Optional local AI** (off by default, Settings → AI)
+- **Plain-language search** ("PDF invoices from this week") and **tag suggestions**, powered by
+  [Ollama](https://ollama.com) running on your own computer: your files never leave it.
+
 **And also**
 - **Send to Phone** through Zorin Connect / GSConnect (AirDrop-like).
 - Settings window (<kbd>Ctrl</kbd>+<kbd>,</kbd>): start folder, default view, icon size, sidebar items, tags,
   servers, extensions, hidden files, folders on top.
-- Log file for bug reports: `~/.cache/galet/galet.log`. Translations: English, French.
+- Log file for bug reports: `~/.cache/galet/galet.log`.
+- **Languages**: English, French, Spanish, German, Italian, Portuguese.
+- **Flatpak** manifest ready for Flathub (`flatpak/`).
 
 ### How tags are stored
 
@@ -89,6 +101,16 @@ is moved or renamed, and Dolphin can read them too. Galet keeps a small index in
 `~/.local/share/galet/index.json` so the sidebar can list tagged files instantly.
 On filesystems without extended attributes (FAT, some network shares) the
 index is used as the storage.
+
+## Screenshots
+
+| Grouped icon view, coloured folders | Search inside documents |
+|---|---|
+| ![Grouped icon view](docs/screenshots/icones-groupees.png) | ![Content search](docs/screenshots/recherche-contenu.png) |
+| **Preview pane & quick actions** | **Column view** |
+| ![Preview pane](docs/screenshots/panneau-apercu.png) | ![Column view](docs/screenshots/colonnes.png) |
+| **Gallery view** | **Settings → Folders** |
+| ![Gallery](docs/screenshots/galerie.png) | ![Folder settings](docs/screenshots/reglages-dossiers.png) |
 
 ## Install
 
@@ -118,6 +140,14 @@ Install for your user (menu entry + `galet` command):
 ./install.sh             # install
 ./install.sh --default   # install and use Galet as the default file manager
 ./install.sh --remove    # uninstall
+```
+
+Or build the **Flatpak** (needs `flatpak-builder` and the GNOME 50 SDK):
+
+```sh
+flatpak install --user flathub org.flatpak.Builder org.gnome.Sdk//50
+flatpak run org.flatpak.Builder --user --install --force-clean build-dir flatpak/io.github.FloDerail.Galet.yml
+flatpak run io.github.FloDerail.Galet
 ```
 
 To go back to GNOME Files as the default: `xdg-mime default org.gnome.Nautilus.desktop inode/directory`.
@@ -155,6 +185,8 @@ galet/
   operations.py    progress of long file operations
   dnd.py           drag and drop
   phone.py         Send to Phone (Zorin Connect / GSConnect)
+  ai.py            optional local AI through Ollama
+  sandbox.py       Flatpak helpers (host programs)
   themes.py        System / macOS / Windows 11 / Custom themes
   folders.py       coloured folders
   preferences.py   Settings window
@@ -170,11 +202,13 @@ Contributions are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Roadmap
 
-- [ ] Full-text search in document contents (LocalSearch)
-- [ ] Grouping in icon view (needs GTK section support in GridView)
-- [ ] More translations (via Weblate)
-- [ ] Flatpak packaging and Flathub release
-- [ ] Optional local AI features (natural-language search, tag suggestions)
+- [x] Search inside document contents
+- [x] Grouping in icon view
+- [x] Spanish, German, Italian and Portuguese translations
+- [x] Flatpak packaging
+- [x] Optional local AI (natural-language search, tag suggestions)
+- [ ] Publish on Flathub
+- [ ] Translation platform (Weblate) for more languages
 
 ## Author
 

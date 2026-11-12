@@ -2,6 +2,25 @@
 
 Galet — logiciel libre et open source de [Florian Dérail](https://florianderail.fr).
 
+## 0.4.0 — Recherche dans le contenu, IA locale, Flatpak
+
+### 🇫🇷 Nouveautés
+- 🔍 **Recherche dans le contenu** des documents : textes, PDF, LibreOffice, Word/Excel/PowerPoint
+  (bouton « document » dans la barre de recherche).
+- 🗂️ **Regroupement aussi en vue Icônes** (par type, date ou tag), via le bouton Trier / Grouper.
+- 📁 **Dossiers configurables** (Réglages → Dossiers) : couleur du tag appliquée au dossier, couleur
+  par défaut de tous les dossiers, palette de couleurs personnalisable.
+- 🤖 **IA locale facultative** avec Ollama : recherche en langage naturel et suggestions de tags.
+  Désactivée par défaut, rien ne quitte votre ordinateur.
+- 🌍 **4 nouvelles langues** : espagnol, allemand, italien, portugais.
+- 📦 **Flatpak** : manifeste et fiche AppStream validée, prêts pour Flathub.
+- 🐛 Corrigé : la barre du haut pouvait devenir transparente/blanche avec le thème Système ;
+  la barre de recherche débordait sur les fenêtres moyennes.
+
+### 🇬🇧 What's new
+- Search inside documents, grouping in icon view, configurable folder colours, optional local AI
+  (Ollama), Spanish/German/Italian/Portuguese translations, Flatpak packaging, bug fixes.
+
 ## 0.3.0 — Logo
 
 - 🇫🇷 Nouveau **logo**, doux et épuré : un galet lavande-bleu avec le contour d'un dossier.

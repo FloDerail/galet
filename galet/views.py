@@ -7,6 +7,7 @@ from gi.repository import Adw, Gdk, Gio, GLib, GObject, Gtk, Pango
 from . import dnd
 from .i18n import _
 from .model import DirectoryModel, FileItem, make_sorter
+from .folders import effective_color
 from .folders import icon_path as folder_icon_path
 from .thumbnails import THUMBNAILER
 from .widgets import TagDots
@@ -53,9 +54,15 @@ def view_sorter(settings):
     return make_sorter(SORT_KEYS.get(settings.get("sort_by", "name")), folders_first=settings.get("folders_first"))
 
 
+FOLDER_STYLE = {"settings": None, "tagstore": None}  # set by the application at startup
+
+
 def set_item_image(image, item, size):
-    if item.folder_color:
-        image.set_from_file(folder_icon_path(item.folder_color))
+    color = item.folder_color
+    if item.is_dir and FOLDER_STYLE["settings"] is not None:
+        color = effective_color(item, FOLDER_STYLE["settings"], FOLDER_STYLE["tagstore"])
+    if color:
+        image.set_from_file(folder_icon_path(color))
         return
     if not item.thumbnail and size >= 32:
         THUMBNAILER.request(item)  # the cell refreshes when the thumbnail is ready
@@ -274,7 +281,8 @@ class _SelectionView:
             self.selection.select_item(position, True)
         self.pane.popup_context_menu(cell, x, y, on_item=True)
 
-    def _on_background_menu(self, _gesture, _n, x, y):
+    def _on_background_menu(self, gesture, _n, x, y):
+        gesture.set_state(Gtk.EventSequenceState.CLAIMED)
         self.selection.unselect_all()
         self.pane.popup_context_menu(self.view, x, y, on_item=False)
 
@@ -432,6 +440,148 @@ def group_by_tags(item, tagstore):
 
 
 GROUPS = {"kind": group_by_kind, "date": group_by_date, "tags": group_by_tags}
+
+
+# ------------------------------------------------ grouped icon view (sections)
+
+class _IconSection(_SelectionView, Gtk.Box):
+    """One group (header + grid) of the grouped icon view."""
+
+    __gsignals__ = {
+        "activate-item": (GObject.SignalFlags.RUN_FIRST, None, (FileItem,)),
+        "selection-changed": (GObject.SignalFlags.RUN_FIRST, None, ()),
+    }
+
+    def __init__(self, pane, model, key, key_of):
+        super().__init__(orientation=Gtk.Orientation.VERTICAL)
+        self.key = key
+        settings, tagstore = pane.settings, pane.tagstore
+        group_filter = Gtk.CustomFilter.new(lambda item, *_a: key_of(item) == key)
+        self.sorted = Gtk.SortListModel(model=Gtk.FilterListModel(model=model, filter=group_filter),
+                                        sorter=view_sorter(settings))
+        self.selection = Gtk.MultiSelection(model=self.sorted)
+        self.view = Gtk.GridView(model=self.selection, max_columns=64, enable_rubberband=True,
+                                 factory=make_factory(lambda: GridCell(tagstore, settings), self.attach_cell))
+        self.view.add_css_class("galet-grid")
+        self.view.set_vexpand(False)
+        self.set_vexpand(False)
+        self.header = Gtk.Label(label=key[1], xalign=0, css_classes=["heading", "galet-group-header"])
+        self._setup_common(pane)
+
+    def _place_view(self):
+        self.append(self.header)
+        self.append(self.view)
+
+
+class GroupedIconView(Gtk.ScrolledWindow):
+    """Icon view split into sections (kind, date or tag), like Finder's "Use Groups"."""
+
+    __gsignals__ = {
+        "activate-item": (GObject.SignalFlags.RUN_FIRST, None, (FileItem,)),
+        "selection-changed": (GObject.SignalFlags.RUN_FIRST, None, ()),
+    }
+
+    def __init__(self, pane, model, group):
+        super().__init__(hscrollbar_policy=Gtk.PolicyType.NEVER)
+        self.pane = pane
+        self.model = model
+        self.key_of = lambda item: group(item, pane.tagstore)
+        self.box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, valign=Gtk.Align.START)
+        self.set_child(self.box)
+        self.sections = {}
+        self._source = 0
+        self._busy = False
+        self._columns = 0
+        icon_size = int(pane.settings.get("icon_size", ICON_SIZE_GRID))
+        self._cell_width = max(96, icon_size + 40) + 16
+        model.connect("items-changed", lambda *_a: self._queue())
+        secondary_click(self, lambda _g, _n, x, y: pane.popup_context_menu(self, x, y, on_item=False))
+        dnd.add_drop_target(self, pane.current_dir, pane.window.drop_files)
+        self._rebuild()
+
+    def do_size_allocate(self, width, height, baseline):
+        Gtk.ScrolledWindow.do_size_allocate(self, width, height, baseline)
+        # GridView sizes itself as if it had one column when it is not scrollable:
+        # tell each section how many columns really fit so it gets the right height.
+        columns = max(1, (width - 24) // self._cell_width)
+        if columns != self._columns:
+            self._columns = columns
+            GLib.idle_add(self._apply_columns)
+
+    def _apply_columns(self):
+        for section in self.sections.values():
+            section.view.set_min_columns(self._columns)
+            section.view.set_max_columns(self._columns)
+        return GLib.SOURCE_REMOVE
+
+    def _queue(self):
+        if not self._source:
+            self._source = GLib.timeout_add(80, self._rebuild)
+
+    def _rebuild(self):
+        self._source = 0
+        keys = {self.key_of(self.model.get_item(i)) for i in range(self.model.get_n_items())}
+        for key in [k for k in self.sections if k not in keys]:
+            self.box.remove(self.sections.pop(key))
+        for key in sorted(keys):
+            if key not in self.sections:
+                section = _IconSection(self.pane, self.model, key, self.key_of)
+                section.connect("activate-item", lambda _s, item: self.emit("activate-item", item))
+                section.connect("selection-changed", self._on_section_selection)
+                if self._columns:
+                    section.view.set_min_columns(self._columns)
+                    section.view.set_max_columns(self._columns)
+                self.sections[key] = section
+        # Keep sections in group order.
+        previous = None
+        for key in sorted(self.sections):
+            section = self.sections[key]
+            if section.get_parent() is None:
+                self.box.insert_child_after(section, previous)
+            else:
+                self.box.reorder_child_after(section, previous)
+            previous = section
+        return GLib.SOURCE_REMOVE
+
+    def _on_section_selection(self, section):
+        if self._busy:
+            return
+        if section.get_selected_items():
+            self._busy = True
+            for other in self.sections.values():
+                if other is not section:
+                    other.selection.unselect_all()
+            self._busy = False
+        self.emit("selection-changed")
+
+    def _ordered(self):
+        return [self.sections[k] for k in sorted(self.sections)]
+
+    def get_selected_items(self):
+        return [item for section in self._ordered() for item in section.get_selected_items()]
+
+    def select_prefix(self, prefix):
+        return any(section.select_prefix(prefix) for section in self._ordered())
+
+    def select_file(self, gfile):
+        return any(section.select_file(gfile) for section in self._ordered())
+
+    def find_cell(self, item):
+        for section in self._ordered():
+            cell = section.find_cell(item)
+            if cell is not None:
+                return cell
+        return None
+
+    def focus_view(self):
+        sections = self._ordered()
+        if sections:
+            sections[0].focus_view()
+
+    def teardown(self):
+        if self._source:
+            GLib.source_remove(self._source)
+            self._source = 0
 
 
 # ------------------------------------------------------------------- gallery

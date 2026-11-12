@@ -1,0 +1,1317 @@
+# German translation for Galet.
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: de\n"
+
+#: galet/application.py:207
+msgid "A Finder-inspired file manager with tabs, columns and colour tags.\nFree and open source software."
+msgstr "Ein vom Finder inspirierter Dateimanager mit Reitern, Spalten und Farbmarkierungen.\nFreie und quelloffene Software."
+
+#: galet/application.py:215
+msgid "Source Code"
+msgstr "Quellcode"
+
+#: galet/dialogs.py:19
+msgid "{n} item"
+msgstr "{n} Objekt"
+
+#: galet/dialogs.py:19
+msgid "{n} items"
+msgstr "{n} Objekte"
+
+#: galet/dialogs.py:20
+msgid "Tags"
+msgstr "Tags"
+
+#: galet/dialogs.py:52
+msgid "No Color"
+msgstr "Keine Farbe"
+
+#: galet/dialogs.py:54
+msgid "New Tag"
+msgstr "Neuer Tag"
+
+#: galet/dialogs.py:78
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: galet/dialogs.py:79
+msgid "Apply"
+msgstr "Anwenden"
+
+#: galet/dialogs.py:99
+msgid "Could not change tags: {error}"
+msgstr "Tags konnten nicht geändert werden: {error}"
+
+#: galet/dialogs.py:107
+msgid "Delete Tag “{name}”?"
+msgstr "Tag „{name}“ löschen?"
+
+#: galet/dialogs.py:108
+msgid "The tag will be removed from all files."
+msgstr "Der Tag wird von allen Dateien entfernt."
+
+#: galet/dialogs.py:110
+msgid "Delete"
+msgstr "Löschen"
+
+#: galet/dialogs.py:122
+msgid "No tag suggestion"
+msgstr "Kein Tag-Vorschlag"
+
+#: galet/dialogs.py:124
+msgid "Suggested Tags"
+msgstr "Vorgeschlagene Tags"
+
+#: galet/dialogs.py:125
+msgid "Untick what you don't want, then apply."
+msgstr "Entfernen Sie die Haken bei unerwünschten Tags und wenden Sie dann an."
+
+#: galet/fileops.py:34
+msgid "Nothing to undo"
+msgstr "Nichts rückgängig zu machen"
+
+#: galet/fileops.py:38
+msgid "Undone: {action}"
+msgstr "Rückgängig gemacht: {action}"
+
+#: galet/fileops.py:52
+msgid "Could not open “{name}”: {error}"
+msgstr "„{name}“ konnte nicht geöffnet werden: {error}"
+
+#: galet/fileops.py:65
+msgid "Quick Look needs the “gnome-sushi” package."
+msgstr "Die Schnellansicht benötigt das Paket „gnome-sushi“."
+
+#: galet/fileops.py:89
+msgid "No terminal application found."
+msgstr "Keine Terminal-Anwendung gefunden."
+
+#: galet/fileops.py:149
+msgid "Could not rename: {error}"
+msgstr "Umbenennen fehlgeschlagen: {error}"
+
+#: galet/fileops.py:154
+msgid "Rename"
+msgstr "Umbenennen"
+
+#: galet/fileops.py:167
+msgid "untitled folder"
+msgstr "Unbenannter Ordner"
+
+#: galet/fileops.py:173
+msgid "Could not create the folder: {error}"
+msgstr "Der Ordner konnte nicht erstellt werden: {error}"
+
+#: galet/fileops.py:175
+msgid "New Folder"
+msgstr "Neuer Ordner"
+
+#: galet/fileops.py:189
+msgid "New Folder With Items"
+msgstr "Neuer Ordner mit Objekten"
+
+#: galet/fileops.py:225
+msgid "Could not move to the trash: {error}"
+msgstr "Verschieben in den Papierkorb fehlgeschlagen: {error}"
+
+#: galet/fileops.py:228
+msgid "Move to Trash"
+msgstr "In den Papierkorb verschieben"
+
+#: galet/fileops.py:231
+msgid "{n} item moved to the trash"
+msgstr "{n} Objekt in den Papierkorb verschoben"
+
+#: galet/fileops.py:231
+msgid "{n} items moved to the trash"
+msgstr "{n} Objekte in den Papierkorb verschoben"
+
+#: galet/fileops.py:284
+msgid "Could not restore: {error}"
+msgstr "Wiederherstellen fehlgeschlagen: {error}"
+
+#: galet/fileops.py:287
+msgid "{n} item put back"
+msgstr "{n} Objekt wiederhergestellt"
+
+#: galet/fileops.py:287
+msgid "{n} items put back"
+msgstr "{n} Objekte wiederhergestellt"
+
+#: galet/fileops.py:313
+msgid "Putting Back"
+msgstr "Wiederherstellen"
+
+#: galet/fileops.py:341
+msgid "Emptying the Trash"
+msgstr "Papierkorb wird geleert"
+
+#: galet/fileops.py:344
+msgid "Empty the Trash?"
+msgstr "Papierkorb leeren?"
+
+#: galet/fileops.py:344
+msgid "All items in the trash will be permanently deleted."
+msgstr "Alle Objekte im Papierkorb werden endgültig gelöscht."
+
+#: galet/fileops.py:345
+msgid "Empty Trash"
+msgstr "Papierkorb leeren"
+
+#: galet/fileops.py:361
+msgid "Deleting"
+msgstr "Löschen"
+
+#: galet/fileops.py:363
+msgid "Permanently delete {n} item?"
+msgstr "{n} Objekt endgültig löschen?"
+
+#: galet/fileops.py:363
+msgid "Permanently delete {n} items?"
+msgstr "{n} Objekte endgültig löschen?"
+
+#: galet/fileops.py:364
+msgid "This cannot be undone."
+msgstr "Dies kann nicht rückgängig gemacht werden."
+
+#: galet/fileops.py:376
+msgid "Path copied"
+msgstr "Pfad kopiert"
+
+#: galet/fileops.py:405
+msgid "Nothing to paste"
+msgstr "Nichts zum Einfügen"
+
+#: galet/fileops.py:446
+msgid "{name} copy{ext}"
+msgstr "{name} Kopie{ext}"
+
+#: galet/fileops.py:448
+msgid "{name} copy {n}{ext}"
+msgstr "{name} Kopie {n}{ext}"
+
+#: galet/fileops.py:509
+msgid "“{name}” already exists"
+msgstr "„{name}“ existiert bereits"
+
+#: galet/fileops.py:510
+msgid "An item with the same name already exists in this location."
+msgstr "An diesem Ort existiert bereits ein Objekt mit demselben Namen."
+
+#: galet/fileops.py:511
+msgid "Apply to all"
+msgstr "Auf alle anwenden"
+
+#: galet/fileops.py:513
+msgid "Skip"
+msgstr "Überspringen"
+
+#: galet/fileops.py:514
+msgid "Keep Both"
+msgstr "Beide behalten"
+
+#: galet/fileops.py:515
+msgid "Replace"
+msgstr "Ersetzen"
+
+#: galet/fileops.py:541
+msgid "Moving {n} item"
+msgstr "{n} Objekt wird verschoben"
+
+#: galet/fileops.py:541
+msgid "Moving {n} items"
+msgstr "{n} Objekte werden verschoben"
+
+#: galet/fileops.py:542
+msgid "Copying {n} item"
+msgstr "{n} Objekt wird kopiert"
+
+#: galet/fileops.py:542
+msgid "Copying {n} items"
+msgstr "{n} Objekte werden kopiert"
+
+#: galet/fileops.py:550
+msgid "{current} of {total} — {name}"
+msgstr "{current} von {total} — {name}"
+
+#: galet/fileops.py:555
+msgid "cannot copy a folder into itself"
+msgstr "Ein Ordner kann nicht in sich selbst kopiert werden"
+
+#: galet/fileops.py:602
+msgid "Some items could not be copied: {error}"
+msgstr "Einige Objekte konnten nicht kopiert werden: {error}"
+
+#: galet/fileops.py:606
+msgid "{n} item moved"
+msgstr "{n} Objekt verschoben"
+
+#: galet/fileops.py:606
+msgid "{n} items moved"
+msgstr "{n} Objekte verschoben"
+
+#: galet/fileops.py:609
+msgid "{n} item copied"
+msgstr "{n} Objekt kopiert"
+
+#: galet/fileops.py:609
+msgid "{n} items copied"
+msgstr "{n} Objekte kopiert"
+
+#: galet/fileops.py:611
+msgid "Move"
+msgstr "Verschieben"
+
+#: galet/fileops.py:611
+msgid "Copy"
+msgstr "Kopieren"
+
+#: galet/fileops.py:634
+msgid "Moving Back"
+msgstr "Zurückverschieben"
+
+#: galet/folders.py:17
+msgid "Red"
+msgstr "Rot"
+
+#: galet/folders.py:17
+msgid "Orange"
+msgstr "Orange"
+
+#: galet/folders.py:17
+msgid "Yellow"
+msgstr "Gelb"
+
+#: galet/folders.py:18
+msgid "Green"
+msgstr "Grün"
+
+#: galet/folders.py:18
+msgid "Teal"
+msgstr "Türkis"
+
+#: galet/folders.py:18
+msgid "Blue"
+msgstr "Blau"
+
+#: galet/folders.py:19
+msgid "Purple"
+msgstr "Lila"
+
+#: galet/folders.py:19
+msgid "Pink"
+msgstr "Rosa"
+
+#: galet/folders.py:19
+msgid "Gray"
+msgstr "Grau"
+
+#: galet/info.py:107
+msgid "No Selection"
+msgstr "Keine Auswahl"
+
+#: galet/info.py:134
+msgid "Dimensions"
+msgstr "Abmessungen"
+
+#: galet/info.py:137
+msgid "Created"
+msgstr "Erstellt"
+
+#: galet/info.py:138
+msgid "Modified"
+msgstr "Geändert"
+
+#: galet/info.py:151
+msgid "Get Info"
+msgstr "Informationen"
+
+#: galet/info.py:162
+msgid "Read and write"
+msgstr "Lesen und Schreiben"
+
+#: galet/info.py:164
+msgid "Read only"
+msgstr "Nur lesen"
+
+#: galet/info.py:166
+msgid "Write only"
+msgstr "Nur schreiben"
+
+#: galet/info.py:167
+msgid "No access"
+msgstr "Kein Zugriff"
+
+#: galet/info.py:174
+msgid "{name} Info"
+msgstr "Informationen zu {name}"
+
+#: galet/info.py:189
+msgid "General"
+msgstr "Allgemein"
+
+#: galet/info.py:190
+msgid "Kind"
+msgstr "Art"
+
+#: galet/info.py:192
+msgid "Size"
+msgstr "Größe"
+
+#: galet/info.py:192
+msgid "Calculating…"
+msgstr "Wird berechnet…"
+
+#: galet/info.py:193
+msgid "{size} ({bytes} bytes)"
+msgstr "{size} ({bytes} Bytes)"
+
+#: galet/info.py:196
+msgid "Where"
+msgstr "Ort"
+
+#: galet/info.py:204
+msgid "Last opened"
+msgstr "Zuletzt geöffnet"
+
+#: galet/info.py:213
+msgid "No tags"
+msgstr "Keine Tags"
+
+#: galet/info.py:217
+msgid "Edit…"
+msgstr "Bearbeiten…"
+
+#: galet/info.py:224
+msgid "Comments"
+msgstr "Kommentare"
+
+#: galet/info.py:225
+msgid "Comment"
+msgstr "Kommentar"
+
+#: galet/info.py:236
+msgid "Sharing & Permissions"
+msgstr "Freigabe & Zugriffsrechte"
+
+#: galet/info.py:237
+msgid "Owner ({name})"
+msgstr "Eigentümer ({name})"
+
+#: galet/info.py:238
+msgid "Group ({name})"
+msgstr "Gruppe ({name})"
+
+#: galet/info.py:240
+msgid "Everyone"
+msgstr "Alle"
+
+#: galet/info.py:262
+msgid "{size} for {n} items"
+msgstr "{size} für {n} Objekte"
+
+#: galet/info.py:286
+msgid "Could not save the comment: {error}"
+msgstr "Der Kommentar konnte nicht gespeichert werden: {error}"
+
+#: galet/info.py:295
+msgid "Open With"
+msgstr "Öffnen mit"
+
+#: galet/info.py:299
+msgid "Application"
+msgstr "Anwendung"
+
+#: galet/info.py:299
+msgid "None"
+msgstr "Keine"
+
+#: galet/info.py:309
+msgid "Change All…"
+msgstr "Alle ändern…"
+
+#: galet/info.py:315
+msgid "{app} will open all “{kind}” files"
+msgstr "{app} öffnet alle Dateien vom Typ „{kind}“"
+
+#: galet/model.py:55
+msgid "Computer"
+msgstr "Computer"
+
+#: galet/model.py:94
+msgid "Folder"
+msgstr "Ordner"
+
+#: galet/model.py:98
+msgid "Document"
+msgstr "Dokument"
+
+#: galet/operations.py:80
+msgid "File Operations"
+msgstr "Dateivorgänge"
+
+#: galet/pane.py:70
+msgid "Items in the trash"
+msgstr "Objekte im Papierkorb"
+
+#: galet/pane.py:70
+msgid "Empty Trash…"
+msgstr "Papierkorb leeren…"
+
+#: galet/pane.py:210
+msgid "No Results"
+msgstr "Keine Ergebnisse"
+
+#: galet/pane.py:211
+msgid "Try other words or remove some filters."
+msgstr "Versuchen Sie andere Begriffe oder entfernen Sie einige Filter."
+
+#: galet/pane.py:215
+msgid "No Tagged Files"
+msgstr "Keine markierten Dateien"
+
+#: galet/pane.py:217
+msgid "Right-click a file and choose a colour to tag it."
+msgstr "Klicken Sie mit der rechten Maustaste auf eine Datei und wählen Sie eine Farbe, um sie zu markieren."
+
+#: galet/pane.py:227
+msgid "Unable to Open This Folder"
+msgstr "Dieser Ordner kann nicht geöffnet werden"
+
+#: galet/pane.py:244
+msgid "{size} available"
+msgstr "{size} verfügbar"
+
+#: galet/pane.py:442
+msgid "{n} item selected"
+msgstr "{n} Objekt ausgewählt"
+
+#: galet/pane.py:442
+msgid "{n} items selected"
+msgstr "{n} Objekte ausgewählt"
+
+#: galet/pane.py:474
+msgid "Open"
+msgstr "Öffnen"
+
+#: galet/pane.py:476
+msgid "Open in New Tab"
+msgstr "In neuem Reiter öffnen"
+
+#: galet/pane.py:478
+msgid "Open With…"
+msgstr "Öffnen mit…"
+
+#: galet/pane.py:483
+msgid "Put Back"
+msgstr "Wiederherstellen"
+
+#: galet/pane.py:484
+msgid "Delete Permanently…"
+msgstr "Endgültig löschen…"
+
+#: galet/pane.py:487
+msgid "Quick Look"
+msgstr "Schnellansicht"
+
+#: galet/pane.py:489
+msgid "Rename…"
+msgstr "Umbenennen…"
+
+#: galet/pane.py:491
+msgid "Duplicate"
+msgstr "Duplizieren"
+
+#: galet/pane.py:493
+msgid "Cut"
+msgstr "Ausschneiden"
+
+#: galet/pane.py:494
+msgid "Copy Path"
+msgstr "Pfad kopieren"
+
+#: galet/pane.py:506
+msgid "Quick Actions"
+msgstr "Schnellaktionen"
+
+#: galet/pane.py:508
+msgid "New Folder With Selection"
+msgstr "Neuer Ordner mit Auswahl"
+
+#: galet/pane.py:516
+msgid "Send to Phone"
+msgstr "An Telefon senden"
+
+#: galet/pane.py:523
+msgid "Add to Sidebar"
+msgstr "Zur Seitenleiste hinzufügen"
+
+#: galet/pane.py:527
+msgid "Folder Colour"
+msgstr "Ordnerfarbe"
+
+#: galet/pane.py:533
+msgid "Tags…"
+msgstr "Tags…"
+
+#: galet/pane.py:535
+msgid "Suggest Tags (AI)"
+msgstr "Tags vorschlagen (KI)"
+
+#: galet/pane.py:548
+msgid "Paste"
+msgstr "Einfügen"
+
+#: galet/pane.py:549
+msgid "Undo"
+msgstr "Rückgängig"
+
+#: galet/pane.py:552
+msgid "Open in Terminal"
+msgstr "Im Terminal öffnen"
+
+#: galet/pane.py:553
+msgid "Show Hidden Files"
+msgstr "Verborgene Dateien anzeigen"
+
+#: galet/preferences.py:53
+msgid "Settings"
+msgstr "Einstellungen"
+
+#: galet/preferences.py:80
+msgid "Appearance"
+msgstr "Erscheinungsbild"
+
+#: galet/preferences.py:81
+msgid "Theme"
+msgstr "Thema"
+
+#: galet/preferences.py:82
+msgid "Change the look of Galet: colours, window buttons, font."
+msgstr "Das Aussehen von Galet ändern: Farben, Fensterknöpfe, Schrift."
+
+#: galet/preferences.py:104
+msgid "Style"
+msgstr "Stil"
+
+#: galet/preferences.py:107
+msgid "Custom Theme"
+msgstr "Benutzerdefiniertes Thema"
+
+#: galet/preferences.py:108
+msgid "Accent colour"
+msgstr "Akzentfarbe"
+
+#: galet/preferences.py:116
+msgid "Window buttons position"
+msgstr "Position der Fensterknöpfe"
+
+#: galet/preferences.py:118
+msgid "Window buttons style"
+msgstr "Stil der Fensterknöpfe"
+
+#: galet/preferences.py:120
+msgid "Rounded corners"
+msgstr "Abgerundete Ecken"
+
+#: galet/preferences.py:129
+msgid "Font"
+msgstr "Schrift"
+
+#: galet/preferences.py:139
+msgid "Tint the sidebar with the accent colour"
+msgstr "Seitenleiste in der Akzentfarbe einfärben"
+
+#: galet/preferences.py:157
+msgid "Windows"
+msgstr "Fenster"
+
+#: galet/preferences.py:158
+msgid "New windows show"
+msgstr "Neue Fenster zeigen"
+
+#: galet/preferences.py:159
+msgid "Open folders in tabs instead of new windows"
+msgstr "Ordner in Reitern statt in neuen Fenstern öffnen"
+
+#: galet/preferences.py:160
+msgid "When another application asks to open a folder"
+msgstr "Wenn eine andere Anwendung einen Ordner öffnen möchte"
+
+#: galet/preferences.py:163
+msgid "View"
+msgstr "Ansicht"
+
+#: galet/preferences.py:164
+msgid "Default view"
+msgstr "Standardansicht"
+
+#: galet/preferences.py:166
+msgid "Icon size"
+msgstr "Symbolgröße"
+
+#: galet/preferences.py:177
+msgid "Show path and status bar"
+msgstr "Pfad- und Statusleiste anzeigen"
+
+#: galet/preferences.py:184
+msgid "Sidebar"
+msgstr "Seitenleiste"
+
+#: galet/preferences.py:185
+msgid "Show these items in the sidebar"
+msgstr "Diese Objekte in der Seitenleiste anzeigen"
+
+#: galet/preferences.py:198
+msgid "Folders"
+msgstr "Ordner"
+
+#: galet/preferences.py:200
+msgid "Folder Colours"
+msgstr "Ordnerfarben"
+
+#: galet/preferences.py:201
+msgid "Right-click a folder → Folder Colour to colour it."
+msgstr "Rechtsklick auf einen Ordner → Ordnerfarbe, um ihn einzufärben."
+
+#: galet/preferences.py:202
+msgid "Colour folders with their tag colour"
+msgstr "Ordner in ihrer Tag-Farbe einfärben"
+
+#: galet/preferences.py:203
+msgid "A folder tagged “Red” shows a red folder icon"
+msgstr "Ein mit „Rot“ markierter Ordner erhält ein rotes Ordnersymbol"
+
+#: galet/preferences.py:204
+msgid "Theme icon"
+msgstr "Symbol des Themas"
+
+#: galet/preferences.py:205
+msgid "Default colour of all folders"
+msgstr "Standardfarbe aller Ordner"
+
+#: galet/preferences.py:215
+msgid "Add a Folder Colour"
+msgstr "Ordnerfarbe hinzufügen"
+
+#: galet/preferences.py:216
+msgid "Name"
+msgstr "Name"
+
+#: galet/preferences.py:245
+msgid "Colours in the Menu"
+msgstr "Farben im Menü"
+
+#: galet/preferences.py:246
+msgid "Reset"
+msgstr "Zurücksetzen"
+
+#: galet/preferences.py:256
+msgid "Remove"
+msgstr "Entfernen"
+
+#: galet/preferences.py:295
+msgid "Your Tags"
+msgstr "Ihre Tags"
+
+#: galet/preferences.py:296
+msgid "Rename a tag by editing its name. The switch shows it in the sidebar."
+msgstr "Bearbeiten Sie den Namen, um einen Tag umzubenennen. Der Schalter zeigt ihn in der Seitenleiste an."
+
+#: galet/preferences.py:303
+msgid "Tag"
+msgstr "Tag"
+
+#: galet/preferences.py:314
+msgid "Show in sidebar"
+msgstr "In der Seitenleiste anzeigen"
+
+#: galet/preferences.py:319
+msgid "Delete Tag…"
+msgstr "Tag löschen…"
+
+#: galet/preferences.py:326
+msgid "This name is already used."
+msgstr "Dieser Name wird bereits verwendet."
+
+#: galet/preferences.py:344
+msgid "Servers"
+msgstr "Server"
+
+#: galet/preferences.py:353
+msgid "Favorite Servers"
+msgstr "Bevorzugte Server"
+
+#: galet/preferences.py:354
+msgid "Shown in the sidebar. Rename a server by editing its name."
+msgstr "Werden in der Seitenleiste angezeigt. Bearbeiten Sie den Namen, um einen Server umzubenennen."
+
+#: galet/preferences.py:355
+msgid "Connect to Server…"
+msgstr "Mit Server verbinden…"
+
+#: galet/preferences.py:364
+msgid "Remove from Favorites"
+msgstr "Aus Favoriten entfernen"
+
+#: galet/preferences.py:382
+msgid "AI"
+msgstr "KI"
+
+#: galet/preferences.py:384
+msgid "Local AI (optional)"
+msgstr "Lokale KI (optional)"
+
+#: galet/preferences.py:385
+msgid "Search in plain language and get tag suggestions. Galet only talks to Ollama running on your own computer: your files never leave it."
+msgstr "Suchen Sie in natürlicher Sprache und erhalten Sie Tag-Vorschläge. Galet kommuniziert nur mit Ollama auf Ihrem eigenen Computer: Ihre Dateien verlassen ihn nie."
+
+#: galet/preferences.py:387
+msgid "Enable AI features"
+msgstr "KI-Funktionen aktivieren"
+
+#: galet/preferences.py:388
+msgid "Ollama address"
+msgstr "Ollama-Adresse"
+
+#: galet/preferences.py:392
+msgid "Model"
+msgstr "Modell"
+
+#: galet/preferences.py:394
+msgid "Refresh the list of models"
+msgstr "Modellliste aktualisieren"
+
+#: galet/preferences.py:401
+msgid "Install Ollama"
+msgstr "Ollama installieren"
+
+#: galet/preferences.py:402
+msgid "In a terminal: install Ollama, then download a model."
+msgstr "In einem Terminal: Installieren Sie Ollama und laden Sie dann ein Modell herunter."
+
+#: galet/preferences.py:435
+msgid "Advanced"
+msgstr "Erweitert"
+
+#: galet/preferences.py:436
+msgid "Files"
+msgstr "Dateien"
+
+#: galet/preferences.py:437
+msgid "Show all filename extensions"
+msgstr "Alle Dateiendungen anzeigen"
+
+#: galet/preferences.py:438
+msgid "Show hidden files"
+msgstr "Verborgene Dateien anzeigen"
+
+#: galet/preferences.py:439
+msgid "Keep folders on top"
+msgstr "Ordner zuerst anzeigen"
+
+#: galet/preferences.py:440
+msgid "In icon, list and column views"
+msgstr "In Symbol-, Listen- und Spaltenansicht"
+
+#: galet/preferences.py
+msgid "Home"
+msgstr "Persönlicher Ordner"
+
+#: galet/preferences.py
+msgid "Recent"
+msgstr "Zuletzt verwendet"
+
+#: galet/preferences.py
+msgid "Desktop"
+msgstr "Schreibtisch"
+
+#: galet/preferences.py
+msgid "Documents"
+msgstr "Dokumente"
+
+#: galet/preferences.py
+msgid "Downloads"
+msgstr "Downloads"
+
+#: galet/preferences.py
+msgid "Icons"
+msgstr "Symbole"
+
+#: galet/preferences.py
+msgid "List"
+msgstr "Liste"
+
+#: galet/preferences.py
+msgid "Columns"
+msgstr "Spalten"
+
+#: galet/preferences.py
+msgid "Gallery"
+msgstr "Galerie"
+
+#: galet/preferences.py
+msgid "Pictures"
+msgstr "Bilder"
+
+#: galet/preferences.py
+msgid "Music"
+msgstr "Musik"
+
+#: galet/preferences.py
+msgid "Videos"
+msgstr "Videos"
+
+#: galet/preferences.py
+msgid "Bookmarks"
+msgstr "Lesezeichen"
+
+#: galet/preferences.py
+msgid "External Drives"
+msgstr "Externe Laufwerke"
+
+#: galet/preferences.py
+msgid "Network"
+msgstr "Netzwerk"
+
+#: galet/preferences.py
+msgid "Trash"
+msgstr "Papierkorb"
+
+#: galet/preferences.py
+msgid "system"
+msgstr "System"
+
+#: galet/quickactions.py:40
+msgid "Rotate Left"
+msgstr "Nach links drehen"
+
+#: galet/quickactions.py:41
+msgid "Rotate Right"
+msgstr "Nach rechts drehen"
+
+#: galet/quickactions.py:42
+msgid "Convert to JPEG"
+msgstr "In JPEG umwandeln"
+
+#: galet/quickactions.py:43
+msgid "Convert to PNG"
+msgstr "In PNG umwandeln"
+
+#: galet/quickactions.py:44
+msgid "Reduce Size"
+msgstr "Größe reduzieren"
+
+#: galet/quickactions.py:45
+msgid "Create PDF"
+msgstr "PDF erstellen"
+
+#: galet/quickactions.py:47
+msgid "Extract Here"
+msgstr "Hier entpacken"
+
+#: galet/quickactions.py:49
+msgid "Compress"
+msgstr "Komprimieren"
+
+#: galet/quickactions.py:96
+msgid "{n} file created"
+msgstr "{n} Datei erstellt"
+
+#: galet/quickactions.py:96
+msgid "{n} files created"
+msgstr "{n} Dateien erstellt"
+
+#: galet/quickactions.py:102
+msgid "Some items could not be processed: {error}"
+msgstr "Einige Objekte konnten nicht verarbeitet werden: {error}"
+
+#: galet/quickactions.py:117
+msgid "Rotating Images"
+msgstr "Bilder werden gedreht"
+
+#: galet/quickactions.py:139
+msgid "Converting Images"
+msgstr "Bilder werden umgewandelt"
+
+#: galet/quickactions.py:140
+msgid "Convert"
+msgstr "Umwandeln"
+
+#: galet/quickactions.py:155
+msgid "{name} (reduced){ext}"
+msgstr "{name} (verkleinert){ext}"
+
+#: galet/quickactions.py:163
+msgid "Resizing Images"
+msgstr "Bildgröße wird geändert"
+
+#: galet/quickactions.py:171
+msgid "Images"
+msgstr "Bilder"
+
+#: galet/quickactions.py:204
+msgid "Creating PDF"
+msgstr "PDF wird erstellt"
+
+#: galet/quickactions.py:226
+msgid "Archive"
+msgstr "Archiv"
+
+#: galet/quickactions.py:255
+msgid "Compressing"
+msgstr "Komprimieren"
+
+#: galet/quickactions.py:279
+msgid "unsupported archive format"
+msgstr "Nicht unterstütztes Archivformat"
+
+#: galet/quickactions.py:289
+msgid "Extracting"
+msgstr "Entpacken"
+
+#: galet/search.py:16
+msgid "Any Kind"
+msgstr "Beliebige Art"
+
+#: galet/search.py:17
+msgid "PDF"
+msgstr "PDF"
+
+#: galet/search.py:18
+msgid "Archives"
+msgstr "Archive"
+
+#: galet/search.py:19
+msgid "Any Date"
+msgstr "Beliebiges Datum"
+
+#: galet/search.py:19
+msgid "Today"
+msgstr "Heute"
+
+#: galet/search.py:19
+msgid "Previous 7 Days"
+msgstr "Letzte 7 Tage"
+
+#: galet/search.py:20
+msgid "Previous 30 Days"
+msgstr "Letzte 30 Tage"
+
+#: galet/search.py:20
+msgid "This Year"
+msgstr "Dieses Jahr"
+
+#: galet/search.py:147
+msgid "“{text}” in {folder}"
+msgstr "„{text}“ in {folder}"
+
+#: galet/search.py:148
+msgid "Search in {folder}"
+msgstr "In {folder} suchen"
+
+#: galet/search.py:253
+msgid "Smart Folder"
+msgstr "Intelligenter Ordner"
+
+#: galet/servers.py:69
+msgid "Could not connect to the server: {error}"
+msgstr "Verbindung zum Server fehlgeschlagen: {error}"
+
+#: galet/servers.py:75
+msgid "Connecting to {server}…"
+msgstr "Verbindung zu {server} wird hergestellt…"
+
+#: galet/servers.py:161
+msgid "Could not disconnect: {error}"
+msgstr "Trennen fehlgeschlagen: {error}"
+
+#: galet/servers.py:163
+msgid "“{name}” disconnected"
+msgstr "„{name}“ getrennt"
+
+#: galet/servers.py:179
+msgid "Connect to Server"
+msgstr "Mit Server verbinden"
+
+#: galet/servers.py:183
+msgid "Server Address"
+msgstr "Serveradresse"
+
+#: galet/servers.py:186
+msgid "Add to Favorite Servers"
+msgstr "Zu bevorzugten Servern hinzufügen"
+
+#: galet/servers.py:190
+msgid "Examples: {examples}"
+msgstr "Beispiele: {examples}"
+
+#: galet/servers.py:201
+msgid "Connect"
+msgstr "Verbinden"
+
+#: galet/servers.py:219
+msgid "Type an address and press + to keep it here and in the sidebar."
+msgstr "Geben Sie eine Adresse ein und drücken Sie +, um sie hier und in der Seitenleiste zu behalten."
+
+#: galet/servers.py:229
+msgid "Recent Servers"
+msgstr "Zuletzt verwendete Server"
+
+#: galet/sidebar.py:83
+msgid "Favorites"
+msgstr "Favoriten"
+
+#: galet/sidebar.py:104
+msgid "Locations"
+msgstr "Orte"
+
+#: galet/sidebar.py:142
+msgid "Smart Folders"
+msgstr "Intelligente Ordner"
+
+#: galet/sidebar.py:193
+msgid "Disconnect"
+msgstr "Trennen"
+
+#: galet/sidebar.py:213
+msgid "Remove from Sidebar"
+msgstr "Aus der Seitenleiste entfernen"
+
+#: galet/sidebar.py:215
+msgid "Remove Smart Folder"
+msgstr "Intelligenten Ordner entfernen"
+
+#: galet/sidebar.py:262
+msgid "Click to connect"
+msgstr "Zum Verbinden klicken"
+
+#: galet/themes.py:14
+msgid "System"
+msgstr "System"
+
+#: galet/themes.py:41
+msgid "Custom"
+msgstr "Benutzerdefiniert"
+
+#: galet/themes.py:45
+msgid "Follow System"
+msgstr "System folgen"
+
+#: galet/themes.py:45
+msgid "Light"
+msgstr "Hell"
+
+#: galet/themes.py:45
+msgid "Dark"
+msgstr "Dunkel"
+
+#: galet/themes.py:46
+msgid "Left"
+msgstr "Links"
+
+#: galet/themes.py:46
+msgid "Right"
+msgstr "Rechts"
+
+#: galet/themes.py:47
+msgid "Coloured dots (macOS)"
+msgstr "Farbige Punkte (macOS)"
+
+#: galet/themes.py:48
+msgid "Rectangles (Windows)"
+msgstr "Rechtecke (Windows)"
+
+#: galet/views.py:26
+msgid "Today at {time}"
+msgstr "Heute um {time}"
+
+#: galet/views.py:28
+msgid "Yesterday at {time}"
+msgstr "Gestern um {time}"
+
+#: galet/views.py:348
+msgid "Date Modified"
+msgstr "Änderungsdatum"
+
+#: galet/views.py:364
+msgid "Location"
+msgstr "Ort"
+
+#: galet/views.py:410
+msgid "Applications"
+msgstr "Anwendungen"
+
+#: galet/views.py:411
+msgid "Other"
+msgstr "Andere"
+
+#: galet/views.py:416
+msgid "Unknown"
+msgstr "Unbekannt"
+
+#: galet/views.py:424
+msgid "Yesterday"
+msgstr "Gestern"
+
+#: galet/views.py:430
+msgid "Earlier This Year"
+msgstr "Früher in diesem Jahr"
+
+#: galet/views.py:437
+msgid "No Tags"
+msgstr "Keine Tags"
+
+#: galet/widgets.py:173
+msgid "Default Colour"
+msgstr "Standardfarbe"
+
+#: galet/window.py:50
+msgid "Show Sidebar"
+msgstr "Seitenleiste anzeigen"
+
+#: galet/window.py:54
+msgid "Back"
+msgstr "Zurück"
+
+#: galet/window.py:56
+msgid "Forward"
+msgstr "Vor"
+
+#: galet/window.py:63
+msgid "New Window"
+msgstr "Neues Fenster"
+
+#: galet/window.py:64
+msgid "New Tab"
+msgstr "Neuer Reiter"
+
+#: galet/window.py:66
+msgid "Merge All Windows"
+msgstr "Alle Fenster zusammenführen"
+
+#: galet/window.py:75
+msgid "Go"
+msgstr "Gehe zu"
+
+#: galet/window.py:76
+msgid "Go to Location…"
+msgstr "Gehe zu Ort…"
+
+#: galet/window.py:82
+msgid "About Galet"
+msgstr "Info zu Galet"
+
+#: galet/window.py:85
+msgid "Main Menu"
+msgstr "Hauptmenü"
+
+#: galet/window.py:87
+msgid "Search"
+msgstr "Suchen"
+
+#: galet/window.py:97
+msgid "Sort By"
+msgstr "Sortieren nach"
+
+#: galet/window.py:102
+msgid "Group By"
+msgstr "Gruppieren nach"
+
+#: galet/window.py:104
+msgid "Show Preview"
+msgstr "Vorschau anzeigen"
+
+#: galet/window.py:108
+msgid "Sort, Group and Display Options"
+msgstr "Sortier-, Gruppierungs- und Anzeigeoptionen"
+
+#: galet/window.py:129
+msgid "This Folder"
+msgstr "Dieser Ordner"
+
+#: galet/window.py:129
+msgid "Filter the current folder"
+msgstr "Aktuellen Ordner filtern"
+
+#: galet/window.py:130
+msgid "Subfolders"
+msgstr "Unterordner"
+
+#: galet/window.py:130
+msgid "Search this folder and all its subfolders"
+msgstr "Diesen Ordner und alle Unterordner durchsuchen"
+
+#: galet/window.py:131
+msgid "Everywhere"
+msgstr "Überall"
+
+#: galet/window.py:131
+msgid "Search your whole home folder"
+msgstr "Gesamten persönlichen Ordner durchsuchen"
+
+#: galet/window.py:143
+msgid "Contents"
+msgstr "Inhalte"
+
+#: galet/window.py:144
+msgid "Also search inside documents (text, PDF, office files)"
+msgstr "Auch in Dokumenten suchen (Text, PDF, Office-Dateien)"
+
+#: galet/window.py:147
+msgid "Ask the local AI (Ollama)"
+msgstr "Lokale KI fragen (Ollama)"
+
+#: galet/window.py:154
+msgid "Save as Smart Folder"
+msgstr "Als intelligenten Ordner speichern"
+
+#: galet/window.py:341
+msgid "Sending {n} file to {device}…"
+msgstr "{n} Datei wird an {device} gesendet…"
+
+#: galet/window.py:341
+msgid "Sending {n} files to {device}…"
+msgstr "{n} Dateien werden an {device} gesendet…"
+
+#: galet/window.py:349
+msgid "Describe what you are looking for, e.g. “PDF invoices from this week”"
+msgstr "Beschreiben Sie, wonach Sie suchen, z. B. „PDF-Rechnungen von dieser Woche“"
+
+#: galet/window.py:352
+msgid "Asking the local AI…"
+msgstr "Lokale KI wird gefragt…"
+
+#: galet/window.py:357
+msgid "The local AI is not available: {error}"
+msgstr "Die lokale KI ist nicht verfügbar: {error}"
+
+#: galet/window.py:512
+msgid "Could not change the folder colour: {error}"
+msgstr "Die Ordnerfarbe konnte nicht geändert werden: {error}"
+
+#: galet/window.py:570
+msgid "Tag “{tag}” added"
+msgstr "Tag „{tag}“ hinzugefügt"
+
+#: galet/window.py:678
+msgid "Save Smart Folder"
+msgstr "Intelligenten Ordner speichern"
+
+#: galet/window.py:678
+msgid "Save"
+msgstr "Speichern"
+
+#: galet/window.py:680
+msgid "Smart folder “{name}” saved"
+msgstr "Intelligenter Ordner „{name}“ gespeichert"
+
+#: galet/window.py:724
+msgid "No folder at “{path}”"
+msgstr "Kein Ordner unter „{path}“"
+
+#: galet/window.py:726
+msgid "Go to Location"
+msgstr "Gehe zu Ort"

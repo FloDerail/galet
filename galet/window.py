@@ -18,8 +18,8 @@ SELECTION_ACTIONS = ("open", "open-new-tab", "quicklook", "copy", "cut", "copy-p
 
 class GaletWindow(Adw.ApplicationWindow):
     def __init__(self, app, location=None, empty=False):
-        super().__init__(application=app, title="Galet", width_request=360, height_request=320,
-                         css_classes=["galet-window"])
+        super().__init__(application=app, title="Galet", width_request=360, height_request=320)
+        self.add_css_class("galet-window")  # add, don't replace: the window keeps its "background" class
         self.app = app
         self._resetting_search = False
         self.tagstore = app.tagstore
@@ -99,7 +99,7 @@ class GaletWindow(Adw.ApplicationWindow):
         for key, label in (("none", _("None")), ("kind", _("Kind")), ("date", _("Date Modified")),
                            ("tags", _("Tags"))):
             group_section.append(label, f"win.group-by::{key}")
-        arrange.append_section(_("Group By (List View)"), group_section)
+        arrange.append_section(_("Group By"), group_section)
         options = Gio.Menu()
         options.append(_("Show Preview"), "win.show-preview")
         options.append(_("Show Hidden Files"), "win.show-hidden")
@@ -118,7 +118,7 @@ class GaletWindow(Adw.ApplicationWindow):
         header.pack_end(modes)
 
         # Search bar
-        self.search_entry = Gtk.SearchEntry(placeholder_text=_("Search"), hexpand=True)
+        self.search_entry = Gtk.SearchEntry(placeholder_text=_("Search"), hexpand=True, width_chars=8)
         self.search_entry.connect("search-changed", lambda *_a: self._apply_search())
         self.search_entry.connect("stop-search", lambda *_a: self.search_bar.set_search_mode(False))
         search_row = Gtk.Box(spacing=6)
@@ -140,6 +140,14 @@ class GaletWindow(Adw.ApplicationWindow):
         self.kind_dropdown.connect("notify::selected", lambda *_a: self._apply_search())
         self.date_dropdown = Gtk.DropDown.new_from_strings([_(label) for _k, label in search.DATES])
         self.date_dropdown.connect("notify::selected", lambda *_a: self._apply_search())
+        self.content_button = Gtk.ToggleButton(icon_name="x-office-document-symbolic",
+                                               tooltip_text=_("Also search inside documents (text, PDF, office files)"))
+        self.content_button.connect("toggled", lambda *_a: self._apply_search())
+        search_row.append(self.content_button)
+        self.ai_button = Gtk.Button(icon_name="galet-ai-symbolic", tooltip_text=_("Ask the local AI (Ollama)"),
+                                    visible=bool(self.settings.get("ai_enabled")), css_classes=["flat"])
+        self.ai_button.connect("clicked", lambda *_a: self._ai_search())
+        search_row.append(self.ai_button)
         search_row.append(self.kind_dropdown)
         search_row.append(self.date_dropdown)
         self.save_search_button = Gtk.Button(icon_name="document-save-symbolic", sensitive=False,
@@ -236,6 +244,7 @@ class GaletWindow(Adw.ApplicationWindow):
             "edit-tags": lambda: dialogs.edit_tags(self, self.selection),
             "connect-server": lambda: servers.ConnectDialog(self).present(self),
             "get-info": self._get_info,
+            "ai-tags": self._ai_tags,
             "merge-windows": self.merge_windows,
             "add-to-sidebar": lambda: self.sidebar.add_bookmarks([i.target_file for i in self.selection if i.is_dir]),
             "go-recent": lambda: self._go_special("recent"),
@@ -332,6 +341,44 @@ class GaletWindow(Adw.ApplicationWindow):
             self.toast(ngettext("Sending {n} file to {device}…", "Sending {n} files to {device}…",
                                 len(files)).format(n=len(files), device=name))
 
+    def _ai_search(self):
+        from . import ai
+
+        request = self.search_entry.get_text().strip()
+        if not request:
+            self.toast(_("Describe what you are looking for, e.g. “PDF invoices from this week”"))
+            return
+        self.ai_button.set_sensitive(False)
+        self.toast(_("Asking the local AI…"))
+
+        def done(result, error):
+            self.ai_button.set_sensitive(True)
+            if error:
+                self.toast(_("The local AI is not available: {error}").format(error=error))
+                return
+            self._resetting_search = True
+            self.search_entry.set_text(result["text"])
+            self.kind_dropdown.set_selected([k for k, _l in search.KINDS].index(result["kind"]))
+            self.date_dropdown.set_selected([k for k, _l in search.DATES].index(result["date"]))
+            self.content_button.set_active(result["content"])
+            self.scope_buttons["home"].set_active(True)
+            self._resetting_search = False
+            self._apply_search()
+
+        ai.run(lambda: ai.parse_search(self.settings, request), done)
+
+    def _ai_tags(self):
+        from . import ai, dialogs
+
+        items = [i for i in self.selection if i.path]
+        if not items:
+            return
+        self.toast(_("Asking the local AI…"))
+        existing = [t["name"] for t in self.tagstore.tags]
+        ai.run(lambda: ai.suggest_tags(self.settings, items, existing),
+               lambda result, error: self.toast(_("The local AI is not available: {error}").format(error=error))
+               if error else dialogs.apply_suggested_tags(self, result))
+
     def _get_info(self):
         from .info import GetInfoDialog
 
@@ -368,13 +415,16 @@ class GaletWindow(Adw.ApplicationWindow):
                 self.preview_action.set_state(value)
         elif key == "theme" or key.startswith("custom_"):
             self._apply_window_buttons()
-        elif key in ("icon_size", "folders_first", "show_extensions", "group_by", "sort_by"):
+        elif key in ("icon_size", "folders_first", "show_extensions", "group_by", "sort_by",
+                     "folder_color_from_tags", "default_folder_color"):
             for state_key, action in (("sort_by", self.sort_action), ("group_by", self.group_action)):
                 value = GLib.Variant("s", self.settings.get(state_key, "name" if state_key == "sort_by" else "none"))
                 if action.get_state() != value:
                     action.set_state(value)
             for pane in self.panes:
                 pane.reload()
+        elif key == "ai_enabled":
+            self.ai_button.set_visible(bool(self.settings.get(key)))
         elif key == "show_bottom_bar":
             self.bottom_bar.set_visible(self.settings.get(key))
         elif key == "show_hidden":
@@ -591,8 +641,9 @@ class GaletWindow(Adw.ApplicationWindow):
         kind = search.KINDS[self.kind_dropdown.get_selected()][0]
         date = search.DATES[self.date_dropdown.get_selected()][0]
         scope = self._search_scope()
+        content = self.content_button.get_active() and bool(text.strip())
         origin = pane.search_origin or pane.location
-        if scope == "folder" or (not text.strip() and kind == "any" and date == "any"):
+        if (scope == "folder" and not content) or (not text.strip() and kind == "any" and date == "any"):
             if pane.search_origin is not None:
                 pane.search_origin = None
                 pane.go_to(origin, record=False)
@@ -601,9 +652,9 @@ class GaletWindow(Adw.ApplicationWindow):
             self.save_search_button.set_sensitive(False)
             return
         root = GLib.get_home_dir()
-        if scope == "subfolders" and not origin.is_virtual and origin.gfile.get_path():
+        if scope in ("subfolders", "folder") and not origin.is_virtual and origin.gfile.get_path():
             root = origin.gfile.get_path()
-        query = search.SearchQuery(text, root, kind, date)
+        query = search.SearchQuery(text, root, kind, date, content=content, recursive=scope != "folder")
         pane.search_origin = origin
         pane.go_to(Location(search=query), record=False)
         pane.set_search_filters(kind, date)
@@ -615,6 +666,7 @@ class GaletWindow(Adw.ApplicationWindow):
         self.kind_dropdown.set_selected(0)
         self.date_dropdown.set_selected(0)
         self.scope_buttons["folder"].set_active(True)
+        self.content_button.set_active(False)
         self._resetting_search = False
         self.save_search_button.set_sensitive(False)
 

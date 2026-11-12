@@ -67,6 +67,12 @@ DEFAULTS = {
     "color_scheme": "auto",
     "sort_by": "name",
     "folder_views": {},
+    "folder_color_from_tags": True,
+    "default_folder_color": "",
+    "folder_palette": [],
+    "ai_enabled": False,
+    "ai_url": "http://localhost:11434",
+    "ai_model": "llama3.2",
     "group_by": "none",
     "recent_servers": [],
 }
@@ -134,6 +140,9 @@ class GaletApplication(Adw.Application):
         logs.setup(__version__)
         self.tagstore = TagStore()
         self.settings = Settings()
+        from .views import FOLDER_STYLE
+
+        FOLDER_STYLE.update(settings=self.settings, tagstore=self.tagstore)
         from . import phone
 
         phone.phones()  # start watching paired phones early

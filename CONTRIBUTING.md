@@ -17,6 +17,9 @@ no build step: clone the repository and run `./bin/galet`.
 
 ## Translations
 
+Available: English, French (fr), Spanish (es), German (de), Italian (it), Portuguese (pt).
+Native speakers are very welcome to review and improve them.
+
 1. Regenerate the template: `python3 tools/update-pot.py`
 2. Copy `po/galet.pot` to `po/<lang>.po` (e.g. `po/de.po`) and fill in the `msgstr` lines,
    or update an existing file.

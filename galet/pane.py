@@ -7,7 +7,7 @@ from .i18n import _, ngettext
 from .model import DirectoryModel, Location, TagModel, fold
 from .search import SearchModel, date_matches, kind_matches
 from .info import InfoPanel
-from .views import ColumnBrowser, DetailListView, GalleryView, IconGridView
+from .views import GROUPS, ColumnBrowser, DetailListView, GalleryView, GroupedIconView, IconGridView
 from .widgets import FolderColorPicker, TagPicker
 
 VIEW_MODES = ("grid", "list", "columns", "gallery")
@@ -182,6 +182,8 @@ class BrowserPane(Gtk.Box):
             self.view = DetailListView(self, self.filtered)
         elif mode == "gallery":
             self.view = GalleryView(self, self.filtered)
+        elif GROUPS.get(self.settings.get("group_by", "none")) is not None:
+            self.view = GroupedIconView(self, self.filtered, GROUPS[self.settings.get("group_by")])
         else:
             self.view = IconGridView(self, self.filtered)
         self.view.connect("activate-item", lambda _v, item: self.open_items([item]))
@@ -529,6 +531,8 @@ class BrowserPane(Gtk.Box):
                 custom.set_attribute_value("custom", GLib.Variant("s", "tags"))
                 section.append_item(custom)
                 section.append(_("Tags…"), "win.edit-tags")
+                if self.settings.get("ai_enabled"):
+                    section.append(_("Suggest Tags (AI)"), "win.ai-tags")
                 menu.append_section(None, section)
                 common = set(items[0].tags)
                 for item in items[1:]:
@@ -556,7 +560,8 @@ class BrowserPane(Gtk.Box):
                 popover.popdown()
                 self.window.set_folder_color(folders, color)
 
-            popover.add_child(FolderColorPicker(self.tagstore, folders[0].folder_color, on_color), "folder-color")
+            popover.add_child(FolderColorPicker(self.tagstore, folders[0].folder_color, on_color, self.settings),
+                              "folder-color")
         if picker is not None:
             common, toggle = picker
 

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.FloDerail.Galet</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+  <name>Galet</name>
+  <summary>Finder-inspired file manager with colour tags</summary>
+  <summary xml:lang="fr">Gestionnaire de fichiers inspiré du Finder, avec tags de couleur</summary>
+  <developer id="io.github.floderail">
+    <name>Florian Dérail</name>
+  </developer>
+  <description>
+    <p>
+      Galet brings the best of the macOS Finder to Linux, as a native GNOME application.
+      Its author never found a file manager that suited him, so he built his own.
+    </p>
+    <p xml:lang="fr">
+      Galet apporte le meilleur du Finder de macOS à Linux, en application GNOME native.
+      Son auteur n’a jamais trouvé d’explorateur qui lui convienne : il a créé le sien.
+    </p>
+    <ul>
+      <li>Colour tags on files and folders, with a sidebar section per tag</li>
+      <li>Icon, list, column and gallery views, tabs, Quick Look and preview pane</li>
+      <li>Search in sub-folders and inside documents, smart folders</li>
+      <li>Quick actions: rotate, convert, resize, create PDF, compress, extract</li>
+      <li>Network servers (SMB, SFTP, FTP, WebDAV), send to phone</li>
+      <li>Themes: System, macOS, Windows 11 or your own</li>
+      <li>Optional local AI (Ollama): plain-language search and tag suggestions</li>
+    </ul>
+  </description>
+  <launchable type="desktop-id">io.github.FloDerail.Galet.desktop</launchable>
+  <provides>
+    <binary>galet</binary>
+  </provides>
+  <url type="homepage">https://florianderail.fr</url>
+  <url type="bugtracker">https://github.com/FloDerail/galet/issues</url>
+  <url type="vcs-browser">https://github.com/FloDerail/galet</url>
+  <url type="translate">https://github.com/FloDerail/galet/blob/main/CONTRIBUTING.md</url>
+  <screenshots>
+    <screenshot type="default">
+      <caption>Icon view with colour tags</caption>
+      <image>https://raw.githubusercontent.com/FloDerail/galet/main/docs/screenshots/icones-tags.png</image>
+    </screenshot>
+    <screenshot>
+      <caption>Column view</caption>
+      <image>https://raw.githubusercontent.com/FloDerail/galet/main/docs/screenshots/colonnes.png</image>
+    </screenshot>
+    <screenshot>
+      <caption>Gallery view</caption>
+      <image>https://raw.githubusercontent.com/FloDerail/galet/main/docs/screenshots/galerie.png</image>
+    </screenshot>
+    <screenshot>
+      <caption>Grouped icon view with coloured folders</caption>
+      <image>https://raw.githubusercontent.com/FloDerail/galet/main/docs/screenshots/icones-groupees.png</image>
+    </screenshot>
+    <screenshot>
+      <caption>Search inside documents</caption>
+      <image>https://raw.githubusercontent.com/FloDerail/galet/main/docs/screenshots/recherche-contenu.png</image>
+    </screenshot>
+    <screenshot>
+      <caption>macOS theme</caption>
+      <image>https://raw.githubusercontent.com/FloDerail/galet/main/docs/screenshots/theme-macos.png</image>
+    </screenshot>
+  </screenshots>
+  <branding>
+    <color type="primary" scheme_preference="light">#c9cff2</color>
+    <color type="primary" scheme_preference="dark">#3b4a7a</color>
+  </branding>
+  <content_rating type="oars-1.1"/>
+  <requires>
+    <display_length compare="ge">360</display_length>
+  </requires>
+  <supports>
+    <control>pointing</control>
+    <control>keyboard</control>
+  </supports>
+  <categories>
+    <category>Utility</category>
+    <category>FileManager</category>
+  </categories>
+  <keywords>
+    <keyword>files</keyword>
+    <keyword>finder</keyword>
+    <keyword>tags</keyword>
+    <keyword>explorer</keyword>
+  </keywords>
+  <releases>
+    <release version="0.4.0" date="2026-11-13">
+      <description>
+        <p>Content search, grouped icon view, configurable folder colours, optional local AI, Flatpak.</p>
+      </description>
+    </release>
+    <release version="0.3.0" date="2026-11-12">
+      <description><p>New logo and author credits.</p></description>
+    </release>
+    <release version="0.2.0" date="2026-11-12">
+      <description><p>Themes, coloured folders, sort menu and more Finder features.</p></description>
+    </release>
+    <release version="0.1.0" date="2026-11-12">
+      <description><p>First release.</p></description>
+    </release>
+  </releases>
+</component>

@@ -1,6 +1,6 @@
 """Settings window, organised like Finder's: General, Sidebar, Tags, Advanced."""
 
-from gi.repository import Adw, Gdk, Gtk, Pango
+from gi.repository import Adw, Gdk, GLib, Gtk, Pango
 
 from . import servers
 from .i18n import _
@@ -56,12 +56,15 @@ class PreferencesDialog(Adw.PreferencesDialog):
         self.add(self._appearance_page())
         self.add(self._general_page())
         self.add(self._sidebar_page())
+        self.add(self._folders_page())
         self.add(self._tags_page())
         self.add(self._servers_page())
+        self.add(self._ai_page())
         self.add(self._advanced_page())
         self._tags_handler = self.tagstore.connect("tags-changed", lambda *_a: self._fill_tags())
         self._settings_handler = self.settings.connect(
-            "changed", lambda _s, key: self._fill_servers() if key == "servers" else None)
+            "changed", lambda _s, key: self._fill_servers() if key == "servers"
+            else self._fill_folder_palette() if key == "folder_palette" else None)
         self.connect("closed", self._on_closed)
         self.app = app
 
@@ -187,6 +190,81 @@ class PreferencesDialog(Adw.PreferencesDialog):
         page.add(group)
         return page
 
+    # ---------------------------------------------------------------- folders
+
+    def _folders_page(self):
+        from . import folders
+
+        page = Adw.PreferencesPage(title=_("Folders"), icon_name="folder-symbolic")
+        self.folders_page = page
+        look = Adw.PreferencesGroup(title=_("Folder Colours"),
+                                    description=_("Right-click a folder → Folder Colour to colour it."))
+        look.add(_switch(self.settings, "folder_color_from_tags", _("Colour folders with their tag colour"),
+                         _("A folder tagged “Red” shows a red folder icon")))
+        choices = [("", _("Theme icon"))] + [(color, _(name)) for name, color in folders.palette(self.settings)]
+        default = Adw.ComboRow(title=_("Default colour of all folders"),
+                               model=Gtk.StringList.new([label for _c, label in choices]))
+        current = self.settings.get("default_folder_color", "")
+        values = [c for c, _l in choices]
+        default.set_selected(values.index(current) if current in values else 0)
+        default.connect("notify::selected", lambda r, _p: self.settings.set("default_folder_color",
+                                                                           values[r.get_selected()]))
+        look.add(default)
+        page.add(look)
+
+        add_group = Adw.PreferencesGroup(title=_("Add a Folder Colour"))
+        entry = Adw.EntryRow(title=_("Name"), show_apply_button=True)
+        color_button = Gtk.ColorDialogButton(dialog=Gtk.ColorDialog(with_alpha=False), valign=Gtk.Align.CENTER)
+        rgba = Gdk.RGBA()
+        rgba.parse("#5e81ac")
+        color_button.set_rgba(rgba)
+        entry.add_suffix(color_button)
+
+        def add(_row):
+            name = entry.get_text().strip()
+            if not name:
+                return
+            current_palette = [{"name": n, "color": c} for n, c in folders.palette(self.settings)]
+            current_palette.append({"name": name, "color": _hex(color_button.get_rgba())})
+            self.settings.set("folder_palette", current_palette)
+            entry.set_text("")
+
+        entry.connect("apply", add)
+        entry.connect("entry-activated", add)
+        add_group.add(entry)
+        page.add(add_group)
+        self.palette_group = None
+        self._fill_folder_palette()
+        return page
+
+    def _fill_folder_palette(self):
+        from . import folders
+
+        if self.palette_group is not None:
+            self.folders_page.remove(self.palette_group)
+        group = Adw.PreferencesGroup(title=_("Colours in the Menu"))
+        reset = Gtk.Button(label=_("Reset"), css_classes=["flat"], valign=Gtk.Align.CENTER)
+        reset.connect("clicked", lambda _b: self.settings.set("folder_palette", []))
+        group.set_header_suffix(reset)
+        entries = folders.palette(self.settings)
+        for index, (name, color) in enumerate(entries):
+            row = Adw.ActionRow(title=GLib.markup_escape_text(_(name)), subtitle=color)
+            dots = TagDots(self.tagstore, 16)
+            dots.set_colors([color])
+            row.add_prefix(dots)
+            remove = Gtk.Button(icon_name="user-trash-symbolic", css_classes=["flat"], valign=Gtk.Align.CENTER,
+                                tooltip_text=_("Remove"))
+
+            def on_remove(_b, i=index):
+                kept = [{"name": n, "color": c} for j, (n, c) in enumerate(folders.palette(self.settings)) if j != i]
+                self.settings.set("folder_palette", kept or [{"name": n, "color": c} for n, c in folders.PALETTE][:1])
+
+            remove.connect("clicked", on_remove)
+            row.add_suffix(remove)
+            group.add(row)
+        self.palette_group = group
+        self.folders_page.add(group)
+
     # ------------------------------------------------------------------- tags
 
     def _tags_page(self):
@@ -295,6 +373,61 @@ class PreferencesDialog(Adw.PreferencesDialog):
         self.close()
         if window is not None:
             servers.ConnectDialog(window).present(window)
+
+    # --------------------------------------------------------------------- AI
+
+    def _ai_page(self):
+        from . import ai
+
+        page = Adw.PreferencesPage(title=_("AI"), icon_name="galet-ai-symbolic")
+        intro = Adw.PreferencesGroup(
+            title=_("Local AI (optional)"),
+            description=_("Search in plain language and get tag suggestions. Galet only talks to Ollama "
+                          "running on your own computer: your files never leave it."))
+        intro.add(_switch(self.settings, "ai_enabled", _("Enable AI features")))
+        url = Adw.EntryRow(title=_("Ollama address"), text=self.settings.get("ai_url", ai.DEFAULT_URL),
+                           show_apply_button=True)
+        url.connect("apply", lambda r: self.settings.set("ai_url", r.get_text().strip() or ai.DEFAULT_URL))
+        intro.add(url)
+        self.model_row = Adw.ComboRow(title=_("Model"), model=Gtk.StringList.new([self.settings.get("ai_model")]))
+        refresh = Gtk.Button(icon_name="view-refresh-symbolic", css_classes=["flat"], valign=Gtk.Align.CENTER,
+                             tooltip_text=_("Refresh the list of models"))
+        refresh.connect("clicked", lambda _b: self._load_models())
+        self.model_row.add_suffix(refresh)
+        self.model_row.connect("notify::selected", self._on_model_selected)
+        intro.add(self.model_row)
+        page.add(intro)
+
+        help_group = Adw.PreferencesGroup(title=_("Install Ollama"),
+                                          description=_("In a terminal: install Ollama, then download a model."))
+        for command in ("curl -fsSL https://ollama.com/install.sh | sh", "ollama pull llama3.2"):
+            row = Adw.ActionRow(title=command, title_selectable=True)
+            row.add_css_class("monospace")
+            help_group.add(row)
+        page.add(help_group)
+        self._models = [self.settings.get("ai_model")]
+        GLib.idle_add(self._load_models)
+        return page
+
+    def _load_models(self):
+        from . import ai
+
+        def done(names, error):
+            if error or not names:
+                return
+            self._models = names
+            self.model_row.set_model(Gtk.StringList.new(names))
+            current = self.settings.get("ai_model")
+            if current in names:
+                self.model_row.set_selected(names.index(current))
+
+        ai.run(lambda: ai.models(self.settings), done)
+        return GLib.SOURCE_REMOVE
+
+    def _on_model_selected(self, row, _pspec):
+        index = row.get_selected()
+        if 0 <= index < len(self._models):
+            self.settings.set("ai_model", self._models[index])
 
     # --------------------------------------------------------------- advanced
 

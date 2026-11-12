@@ -1,0 +1,989 @@
+# Spanish translation for Galet.
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: es\n"
+
+msgid "A Finder-inspired file manager with tabs, columns and colour tags.\nFree and open source software."
+msgstr "Un gestor de archivos inspirado en Finder, con pestañas, columnas y etiquetas de color.\nSoftware libre y de código abierto."
+
+msgid "Source Code"
+msgstr "Código fuente"
+
+msgid "{n} item"
+msgstr "{n} elemento"
+
+msgid "{n} items"
+msgstr "{n} elementos"
+
+msgid "Tags"
+msgstr "Etiquetas"
+
+msgid "No Color"
+msgstr "Sin color"
+
+msgid "New Tag"
+msgstr "Etiqueta nueva"
+
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgid "Apply"
+msgstr "Aplicar"
+
+msgid "Could not change tags: {error}"
+msgstr "No se pudieron cambiar las etiquetas: {error}"
+
+msgid "Delete Tag “{name}”?"
+msgstr "¿Eliminar la etiqueta «{name}»?"
+
+msgid "The tag will be removed from all files."
+msgstr "La etiqueta se quitará de todos los archivos."
+
+msgid "Delete"
+msgstr "Eliminar"
+
+msgid "No tag suggestion"
+msgstr "Ninguna sugerencia de etiqueta"
+
+msgid "Suggested Tags"
+msgstr "Etiquetas sugeridas"
+
+msgid "Untick what you don't want, then apply."
+msgstr "Desmarque lo que no quiera y luego aplique."
+
+msgid "Nothing to undo"
+msgstr "Nada que deshacer"
+
+msgid "Undone: {action}"
+msgstr "Deshecho: {action}"
+
+msgid "Could not open “{name}”: {error}"
+msgstr "No se pudo abrir «{name}»: {error}"
+
+msgid "Quick Look needs the “gnome-sushi” package."
+msgstr "Vista rápida necesita el paquete «gnome-sushi»."
+
+msgid "No terminal application found."
+msgstr "No se encontró ninguna aplicación de terminal."
+
+msgid "Could not rename: {error}"
+msgstr "No se pudo renombrar: {error}"
+
+msgid "Rename"
+msgstr "Renombrar"
+
+msgid "untitled folder"
+msgstr "carpeta sin título"
+
+msgid "Could not create the folder: {error}"
+msgstr "No se pudo crear la carpeta: {error}"
+
+msgid "New Folder"
+msgstr "Carpeta nueva"
+
+msgid "New Folder With Items"
+msgstr "Carpeta nueva con los elementos"
+
+msgid "Could not move to the trash: {error}"
+msgstr "No se pudo mover a la papelera: {error}"
+
+msgid "Move to Trash"
+msgstr "Mover a la papelera"
+
+msgid "{n} item moved to the trash"
+msgstr "{n} elemento movido a la papelera"
+
+msgid "{n} items moved to the trash"
+msgstr "{n} elementos movidos a la papelera"
+
+msgid "Could not restore: {error}"
+msgstr "No se pudo restaurar: {error}"
+
+msgid "{n} item put back"
+msgstr "{n} elemento restaurado"
+
+msgid "{n} items put back"
+msgstr "{n} elementos restaurados"
+
+msgid "Putting Back"
+msgstr "Restaurando"
+
+msgid "Emptying the Trash"
+msgstr "Vaciando la papelera"
+
+msgid "Empty the Trash?"
+msgstr "¿Vaciar la papelera?"
+
+msgid "All items in the trash will be permanently deleted."
+msgstr "Todos los elementos de la papelera se eliminarán permanentemente."
+
+msgid "Empty Trash"
+msgstr "Vaciar la papelera"
+
+msgid "Deleting"
+msgstr "Eliminando"
+
+msgid "Permanently delete {n} item?"
+msgstr "¿Eliminar permanentemente {n} elemento?"
+
+msgid "Permanently delete {n} items?"
+msgstr "¿Eliminar permanentemente {n} elementos?"
+
+msgid "This cannot be undone."
+msgstr "Esta acción no se puede deshacer."
+
+msgid "Path copied"
+msgstr "Ruta copiada"
+
+msgid "Nothing to paste"
+msgstr "Nada que pegar"
+
+msgid "{name} copy{ext}"
+msgstr "{name} copia{ext}"
+
+msgid "{name} copy {n}{ext}"
+msgstr "{name} copia {n}{ext}"
+
+msgid "“{name}” already exists"
+msgstr "«{name}» ya existe"
+
+msgid "An item with the same name already exists in this location."
+msgstr "Ya existe un elemento con el mismo nombre en esta ubicación."
+
+msgid "Apply to all"
+msgstr "Aplicar a todos"
+
+msgid "Skip"
+msgstr "Omitir"
+
+msgid "Keep Both"
+msgstr "Conservar ambos"
+
+msgid "Replace"
+msgstr "Reemplazar"
+
+msgid "Moving {n} item"
+msgstr "Moviendo {n} elemento"
+
+msgid "Moving {n} items"
+msgstr "Moviendo {n} elementos"
+
+msgid "Copying {n} item"
+msgstr "Copiando {n} elemento"
+
+msgid "Copying {n} items"
+msgstr "Copiando {n} elementos"
+
+msgid "{current} of {total} — {name}"
+msgstr "{current} de {total} — {name}"
+
+msgid "cannot copy a folder into itself"
+msgstr "no se puede copiar una carpeta dentro de sí misma"
+
+msgid "Some items could not be copied: {error}"
+msgstr "Algunos elementos no se pudieron copiar: {error}"
+
+msgid "{n} item moved"
+msgstr "{n} elemento movido"
+
+msgid "{n} items moved"
+msgstr "{n} elementos movidos"
+
+msgid "{n} item copied"
+msgstr "{n} elemento copiado"
+
+msgid "{n} items copied"
+msgstr "{n} elementos copiados"
+
+msgid "Move"
+msgstr "Mover"
+
+msgid "Copy"
+msgstr "Copiar"
+
+msgid "Moving Back"
+msgstr "Devolviendo a la ubicación original"
+
+msgid "Red"
+msgstr "Rojo"
+
+msgid "Orange"
+msgstr "Naranja"
+
+msgid "Yellow"
+msgstr "Amarillo"
+
+msgid "Green"
+msgstr "Verde"
+
+msgid "Teal"
+msgstr "Turquesa"
+
+msgid "Blue"
+msgstr "Azul"
+
+msgid "Purple"
+msgstr "Morado"
+
+msgid "Pink"
+msgstr "Rosa"
+
+msgid "Gray"
+msgstr "Gris"
+
+msgid "No Selection"
+msgstr "Sin selección"
+
+msgid "Dimensions"
+msgstr "Dimensiones"
+
+msgid "Created"
+msgstr "Creado"
+
+msgid "Modified"
+msgstr "Modificado"
+
+msgid "Get Info"
+msgstr "Obtener información"
+
+msgid "Read and write"
+msgstr "Lectura y escritura"
+
+msgid "Read only"
+msgstr "Solo lectura"
+
+msgid "Write only"
+msgstr "Solo escritura"
+
+msgid "No access"
+msgstr "Sin acceso"
+
+msgid "{name} Info"
+msgstr "Información de {name}"
+
+msgid "General"
+msgstr "General"
+
+msgid "Kind"
+msgstr "Tipo"
+
+msgid "Size"
+msgstr "Tamaño"
+
+msgid "Calculating…"
+msgstr "Calculando…"
+
+msgid "{size} ({bytes} bytes)"
+msgstr "{size} ({bytes} bytes)"
+
+msgid "Where"
+msgstr "Ubicación"
+
+msgid "Last opened"
+msgstr "Última apertura"
+
+msgid "No tags"
+msgstr "Sin etiquetas"
+
+msgid "Edit…"
+msgstr "Editar…"
+
+msgid "Comments"
+msgstr "Comentarios"
+
+msgid "Comment"
+msgstr "Comentario"
+
+msgid "Sharing & Permissions"
+msgstr "Compartir y permisos"
+
+msgid "Owner ({name})"
+msgstr "Propietario ({name})"
+
+msgid "Group ({name})"
+msgstr "Grupo ({name})"
+
+msgid "Everyone"
+msgstr "Todos"
+
+msgid "{size} for {n} items"
+msgstr "{size} para {n} elementos"
+
+msgid "Could not save the comment: {error}"
+msgstr "No se pudo guardar el comentario: {error}"
+
+msgid "Open With"
+msgstr "Abrir con"
+
+msgid "Application"
+msgstr "Aplicación"
+
+msgid "None"
+msgstr "Ninguna"
+
+msgid "Change All…"
+msgstr "Cambiar todo…"
+
+msgid "{app} will open all “{kind}” files"
+msgstr "{app} abrirá todos los archivos «{kind}»"
+
+msgid "Computer"
+msgstr "Equipo"
+
+msgid "Folder"
+msgstr "Carpeta"
+
+msgid "Document"
+msgstr "Documento"
+
+msgid "File Operations"
+msgstr "Operaciones con archivos"
+
+msgid "Items in the trash"
+msgstr "Elementos en la papelera"
+
+msgid "Empty Trash…"
+msgstr "Vaciar la papelera…"
+
+msgid "No Results"
+msgstr "Sin resultados"
+
+msgid "Try other words or remove some filters."
+msgstr "Pruebe con otras palabras o quite algunos filtros."
+
+msgid "No Tagged Files"
+msgstr "No hay archivos etiquetados"
+
+msgid "Right-click a file and choose a colour to tag it."
+msgstr "Pulse con el botón derecho en un archivo y elija un color para etiquetarlo."
+
+msgid "Unable to Open This Folder"
+msgstr "No se puede abrir esta carpeta"
+
+msgid "{size} available"
+msgstr "{size} disponibles"
+
+msgid "{n} item selected"
+msgstr "{n} elemento seleccionado"
+
+msgid "{n} items selected"
+msgstr "{n} elementos seleccionados"
+
+msgid "Open"
+msgstr "Abrir"
+
+msgid "Open in New Tab"
+msgstr "Abrir en una pestaña nueva"
+
+msgid "Open With…"
+msgstr "Abrir con…"
+
+msgid "Put Back"
+msgstr "Restaurar"
+
+msgid "Delete Permanently…"
+msgstr "Eliminar permanentemente…"
+
+msgid "Quick Look"
+msgstr "Vista rápida"
+
+msgid "Rename…"
+msgstr "Renombrar…"
+
+msgid "Duplicate"
+msgstr "Duplicar"
+
+msgid "Cut"
+msgstr "Cortar"
+
+msgid "Copy Path"
+msgstr "Copiar ruta"
+
+msgid "Quick Actions"
+msgstr "Acciones rápidas"
+
+msgid "New Folder With Selection"
+msgstr "Carpeta nueva con la selección"
+
+msgid "Send to Phone"
+msgstr "Enviar al teléfono"
+
+msgid "Add to Sidebar"
+msgstr "Añadir a la barra lateral"
+
+msgid "Folder Colour"
+msgstr "Color de la carpeta"
+
+msgid "Tags…"
+msgstr "Etiquetas…"
+
+msgid "Suggest Tags (AI)"
+msgstr "Sugerir etiquetas (IA)"
+
+msgid "Paste"
+msgstr "Pegar"
+
+msgid "Undo"
+msgstr "Deshacer"
+
+msgid "Open in Terminal"
+msgstr "Abrir en una terminal"
+
+msgid "Show Hidden Files"
+msgstr "Mostrar archivos ocultos"
+
+msgid "Settings"
+msgstr "Configuración"
+
+msgid "Appearance"
+msgstr "Apariencia"
+
+msgid "Theme"
+msgstr "Tema"
+
+msgid "Change the look of Galet: colours, window buttons, font."
+msgstr "Cambie el aspecto de Galet: colores, botones de ventana, tipografía."
+
+msgid "Style"
+msgstr "Estilo"
+
+msgid "Custom Theme"
+msgstr "Tema personalizado"
+
+msgid "Accent colour"
+msgstr "Color de acento"
+
+msgid "Window buttons position"
+msgstr "Posición de los botones de ventana"
+
+msgid "Window buttons style"
+msgstr "Estilo de los botones de ventana"
+
+msgid "Rounded corners"
+msgstr "Esquinas redondeadas"
+
+msgid "Font"
+msgstr "Tipografía"
+
+msgid "Tint the sidebar with the accent colour"
+msgstr "Teñir la barra lateral con el color de acento"
+
+msgid "Windows"
+msgstr "Ventanas"
+
+msgid "New windows show"
+msgstr "Las ventanas nuevas muestran"
+
+msgid "Open folders in tabs instead of new windows"
+msgstr "Abrir las carpetas en pestañas en lugar de en ventanas nuevas"
+
+msgid "When another application asks to open a folder"
+msgstr "Cuando otra aplicación pide abrir una carpeta"
+
+msgid "View"
+msgstr "Vista"
+
+msgid "Default view"
+msgstr "Vista predeterminada"
+
+msgid "Icon size"
+msgstr "Tamaño de los iconos"
+
+msgid "Show path and status bar"
+msgstr "Mostrar la barra de ruta y de estado"
+
+msgid "Sidebar"
+msgstr "Barra lateral"
+
+msgid "Show these items in the sidebar"
+msgstr "Mostrar estos elementos en la barra lateral"
+
+msgid "Folders"
+msgstr "Carpetas"
+
+msgid "Folder Colours"
+msgstr "Colores de carpeta"
+
+msgid "Right-click a folder → Folder Colour to colour it."
+msgstr "Botón derecho en una carpeta → Color de la carpeta para colorearla."
+
+msgid "Colour folders with their tag colour"
+msgstr "Colorear las carpetas con el color de su etiqueta"
+
+msgid "A folder tagged “Red” shows a red folder icon"
+msgstr "Una carpeta con la etiqueta «Rojo» muestra un icono de carpeta rojo"
+
+msgid "Theme icon"
+msgstr "Icono del tema"
+
+msgid "Default colour of all folders"
+msgstr "Color predeterminado de todas las carpetas"
+
+msgid "Add a Folder Colour"
+msgstr "Añadir un color de carpeta"
+
+msgid "Name"
+msgstr "Nombre"
+
+msgid "Colours in the Menu"
+msgstr "Colores en el menú"
+
+msgid "Reset"
+msgstr "Restablecer"
+
+msgid "Remove"
+msgstr "Quitar"
+
+msgid "Your Tags"
+msgstr "Sus etiquetas"
+
+msgid "Rename a tag by editing its name. The switch shows it in the sidebar."
+msgstr "Renombre una etiqueta editando su nombre. El interruptor la muestra en la barra lateral."
+
+msgid "Tag"
+msgstr "Etiqueta"
+
+msgid "Show in sidebar"
+msgstr "Mostrar en la barra lateral"
+
+msgid "Delete Tag…"
+msgstr "Eliminar etiqueta…"
+
+msgid "This name is already used."
+msgstr "Este nombre ya está en uso."
+
+msgid "Servers"
+msgstr "Servidores"
+
+msgid "Favorite Servers"
+msgstr "Servidores favoritos"
+
+msgid "Shown in the sidebar. Rename a server by editing its name."
+msgstr "Se muestran en la barra lateral. Renombre un servidor editando su nombre."
+
+msgid "Connect to Server…"
+msgstr "Conectar con un servidor…"
+
+msgid "Remove from Favorites"
+msgstr "Quitar de favoritos"
+
+msgid "AI"
+msgstr "IA"
+
+msgid "Local AI (optional)"
+msgstr "IA local (opcional)"
+
+msgid "Search in plain language and get tag suggestions. Galet only talks to Ollama running on your own computer: your files never leave it."
+msgstr "Busque en lenguaje natural y obtenga sugerencias de etiquetas. Galet solo se comunica con Ollama ejecutándose en su propio equipo: sus archivos nunca salen de él."
+
+msgid "Enable AI features"
+msgstr "Activar las funciones de IA"
+
+msgid "Ollama address"
+msgstr "Dirección de Ollama"
+
+msgid "Model"
+msgstr "Modelo"
+
+msgid "Refresh the list of models"
+msgstr "Actualizar la lista de modelos"
+
+msgid "Install Ollama"
+msgstr "Instalar Ollama"
+
+msgid "In a terminal: install Ollama, then download a model."
+msgstr "En una terminal: instale Ollama y luego descargue un modelo."
+
+msgid "Advanced"
+msgstr "Avanzado"
+
+msgid "Files"
+msgstr "Archivos"
+
+msgid "Show all filename extensions"
+msgstr "Mostrar todas las extensiones de archivo"
+
+msgid "Show hidden files"
+msgstr "Mostrar archivos ocultos"
+
+msgid "Keep folders on top"
+msgstr "Mantener las carpetas primero"
+
+msgid "In icon, list and column views"
+msgstr "En las vistas de iconos, lista y columnas"
+
+msgid "Home"
+msgstr "Carpeta personal"
+
+msgid "Recent"
+msgstr "Recientes"
+
+msgid "Desktop"
+msgstr "Escritorio"
+
+msgid "Documents"
+msgstr "Documentos"
+
+msgid "Downloads"
+msgstr "Descargas"
+
+msgid "Icons"
+msgstr "Iconos"
+
+msgid "List"
+msgstr "Lista"
+
+msgid "Columns"
+msgstr "Columnas"
+
+msgid "Gallery"
+msgstr "Galería"
+
+msgid "Pictures"
+msgstr "Imágenes"
+
+msgid "Music"
+msgstr "Música"
+
+msgid "Videos"
+msgstr "Vídeos"
+
+msgid "Bookmarks"
+msgstr "Marcadores"
+
+msgid "External Drives"
+msgstr "Unidades externas"
+
+msgid "Network"
+msgstr "Red"
+
+msgid "Trash"
+msgstr "Papelera"
+
+msgid "system"
+msgstr "sistema"
+
+msgid "Rotate Left"
+msgstr "Girar a la izquierda"
+
+msgid "Rotate Right"
+msgstr "Girar a la derecha"
+
+msgid "Convert to JPEG"
+msgstr "Convertir a JPEG"
+
+msgid "Convert to PNG"
+msgstr "Convertir a PNG"
+
+msgid "Reduce Size"
+msgstr "Reducir tamaño"
+
+msgid "Create PDF"
+msgstr "Crear PDF"
+
+msgid "Extract Here"
+msgstr "Extraer aquí"
+
+msgid "Compress"
+msgstr "Comprimir"
+
+msgid "{n} file created"
+msgstr "{n} archivo creado"
+
+msgid "{n} files created"
+msgstr "{n} archivos creados"
+
+msgid "Some items could not be processed: {error}"
+msgstr "Algunos elementos no se pudieron procesar: {error}"
+
+msgid "Rotating Images"
+msgstr "Girando imágenes"
+
+msgid "Converting Images"
+msgstr "Convirtiendo imágenes"
+
+msgid "Convert"
+msgstr "Convertir"
+
+msgid "{name} (reduced){ext}"
+msgstr "{name} (reducida){ext}"
+
+msgid "Resizing Images"
+msgstr "Redimensionando imágenes"
+
+msgid "Images"
+msgstr "Imágenes"
+
+msgid "Creating PDF"
+msgstr "Creando PDF"
+
+msgid "Archive"
+msgstr "Archivador"
+
+msgid "Compressing"
+msgstr "Comprimiendo"
+
+msgid "unsupported archive format"
+msgstr "formato de archivador no compatible"
+
+msgid "Extracting"
+msgstr "Extrayendo"
+
+msgid "Any Kind"
+msgstr "Cualquier tipo"
+
+msgid "PDF"
+msgstr "PDF"
+
+msgid "Archives"
+msgstr "Archivadores"
+
+msgid "Any Date"
+msgstr "Cualquier fecha"
+
+msgid "Today"
+msgstr "Hoy"
+
+msgid "Previous 7 Days"
+msgstr "Últimos 7 días"
+
+msgid "Previous 30 Days"
+msgstr "Últimos 30 días"
+
+msgid "This Year"
+msgstr "Este año"
+
+msgid "“{text}” in {folder}"
+msgstr "«{text}» en {folder}"
+
+msgid "Search in {folder}"
+msgstr "Buscar en {folder}"
+
+msgid "Smart Folder"
+msgstr "Carpeta inteligente"
+
+msgid "Could not connect to the server: {error}"
+msgstr "No se pudo conectar con el servidor: {error}"
+
+msgid "Connecting to {server}…"
+msgstr "Conectando con {server}…"
+
+msgid "Could not disconnect: {error}"
+msgstr "No se pudo desconectar: {error}"
+
+msgid "“{name}” disconnected"
+msgstr "«{name}» desconectado"
+
+msgid "Connect to Server"
+msgstr "Conectar con un servidor"
+
+msgid "Server Address"
+msgstr "Dirección del servidor"
+
+msgid "Add to Favorite Servers"
+msgstr "Añadir a servidores favoritos"
+
+msgid "Examples: {examples}"
+msgstr "Ejemplos: {examples}"
+
+msgid "Connect"
+msgstr "Conectar"
+
+msgid "Type an address and press + to keep it here and in the sidebar."
+msgstr "Escriba una dirección y pulse + para guardarla aquí y en la barra lateral."
+
+msgid "Recent Servers"
+msgstr "Servidores recientes"
+
+msgid "Favorites"
+msgstr "Favoritos"
+
+msgid "Locations"
+msgstr "Ubicaciones"
+
+msgid "Smart Folders"
+msgstr "Carpetas inteligentes"
+
+msgid "Disconnect"
+msgstr "Desconectar"
+
+msgid "Remove from Sidebar"
+msgstr "Quitar de la barra lateral"
+
+msgid "Remove Smart Folder"
+msgstr "Quitar la carpeta inteligente"
+
+msgid "Click to connect"
+msgstr "Pulse para conectar"
+
+msgid "System"
+msgstr "Sistema"
+
+msgid "Custom"
+msgstr "Personalizado"
+
+msgid "Follow System"
+msgstr "Seguir al sistema"
+
+msgid "Light"
+msgstr "Claro"
+
+msgid "Dark"
+msgstr "Oscuro"
+
+msgid "Left"
+msgstr "Izquierda"
+
+msgid "Right"
+msgstr "Derecha"
+
+msgid "Coloured dots (macOS)"
+msgstr "Puntos de colores (macOS)"
+
+msgid "Rectangles (Windows)"
+msgstr "Rectángulos (Windows)"
+
+msgid "Today at {time}"
+msgstr "Hoy a las {time}"
+
+msgid "Yesterday at {time}"
+msgstr "Ayer a las {time}"
+
+msgid "Date Modified"
+msgstr "Fecha de modificación"
+
+msgid "Location"
+msgstr "Ubicación"
+
+msgid "Applications"
+msgstr "Aplicaciones"
+
+msgid "Other"
+msgstr "Otros"
+
+msgid "Unknown"
+msgstr "Desconocido"
+
+msgid "Yesterday"
+msgstr "Ayer"
+
+msgid "Earlier This Year"
+msgstr "Antes este año"
+
+msgid "No Tags"
+msgstr "Sin etiquetas"
+
+msgid "Default Colour"
+msgstr "Color predeterminado"
+
+msgid "Show Sidebar"
+msgstr "Mostrar la barra lateral"
+
+msgid "Back"
+msgstr "Atrás"
+
+msgid "Forward"
+msgstr "Adelante"
+
+msgid "New Window"
+msgstr "Ventana nueva"
+
+msgid "New Tab"
+msgstr "Pestaña nueva"
+
+msgid "Merge All Windows"
+msgstr "Combinar todas las ventanas"
+
+msgid "Go"
+msgstr "Ir"
+
+msgid "Go to Location…"
+msgstr "Ir a la ubicación…"
+
+msgid "About Galet"
+msgstr "Acerca de Galet"
+
+msgid "Main Menu"
+msgstr "Menú principal"
+
+msgid "Search"
+msgstr "Buscar"
+
+msgid "Sort By"
+msgstr "Ordenar por"
+
+msgid "Group By"
+msgstr "Agrupar por"
+
+msgid "Show Preview"
+msgstr "Mostrar vista previa"
+
+msgid "Sort, Group and Display Options"
+msgstr "Opciones de orden, agrupación y visualización"
+
+msgid "This Folder"
+msgstr "Esta carpeta"
+
+msgid "Filter the current folder"
+msgstr "Filtrar la carpeta actual"
+
+msgid "Subfolders"
+msgstr "Subcarpetas"
+
+msgid "Search this folder and all its subfolders"
+msgstr "Buscar en esta carpeta y en todas sus subcarpetas"
+
+msgid "Everywhere"
+msgstr "En todas partes"
+
+msgid "Search your whole home folder"
+msgstr "Buscar en toda su carpeta personal"
+
+msgid "Contents"
+msgstr "Contenido"
+
+msgid "Also search inside documents (text, PDF, office files)"
+msgstr "Buscar también dentro de los documentos (texto, PDF, ofimática)"
+
+msgid "Ask the local AI (Ollama)"
+msgstr "Preguntar a la IA local (Ollama)"
+
+msgid "Save as Smart Folder"
+msgstr "Guardar como carpeta inteligente"
+
+msgid "Sending {n} file to {device}…"
+msgstr "Enviando {n} archivo a {device}…"
+
+msgid "Sending {n} files to {device}…"
+msgstr "Enviando {n} archivos a {device}…"
+
+msgid "Describe what you are looking for, e.g. “PDF invoices from this week”"
+msgstr "Describa lo que busca, p. ej. «facturas PDF de esta semana»"
+
+msgid "Asking the local AI…"
+msgstr "Preguntando a la IA local…"
+
+msgid "The local AI is not available: {error}"
+msgstr "La IA local no está disponible: {error}"
+
+msgid "Could not change the folder colour: {error}"
+msgstr "No se pudo cambiar el color de la carpeta: {error}"
+
+msgid "Tag “{tag}” added"
+msgstr "Etiqueta «{tag}» añadida"
+
+msgid "Save Smart Folder"
+msgstr "Guardar carpeta inteligente"
+
+msgid "Save"
+msgstr "Guardar"
+
+msgid "Smart folder “{name}” saved"
+msgstr "Carpeta inteligente «{name}» guardada"
+
+msgid "No folder at “{path}”"
+msgstr "No hay ninguna carpeta en «{path}»"
+
+msgid "Go to Location"
+msgstr "Ir a la ubicación"

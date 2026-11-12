@@ -1,6 +1,6 @@
 """Tag editing dialogs."""
 
-from gi.repository import Adw, Gtk
+from gi.repository import Adw, GLib, Gtk
 
 from .i18n import _, ngettext
 from .tags import PALETTE
@@ -111,4 +111,55 @@ def delete_tag(window, name):
     dialog.set_response_appearance("delete", Adw.ResponseAppearance.DESTRUCTIVE)
     dialog.set_close_response("cancel")
     dialog.connect("response", lambda _d, r: tagstore.remove_tag(name) if r == "delete" else None)
+    dialog.present(window)
+
+
+def apply_suggested_tags(window, suggestions):
+    """Show the AI's tag suggestions; nothing is applied without the user's OK."""
+    tagstore = window.tagstore
+    suggestions = {item: tags for item, tags in suggestions.items() if tags}
+    if not suggestions:
+        window.toast(_("No tag suggestion"))
+        return
+    dialog = Adw.AlertDialog(heading=_("Suggested Tags"),
+                             body=_("Untick what you don't want, then apply."))
+    listbox = Gtk.ListBox(selection_mode=Gtk.SelectionMode.NONE, css_classes=["boxed-list"])
+    checks = []
+    for item, tags in suggestions.items():
+        for tag in tags:
+            row = Adw.ActionRow(title=GLib.markup_escape_text(tag), subtitle=GLib.markup_escape_text(item.name))
+            check = Gtk.CheckButton(active=True, valign=Gtk.Align.CENTER)
+            row.add_prefix(check)
+            row.set_activatable_widget(check)
+            dots = TagDots(tagstore, 12)
+            dots.set_colors([tagstore.color_of(tag)])
+            row.add_suffix(dots)
+            listbox.append(row)
+            checks.append((check, item, tag))
+    scroller = Gtk.ScrolledWindow(hscrollbar_policy=Gtk.PolicyType.NEVER, propagate_natural_height=True,
+                                  max_content_height=340)
+    scroller.set_child(listbox)
+    dialog.set_extra_child(scroller)
+    dialog.add_response("cancel", _("Cancel"))
+    dialog.add_response("apply", _("Apply"))
+    dialog.set_response_appearance("apply", Adw.ResponseAppearance.SUGGESTED)
+    dialog.set_default_response("apply")
+    dialog.set_close_response("cancel")
+
+    def on_response(_dialog, response):
+        if response != "apply":
+            return
+        try:
+            for check, item, tag in checks:
+                if not check.get_active():
+                    continue
+                if tagstore.color_of(tag) is None and not any(t["name"] == tag for t in tagstore.tags):
+                    tagstore.add_tag(tag, None)
+                tags = tagstore.read(item.path)
+                if tag not in tags:
+                    tagstore.write(item.path, tags + [tag])
+        except OSError as err:
+            window.toast(_("Could not change tags: {error}").format(error=err.strerror or err))
+
+    dialog.connect("response", on_response)
     dialog.present(window)

@@ -2,11 +2,11 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 
-#: galet/application.py:198
+#: galet/application.py:207
 msgid "A Finder-inspired file manager with tabs, columns and colour tags.\nFree and open source software."
 msgstr ""
 
-#: galet/application.py:206
+#: galet/application.py:215
 msgid "Source Code"
 msgstr ""
 
@@ -54,207 +54,219 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: galet/fileops.py:35
+#: galet/dialogs.py:122
+msgid "No tag suggestion"
+msgstr ""
+
+#: galet/dialogs.py:124
+msgid "Suggested Tags"
+msgstr ""
+
+#: galet/dialogs.py:125
+msgid "Untick what you don't want, then apply."
+msgstr ""
+
+#: galet/fileops.py:34
 msgid "Nothing to undo"
 msgstr ""
 
-#: galet/fileops.py:39
+#: galet/fileops.py:38
 msgid "Undone: {action}"
 msgstr ""
 
-#: galet/fileops.py:53
+#: galet/fileops.py:52
 msgid "Could not open “{name}”: {error}"
 msgstr ""
 
-#: galet/fileops.py:66
+#: galet/fileops.py:65
 msgid "Quick Look needs the “gnome-sushi” package."
 msgstr ""
 
-#: galet/fileops.py:88
+#: galet/fileops.py:89
 msgid "No terminal application found."
 msgstr ""
 
-#: galet/fileops.py:148
+#: galet/fileops.py:149
 msgid "Could not rename: {error}"
 msgstr ""
 
-#: galet/fileops.py:153
+#: galet/fileops.py:154
 msgid "Rename"
 msgstr ""
 
-#: galet/fileops.py:166
+#: galet/fileops.py:167
 msgid "untitled folder"
 msgstr ""
 
-#: galet/fileops.py:172
+#: galet/fileops.py:173
 msgid "Could not create the folder: {error}"
 msgstr ""
 
-#: galet/fileops.py:174
+#: galet/fileops.py:175
 msgid "New Folder"
 msgstr ""
 
-#: galet/fileops.py:188
+#: galet/fileops.py:189
 msgid "New Folder With Items"
 msgstr ""
 
-#: galet/fileops.py:224
+#: galet/fileops.py:225
 msgid "Could not move to the trash: {error}"
 msgstr ""
 
-#: galet/fileops.py:227
+#: galet/fileops.py:228
 msgid "Move to Trash"
 msgstr ""
 
-#: galet/fileops.py:230
+#: galet/fileops.py:231
 msgid "{n} item moved to the trash"
 msgstr ""
 
-#: galet/fileops.py:230
+#: galet/fileops.py:231
 msgid "{n} items moved to the trash"
 msgstr ""
 
-#: galet/fileops.py:283
+#: galet/fileops.py:284
 msgid "Could not restore: {error}"
 msgstr ""
 
-#: galet/fileops.py:286
+#: galet/fileops.py:287
 msgid "{n} item put back"
 msgstr ""
 
-#: galet/fileops.py:286
+#: galet/fileops.py:287
 msgid "{n} items put back"
 msgstr ""
 
-#: galet/fileops.py:312
+#: galet/fileops.py:313
 msgid "Putting Back"
 msgstr ""
 
-#: galet/fileops.py:340
+#: galet/fileops.py:341
 msgid "Emptying the Trash"
 msgstr ""
 
-#: galet/fileops.py:343
+#: galet/fileops.py:344
 msgid "Empty the Trash?"
 msgstr ""
 
-#: galet/fileops.py:343
+#: galet/fileops.py:344
 msgid "All items in the trash will be permanently deleted."
 msgstr ""
 
-#: galet/fileops.py:344
+#: galet/fileops.py:345
 msgid "Empty Trash"
 msgstr ""
 
-#: galet/fileops.py:360
+#: galet/fileops.py:361
 msgid "Deleting"
 msgstr ""
 
-#: galet/fileops.py:362
+#: galet/fileops.py:363
 msgid "Permanently delete {n} item?"
 msgstr ""
 
-#: galet/fileops.py:362
+#: galet/fileops.py:363
 msgid "Permanently delete {n} items?"
 msgstr ""
 
-#: galet/fileops.py:363
+#: galet/fileops.py:364
 msgid "This cannot be undone."
 msgstr ""
 
-#: galet/fileops.py:375
+#: galet/fileops.py:376
 msgid "Path copied"
 msgstr ""
 
-#: galet/fileops.py:404
+#: galet/fileops.py:405
 msgid "Nothing to paste"
 msgstr ""
 
-#: galet/fileops.py:445
+#: galet/fileops.py:446
 msgid "{name} copy{ext}"
 msgstr ""
 
-#: galet/fileops.py:447
+#: galet/fileops.py:448
 msgid "{name} copy {n}{ext}"
 msgstr ""
 
-#: galet/fileops.py:508
+#: galet/fileops.py:509
 msgid "“{name}” already exists"
 msgstr ""
 
-#: galet/fileops.py:509
+#: galet/fileops.py:510
 msgid "An item with the same name already exists in this location."
 msgstr ""
 
-#: galet/fileops.py:510
+#: galet/fileops.py:511
 msgid "Apply to all"
 msgstr ""
 
-#: galet/fileops.py:512
+#: galet/fileops.py:513
 msgid "Skip"
 msgstr ""
 
-#: galet/fileops.py:513
+#: galet/fileops.py:514
 msgid "Keep Both"
 msgstr ""
 
-#: galet/fileops.py:514
+#: galet/fileops.py:515
 msgid "Replace"
 msgstr ""
 
-#: galet/fileops.py:540
+#: galet/fileops.py:541
 msgid "Moving {n} item"
 msgstr ""
 
-#: galet/fileops.py:540
+#: galet/fileops.py:541
 msgid "Moving {n} items"
 msgstr ""
 
-#: galet/fileops.py:541
+#: galet/fileops.py:542
 msgid "Copying {n} item"
 msgstr ""
 
-#: galet/fileops.py:541
+#: galet/fileops.py:542
 msgid "Copying {n} items"
 msgstr ""
 
-#: galet/fileops.py:549
+#: galet/fileops.py:550
 msgid "{current} of {total} — {name}"
 msgstr ""
 
-#: galet/fileops.py:554
+#: galet/fileops.py:555
 msgid "cannot copy a folder into itself"
 msgstr ""
 
-#: galet/fileops.py:601
+#: galet/fileops.py:602
 msgid "Some items could not be copied: {error}"
 msgstr ""
 
-#: galet/fileops.py:605
+#: galet/fileops.py:606
 msgid "{n} item moved"
 msgstr ""
 
-#: galet/fileops.py:605
+#: galet/fileops.py:606
 msgid "{n} items moved"
 msgstr ""
 
-#: galet/fileops.py:608
+#: galet/fileops.py:609
 msgid "{n} item copied"
 msgstr ""
 
-#: galet/fileops.py:608
+#: galet/fileops.py:609
 msgid "{n} items copied"
 msgstr ""
 
-#: galet/fileops.py:610
+#: galet/fileops.py:611
 msgid "Move"
 msgstr ""
 
-#: galet/fileops.py:610
+#: galet/fileops.py:611
 msgid "Copy"
 msgstr ""
 
-#: galet/fileops.py:633
+#: galet/fileops.py:634
 msgid "Moving Back"
 msgstr ""
 
@@ -446,115 +458,119 @@ msgstr ""
 msgid "Empty Trash…"
 msgstr ""
 
-#: galet/pane.py:208
+#: galet/pane.py:210
 msgid "No Results"
 msgstr ""
 
-#: galet/pane.py:209
+#: galet/pane.py:211
 msgid "Try other words or remove some filters."
 msgstr ""
 
-#: galet/pane.py:213
+#: galet/pane.py:215
 msgid "No Tagged Files"
 msgstr ""
 
-#: galet/pane.py:215
+#: galet/pane.py:217
 msgid "Right-click a file and choose a colour to tag it."
 msgstr ""
 
-#: galet/pane.py:225
+#: galet/pane.py:227
 msgid "Unable to Open This Folder"
 msgstr ""
 
-#: galet/pane.py:242
+#: galet/pane.py:244
 msgid "{size} available"
 msgstr ""
 
-#: galet/pane.py:440
+#: galet/pane.py:442
 msgid "{n} item selected"
 msgstr ""
 
-#: galet/pane.py:440
+#: galet/pane.py:442
 msgid "{n} items selected"
 msgstr ""
 
-#: galet/pane.py:472
+#: galet/pane.py:474
 msgid "Open"
 msgstr ""
 
-#: galet/pane.py:474
+#: galet/pane.py:476
 msgid "Open in New Tab"
 msgstr ""
 
-#: galet/pane.py:476
+#: galet/pane.py:478
 msgid "Open With…"
 msgstr ""
 
-#: galet/pane.py:481
+#: galet/pane.py:483
 msgid "Put Back"
 msgstr ""
 
-#: galet/pane.py:482
+#: galet/pane.py:484
 msgid "Delete Permanently…"
 msgstr ""
 
-#: galet/pane.py:485
+#: galet/pane.py:487
 msgid "Quick Look"
 msgstr ""
 
-#: galet/pane.py:487
+#: galet/pane.py:489
 msgid "Rename…"
 msgstr ""
 
-#: galet/pane.py:489
+#: galet/pane.py:491
 msgid "Duplicate"
 msgstr ""
 
-#: galet/pane.py:491
+#: galet/pane.py:493
 msgid "Cut"
 msgstr ""
 
-#: galet/pane.py:492
+#: galet/pane.py:494
 msgid "Copy Path"
 msgstr ""
 
-#: galet/pane.py:504
+#: galet/pane.py:506
 msgid "Quick Actions"
 msgstr ""
 
-#: galet/pane.py:506
+#: galet/pane.py:508
 msgid "New Folder With Selection"
 msgstr ""
 
-#: galet/pane.py:514
+#: galet/pane.py:516
 msgid "Send to Phone"
 msgstr ""
 
-#: galet/pane.py:521
+#: galet/pane.py:523
 msgid "Add to Sidebar"
 msgstr ""
 
-#: galet/pane.py:525
+#: galet/pane.py:527
 msgid "Folder Colour"
 msgstr ""
 
-#: galet/pane.py:531
+#: galet/pane.py:533
 msgid "Tags…"
 msgstr ""
 
-#: galet/pane.py:544
-msgid "Paste"
-msgstr ""
-
-#: galet/pane.py:545
-msgid "Undo"
+#: galet/pane.py:535
+msgid "Suggest Tags (AI)"
 msgstr ""
 
 #: galet/pane.py:548
-msgid "Open in Terminal"
+msgid "Paste"
 msgstr ""
 
 #: galet/pane.py:549
+msgid "Undo"
+msgstr ""
+
+#: galet/pane.py:552
+msgid "Open in Terminal"
+msgstr ""
+
+#: galet/pane.py:553
 msgid "Show Hidden Files"
 msgstr ""
 
@@ -562,159 +578,239 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: galet/preferences.py:77
+#: galet/preferences.py:80
 msgid "Appearance"
 msgstr ""
 
-#: galet/preferences.py:78
+#: galet/preferences.py:81
 msgid "Theme"
 msgstr ""
 
-#: galet/preferences.py:79
+#: galet/preferences.py:82
 msgid "Change the look of Galet: colours, window buttons, font."
 msgstr ""
 
-#: galet/preferences.py:101
+#: galet/preferences.py:104
 msgid "Style"
 msgstr ""
 
-#: galet/preferences.py:104
+#: galet/preferences.py:107
 msgid "Custom Theme"
 msgstr ""
 
-#: galet/preferences.py:105
+#: galet/preferences.py:108
 msgid "Accent colour"
 msgstr ""
 
-#: galet/preferences.py:113
+#: galet/preferences.py:116
 msgid "Window buttons position"
 msgstr ""
 
-#: galet/preferences.py:115
+#: galet/preferences.py:118
 msgid "Window buttons style"
 msgstr ""
 
-#: galet/preferences.py:117
+#: galet/preferences.py:120
 msgid "Rounded corners"
 msgstr ""
 
-#: galet/preferences.py:126
+#: galet/preferences.py:129
 msgid "Font"
 msgstr ""
 
-#: galet/preferences.py:136
+#: galet/preferences.py:139
 msgid "Tint the sidebar with the accent colour"
 msgstr ""
 
-#: galet/preferences.py:154
+#: galet/preferences.py:157
 msgid "Windows"
 msgstr ""
 
-#: galet/preferences.py:155
+#: galet/preferences.py:158
 msgid "New windows show"
 msgstr ""
 
-#: galet/preferences.py:156
+#: galet/preferences.py:159
 msgid "Open folders in tabs instead of new windows"
 msgstr ""
 
-#: galet/preferences.py:157
+#: galet/preferences.py:160
 msgid "When another application asks to open a folder"
 msgstr ""
 
-#: galet/preferences.py:160
+#: galet/preferences.py:163
 msgid "View"
 msgstr ""
 
-#: galet/preferences.py:161
+#: galet/preferences.py:164
 msgid "Default view"
 msgstr ""
 
-#: galet/preferences.py:163
+#: galet/preferences.py:166
 msgid "Icon size"
 msgstr ""
 
-#: galet/preferences.py:174
+#: galet/preferences.py:177
 msgid "Show path and status bar"
 msgstr ""
 
-#: galet/preferences.py:181
+#: galet/preferences.py:184
 msgid "Sidebar"
 msgstr ""
 
-#: galet/preferences.py:182
+#: galet/preferences.py:185
 msgid "Show these items in the sidebar"
 msgstr ""
 
-#: galet/preferences.py:197
+#: galet/preferences.py:198
+msgid "Folders"
+msgstr ""
+
+#: galet/preferences.py:200
+msgid "Folder Colours"
+msgstr ""
+
+#: galet/preferences.py:201
+msgid "Right-click a folder → Folder Colour to colour it."
+msgstr ""
+
+#: galet/preferences.py:202
+msgid "Colour folders with their tag colour"
+msgstr ""
+
+#: galet/preferences.py:203
+msgid "A folder tagged “Red” shows a red folder icon"
+msgstr ""
+
+#: galet/preferences.py:204
+msgid "Theme icon"
+msgstr ""
+
+#: galet/preferences.py:205
+msgid "Default colour of all folders"
+msgstr ""
+
+#: galet/preferences.py:215
+msgid "Add a Folder Colour"
+msgstr ""
+
+#: galet/preferences.py:216
 msgid "Name"
 msgstr ""
 
-#: galet/preferences.py:217
+#: galet/preferences.py:245
+msgid "Colours in the Menu"
+msgstr ""
+
+#: galet/preferences.py:246
+msgid "Reset"
+msgstr ""
+
+#: galet/preferences.py:256
+msgid "Remove"
+msgstr ""
+
+#: galet/preferences.py:295
 msgid "Your Tags"
 msgstr ""
 
-#: galet/preferences.py:218
+#: galet/preferences.py:296
 msgid "Rename a tag by editing its name. The switch shows it in the sidebar."
 msgstr ""
 
-#: galet/preferences.py:225
+#: galet/preferences.py:303
 msgid "Tag"
 msgstr ""
 
-#: galet/preferences.py:236
+#: galet/preferences.py:314
 msgid "Show in sidebar"
 msgstr ""
 
-#: galet/preferences.py:241
+#: galet/preferences.py:319
 msgid "Delete Tag…"
 msgstr ""
 
-#: galet/preferences.py:248
+#: galet/preferences.py:326
 msgid "This name is already used."
 msgstr ""
 
-#: galet/preferences.py:266
+#: galet/preferences.py:344
 msgid "Servers"
 msgstr ""
 
-#: galet/preferences.py:275
+#: galet/preferences.py:353
 msgid "Favorite Servers"
 msgstr ""
 
-#: galet/preferences.py:276
+#: galet/preferences.py:354
 msgid "Shown in the sidebar. Rename a server by editing its name."
 msgstr ""
 
-#: galet/preferences.py:277
+#: galet/preferences.py:355
 msgid "Connect to Server…"
 msgstr ""
 
-#: galet/preferences.py:286
+#: galet/preferences.py:364
 msgid "Remove from Favorites"
 msgstr ""
 
-#: galet/preferences.py:302
+#: galet/preferences.py:382
+msgid "AI"
+msgstr ""
+
+#: galet/preferences.py:384
+msgid "Local AI (optional)"
+msgstr ""
+
+#: galet/preferences.py:385
+msgid "Search in plain language and get tag suggestions. Galet only talks to Ollama running on your own computer: your files never leave it."
+msgstr ""
+
+#: galet/preferences.py:387
+msgid "Enable AI features"
+msgstr ""
+
+#: galet/preferences.py:388
+msgid "Ollama address"
+msgstr ""
+
+#: galet/preferences.py:392
+msgid "Model"
+msgstr ""
+
+#: galet/preferences.py:394
+msgid "Refresh the list of models"
+msgstr ""
+
+#: galet/preferences.py:401
+msgid "Install Ollama"
+msgstr ""
+
+#: galet/preferences.py:402
+msgid "In a terminal: install Ollama, then download a model."
+msgstr ""
+
+#: galet/preferences.py:435
 msgid "Advanced"
 msgstr ""
 
-#: galet/preferences.py:303
+#: galet/preferences.py:436
 msgid "Files"
 msgstr ""
 
-#: galet/preferences.py:304
+#: galet/preferences.py:437
 msgid "Show all filename extensions"
 msgstr ""
 
-#: galet/preferences.py:305
+#: galet/preferences.py:438
 msgid "Show hidden files"
 msgstr ""
 
-#: galet/preferences.py:306
+#: galet/preferences.py:439
 msgid "Keep folders on top"
 msgstr ""
 
-#: galet/preferences.py:307
+#: galet/preferences.py:440
 msgid "In icon, list and column views"
 msgstr ""
 
@@ -866,59 +962,55 @@ msgstr ""
 msgid "Compressing"
 msgstr ""
 
-#: galet/quickactions.py:277
+#: galet/quickactions.py:279
 msgid "unsupported archive format"
 msgstr ""
 
-#: galet/quickactions.py:287
+#: galet/quickactions.py:289
 msgid "Extracting"
 msgstr ""
 
-#: galet/search.py:13
+#: galet/search.py:16
 msgid "Any Kind"
 msgstr ""
 
-#: galet/search.py:13
-msgid "Folders"
-msgstr ""
-
-#: galet/search.py:14
+#: galet/search.py:17
 msgid "PDF"
 msgstr ""
 
-#: galet/search.py:15
+#: galet/search.py:18
 msgid "Archives"
 msgstr ""
 
-#: galet/search.py:16
+#: galet/search.py:19
 msgid "Any Date"
 msgstr ""
 
-#: galet/search.py:16
+#: galet/search.py:19
 msgid "Today"
 msgstr ""
 
-#: galet/search.py:16
+#: galet/search.py:19
 msgid "Previous 7 Days"
 msgstr ""
 
-#: galet/search.py:17
+#: galet/search.py:20
 msgid "Previous 30 Days"
 msgstr ""
 
-#: galet/search.py:17
+#: galet/search.py:20
 msgid "This Year"
 msgstr ""
 
-#: galet/search.py:94
+#: galet/search.py:147
 msgid "“{text}” in {folder}"
 msgstr ""
 
-#: galet/search.py:95
+#: galet/search.py:148
 msgid "Search in {folder}"
 msgstr ""
 
-#: galet/search.py:192
+#: galet/search.py:253
 msgid "Smart Folder"
 msgstr ""
 
@@ -1030,43 +1122,43 @@ msgstr ""
 msgid "Rectangles (Windows)"
 msgstr ""
 
-#: galet/views.py:25
+#: galet/views.py:26
 msgid "Today at {time}"
 msgstr ""
 
-#: galet/views.py:27
+#: galet/views.py:28
 msgid "Yesterday at {time}"
 msgstr ""
 
-#: galet/views.py:340
+#: galet/views.py:348
 msgid "Date Modified"
 msgstr ""
 
-#: galet/views.py:356
+#: galet/views.py:364
 msgid "Location"
 msgstr ""
 
-#: galet/views.py:402
+#: galet/views.py:410
 msgid "Applications"
 msgstr ""
 
-#: galet/views.py:403
+#: galet/views.py:411
 msgid "Other"
 msgstr ""
 
-#: galet/views.py:408
+#: galet/views.py:416
 msgid "Unknown"
 msgstr ""
 
-#: galet/views.py:416
+#: galet/views.py:424
 msgid "Yesterday"
 msgstr ""
 
-#: galet/views.py:422
+#: galet/views.py:430
 msgid "Earlier This Year"
 msgstr ""
 
-#: galet/views.py:429
+#: galet/views.py:437
 msgid "No Tags"
 msgstr ""
 
@@ -1123,7 +1215,7 @@ msgid "Sort By"
 msgstr ""
 
 #: galet/window.py:102
-msgid "Group By (List View)"
+msgid "Group By"
 msgstr ""
 
 #: galet/window.py:104
@@ -1158,42 +1250,66 @@ msgstr ""
 msgid "Search your whole home folder"
 msgstr ""
 
-#: galet/window.py:146
+#: galet/window.py:143
+msgid "Contents"
+msgstr ""
+
+#: galet/window.py:144
+msgid "Also search inside documents (text, PDF, office files)"
+msgstr ""
+
+#: galet/window.py:147
+msgid "Ask the local AI (Ollama)"
+msgstr ""
+
+#: galet/window.py:154
 msgid "Save as Smart Folder"
 msgstr ""
 
-#: galet/window.py:326
+#: galet/window.py:341
 msgid "Sending {n} file to {device}…"
 msgstr ""
 
-#: galet/window.py:326
+#: galet/window.py:341
 msgid "Sending {n} files to {device}…"
 msgstr ""
 
-#: galet/window.py:456
+#: galet/window.py:349
+msgid "Describe what you are looking for, e.g. “PDF invoices from this week”"
+msgstr ""
+
+#: galet/window.py:352
+msgid "Asking the local AI…"
+msgstr ""
+
+#: galet/window.py:357
+msgid "The local AI is not available: {error}"
+msgstr ""
+
+#: galet/window.py:512
 msgid "Could not change the folder colour: {error}"
 msgstr ""
 
-#: galet/window.py:514
+#: galet/window.py:570
 msgid "Tag “{tag}” added"
 msgstr ""
 
-#: galet/window.py:620
+#: galet/window.py:678
 msgid "Save Smart Folder"
 msgstr ""
 
-#: galet/window.py:620
+#: galet/window.py:678
 msgid "Save"
 msgstr ""
 
-#: galet/window.py:622
+#: galet/window.py:680
 msgid "Smart folder “{name}” saved"
 msgstr ""
 
-#: galet/window.py:666
+#: galet/window.py:724
 msgid "No folder at “{path}”"
 msgstr ""
 
-#: galet/window.py:668
+#: galet/window.py:726
 msgid "Go to Location"
 msgstr ""

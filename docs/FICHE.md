@@ -36,16 +36,22 @@ logiciel libre, il peut maintenant convenir à d'autres aussi.
 | 👁️ **Aperçus** | Coup d'œil avec `Espace`, panneau d'aperçu (`Ctrl+Maj+P`), « Lire les informations » (`Ctrl+I`), miniatures des photos, vidéos et PDF. |
 | ⚡ **Actions rapides** | Pivoter, convertir en JPEG ou PNG, réduire une image, créer un PDF, compresser en ZIP, extraire une archive. |
 | ↩️ **Confort** | Annuler (`Ctrl+Z`), renommer sur place (`F2`), dupliquer (`Ctrl+D`), sélection en tapant un nom, gestion des conflits de copie, barre de progression. |
-| 🔍 **Recherche** | Dans le dossier, ses sous-dossiers ou tout le dossier personnel, avec filtres par type et par date. Les recherches s'enregistrent en **dossiers intelligents**. |
+| 🔍 **Recherche** | Dans le dossier, ses sous-dossiers ou tout le dossier personnel, avec filtres par type et par date, **et même dans le contenu** des textes, PDF et documents LibreOffice/Word. Les recherches s'enregistrent en **dossiers intelligents**. |
+| 🤖 **IA locale (facultative)** | Recherche en langage naturel (« les factures PDF de cette semaine ») et suggestions de tags, avec Ollama sur votre ordinateur : vos fichiers ne le quittent jamais. Désactivée par défaut. |
+| 🌍 **Langues** | Français, anglais, espagnol, allemand, italien, portugais. |
 | 🌐 **Serveurs** | `Ctrl+K` : partages Windows (SMB), SFTP, FTP, WebDAV (Nextcloud, kDrive…), serveurs favoris dans la barre latérale. |
 | 📱 **Envoi vers le téléphone** | Avec Zorin Connect ou GSConnect, comme AirDrop. |
 | 🎨 **Thèmes** | Système, **macOS** (pastilles rouge-orange-vert à gauche), **Windows 11** ou **Personnalisé** (couleur, boutons, coins, police), en clair ou en sombre. |
-| 📁 **Dossiers colorés** | Clic droit → « Couleur du dossier ». Chaque dossier retient aussi sa présentation, comme sur Mac. |
+| 📁 **Dossiers colorés** | Clic droit → « Couleur du dossier ». Un dossier peut prendre la couleur de son tag, et la palette se règle dans Réglages → Dossiers. Chaque dossier retient aussi sa présentation, comme sur Mac. |
 | ⚙️ **Réglages** | `Ctrl+,` : dossier de départ, présentation par défaut, taille des icônes, éléments de la barre latérale, tags, serveurs… |
 
 | Colonnes | Galerie |
 |---|---|
 | ![Vue Colonnes](screenshots/colonnes.png) | ![Vue Galerie](screenshots/galerie.png) |
+| **Icônes groupées, dossiers colorés** | **Recherche dans le contenu** |
+| ![Vue groupée](screenshots/icones-groupees.png) | ![Recherche dans le contenu](screenshots/recherche-contenu.png) |
+| **Aperçu et actions rapides** | **Réglages → IA locale** |
+| ![Panneau d'aperçu](screenshots/panneau-apercu.png) | ![IA locale](screenshots/reglages-ia.png) |
 
 ### Thèmes
 
@@ -135,6 +141,24 @@ Les dossiers ouverts depuis le bureau, une clé USB ou le navigateur s'ouvriront
 ```sh
 xdg-mime default org.gnome.Nautilus.desktop inode/directory
 ```
+
+### Variante : installer en Flatpak
+
+```sh
+flatpak install --user flathub org.flatpak.Builder org.gnome.Sdk//50
+flatpak run org.flatpak.Builder --user --install --force-clean build-dir flatpak/io.github.FloDerail.Galet.yml
+flatpak run io.github.FloDerail.Galet
+```
+
+### Activer l'IA locale (facultatif)
+
+```sh
+curl -fsSL https://ollama.com/install.sh | sh
+ollama pull llama3.2
+```
+
+Puis Réglages (`Ctrl+,`) → **IA** → « Activer les fonctions d'IA ». Un bouton ✨ apparaît dans la
+recherche, et « Suggérer des tags (IA) » dans le clic droit.
 
 ### Mettre à jour
 
