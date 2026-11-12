@@ -1,0 +1,14 @@
+[Desktop Entry]
+Type=Application
+Name=Galet
+GenericName=File Manager
+GenericName[fr]=Gestionnaire de fichiers
+Comment=Browse your files with tabs, columns and colour tags
+Comment[fr]=Parcourez vos fichiers avec des onglets, des colonnes et des tags de couleur
+Exec=@BIN@ %U
+Icon=system-file-manager
+Terminal=false
+Categories=GTK;GNOME;Utility;Core;FileManager;
+MimeType=inode/directory;
+Keywords=folder;manager;explore;disk;filesystem;finder;tags;
+StartupNotify=true

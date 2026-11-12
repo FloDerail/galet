@@ -1,0 +1,954 @@
+# French translation for Galet.
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: fr\n"
+
+#: galet/application.py:166
+msgid "A Finder-inspired file manager with tabs, columns and colour tags."
+msgstr "Un gestionnaire de fichiers inspiré du Finder, avec onglets, colonnes et tags de couleur."
+
+#: galet/dialogs.py:19
+msgid "{n} item"
+msgstr "{n} élément"
+
+#: galet/dialogs.py:19
+msgid "{n} items"
+msgstr "{n} éléments"
+
+#: galet/dialogs.py:20
+msgid "Tags"
+msgstr "Tags"
+
+#: galet/dialogs.py:52
+msgid "No Color"
+msgstr "Sans couleur"
+
+#: galet/dialogs.py:54
+msgid "New Tag"
+msgstr "Nouveau tag"
+
+#: galet/dialogs.py:78
+msgid "Cancel"
+msgstr "Annuler"
+
+#: galet/dialogs.py:79
+msgid "Apply"
+msgstr "Appliquer"
+
+#: galet/dialogs.py:99
+msgid "Could not change tags: {error}"
+msgstr "Impossible de modifier les tags : {error}"
+
+#: galet/dialogs.py:107
+msgid "Delete Tag “{name}”?"
+msgstr "Supprimer le tag « {name} » ?"
+
+#: galet/dialogs.py:108
+msgid "The tag will be removed from all files."
+msgstr "Le tag sera retiré de tous les fichiers."
+
+#: galet/dialogs.py:110
+msgid "Delete"
+msgstr "Supprimer"
+
+#: galet/fileops.py:27
+msgid "Could not open “{name}”: {error}"
+msgstr "Impossible d’ouvrir « {name} » : {error}"
+
+#: galet/fileops.py:40
+msgid "Quick Look needs the “gnome-sushi” package."
+msgstr "Coup d’œil nécessite le paquet « gnome-sushi »."
+
+#: galet/fileops.py:62
+msgid "No terminal application found."
+msgstr "Aucun terminal trouvé."
+
+#: galet/fileops.py:106
+msgid "Could not rename: {error}"
+msgstr "Impossible de renommer : {error}"
+
+#: galet/fileops.py:113
+msgid "Rename"
+msgstr "Renommer"
+
+#: galet/fileops.py:122
+msgid "Could not create the folder: {error}"
+msgstr "Impossible de créer le dossier : {error}"
+
+#: galet/fileops.py:127
+msgid "New Folder"
+msgstr "Nouveau dossier"
+
+#: galet/fileops.py:127
+msgid "untitled folder"
+msgstr "dossier sans titre"
+
+#: galet/fileops.py:127
+msgid "Create"
+msgstr "Créer"
+
+#: galet/fileops.py:142
+msgid "Could not move to the trash: {error}"
+msgstr "Impossible de mettre à la corbeille : {error}"
+
+#: galet/fileops.py:145
+msgid "{n} item moved to the trash"
+msgstr "{n} élément mis à la corbeille"
+
+#: galet/fileops.py:145
+msgid "{n} items moved to the trash"
+msgstr "{n} éléments mis à la corbeille"
+
+#: galet/fileops.py:161
+msgid "Path copied"
+msgstr "Chemin copié"
+
+#: galet/fileops.py:190
+msgid "Nothing to paste"
+msgstr "Rien à coller"
+
+#: galet/fileops.py:229
+msgid "{name} copy{ext}"
+msgstr "{name} copie{ext}"
+
+#: galet/fileops.py:231
+msgid "{name} copy {n}{ext}"
+msgstr "{name} copie {n}{ext}"
+
+#: galet/fileops.py:275
+msgid "Copying {n} item…"
+msgstr "Copie de {n} élément…"
+
+#: galet/fileops.py:275
+msgid "Copying {n} items…"
+msgstr "Copie de {n} éléments…"
+
+#: galet/fileops.py:277
+msgid "Moving {n} item…"
+msgstr "Déplacement de {n} élément…"
+
+#: galet/fileops.py:277
+msgid "Moving {n} items…"
+msgstr "Déplacement de {n} éléments…"
+
+#: galet/fileops.py:284
+msgid "cannot copy a folder into itself"
+msgstr "impossible de copier un dossier dans lui-même"
+
+#: galet/fileops.py:310
+msgid "Some items could not be copied: {error}"
+msgstr "Certains éléments n’ont pas pu être copiés : {error}"
+
+#: galet/model.py:52
+msgid "Computer"
+msgstr "Ordinateur"
+
+#: galet/model.py:90
+msgid "Folder"
+msgstr "Dossier"
+
+#: galet/model.py:94
+msgid "Document"
+msgstr "Document"
+
+#: galet/pane.py:158
+msgid "No Tagged Files"
+msgstr "Aucun fichier avec ce tag"
+
+#: galet/pane.py:160
+msgid "Right-click a file and choose a colour to tag it."
+msgstr "Faites un clic droit sur un fichier et choisissez une couleur pour lui ajouter un tag."
+
+#: galet/pane.py:170
+msgid "Unable to Open This Folder"
+msgstr "Impossible d’ouvrir ce dossier"
+
+#: galet/pane.py:187
+msgid "{size} available"
+msgstr "{size} disponibles"
+
+#: galet/pane.py:244
+msgid "{n} item selected"
+msgstr "{n} élément sélectionné"
+
+#: galet/pane.py:244
+msgid "{n} items selected"
+msgstr "{n} éléments sélectionnés"
+
+#: galet/pane.py:276
+msgid "Open"
+msgstr "Ouvrir"
+
+#: galet/pane.py:278
+msgid "Open in New Tab"
+msgstr "Ouvrir dans un nouvel onglet"
+
+#: galet/pane.py:280
+msgid "Open With…"
+msgstr "Ouvrir avec…"
+
+#: galet/pane.py:284
+msgid "Quick Look"
+msgstr "Coup d’œil"
+
+#: galet/pane.py:286
+msgid "Rename…"
+msgstr "Renommer…"
+
+#: galet/pane.py:287
+msgid "Copy"
+msgstr "Copier"
+
+#: galet/pane.py:288
+msgid "Cut"
+msgstr "Couper"
+
+#: galet/pane.py:289
+msgid "Copy Path"
+msgstr "Copier le chemin"
+
+#: galet/pane.py:290
+msgid "Move to Trash"
+msgstr "Mettre à la corbeille"
+
+#: galet/pane.py:298
+msgid "Tags…"
+msgstr "Tags…"
+
+#: galet/pane.py:306
+msgid "New Folder…"
+msgstr "Nouveau dossier…"
+
+#: galet/pane.py:307
+msgid "Paste"
+msgstr "Coller"
+
+#: galet/pane.py:310
+msgid "Open in Terminal"
+msgstr "Ouvrir dans un terminal"
+
+#: galet/pane.py:311
+msgid "Show Hidden Files"
+msgstr "Afficher les fichiers cachés"
+
+#: galet/preferences.py:48
+msgid "Settings"
+msgstr "Réglages"
+
+#: galet/preferences.py:61
+msgid "General"
+msgstr "Général"
+
+#: galet/preferences.py:63
+msgid "Windows"
+msgstr "Fenêtres"
+
+#: galet/preferences.py:64
+msgid "New windows show"
+msgstr "Les nouvelles fenêtres affichent"
+
+#: galet/preferences.py:65
+msgid "Open folders in tabs instead of new windows"
+msgstr "Ouvrir les dossiers dans des onglets plutôt que dans de nouvelles fenêtres"
+
+#: galet/preferences.py:66
+msgid "When another application asks to open a folder"
+msgstr "Quand une autre application demande d’ouvrir un dossier"
+
+#: galet/preferences.py:69
+msgid "View"
+msgstr "Présentation"
+
+#: galet/preferences.py:70
+msgid "Default view"
+msgstr "Présentation par défaut"
+
+#: galet/preferences.py:72
+msgid "Icon size"
+msgstr "Taille des icônes"
+
+#: galet/preferences.py:83
+msgid "Show path and status bar"
+msgstr "Afficher la barre du chemin et d’état"
+
+#: galet/preferences.py:90
+msgid "Sidebar"
+msgstr "Barre latérale"
+
+#: galet/preferences.py:91
+msgid "Show these items in the sidebar"
+msgstr "Afficher ces éléments dans la barre latérale"
+
+#: galet/preferences.py:106
+msgid "Name"
+msgstr "Nom"
+
+#: galet/preferences.py:126
+msgid "Your Tags"
+msgstr "Vos tags"
+
+#: galet/preferences.py:127
+msgid "Rename a tag by editing its name. The switch shows it in the sidebar."
+msgstr "Renommez un tag en modifiant son nom. L’interrupteur l’affiche dans la barre latérale."
+
+#: galet/preferences.py:134
+msgid "Tag"
+msgstr "Tag"
+
+#: galet/preferences.py:145
+msgid "Show in sidebar"
+msgstr "Afficher dans la barre latérale"
+
+#: galet/preferences.py:150
+msgid "Delete Tag…"
+msgstr "Supprimer le tag…"
+
+#: galet/preferences.py:157
+msgid "This name is already used."
+msgstr "Ce nom est déjà utilisé."
+
+#: galet/preferences.py:175
+msgid "Advanced"
+msgstr "Avancé"
+
+#: galet/preferences.py:176
+msgid "Files"
+msgstr "Fichiers"
+
+#: galet/preferences.py:177
+msgid "Show all filename extensions"
+msgstr "Afficher toutes les extensions de fichier"
+
+#: galet/preferences.py:178
+msgid "Show hidden files"
+msgstr "Afficher les fichiers cachés"
+
+#: galet/preferences.py:179
+msgid "Keep folders on top"
+msgstr "Garder les dossiers en premier"
+
+#: galet/preferences.py:180
+msgid "In icon, list and column views"
+msgstr "Dans les présentations icônes, liste et colonnes"
+
+#: galet/preferences.py
+msgid "Home"
+msgstr "Dossier personnel"
+
+#: galet/preferences.py
+msgid "Recent"
+msgstr "Récents"
+
+#: galet/preferences.py
+msgid "Desktop"
+msgstr "Bureau"
+
+#: galet/preferences.py
+msgid "Documents"
+msgstr "Documents"
+
+#: galet/preferences.py
+msgid "Downloads"
+msgstr "Téléchargements"
+
+#: galet/preferences.py
+msgid "Icons"
+msgstr "Icônes"
+
+#: galet/preferences.py
+msgid "List"
+msgstr "Liste"
+
+#: galet/preferences.py
+msgid "Columns"
+msgstr "Colonnes"
+
+#: galet/preferences.py
+msgid "Pictures"
+msgstr "Images"
+
+#: galet/preferences.py
+msgid "Music"
+msgstr "Musique"
+
+#: galet/preferences.py
+msgid "Videos"
+msgstr "Vidéos"
+
+#: galet/preferences.py
+msgid "Bookmarks"
+msgstr "Signets"
+
+#: galet/preferences.py
+msgid "External Drives and Servers"
+msgstr "Disques externes et serveurs"
+
+#: galet/preferences.py
+msgid "Trash"
+msgstr "Corbeille"
+
+#: galet/sidebar.py:79
+msgid "Favorites"
+msgstr "Favoris"
+
+#: galet/sidebar.py:94
+msgid "Locations"
+msgstr "Emplacements"
+
+#: galet/tags.py:26
+msgid "Red"
+msgstr "Rouge"
+
+#: galet/tags.py:27
+msgid "Orange"
+msgstr "Orange"
+
+#: galet/tags.py:28
+msgid "Yellow"
+msgstr "Jaune"
+
+#: galet/tags.py:29
+msgid "Green"
+msgstr "Vert"
+
+#: galet/tags.py:30
+msgid "Blue"
+msgstr "Bleu"
+
+#: galet/tags.py:31
+msgid "Purple"
+msgstr "Violet"
+
+#: galet/tags.py:32
+msgid "Gray"
+msgstr "Gris"
+
+#: galet/views.py:22
+msgid "Today at {time}"
+msgstr "Aujourd’hui à {time}"
+
+#: galet/views.py:24
+msgid "Yesterday at {time}"
+msgstr "Hier à {time}"
+
+#: galet/views.py:267
+msgid "Date Modified"
+msgstr "Date de modification"
+
+#: galet/views.py:269
+msgid "Size"
+msgstr "Taille"
+
+#: galet/views.py:271
+msgid "Kind"
+msgstr "Type"
+
+#: galet/views.py:310
+msgid "Modified"
+msgstr "Modifié"
+
+#: galet/window.py:43
+msgid "Show Sidebar"
+msgstr "Afficher la barre latérale"
+
+#: galet/window.py:47
+msgid "Back"
+msgstr "Précédent"
+
+#: galet/window.py:49
+msgid "Forward"
+msgstr "Suivant"
+
+#: galet/window.py:56
+msgid "New Window"
+msgstr "Nouvelle fenêtre"
+
+#: galet/window.py:57
+msgid "New Tab"
+msgstr "Nouvel onglet"
+
+#: galet/window.py:60
+msgid "Go to Location…"
+msgstr "Aller à l’emplacement…"
+
+#: galet/window.py:65
+msgid "About Galet"
+msgstr "À propos de Galet"
+
+#: galet/window.py:68
+msgid "Main Menu"
+msgstr "Menu principal"
+
+#: galet/window.py:70
+msgid "Search"
+msgstr "Rechercher"
+
+#: galet/window.py:83
+msgid "Search in this folder"
+msgstr "Rechercher dans ce dossier"
+
+#: galet/window.py:331
+msgid "No folder at “{path}”"
+msgstr "Aucun dossier à « {path} »"
+
+#: galet/window.py:333
+msgid "Go to Location"
+msgstr "Aller à l’emplacement"
+
+#: galet/window.py:333
+msgid "Go"
+msgstr "Aller"
+
+msgid "Servers"
+msgstr "Serveurs"
+
+msgid "Favorite Servers"
+msgstr "Serveurs favoris"
+
+msgid "Shown in the sidebar. Rename a server by editing its name."
+msgstr "Affichés dans la barre latérale. Renommez un serveur en modifiant son nom."
+
+msgid "Connect to Server…"
+msgstr "Se connecter à un serveur…"
+
+msgid "Remove from Favorites"
+msgstr "Retirer des favoris"
+
+msgid "External Drives"
+msgstr "Disques externes"
+
+msgid "Network"
+msgstr "Réseau"
+
+msgid "Could not connect to the server: {error}"
+msgstr "Impossible de se connecter au serveur : {error}"
+
+msgid "Connecting to {server}…"
+msgstr "Connexion à {server}…"
+
+msgid "Could not disconnect: {error}"
+msgstr "Impossible de déconnecter : {error}"
+
+msgid "“{name}” disconnected"
+msgstr "« {name} » déconnecté"
+
+msgid "Connect to Server"
+msgstr "Se connecter au serveur"
+
+msgid "Server Address"
+msgstr "Adresse du serveur"
+
+msgid "Add to Favorite Servers"
+msgstr "Ajouter aux serveurs favoris"
+
+msgid "Examples: {examples}"
+msgstr "Exemples : {examples}"
+
+msgid "Connect"
+msgstr "Se connecter"
+
+msgid "Type an address and press + to keep it here and in the sidebar."
+msgstr "Saisissez une adresse et appuyez sur + pour la garder ici et dans la barre latérale."
+
+msgid "Recent Servers"
+msgstr "Serveurs récents"
+
+msgid "Disconnect"
+msgstr "Déconnecter"
+
+msgid "Tag “{tag}” added"
+msgstr "Tag « {tag} » ajouté"
+
+msgid "Click to connect"
+msgstr "Cliquez pour vous connecter"
+
+msgid "Nothing to undo"
+msgstr "Rien à annuler"
+
+msgid "Undone: {action}"
+msgstr "Annulé : {action}"
+
+msgid "New Folder With Items"
+msgstr "Nouveau dossier avec des éléments"
+
+msgid "Could not restore: {error}"
+msgstr "Impossible de restaurer : {error}"
+
+msgid "{n} item put back"
+msgstr "{n} élément remis en place"
+
+msgid "{n} items put back"
+msgstr "{n} éléments remis en place"
+
+msgid "Putting Back"
+msgstr "Remise en place"
+
+msgid "Emptying the Trash"
+msgstr "Vidage de la corbeille"
+
+msgid "Empty the Trash?"
+msgstr "Vider la corbeille ?"
+
+msgid "All items in the trash will be permanently deleted."
+msgstr "Tous les éléments de la corbeille seront supprimés définitivement."
+
+msgid "Empty Trash"
+msgstr "Vider la corbeille"
+
+msgid "Deleting"
+msgstr "Suppression"
+
+msgid "Permanently delete {n} item?"
+msgstr "Supprimer définitivement {n} élément ?"
+
+msgid "Permanently delete {n} items?"
+msgstr "Supprimer définitivement {n} éléments ?"
+
+msgid "This cannot be undone."
+msgstr "Cette action est irréversible."
+
+msgid "“{name}” already exists"
+msgstr "« {name} » existe déjà"
+
+msgid "An item with the same name already exists in this location."
+msgstr "Un élément portant le même nom existe déjà à cet emplacement."
+
+msgid "Apply to all"
+msgstr "Appliquer à tous"
+
+msgid "Skip"
+msgstr "Ignorer"
+
+msgid "Keep Both"
+msgstr "Garder les deux"
+
+msgid "Replace"
+msgstr "Remplacer"
+
+msgid "Moving {n} item"
+msgstr "Déplacement de {n} élément"
+
+msgid "Moving {n} items"
+msgstr "Déplacement de {n} éléments"
+
+msgid "Copying {n} item"
+msgstr "Copie de {n} élément"
+
+msgid "Copying {n} items"
+msgstr "Copie de {n} éléments"
+
+msgid "{current} of {total} — {name}"
+msgstr "{current} sur {total} — {name}"
+
+msgid "{n} item moved"
+msgstr "{n} élément déplacé"
+
+msgid "{n} items moved"
+msgstr "{n} éléments déplacés"
+
+msgid "{n} item copied"
+msgstr "{n} élément copié"
+
+msgid "{n} items copied"
+msgstr "{n} éléments copiés"
+
+msgid "Move"
+msgstr "Déplacement"
+
+msgid "Moving Back"
+msgstr "Retour à l’emplacement d’origine"
+
+msgid "No Selection"
+msgstr "Aucune sélection"
+
+msgid "Dimensions"
+msgstr "Dimensions"
+
+msgid "Created"
+msgstr "Créé"
+
+msgid "Get Info"
+msgstr "Lire les informations"
+
+msgid "Read and write"
+msgstr "Lecture et écriture"
+
+msgid "Read only"
+msgstr "Lecture seule"
+
+msgid "Write only"
+msgstr "Écriture seule"
+
+msgid "No access"
+msgstr "Aucun accès"
+
+msgid "{name} Info"
+msgstr "Infos sur {name}"
+
+msgid "Calculating…"
+msgstr "Calcul en cours…"
+
+msgid "{size} ({bytes} bytes)"
+msgstr "{size} ({bytes} octets)"
+
+msgid "Where"
+msgstr "Emplacement"
+
+msgid "Last opened"
+msgstr "Dernière ouverture"
+
+msgid "No tags"
+msgstr "Aucun tag"
+
+msgid "Edit…"
+msgstr "Modifier…"
+
+msgid "Comments"
+msgstr "Commentaires"
+
+msgid "Comment"
+msgstr "Commentaire"
+
+msgid "Sharing & Permissions"
+msgstr "Partage et permissions"
+
+msgid "Owner ({name})"
+msgstr "Propriétaire ({name})"
+
+msgid "Group ({name})"
+msgstr "Groupe ({name})"
+
+msgid "Everyone"
+msgstr "Tout le monde"
+
+msgid "{size} for {n} items"
+msgstr "{size} pour {n} éléments"
+
+msgid "Could not save the comment: {error}"
+msgstr "Impossible d’enregistrer le commentaire : {error}"
+
+msgid "Open With"
+msgstr "Ouvrir avec"
+
+msgid "Application"
+msgstr "Application"
+
+msgid "None"
+msgstr "Aucun"
+
+msgid "Change All…"
+msgstr "Tout modifier…"
+
+msgid "{app} will open all “{kind}” files"
+msgstr "{app} ouvrira tous les fichiers « {kind} »"
+
+msgid "File Operations"
+msgstr "Opérations sur les fichiers"
+
+msgid "Items in the trash"
+msgstr "Éléments dans la corbeille"
+
+msgid "Empty Trash…"
+msgstr "Vider la corbeille…"
+
+msgid "Put Back"
+msgstr "Remettre en place"
+
+msgid "Delete Permanently…"
+msgstr "Supprimer définitivement…"
+
+msgid "Duplicate"
+msgstr "Dupliquer"
+
+msgid "Quick Actions"
+msgstr "Actions rapides"
+
+msgid "New Folder With Selection"
+msgstr "Nouveau dossier avec la sélection"
+
+msgid "Undo"
+msgstr "Annuler"
+
+msgid "Gallery"
+msgstr "Galerie"
+
+msgid "Rotate Left"
+msgstr "Pivoter à gauche"
+
+msgid "Rotate Right"
+msgstr "Pivoter à droite"
+
+msgid "Convert to JPEG"
+msgstr "Convertir en JPEG"
+
+msgid "Convert to PNG"
+msgstr "Convertir en PNG"
+
+msgid "Reduce Size"
+msgstr "Réduire la taille"
+
+msgid "Create PDF"
+msgstr "Créer un PDF"
+
+msgid "Extract Here"
+msgstr "Extraire ici"
+
+msgid "Compress"
+msgstr "Compresser"
+
+msgid "{n} file created"
+msgstr "{n} fichier créé"
+
+msgid "{n} files created"
+msgstr "{n} fichiers créés"
+
+msgid "Some items could not be processed: {error}"
+msgstr "Certains éléments n’ont pas pu être traités : {error}"
+
+msgid "Rotating Images"
+msgstr "Rotation des images"
+
+msgid "Converting Images"
+msgstr "Conversion des images"
+
+msgid "Convert"
+msgstr "Conversion"
+
+msgid "{name} (reduced){ext}"
+msgstr "{name} (réduite){ext}"
+
+msgid "Resizing Images"
+msgstr "Redimensionnement des images"
+
+msgid "Images"
+msgstr "Images"
+
+msgid "Creating PDF"
+msgstr "Création du PDF"
+
+msgid "Archive"
+msgstr "Archive"
+
+msgid "Compressing"
+msgstr "Compression"
+
+msgid "unsupported archive format"
+msgstr "format d’archive non pris en charge"
+
+msgid "Extracting"
+msgstr "Extraction"
+
+msgid "Folders"
+msgstr "Dossiers"
+
+msgid "Archives"
+msgstr "Archives"
+
+msgid "Applications"
+msgstr "Applications"
+
+msgid "Other"
+msgstr "Autres"
+
+msgid "Unknown"
+msgstr "Inconnue"
+
+msgid "Today"
+msgstr "Aujourd’hui"
+
+msgid "Yesterday"
+msgstr "Hier"
+
+msgid "Previous 7 Days"
+msgstr "7 derniers jours"
+
+msgid "Previous 30 Days"
+msgstr "30 derniers jours"
+
+msgid "Earlier This Year"
+msgstr "Plus tôt cette année"
+
+msgid "No Tags"
+msgstr "Sans tag"
+
+msgid "Show Preview"
+msgstr "Afficher l’aperçu"
+
+msgid "Group By (List View)"
+msgstr "Grouper par (vue Liste)"
+
+msgid "No Results"
+msgstr "Aucun résultat"
+
+msgid "Try other words or remove some filters."
+msgstr "Essayez d’autres mots ou retirez des filtres."
+
+msgid "Send to Phone"
+msgstr "Envoyer vers le téléphone"
+
+msgid "Any Kind"
+msgstr "Tous les types"
+
+msgid "PDF"
+msgstr "PDF"
+
+msgid "Any Date"
+msgstr "N’importe quand"
+
+msgid "This Year"
+msgstr "Cette année"
+
+msgid "“{text}” in {folder}"
+msgstr "« {text} » dans {folder}"
+
+msgid "Search in {folder}"
+msgstr "Recherche dans {folder}"
+
+msgid "Smart Folder"
+msgstr "Dossier intelligent"
+
+msgid "Smart Folders"
+msgstr "Dossiers intelligents"
+
+msgid "Remove Smart Folder"
+msgstr "Supprimer le dossier intelligent"
+
+msgid "This Folder"
+msgstr "Ce dossier"
+
+msgid "Filter the current folder"
+msgstr "Filtrer le dossier actuel"
+
+msgid "Subfolders"
+msgstr "Sous-dossiers"
+
+msgid "Search this folder and all its subfolders"
+msgstr "Chercher dans ce dossier et tous ses sous-dossiers"
+
+msgid "Everywhere"
+msgstr "Partout"
+
+msgid "Search your whole home folder"
+msgstr "Chercher dans tout votre dossier personnel"
+
+msgid "Save as Smart Folder"
+msgstr "Enregistrer comme dossier intelligent"
+
+msgid "Sending {n} file to {device}…"
+msgstr "Envoi de {n} fichier vers {device}…"
+
+msgid "Sending {n} files to {device}…"
+msgstr "Envoi de {n} fichiers vers {device}…"
+
+msgid "Save Smart Folder"
+msgstr "Enregistrer le dossier intelligent"
+
+msgid "Save"
+msgstr "Enregistrer"
+
+msgid "Smart folder “{name}” saved"
+msgstr "Dossier intelligent « {name} » enregistré"
+
+msgid "Location"
+msgstr "Emplacement"
