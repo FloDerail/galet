@@ -147,10 +147,13 @@ Install for your user (menu entry + `galet` command):
 ./install.sh --remove    # uninstall
 ```
 
-Or build the **Flatpak** (needs `flatpak-builder` and the GNOME 50 SDK):
+Or install the **Flatpak file** from the [latest release](https://github.com/FloDerail/galet/releases/latest)
+(double-click it, or run `flatpak install --user galet.flatpak`; the GNOME runtime is fetched from Flathub).
+
+Or build the **Flatpak** yourself (needs `flatpak-builder` and the GNOME 51 SDK):
 
 ```sh
-flatpak install --user flathub org.flatpak.Builder org.gnome.Sdk//50
+flatpak install --user flathub org.flatpak.Builder org.gnome.Sdk//51
 flatpak run org.flatpak.Builder --user --install --force-clean build-dir flatpak/io.github.FloDerail.Galet.yml
 flatpak run io.github.FloDerail.Galet
 ```
@@ -212,8 +215,19 @@ Contributions are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md).
 - [x] Spanish, German, Italian and Portuguese translations
 - [x] Flatpak packaging
 - [x] Optional local AI (natural-language search, tag suggestions)
-- [ ] Publish on Flathub
+- [ ] Publish on Flathub (later: Flathub asks for a longer development history and human-made submissions)
 - [ ] Translation platform (Weblate) for more languages
+
+## How Galet is made (AI disclosure)
+
+Galet is designed and directed by Florian Dérail and developed **with the help of Claude**
+(Anthropic's AI assistant). A large part of the code, the Spanish, German, Italian and Portuguese
+translations, the logo and the documentation were generated with AI, then tested and used day to day
+by the author. Contributions and reviews from humans are very welcome.
+
+*Galet est conçu et dirigé par Florian Dérail et développé **avec l'aide de Claude** (l'assistant
+d'IA d'Anthropic). Une grande partie du code, des traductions, du logo et de la documentation a été
+générée avec l'IA, puis testée et utilisée au quotidien par l'auteur.*
 
 ## Author
 

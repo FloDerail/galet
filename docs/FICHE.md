@@ -142,10 +142,21 @@ Les dossiers ouverts depuis le bureau, une clé USB ou le navigateur s'ouvriront
 xdg-mime default org.gnome.Nautilus.desktop inode/directory
 ```
 
-### Variante : installer en Flatpak
+### Variante : installer le fichier Flatpak
+
+Téléchargez `galet.flatpak` depuis la [dernière version](https://github.com/FloDerail/galet/releases/latest),
+puis double-cliquez dessus (la Logithèque s'ouvre) ou tapez :
 
 ```sh
-flatpak install --user flathub org.flatpak.Builder org.gnome.Sdk//50
+flatpak install --user galet.flatpak
+```
+
+L'environnement GNOME nécessaire est téléchargé automatiquement depuis Flathub.
+
+### Variante : construire le Flatpak soi-même
+
+```sh
+flatpak install --user flathub org.flatpak.Builder org.gnome.Sdk//51
 flatpak run org.flatpak.Builder --user --install --force-clean build-dir flatpak/io.github.FloDerail.Galet.yml
 flatpak run io.github.FloDerail.Galet
 ```
@@ -198,6 +209,13 @@ effacer.
 | La touche `Espace` n'affiche rien | Installez `gnome-sushi`. |
 | Galet n'apparaît pas dans le menu | Déconnectez-vous puis reconnectez-vous, ou lancez `update-desktop-database ~/.local/share/applications`. |
 | Un bug ? | Joignez le fichier `~/.cache/galet/galet.log` à votre signalement sur la page *Issues* du projet GitHub. |
+
+## Comment Galet est fait
+
+Galet est conçu et dirigé par **Florian Dérail** et développé **avec l'aide de Claude**,
+l'assistant d'IA d'Anthropic. Une grande partie du code, des traductions (espagnol, allemand,
+italien, portugais), du logo et de cette documentation a été générée avec l'IA, puis testée et
+utilisée au quotidien par l'auteur. Les relectures et contributions humaines sont les bienvenues.
 
 ## L'auteur
 

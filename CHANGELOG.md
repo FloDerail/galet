@@ -2,6 +2,13 @@
 
 Galet — logiciel libre et open source de [Florian Dérail](https://florianderail.fr).
 
+## Non publié / Unreleased
+
+- 🌐 Site web : https://floderail.github.io/galet/
+- 📦 Fichier `galet.flatpak` installable par double-clic (dans les versions GitHub).
+- 🤖 Transparence : Galet est développé avec l'aide de Claude (Anthropic) ; voir « Comment Galet est
+  fait » dans le README. / AI disclosure added to the README, website and docs.
+
 ## 0.5.0 — Choix du fournisseur d'IA
 
 ### 🇫🇷 Nouveautés

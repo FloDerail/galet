@@ -3,6 +3,10 @@
 Galet is maintained by **Florian Dérail** ([florianderail.fr](https://florianderail.fr), GitHub
 [@FloDerail](https://github.com/FloDerail)).
 
+Galet was largely written with the help of an AI assistant (Claude, by Anthropic); see the
+"How Galet is made" section of the README. Human reviews of the code and translations are especially
+welcome.
+
 Thanks for helping! Galet is plain Python + PyGObject (GTK 4, libadwaita), so there is
 no build step: clone the repository and run `./bin/galet`.
 
