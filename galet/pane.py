@@ -535,6 +535,8 @@ class BrowserPane(Gtk.Box):
                 section.append(_("Tags…"), "win.edit-tags")
                 if self.settings.get("ai_enabled"):
                     section.append(_("Suggest Tags (AI)"), "win.ai-tags")
+                    if any(i.is_dir or i.content_type.startswith("image/") for i in items):
+                        section.append(_("Analyse Photos (AI)"), "win.analyze-photos")
                 menu.append_section(None, section)
                 common = set(items[0].tags)
                 for item in items[1:]:
@@ -551,6 +553,8 @@ class BrowserPane(Gtk.Box):
             section.append(_("Undo"), "win.undo")
             menu.append_section(None, section)
             section = Gio.Menu()
+            if self.settings.get("ai_enabled"):
+                section.append(_("Analyse Photos in This Folder (AI)"), "win.analyze-photos")
             section.append(_("Open in Terminal"), "win.open-terminal")
             section.append(_("Show Hidden Files"), "win.show-hidden")
             menu.append_section(None, section)

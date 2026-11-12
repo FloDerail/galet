@@ -211,7 +211,7 @@ def _ask_gemini(settings, prompt, _schema_unused):
     return _parse_json(text)
 
 
-def _run_cli(args, prompt):
+def _run_cli(args, prompt, cwd=None):
     from .sandbox import find_program
 
     command = find_program(args[0])
@@ -219,7 +219,7 @@ def _run_cli(args, prompt):
         raise AIError(f"“{args[0]}” is not installed")
     try:
         completed = subprocess.run([*command, *args[1:]], input="", capture_output=True, text=True,
-                                   timeout=TIMEOUT * 2, check=False)
+                                   timeout=TIMEOUT * 3, check=False, cwd=cwd)
     except subprocess.TimeoutExpired as err:
         raise AIError(f"{args[0]} did not answer in time") from err
     if completed.returncode != 0:
@@ -304,8 +304,8 @@ SEARCH_SCHEMA = {
 }
 
 SEARCH_PROMPT = """You turn a file search request into JSON. The request may be in any language.
-Files are matched on their file name and on the names of the folders containing them, so photos
-called "IMG_2034.jpg" are only found through a folder name such as "Vacances/Plage 2024".
+Files are matched on their file name, the names of the folders containing them, the text inside documents
+and code (when "content" is true), and descriptions of photos made earlier by an AI.
 Reply with JSON only, with these keys:
 - "text": the single most important word to look for (not the file type: "photo plage" -> "plage"), "" if none
 - "keywords": up to 8 other words that could appear in such file or folder names: synonyms, singular and
@@ -313,7 +313,12 @@ Reply with JSON only, with these keys:
   mer, sea, ocean, vacances, holidays, ete, summer). [] if "text" is ""
 - "kind": one of {kinds}
 - "date": one of {dates}
-- "content": true if the words should be searched inside documents, else false
+- "content": true when the request is about a topic or something written inside files (a piece of code,
+  a function, a text or lesson about a subject, a quote…), false when it is about names, photos or types
+Examples: "un morceau de code qui lit un fichier JSON" -> text "json", keywords ["json.load", "JSON.parse",
+  "read_json", "fichier"], kind "code", content true. "lecture de Jésus" -> text "jesus", keywords ["Christ",
+  "Évangile", "Gospel", "Bible", "lecture", "reading"], kind "document", content true.
+  "photos de plage" -> text "plage", keywords ["beach", "mer", "sea", "sable", "sand", "vacances"], kind "image".
 Request: {request}"""
 
 
@@ -352,6 +357,147 @@ You may propose at most one new short tag per file. Use the language of the exis
 Reply with JSON only: {{"files": [{{"name": "<file name>", "tags": ["tag", ...]}}]}} (0 to 3 tags per file).
 Files:
 {files}"""
+
+
+IMAGES_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "images": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {"name": {"type": "string"}, "keywords": {"type": "array", "items": {"type": "string"}},
+                               "caption": {"type": "string"}},
+                "required": ["name", "keywords", "caption"],
+                "additionalProperties": False,
+            },
+        },
+    },
+    "required": ["images"],
+    "additionalProperties": False,
+}
+
+IMAGES_PROMPT = """Describe each of these photos so that people can find them later by searching.
+For each image give 10 to 25 keywords, each one both in French and in English (place, scene, objects,
+people, animals, activity, season, weather, colours, visible text, event such as wedding or birthday),
+and a one-sentence caption in French.
+Reply with JSON only: {{"images": [{{"name": "<file name>", "keywords": [...], "caption": "..."}}]}}.
+Images: {names}"""
+
+
+def _shrink(path, target):
+    import gi
+
+    gi.require_version("GdkPixbuf", "2.0")
+    from gi.repository import GdkPixbuf
+
+    pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(path, 512, 512, True)
+    pixbuf = pixbuf.apply_embedded_orientation() or pixbuf
+    if pixbuf.get_has_alpha():
+        pixbuf = pixbuf.composite_color_simple(pixbuf.get_width(), pixbuf.get_height(),
+                                               GdkPixbuf.InterpType.BILINEAR, 255, 1, 0xFFFFFF, 0xFFFFFF)
+    pixbuf.savev(target, "jpeg", ["quality"], ["80"])
+
+
+def describe_images(settings, paths):
+    """Ask the AI what each photo shows. Returns {path: (keywords, caption)}."""
+    import base64
+    import tempfile
+
+    name = provider(settings)
+    if name == "gemini-cli":
+        raise AIError("Gemini CLI cannot analyse photos: choose another provider")
+    cache = os.path.join(GLib.get_user_cache_dir(), "galet")
+    os.makedirs(cache, exist_ok=True)
+    with tempfile.TemporaryDirectory(prefix="vision-", dir=cache) as tmp:
+        files = {}
+        for index, path in enumerate(paths, 1):
+            target = os.path.join(tmp, f"image{index}.jpg")
+            try:
+                _shrink(path, target)
+            except Exception:  # noqa: BLE001  unreadable or unsupported image
+                continue
+            files[f"image{index}.jpg"] = (path, target)
+        if not files:
+            return {}
+        prompt = IMAGES_PROMPT.format(names=", ".join(files))
+        if name == "claude-cli":
+            output = _run_cli(["claude", "-p", prompt, "--output-format", "json", "--json-schema",
+                               json.dumps(IMAGES_SCHEMA), "--allowedTools", "Read", "--no-session-persistence",
+                               "--disable-slash-commands"], prompt, cwd=tmp)
+            data = json.loads(output)
+            if data.get("is_error"):
+                raise AIError(str(data.get("result") or "Claude Code error")[:200])
+            data = data.get("structured_output") or _parse_json(data.get("result", ""))
+        else:
+            images = {n: base64.b64encode(open(t, "rb").read()).decode() for n, (_p, t) in files.items()}
+            data = _ask_vision(settings, name, prompt, images)
+    result = {}
+    for entry in data.get("images", []) if isinstance(data, dict) else []:
+        found = files.get(str(entry.get("name", "")).strip())
+        if found:
+            keywords = [str(k).strip() for k in entry.get("keywords", []) if str(k).strip()]
+            result[found[0]] = (keywords, str(entry.get("caption", "")))
+    return result
+
+
+def _ask_vision(settings, name, prompt, images):
+    """Send small JPEG images (base64) with the prompt to an API provider."""
+    labelled = "\n".join(f"Next image: {n}" for n in images)
+    if name == "ollama":
+        url = (settings.get("ai_url") or DEFAULT_OLLAMA_URL).rstrip("/")
+        answer = _http(url + "/api/generate", {
+            "model": settings.get("ai_vision_model") or model(settings, "ollama"),
+            "prompt": prompt + "\nThe images are given in this order: " + ", ".join(images),
+            "images": list(images.values()), "stream": False, "format": IMAGES_SCHEMA,
+        }, timeout=TIMEOUT * 3)
+        return _parse_json(answer.get("response", ""))
+    if name == "claude":
+        try:
+            import anthropic
+        except ImportError as err:
+            raise AIError("the “anthropic” Python package is missing: pip install --user anthropic") from err
+        content = []
+        for image_name, data in images.items():
+            content.append({"type": "text", "text": f"Image {image_name}:"})
+            content.append({"type": "image", "source": {"type": "base64", "media_type": "image/jpeg", "data": data}})
+        content.append({"type": "text", "text": prompt})
+        client = anthropic.Anthropic(api_key=get_key("claude") or None, timeout=TIMEOUT * 3)
+        try:
+            response = client.beta.messages.create(
+                model=model(settings, "claude"), max_tokens=8192,
+                betas=["server-side-fallback-2026-07-01"], fallbacks="default",
+                output_config={"effort": "low", "format": {"type": "json_schema", "schema": IMAGES_SCHEMA}},
+                messages=[{"role": "user", "content": content}],
+            )
+        except anthropic.APIStatusError as err:
+            raise AIError(f"Claude API error {err.status_code}: {err.message}") from err
+        except anthropic.APIConnectionError as err:
+            raise AIError("cannot reach the Claude API") from err
+        if response.stop_reason == "refusal":
+            raise AIError("Claude declined this request")
+        return _parse_json(next((b.text for b in response.content if b.type == "text"), ""))
+    if name in ("openai", "mistral"):
+        parts = [{"type": "text", "text": prompt + "\n" + labelled}]
+        for data in images.values():
+            url = f"data:image/jpeg;base64,{data}"
+            parts.append({"type": "image_url", "image_url": {"url": url} if name == "openai" else url})
+        endpoint = ("https://api.openai.com/v1/chat/completions" if name == "openai"
+                    else "https://api.mistral.ai/v1/chat/completions")
+        answer = _http(endpoint, {"model": model(settings, name), "messages": [{"role": "user", "content": parts}],
+                                  "response_format": {"type": "json_object"}},
+                       {"Authorization": f"Bearer {_need_key(name)}"}, timeout=TIMEOUT * 3)
+        return _parse_json(answer["choices"][0]["message"]["content"])
+    if name == "gemini":
+        parts = [{"text": prompt + "\n" + labelled}]
+        parts += [{"inline_data": {"mime_type": "image/jpeg", "data": data}} for data in images.values()]
+        url = ("https://generativelanguage.googleapis.com/v1beta/models/"
+               f"{urllib.parse.quote(model(settings, 'gemini'))}:generateContent")
+        answer = _http(url, {"contents": [{"parts": parts}],
+                             "generationConfig": {"responseMimeType": "application/json"}},
+                       {"x-goog-api-key": _need_key("gemini")}, timeout=TIMEOUT * 3)
+        return _parse_json(answer["candidates"][0]["content"]["parts"][0]["text"])
+    raise AIError("this provider cannot analyse photos")
 
 
 def suggest_tags(settings, items, existing):

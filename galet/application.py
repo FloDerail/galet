@@ -70,6 +70,8 @@ DEFAULTS = {
     "folder_color_from_tags": True,
     "default_folder_color": "",
     "folder_palette": [],
+    "search_style": "spotlight",
+    "search_default_mode": "simple",
     "ai_enabled": False,
     "ai_url": "http://localhost:11434",
     "ai_model": "llama3.2",

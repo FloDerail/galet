@@ -14,11 +14,11 @@ msgstr ""
 msgid "Gemini CLI (command line)"
 msgstr ""
 
-#: galet/application.py:210
+#: galet/application.py:212
 msgid "A Finder-inspired file manager with tabs, columns and colour tags.\nFree and open source software."
 msgstr ""
 
-#: galet/application.py:218
+#: galet/application.py:220
 msgid "Source Code"
 msgstr ""
 
@@ -570,19 +570,27 @@ msgstr ""
 msgid "Suggest Tags (AI)"
 msgstr ""
 
-#: galet/pane.py:550
+#: galet/pane.py:539
+msgid "Analyse Photos (AI)"
+msgstr ""
+
+#: galet/pane.py:552
 msgid "Paste"
 msgstr ""
 
-#: galet/pane.py:551
+#: galet/pane.py:553
 msgid "Undo"
 msgstr ""
 
-#: galet/pane.py:554
+#: galet/pane.py:557
+msgid "Analyse Photos in This Folder (AI)"
+msgstr ""
+
+#: galet/pane.py:558
 msgid "Open in Terminal"
 msgstr ""
 
-#: galet/pane.py:555
+#: galet/pane.py:559
 msgid "Show Hidden Files"
 msgstr ""
 
@@ -651,234 +659,254 @@ msgid "When another application asks to open a folder"
 msgstr ""
 
 #: galet/preferences.py:163
-msgid "View"
+msgid "Search"
 msgstr ""
 
 #: galet/preferences.py:164
+msgid "Search window (Ctrl+F)"
+msgstr ""
+
+#: galet/preferences.py:167
+msgid "Default search mode"
+msgstr ""
+
+#: galet/preferences.py:172
+msgid "View"
+msgstr ""
+
+#: galet/preferences.py:173
 msgid "Default view"
 msgstr ""
 
-#: galet/preferences.py:166
+#: galet/preferences.py:175
 msgid "Icon size"
 msgstr ""
 
-#: galet/preferences.py:177
+#: galet/preferences.py:186
 msgid "Show path and status bar"
 msgstr ""
 
-#: galet/preferences.py:184
+#: galet/preferences.py:193
 msgid "Sidebar"
 msgstr ""
 
-#: galet/preferences.py:185
+#: galet/preferences.py:194
 msgid "Show these items in the sidebar"
 msgstr ""
 
-#: galet/preferences.py:198
+#: galet/preferences.py:207
 msgid "Folders"
 msgstr ""
 
-#: galet/preferences.py:200
+#: galet/preferences.py:209
 msgid "Folder Colours"
 msgstr ""
 
-#: galet/preferences.py:201
+#: galet/preferences.py:210
 msgid "Right-click a folder → Folder Colour to colour it."
 msgstr ""
 
-#: galet/preferences.py:202
+#: galet/preferences.py:211
 msgid "Colour folders with their tag colour"
 msgstr ""
 
-#: galet/preferences.py:203
+#: galet/preferences.py:212
 msgid "A folder tagged “Red” shows a red folder icon"
 msgstr ""
 
-#: galet/preferences.py:204
+#: galet/preferences.py:213
 msgid "Theme icon"
 msgstr ""
 
-#: galet/preferences.py:205
+#: galet/preferences.py:214
 msgid "Default colour of all folders"
 msgstr ""
 
-#: galet/preferences.py:215
+#: galet/preferences.py:224
 msgid "Add a Folder Colour"
 msgstr ""
 
-#: galet/preferences.py:216
+#: galet/preferences.py:225
 msgid "Name"
 msgstr ""
 
-#: galet/preferences.py:245
+#: galet/preferences.py:254
 msgid "Colours in the Menu"
 msgstr ""
 
-#: galet/preferences.py:246
+#: galet/preferences.py:255
 msgid "Reset"
 msgstr ""
 
-#: galet/preferences.py:256
+#: galet/preferences.py:265
 msgid "Remove"
 msgstr ""
 
-#: galet/preferences.py:295
+#: galet/preferences.py:304
 msgid "Your Tags"
 msgstr ""
 
-#: galet/preferences.py:296
+#: galet/preferences.py:305
 msgid "Rename a tag by editing its name. The switch shows it in the sidebar."
 msgstr ""
 
-#: galet/preferences.py:303
+#: galet/preferences.py:312
 msgid "Tag"
 msgstr ""
 
-#: galet/preferences.py:314
+#: galet/preferences.py:323
 msgid "Show in sidebar"
 msgstr ""
 
-#: galet/preferences.py:319
+#: galet/preferences.py:328
 msgid "Delete Tag…"
 msgstr ""
 
-#: galet/preferences.py:326
+#: galet/preferences.py:335
 msgid "This name is already used."
 msgstr ""
 
-#: galet/preferences.py:344
+#: galet/preferences.py:353
 msgid "Servers"
 msgstr ""
 
-#: galet/preferences.py:353
+#: galet/preferences.py:362
 msgid "Favorite Servers"
 msgstr ""
 
-#: galet/preferences.py:354
+#: galet/preferences.py:363
 msgid "Shown in the sidebar. Rename a server by editing its name."
 msgstr ""
 
-#: galet/preferences.py:355
+#: galet/preferences.py:364
 msgid "Connect to Server…"
 msgstr ""
 
-#: galet/preferences.py:364
+#: galet/preferences.py:373
 msgid "Remove from Favorites"
 msgstr ""
 
-#: galet/preferences.py:382
+#: galet/preferences.py:391
 msgid "AI"
 msgstr ""
 
-#: galet/preferences.py:385
+#: galet/preferences.py:394
 msgid "AI (optional)"
 msgstr ""
 
-#: galet/preferences.py:386
+#: galet/preferences.py:395
 msgid "Search in plain language and get tag suggestions. With Ollama everything stays on your computer; online services receive file names and short document excerpts."
 msgstr ""
 
-#: galet/preferences.py:388
+#: galet/preferences.py:397
 msgid "Enable AI features"
 msgstr ""
 
-#: galet/preferences.py:390
+#: galet/preferences.py:399
 msgid "Provider"
 msgstr ""
 
-#: galet/preferences.py:408
-msgid "Send data to {service}?"
+#: galet/preferences.py:406
+msgid "Analysed photos"
+msgstr ""
+
+#: galet/preferences.py:407
+msgid "{n} photos described by the AI, stored only on this computer"
 msgstr ""
 
 #: galet/preferences.py:409
-msgid "When you use AI features, Galet will send file names and short excerpts of the selected documents to this online service. Nothing is sent until you use an AI feature."
-msgstr ""
-
-#: galet/preferences.py:412
-msgid "I Agree"
-msgstr ""
-
-#: galet/preferences.py:444
-msgid "Ollama address"
-msgstr ""
-
-#: galet/preferences.py:449
-msgid "Model"
-msgstr ""
-
-#: galet/preferences.py:451
-msgid "Refresh the list of models"
-msgstr ""
-
-#: galet/preferences.py:456
-msgid "Install Ollama"
-msgstr ""
-
-#: galet/preferences.py:457
-msgid "In a terminal: install Ollama, then download a model."
-msgstr ""
-
-#: galet/preferences.py:466
-msgid "API key"
-msgstr ""
-
-#: galet/preferences.py:475
-msgid "API key saved in the GNOME keyring"
-msgstr ""
-
-#: galet/preferences.py:482
-msgid "Get a key"
-msgstr ""
-
-#: galet/preferences.py:485
-msgid "Forget the API key"
-msgstr ""
-
-#: galet/preferences.py:486
 msgid "Forget"
 msgstr ""
 
-#: galet/preferences.py:498
+#: galet/preferences.py:427
+msgid "Send data to {service}?"
+msgstr ""
+
+#: galet/preferences.py:428
+msgid "When you use AI features, Galet will send file names and short excerpts of the selected documents to this online service. Nothing is sent until you use an AI feature."
+msgstr ""
+
+#: galet/preferences.py:431
+msgid "I Agree"
+msgstr ""
+
+#: galet/preferences.py:463
+msgid "Ollama address"
+msgstr ""
+
+#: galet/preferences.py:468
+msgid "Model"
+msgstr ""
+
+#: galet/preferences.py:470
+msgid "Refresh the list of models"
+msgstr ""
+
+#: galet/preferences.py:475
+msgid "Install Ollama"
+msgstr ""
+
+#: galet/preferences.py:476
+msgid "In a terminal: install Ollama, then download a model."
+msgstr ""
+
+#: galet/preferences.py:485
+msgid "API key"
+msgstr ""
+
+#: galet/preferences.py:494
+msgid "API key saved in the GNOME keyring"
+msgstr ""
+
+#: galet/preferences.py:501
+msgid "Get a key"
+msgstr ""
+
+#: galet/preferences.py:504
+msgid "Forget the API key"
+msgstr ""
+
+#: galet/preferences.py:517
 msgid "Requires the “anthropic” Python package"
 msgstr ""
 
-#: galet/preferences.py:506
+#: galet/preferences.py:525
 msgid "“{program}” is installed"
 msgstr ""
 
-#: galet/preferences.py:507
+#: galet/preferences.py:526
 msgid "“{program}” is not installed"
 msgstr ""
 
-#: galet/preferences.py:508
+#: galet/preferences.py:527
 msgid "Uses your existing subscription: no API key needed."
 msgstr ""
 
-#: galet/preferences.py:514
+#: galet/preferences.py:533
 msgid "Privacy: file names and short excerpts of the documents you select are sent to this service only when you use an AI feature."
 msgstr ""
 
-#: galet/preferences.py:548
+#: galet/preferences.py:567
 msgid "Advanced"
 msgstr ""
 
-#: galet/preferences.py:549
+#: galet/preferences.py:568
 msgid "Files"
 msgstr ""
 
-#: galet/preferences.py:550
+#: galet/preferences.py:569
 msgid "Show all filename extensions"
 msgstr ""
 
-#: galet/preferences.py:551
+#: galet/preferences.py:570
 msgid "Show hidden files"
 msgstr ""
 
-#: galet/preferences.py:552
+#: galet/preferences.py:571
 msgid "Keep folders on top"
 msgstr ""
 
-#: galet/preferences.py:553
+#: galet/preferences.py:572
 msgid "In icon, list and column views"
 msgstr ""
 
@@ -948,6 +976,22 @@ msgstr ""
 
 #: galet/preferences.py
 msgid "system"
+msgstr ""
+
+#: galet/preferences.py
+msgid "Big search bar (Spotlight style)"
+msgstr ""
+
+#: galet/preferences.py
+msgid "Bar inside the window, with filters"
+msgstr ""
+
+#: galet/preferences.py
+msgid "Simple (file and folder names)"
+msgstr ""
+
+#: galet/preferences.py
+msgid "AI (plain-language sentences)"
 msgstr ""
 
 #: galet/quickactions.py:40
@@ -1038,47 +1082,51 @@ msgstr ""
 msgid "Extracting"
 msgstr ""
 
-#: galet/search.py:16
+#: galet/search.py:17
 msgid "Any Kind"
 msgstr ""
 
-#: galet/search.py:17
+#: galet/search.py:18
 msgid "PDF"
 msgstr ""
 
-#: galet/search.py:18
+#: galet/search.py:19
 msgid "Archives"
 msgstr ""
 
 #: galet/search.py:19
+msgid "Code"
+msgstr ""
+
+#: galet/search.py:20
 msgid "Any Date"
 msgstr ""
 
-#: galet/search.py:19
+#: galet/search.py:20
 msgid "Today"
 msgstr ""
 
-#: galet/search.py:19
+#: galet/search.py:20
 msgid "Previous 7 Days"
 msgstr ""
 
-#: galet/search.py:20
+#: galet/search.py:21
 msgid "Previous 30 Days"
 msgstr ""
 
-#: galet/search.py:20
+#: galet/search.py:21
 msgid "This Year"
 msgstr ""
 
-#: galet/search.py:154
+#: galet/search.py:159
 msgid "“{text}” in {folder}"
 msgstr ""
 
-#: galet/search.py:155
+#: galet/search.py:160
 msgid "Search in {folder}"
 msgstr ""
 
-#: galet/search.py:271
+#: galet/search.py:293
 msgid "Smart Folder"
 msgstr ""
 
@@ -1152,6 +1200,62 @@ msgstr ""
 
 #: galet/sidebar.py:262
 msgid "Click to connect"
+msgstr ""
+
+#: galet/spotlight.py:42
+msgid "Simple"
+msgstr ""
+
+#: galet/spotlight.py:74
+msgid "Show All in Galet"
+msgstr ""
+
+#: galet/spotlight.py:76
+msgid "Enter: open · Ctrl+Enter: show in folder · Esc: close"
+msgstr ""
+
+#: galet/spotlight.py:99
+msgid "Describe what you are looking for, then press Enter"
+msgstr ""
+
+#: galet/spotlight.py:100
+msgid "Example: “beach photos”, “a piece of code that reads JSON”, “my invoices from this month”"
+msgstr ""
+
+#: galet/spotlight.py:103
+msgid "Search files and folders by name"
+msgstr ""
+
+#: galet/spotlight.py:142
+msgid "Asking the AI…"
+msgstr ""
+
+#: galet/spotlight.py:148
+msgid "The AI is not available: {error}"
+msgstr ""
+
+#: galet/spotlight.py:153
+msgid "“{text}”"
+msgstr ""
+
+#: galet/spotlight.py:155
+msgid "inside documents"
+msgstr ""
+
+#: galet/spotlight.py:156
+msgid "AI understood: {summary}"
+msgstr ""
+
+#: galet/spotlight.py:173
+msgid "Searching…"
+msgstr ""
+
+#: galet/spotlight.py:215
+msgid "{n} result"
+msgstr ""
+
+#: galet/spotlight.py:215
+msgid "{n} results"
 msgstr ""
 
 #: galet/themes.py:14
@@ -1275,58 +1379,58 @@ msgid "Main Menu"
 msgstr ""
 
 #: galet/window.py:87
-msgid "Search"
+msgid "Search (Ctrl+F)"
 msgstr ""
 
-#: galet/window.py:97
+#: galet/window.py:98
 msgid "Sort By"
 msgstr ""
 
-#: galet/window.py:102
+#: galet/window.py:103
 msgid "Group By"
 msgstr ""
 
-#: galet/window.py:104
+#: galet/window.py:105
 msgid "Show Preview"
 msgstr ""
 
-#: galet/window.py:108
+#: galet/window.py:109
 msgid "Sort, Group and Display Options"
 msgstr ""
 
-#: galet/window.py:129
+#: galet/window.py:130
 msgid "This Folder"
 msgstr ""
 
-#: galet/window.py:129
+#: galet/window.py:130
 msgid "Filter the current folder"
 msgstr ""
 
-#: galet/window.py:130
+#: galet/window.py:131
 msgid "Subfolders"
 msgstr ""
 
-#: galet/window.py:130
+#: galet/window.py:131
 msgid "Search this folder and all its subfolders"
 msgstr ""
 
-#: galet/window.py:131
+#: galet/window.py:132
 msgid "Everywhere"
 msgstr ""
 
-#: galet/window.py:131
+#: galet/window.py:132
 msgid "Search your whole home folder"
 msgstr ""
 
-#: galet/window.py:144
+#: galet/window.py:145
 msgid "Also search inside documents (text, PDF, office files)"
 msgstr ""
 
-#: galet/window.py:149
+#: galet/window.py:150
 msgid "AI mode: describe what you are looking for, then press Enter"
 msgstr ""
 
-#: galet/window.py:158
+#: galet/window.py:159
 msgid "Save as Smart Folder"
 msgstr ""
 
@@ -1338,58 +1442,66 @@ msgstr ""
 msgid "Sending {n} files to {device}…"
 msgstr ""
 
-#: galet/window.py:352
-msgid "Describe what you are looking for, then press Enter"
-msgstr ""
-
 #: galet/window.py:374
 msgid "Describe what you are looking for, e.g. “PDF invoices from this week”"
 msgstr ""
 
-#: galet/window.py:382
-msgid "The AI is not available: {error}"
+#: galet/window.py:435
+msgid "No new photo to analyse here"
 msgstr ""
 
-#: galet/window.py:388
-msgid "“{text}”"
+#: galet/window.py:438
+msgid "{n} photos will be described by {service} so you can find them by what they show."
 msgstr ""
 
-#: galet/window.py:391
-msgid "inside documents"
+#: galet/window.py:441
+msgid "Reduced copies of the photos (512 pixels) are sent to this online service."
 msgstr ""
 
-#: galet/window.py:402
-msgid "AI understood: {summary}"
+#: galet/window.py:470
+msgid "{n} photo analysed"
 msgstr ""
 
-#: galet/window.py:412
-msgid "Asking the AI…"
+#: galet/window.py:470
+msgid "{n} photos analysed"
 msgstr ""
 
-#: galet/window.py:548
+#: galet/window.py:472
+msgid "Analysing Photos"
+msgstr ""
+
+#: galet/window.py:474
+msgid "Analyse photos with the AI?"
+msgstr ""
+
+#: galet/window.py:474
+msgid "Analyse"
+msgstr ""
+
+#: galet/window.py:618
 msgid "Could not change the folder colour: {error}"
 msgstr ""
 
-#: galet/window.py:606
+#: galet/window.py:676
 msgid "Tag “{tag}” added"
 msgstr ""
 
-#: galet/window.py:730
+#: galet/window.py:800
 msgid "Save Smart Folder"
 msgstr ""
 
-#: galet/window.py:730
+#: galet/window.py:800
 msgid "Save"
 msgstr ""
 
-#: galet/window.py:732
+#: galet/window.py:802
 msgid "Smart folder “{name}” saved"
 msgstr ""
 
-#: galet/window.py:776
+#: galet/window.py:846
 msgid "No folder at “{path}”"
 msgstr ""
 
-#: galet/window.py:778
+#: galet/window.py:848
 msgid "Go to Location"
 msgstr ""

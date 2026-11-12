@@ -12,21 +12,24 @@ from gi.repository import Gio, GLib, GObject
 
 from .i18n import N_, _
 from .model import ATTRIBUTES, FileItem, fold
+from .photoindex import PHOTO_INDEX
 
 KINDS = (("any", N_("Any Kind")), ("folder", N_("Folders")), ("document", N_("Documents")),
          ("image", N_("Images")), ("pdf", N_("PDF")), ("audio", N_("Music")), ("video", N_("Videos")),
-         ("archive", N_("Archives")))
+         ("archive", N_("Archives")), ("code", N_("Code")))
 DATES = (("any", N_("Any Date")), ("today", N_("Today")), ("week", N_("Previous 7 Days")),
          ("month", N_("Previous 30 Days")), ("year", N_("This Year")))
 DOCUMENT_HINTS = ("text/", "pdf", "opendocument", "msword", "officedocument", "ms-excel", "ms-powerpoint",
                   "rtf", "epub", "markdown")
+CODE_EXTENSIONS = (".py", ".js", ".mjs", ".ts", ".tsx", ".jsx", ".java", ".kt", ".c", ".h", ".cpp", ".hpp", ".cs",
+                   ".rs", ".go", ".rb", ".php", ".sh", ".bash", ".lua", ".swift", ".sql", ".css", ".scss", ".html",
+                   ".vue", ".svelte", ".json", ".yml", ".yaml", ".toml", ".xml", ".pl", ".r", ".dart", ".gd")
 ARCHIVE_EXTENSIONS = (".zip", ".tar", ".gz", ".tgz", ".bz2", ".xz", ".7z", ".rar", ".zst")
 MAX_RESULTS = 3000
 MAX_TEXT_BYTES = 8 * 1024 * 1024
 MAX_DOCUMENT_BYTES = 60 * 1024 * 1024
-TEXT_EXTENSIONS = (".txt", ".md", ".csv", ".tsv", ".log", ".json", ".xml", ".html", ".htm", ".py", ".js", ".ts",
-                   ".css", ".sh", ".c", ".h", ".cpp", ".java", ".rs", ".go", ".php", ".rb", ".yml", ".yaml",
-                   ".ini", ".conf", ".tex", ".srt", ".rtf")
+TEXT_EXTENSIONS = (".txt", ".md", ".csv", ".tsv", ".log", ".htm", ".ini", ".conf", ".cfg", ".tex", ".srt",
+                   ".rtf", ".rst", ".org", ".adoc")
 OFFICE_PARTS = {
     ".odt": ("content.xml",), ".ods": ("content.xml",), ".odp": ("content.xml",), ".odg": ("content.xml",),
     ".docx": ("word/document.xml",), ".xlsx": ("xl/sharedStrings.xml",), ".pptx": ("ppt/slides/",),
@@ -48,7 +51,7 @@ def document_text(path, size):
     """Plain text of a document for content search ("" if unsupported)."""
     lower = path.lower()
     try:
-        if lower.endswith(TEXT_EXTENSIONS) and size <= MAX_TEXT_BYTES:
+        if lower.endswith(TEXT_EXTENSIONS + CODE_EXTENSIONS) and size <= MAX_TEXT_BYTES:
             with open(path, "rb") as handle:
                 return handle.read(MAX_TEXT_BYTES).decode("utf-8", "ignore")
         if size > MAX_DOCUMENT_BYTES:
@@ -90,6 +93,8 @@ def kind_matches(kind, content_type, is_dir, name=""):
         return content_type.startswith("video/")
     if kind == "archive":
         return name.lower().endswith(ARCHIVE_EXTENSIONS)
+    if kind == "code":
+        return name.lower().endswith(CODE_EXTENSIONS)
     return True
 
 
@@ -180,24 +185,33 @@ class SearchModel(GObject.Object):
         query = self.query
         needle = fold(query.text)
         needles = [n for n in dict.fromkeys([needle] + [fold(k) for k in query.keywords]) if n]
+        # The typed text may match anywhere in a name ("fact" finds "facture"); AI keywords and photo
+        # descriptions must start a word ("mer" must not match "summer").
+        word_patterns = [re.compile(r"(?<![a-z0-9])" + re.escape(n)) for n in needles]
+
+        def name_matches(folded):
+            return (needle and needle in folded) or any(p.search(folded) for p in word_patterns)
         now = time.time()
         pending, found = [], 0
         last_flush = time.monotonic()
         roots = [query.root, *query.extra_roots]
         stack = [(root, root) for root in reversed(roots)]
+        current_root = None
         while stack and not self._cancelled.is_set():
             directory, root = stack.pop()
+            # Show results as they come, before reading the next folder: listing a folder on a
+            # network drive can take seconds and must not hold back what was already found.
+            if pending and (root != current_root or time.monotonic() - last_flush > 0.3):
+                GLib.idle_add(self._add, pending)
+                pending, last_flush = [], time.monotonic()
+            current_root = root
             try:
                 entries = list(os.scandir(directory))
             except OSError:
                 continue
-            # Show results as they come: slow network drives must not hold back the others.
-            if pending and time.monotonic() - last_flush > 0.3:
-                GLib.idle_add(self._add, pending)
-                pending, last_flush = [], time.monotonic()
             # Folder names count too: ".../Vacances/Plage 2024/IMG_0001.jpg" matches "plage".
             folder_path = fold(os.path.relpath(directory, root)) if directory != root else ""
-            in_matching_folder = bool(needles) and any(n in folder_path for n in needles)
+            in_matching_folder = bool(needles) and bool(folder_path) and name_matches(folder_path)
             for entry in entries:
                 name = entry.name
                 if name.startswith(".") and not self.show_hidden:
@@ -210,15 +224,23 @@ class SearchModel(GObject.Object):
                         and not os.path.ismount(entry.path)):
                     stack.append((entry.path, root))
                 folded_name = fold(name)
-                if needles and not in_matching_folder and not any(n in folded_name for n in needles):
-                    if not query.content or is_dir or not needle:
+                if needles and not in_matching_folder and not name_matches(folded_name):
+                    if is_dir:
                         continue
-                    try:
-                        size = entry.stat(follow_symlinks=False).st_size
-                    except OSError:
+                    # Photos analysed by the AI: match what the picture shows.
+                    described = PHOTO_INDEX.words(entry.path)
+                    if described and any(p.search(described) for p in word_patterns):
+                        pass
+                    elif not query.content:
                         continue
-                    if needle not in fold(document_text(entry.path, size)):
-                        continue
+                    else:
+                        try:
+                            size = entry.stat(follow_symlinks=False).st_size
+                        except OSError:
+                            continue
+                        text = fold(document_text(entry.path, size))
+                        if not text or not any(p.search(text) for p in word_patterns):
+                            continue
                 if query.kind != "any":
                     content_type = "inode/directory" if is_dir else Gio.content_type_guess(name, None)[0]
                     if not kind_matches(query.kind, content_type, is_dir, name):

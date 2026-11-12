@@ -51,6 +51,8 @@ staying a native GTK4 / libadwaita application that blends in with GNOME and Zor
 - Rotate, convert to JPEG/PNG, reduce size, create a PDF from images, compress to ZIP, extract archives.
 
 **Search, Spotlight-style**
+- A **big search window** (<kbd>Ctrl</kbd>+<kbd>F</kbd>) with **Simple** or **AI** mode, instant results with
+  thumbnails; the classic in-window bar with filters is still available (Settings → General).
 - Filter the current folder, or search **all subfolders** / your **whole home folder**, by name,
   kind (documents, images, PDF, music, videos, archives…) and date.
 - **Search inside documents**: text files, PDF, LibreOffice and Word/Excel/PowerPoint files.
@@ -83,7 +85,10 @@ staying a native GTK4 / libadwaita application that blends in with GNOME and Zor
   **folder colour palette** (Settings → Folders).
 
 **Optional AI** (off by default, Settings → AI)
-- **Plain-language search** ("PDF invoices from this week") and **tag suggestions**.
+- **Plain-language search** ("PDF invoices from this week", "a piece of code that reads JSON") and
+  **tag suggestions**.
+- **Analyse photos**: the AI describes what your photos show, so "beach photos" finds `IMG_2034.jpg`.
+  Descriptions stay on your computer.
 - Choose your provider: **Ollama** (local, nothing leaves your computer — the default),
   **Claude**, **Mistral**, **Gemini**, **ChatGPT** (API key stored in the GNOME keyring), or the
   **Claude Code** / **Gemini CLI** command-line tools (use your existing subscription, no key).

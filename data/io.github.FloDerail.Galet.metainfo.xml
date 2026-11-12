@@ -85,6 +85,9 @@
     <keyword>explorer</keyword>
   </keywords>
   <releases>
+    <release version="0.6.0" date="2026-11-13">
+      <description><p>Spotlight-style search window with Simple and AI modes, AI photo analysis, meaning-based search in code and documents.</p></description>
+    </release>
     <release version="0.5.2" date="2026-11-13">
       <description><p>AI search suggests alternative keywords and matches folder names; Everywhere includes network drives.</p></description>
     </release>

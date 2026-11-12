@@ -84,7 +84,8 @@ class GaletWindow(Adw.ApplicationWindow):
         header.pack_end(Gtk.MenuButton(icon_name="open-menu-symbolic", menu_model=menu, primary=True,
                                        tooltip_text=_("Main Menu")))
 
-        search_button = Gtk.ToggleButton(icon_name="system-search-symbolic", tooltip_text=_("Search"))
+        search_button = Gtk.Button(icon_name="system-search-symbolic", tooltip_text=_("Search (Ctrl+F)"),
+                                   action_name="win.search")
         header.pack_end(search_button)
         self.operations_button = OperationsButton()
         header.pack_end(self.operations_button)
@@ -160,8 +161,6 @@ class GaletWindow(Adw.ApplicationWindow):
         search_row.append(self.save_search_button)
         self.search_bar = Gtk.SearchBar(child=Adw.Clamp(child=search_row, maximum_size=980))
         self.search_bar.connect_entry(self.search_entry)
-        search_button.bind_property("active", self.search_bar, "search-mode-enabled",
-                                    GObject.BindingFlags.BIDIRECTIONAL)
         self.search_bar.connect("notify::search-mode-enabled", self._on_search_mode)
 
         # Tabs
@@ -222,7 +221,7 @@ class GaletWindow(Adw.ApplicationWindow):
             "reload": lambda: self.current_pane.reload(),
             "new-tab": lambda: self.new_tab(self.current_pane.location if self.current_pane else None),
             "close-tab": self._close_current_tab,
-            "search": lambda: self.search_bar.set_search_mode(not self.search_bar.get_search_mode()),
+            "search": self.open_search,
             "go-to": self._go_to_dialog,
             "open": lambda: self.current_pane.open_items(self.selection),
             "open-new-tab": lambda: self.current_pane.open_items(self.selection, new_tab=True),
@@ -249,6 +248,7 @@ class GaletWindow(Adw.ApplicationWindow):
             "connect-server": lambda: servers.ConnectDialog(self).present(self),
             "get-info": self._get_info,
             "ai-tags": self._ai_tags,
+            "analyze-photos": self._analyze_photos,
             "merge-windows": self.merge_windows,
             "add-to-sidebar": lambda: self.sidebar.add_bookmarks([i.target_file for i in self.selection if i.is_dir]),
             "go-recent": lambda: self._go_special("recent"),
@@ -402,6 +402,76 @@ class GaletWindow(Adw.ApplicationWindow):
             self.toast(_("AI understood: {summary}").format(summary=" · ".join(parts)))
 
         ai.run(lambda: ai.parse_search(self.settings, request), done)
+
+    def open_search(self):
+        """Ctrl+F: the big Spotlight-style window, or the classic bar (Settings → General)."""
+        if self.settings.get("search_style", "spotlight") == "spotlight":
+            from .spotlight import SpotlightDialog
+
+            SpotlightDialog(self).present(self)
+        else:
+            self.search_bar.set_search_mode(not self.search_bar.get_search_mode())
+
+    def _analyze_photos(self):
+        """Let the AI describe photos (selection, or the current folder) for search."""
+        import os
+
+        from . import ai, fileops
+        from .photoindex import PHOTO_INDEX, is_photo
+
+        pane = self.current_pane
+        roots = [i.path for i in self.selection if i.path] or (
+            [pane.current_dir().get_path()] if pane and pane.current_dir() and pane.current_dir().get_path() else [])
+        photos = []
+        for root in roots:
+            if os.path.isdir(root):
+                for directory, dirs, files in os.walk(root):
+                    dirs[:] = [d for d in dirs if not d.startswith(".")]
+                    photos += [os.path.join(directory, f) for f in files if is_photo(f)]
+            elif is_photo(root):
+                photos.append(root)
+        photos = [p for p in dict.fromkeys(photos) if not PHOTO_INDEX.is_current(p)]
+        if not photos:
+            self.toast(_("No new photo to analyse here"))
+            return
+        name = ai.provider(self.settings)
+        body = _("{n} photos will be described by {service} so you can find them by what they show.").format(
+            n=len(photos), service=_(ai.PROVIDERS[name]["label"]))
+        if ai.is_cloud(name):
+            body += " " + _("Reduced copies of the photos (512 pixels) are sent to this online service.")
+
+        def run():
+            batch_size = 6
+
+            def work(operation, errors):
+                done, failures = 0, 0
+                for start in range(0, len(photos), batch_size):
+                    if operation.cancellable.is_cancelled():
+                        break
+                    batch = photos[start:start + batch_size]
+                    operation.update(detail=os.path.basename(batch[0]), fraction=start / len(photos))
+                    try:
+                        for path, (keywords, caption) in ai.describe_images(self.settings, batch).items():
+                            PHOTO_INDEX.add(path, keywords, caption)
+                            done += 1
+                        PHOTO_INDEX.save()
+                        failures = 0
+                    except ai.AIError as err:
+                        failures += 1
+                        if failures >= 2:
+                            errors.append(str(err))
+                            break
+                return done
+
+            def finished(done, errors):
+                if errors:
+                    self.toast(_("The AI is not available: {error}").format(error=errors[0]))
+                if done:
+                    self.toast(ngettext("{n} photo analysed", "{n} photos analysed", done).format(n=done))
+
+            fileops._run(self, _("Analysing Photos"), work, finished)
+
+        fileops.confirm(self, _("Analyse photos with the AI?"), body, _("Analyse"), run, destructive=False)
 
     def _ai_tags(self):
         from . import ai, dialogs

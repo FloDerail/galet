@@ -93,3 +93,16 @@ button.galet-theme-card:checked {
   box-shadow: inset 0 0 0 2px @accent_bg_color;
   background-color: alpha(@accent_bg_color, 0.08);
 }
+
+/* Spotlight-style search window */
+entry.galet-spotlight-entry,
+searchbar entry.galet-spotlight-entry {
+  font-size: 1.35em;
+  min-height: 48px;
+  padding: 0 12px;
+  border-radius: 12px;
+}
+
+.galet-spotlight-list > row {
+  border-radius: 10px;
+}

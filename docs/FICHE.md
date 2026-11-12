@@ -37,6 +37,8 @@ logiciel libre, il peut maintenant convenir à d'autres aussi.
 | ⚡ **Actions rapides** | Pivoter, convertir en JPEG ou PNG, réduire une image, créer un PDF, compresser en ZIP, extraire une archive. |
 | ↩️ **Confort** | Annuler (`Ctrl+Z`), renommer sur place (`F2`), dupliquer (`Ctrl+D`), sélection en tapant un nom, gestion des conflits de copie, barre de progression. |
 | 🔍 **Recherche** | Dans le dossier, ses sous-dossiers ou tout le dossier personnel, avec filtres par type et par date, **et même dans le contenu** des textes, PDF et documents LibreOffice/Word. Les recherches s'enregistrent en **dossiers intelligents**. |
+| 🔍 **Grande barre de recherche** | `Ctrl+F` ouvre une grande barre façon Spotlight, en mode **Simple** ou **IA**. Réglages → Général pour choisir la barre et le mode par défaut. |
+| 🖼️ **Photos comprises par l'IA** | Clic droit → « Analyser les photos (IA) » : « photos de plage » trouve ensuite `IMG_2034.jpg`. Les descriptions restent sur votre ordinateur. |
 | 🤖 **IA (facultative)** | Recherche en langage naturel (« les factures PDF de cette semaine ») et suggestions de tags. Au choix : **Ollama** (local, rien ne quitte votre ordinateur), **Claude**, **Mistral**, **Gemini**, **ChatGPT** (clé d'API rangée dans le trousseau GNOME), ou **Claude Code** / **Gemini CLI** (votre abonnement, sans clé). Désactivée par défaut. |
 | 🌍 **Langues** | Français, anglais, espagnol, allemand, italien, portugais. |
 | 🌐 **Serveurs** | `Ctrl+K` : partages Windows (SMB), SFTP, FTP, WebDAV (Nextcloud, kDrive…), serveurs favoris dans la barre latérale. |

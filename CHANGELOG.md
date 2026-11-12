@@ -2,6 +2,21 @@
 
 Galet — logiciel libre et open source de [Florian Dérail](https://florianderail.fr).
 
+## 0.6.0 — Grande barre de recherche et IA qui comprend vos fichiers
+
+- 🔍 **Grande barre de recherche façon Spotlight** (`Ctrl+F` ou 🔍) avec un choix **Simple / IA**,
+  résultats immédiats avec miniatures et dossier, Entrée pour ouvrir, Ctrl+Entrée pour afficher dans
+  le dossier, « Tout afficher dans Galet ». Réglages → Général : grande barre ou barre classique, et
+  mode par défaut (Simple ou IA).
+- 🖼️ **Analyser les photos (IA)** (clic droit) : l'IA décrit ce que montrent vos photos (plage,
+  montagne, chien…) et la recherche les trouve même si elles s'appellent `IMG_2034.jpg`. Les
+  descriptions restent sur votre ordinateur ; seules des copies réduites (512 px) sont envoyées si vous
+  utilisez un service en ligne.
+- 💻 Recherche **par le sens** dans le code et les documents : « un morceau de code qui lit du JSON »,
+  « lecture de Jésus »… Nouveau type **Code**.
+- 🇬🇧 Spotlight-style search window (Simple / AI), AI photo analysis for search, meaning-based search
+  in code and documents.
+
 ## 0.5.2 — Recherche IA qui trouve vraiment
 
 - 🔎 L'IA propose des **mots-clés alternatifs** (synonymes, français/anglais, noms de dossiers :

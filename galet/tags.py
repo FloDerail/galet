@@ -247,6 +247,9 @@ class TagStore(GObject.Object):
 
     def moved(self, old, new):
         """Keep the index in sync after a rename/move done by Galet."""
+        from .photoindex import PHOTO_INDEX
+
+        PHOTO_INDEX.moved(old, new)
         prefix = old.rstrip("/") + "/"
         for path in list(self._index):
             if path == old or path.startswith(prefix):

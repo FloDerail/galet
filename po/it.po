@@ -1399,3 +1399,87 @@ msgstr "L’IA ha capito: {summary}"
 
 msgid "Galet searches file and folder names (and the text of documents with the Contents option). It cannot see what a photo shows: try another word, a folder name, or remove some filters."
 msgstr "Galet cerca nei nomi di file e cartelle (e nel testo dei documenti con l’opzione Contenuto). Non vede cosa mostra una foto: prova un’altra parola, il nome di una cartella o rimuovi qualche filtro."
+
+msgid "AI (plain-language sentences)"
+msgstr "IA (frasi in linguaggio naturale)"
+
+msgid "Analyse"
+msgstr "Analizza"
+
+msgid "Analysed photos"
+msgstr "Foto analizzate"
+
+msgid "Analyse Photos (AI)"
+msgstr "Analizza foto (IA)"
+
+msgid "Analyse Photos in This Folder (AI)"
+msgstr "Analizza le foto di questa cartella (IA)"
+
+msgid "Analyse photos with the AI?"
+msgstr "Analizzare le foto con l’IA?"
+
+msgid "Analysing Photos"
+msgstr "Analisi delle foto"
+
+msgid "Bar inside the window, with filters"
+msgstr "Barra nella finestra, con filtri"
+
+msgid "Big search bar (Spotlight style)"
+msgstr "Grande barra di ricerca (stile Spotlight)"
+
+msgid "Code"
+msgstr "Codice"
+
+msgid "Default search mode"
+msgstr "Modalità di ricerca predefinita"
+
+msgid "Enter: open · Ctrl+Enter: show in folder · Esc: close"
+msgstr "Invio: apri · Ctrl+Invio: mostra nella cartella · Esc: chiudi"
+
+msgid "Example: “beach photos”, “a piece of code that reads JSON”, “my invoices from this month”"
+msgstr "Esempi: «foto di spiaggia», «un pezzo di codice che legge JSON», «le mie fatture di questo mese»"
+
+msgid "No new photo to analyse here"
+msgstr "Nessuna nuova foto da analizzare qui"
+
+msgid "{n} photo analysed"
+msgstr "{n} foto analizzata"
+
+msgid "{n} photos analysed"
+msgstr "{n} foto analizzate"
+
+msgid "{n} photos described by the AI, stored only on this computer"
+msgstr "{n} foto descritte dall’IA, salvate solo su questo computer"
+
+msgid "{n} photos will be described by {service} so you can find them by what they show."
+msgstr "{service} descriverà {n} foto per permetterti di trovarle in base al contenuto."
+
+msgid "{n} result"
+msgstr "{n} risultato"
+
+msgid "{n} results"
+msgstr "{n} risultati"
+
+msgid "Reduced copies of the photos (512 pixels) are sent to this online service."
+msgstr "Copie ridotte delle foto (512 pixel) vengono inviate a questo servizio online."
+
+msgid "Search (Ctrl+F)"
+msgstr "Cerca (Ctrl+F)"
+
+msgid "Search files and folders by name"
+msgstr "Cerca file e cartelle per nome"
+
+msgid "Searching…"
+msgstr "Ricerca…"
+
+msgid "Search window (Ctrl+F)"
+msgstr "Finestra di ricerca (Ctrl+F)"
+
+msgid "Show All in Galet"
+msgstr "Mostra tutto in Galet"
+
+msgid "Simple"
+msgstr "Semplice"
+
+msgid "Simple (file and folder names)"
+msgstr "Semplice (nomi di file e cartelle)"

@@ -160,6 +160,15 @@ class PreferencesDialog(Adw.PreferencesDialog):
                             _("When another application asks to open a folder")))
         page.add(windows)
 
+        search_group = Adw.PreferencesGroup(title=_("Search"))
+        search_group.add(_combo(self.settings, "search_style", _("Search window (Ctrl+F)"),
+                                (("spotlight", "Big search bar (Spotlight style)"),
+                                 ("classic", "Bar inside the window, with filters"))))
+        search_group.add(_combo(self.settings, "search_default_mode", _("Default search mode"),
+                                (("simple", "Simple (file and folder names)"),
+                                 ("ai", "AI (plain-language sentences)"))))
+        page.add(search_group)
+
         view = Adw.PreferencesGroup(title=_("View"))
         view.add(_combo(self.settings, "view_mode", _("Default view"), VIEW_CHOICES))
 
@@ -392,6 +401,16 @@ class PreferencesDialog(Adw.PreferencesDialog):
         self.provider_row.set_selected(names.index(ai.provider(self.settings)))
         self.provider_row.connect("notify::selected", lambda r, _p: self._on_provider(names[r.get_selected()]))
         intro.add(self.provider_row)
+        from .photoindex import PHOTO_INDEX
+
+        photos = Adw.ActionRow(title=_("Analysed photos"),
+                               subtitle=_("{n} photos described by the AI, stored only on this computer").format(
+                                   n=PHOTO_INDEX.count()))
+        forget = Gtk.Button(label=_("Forget"), css_classes=["flat"], valign=Gtk.Align.CENTER)
+        forget.connect("clicked", lambda _b: (PHOTO_INDEX.clear(), photos.set_subtitle(
+            _("{n} photos described by the AI, stored only on this computer").format(n=0))))
+        photos.add_suffix(forget)
+        intro.add(photos)
         page.add(intro)
         self.ai_group = None
         self._fill_ai_provider()
