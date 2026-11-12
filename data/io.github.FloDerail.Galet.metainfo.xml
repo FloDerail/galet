@@ -85,6 +85,9 @@
     <keyword>explorer</keyword>
   </keywords>
   <releases>
+    <release version="0.5.2" date="2026-11-13">
+      <description><p>AI search suggests alternative keywords and matches folder names; Everywhere includes network drives.</p></description>
+    </release>
     <release version="0.5.1" date="2026-11-13">
       <description><p>Clearer AI search mode, install from the Software store.</p></description>
     </release>

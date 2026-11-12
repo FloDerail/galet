@@ -294,17 +294,23 @@ SEARCH_SCHEMA = {
     "type": "object",
     "properties": {
         "text": {"type": "string"},
+        "keywords": {"type": "array", "items": {"type": "string"}},
         "kind": {"type": "string", "enum": [k for k, _l in KINDS]},
         "date": {"type": "string", "enum": [k for k, _l in DATES]},
         "content": {"type": "boolean"},
     },
-    "required": ["text", "kind", "date", "content"],
+    "required": ["text", "keywords", "kind", "date", "content"],
     "additionalProperties": False,
 }
 
 SEARCH_PROMPT = """You turn a file search request into JSON. The request may be in any language.
+Files are matched on their file name and on the names of the folders containing them, so photos
+called "IMG_2034.jpg" are only found through a folder name such as "Vacances/Plage 2024".
 Reply with JSON only, with these keys:
-- "text": the main word(s) to look for (file name or document words), "" if none
+- "text": the single most important word to look for (not the file type: "photo plage" -> "plage"), "" if none
+- "keywords": up to 8 other words that could appear in such file or folder names: synonyms, singular and
+  plural, the same words in French and in English, typical folder names (e.g. for "plage": beach, plages,
+  mer, sea, ocean, vacances, holidays, ete, summer). [] if "text" is ""
 - "kind": one of {kinds}
 - "date": one of {dates}
 - "content": true if the words should be searched inside documents, else false
@@ -317,7 +323,8 @@ def parse_search(settings, request):
         SEARCH_SCHEMA)
     kind = data.get("kind") if data.get("kind") in [k for k, _l in KINDS] else "any"
     date = data.get("date") if data.get("date") in [k for k, _l in DATES] else "any"
-    return {"text": str(data.get("text") or "").strip(), "kind": kind, "date": date,
+    keywords = [str(k).strip() for k in data.get("keywords") or [] if str(k).strip()][:8]
+    return {"text": str(data.get("text") or "").strip(), "keywords": keywords, "kind": kind, "date": date,
             "content": bool(data.get("content"))}
 
 

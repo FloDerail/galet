@@ -208,7 +208,9 @@ class BrowserPane(Gtk.Box):
         if self.location.is_search and model.store.get_n_items() == 0:
             self.status_page.set_icon_name("system-search-symbolic")
             self.status_page.set_title(_("No Results"))
-            self.status_page.set_description(_("Try other words or remove some filters."))
+            self.status_page.set_description(_(
+                "Galet searches file and folder names (and the text of documents with the Contents option). "
+                "It cannot see what a photo shows: try another word, a folder name, or remove some filters."))
             self.stack.set_visible_child(self.status_page)
         elif self.location.is_tag and model.store.get_n_items() == 0:
             self.status_page.set_icon_name("galet-tag-symbolic")

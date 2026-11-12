@@ -150,6 +150,7 @@ class GaletWindow(Adw.ApplicationWindow):
         self.ai_button.connect("toggled", self._on_ai_mode)
         self.search_entry.connect("activate", lambda *_a: self.ai_button.get_active() and self._ai_search())
         self._ai_applying = False
+        self._ai_keywords = None  # (text, [keywords]) from the last AI answer
         search_row.append(self.ai_button)
         search_row.append(self.kind_dropdown)
         search_row.append(self.date_dropdown)
@@ -383,7 +384,9 @@ class GaletWindow(Adw.ApplicationWindow):
             kinds, dates = dict(search.KINDS), dict(search.DATES)
             parts = [_(kinds[result["kind"]]), _(dates[result["date"]])]
             if result["text"]:
-                parts.append(_("“{text}”").format(text=result["text"]))
+                words = ", ".join([result["text"], *result.get("keywords", [])[:4]])
+                parts.append(_("“{text}”").format(text=words))
+            self._ai_keywords = (result["text"], result.get("keywords", []))
             if result["content"]:
                 parts.append(_("inside documents"))
             self._resetting_search = True
@@ -687,9 +690,20 @@ class GaletWindow(Adw.ApplicationWindow):
             self.save_search_button.set_sensitive(False)
             return
         root = GLib.get_home_dir()
+        extra_roots = []
         if scope in ("subfolders", "folder") and not origin.is_virtual and origin.gfile.get_path():
             root = origin.gfile.get_path()
-        query = search.SearchQuery(text, root, kind, date, content=content, recursive=scope != "folder")
+        elif scope == "home":
+            # "Everywhere" also covers network drives (kDrive, NAS…) and USB disks.
+            for mount in Gio.VolumeMonitor.get().get_mounts():
+                path = mount.get_root().get_path()
+                if path and path not in extra_roots and not path.startswith(root + "/"):
+                    extra_roots.append(path)
+        keywords = []
+        if self._ai_keywords and self._ai_keywords[0] == text.strip():
+            keywords = self._ai_keywords[1]
+        query = search.SearchQuery(text, root, kind, date, content=content, recursive=scope != "folder",
+                                   keywords=keywords, extra_roots=extra_roots)
         pane.search_origin = origin
         pane.go_to(Location(search=query), record=False)
         pane.set_search_filters(kind, date)
@@ -703,6 +717,7 @@ class GaletWindow(Adw.ApplicationWindow):
         self.scope_buttons["folder"].set_active(True)
         self.content_button.set_active(False)
         self.ai_button.set_active(False)
+        self._ai_keywords = None
         self.search_entry.set_placeholder_text(_("Search"))
         self._resetting_search = False
         self.save_search_button.set_sensitive(False)

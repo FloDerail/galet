@@ -1068,3 +1068,6 @@ msgstr "dentro de los documentos"
 
 msgid "AI understood: {summary}"
 msgstr "La IA ha entendido: {summary}"
+
+msgid "Galet searches file and folder names (and the text of documents with the Contents option). It cannot see what a photo shows: try another word, a folder name, or remove some filters."
+msgstr "Galet busca en los nombres de archivos y carpetas (y en el texto de los documentos con la opción Contenido). No ve lo que muestra una foto: pruebe otra palabra, el nombre de una carpeta o quite algún filtro."

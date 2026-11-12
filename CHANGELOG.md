@@ -2,6 +2,16 @@
 
 Galet — logiciel libre et open source de [Florian Dérail](https://florianderail.fr).
 
+## 0.5.2 — Recherche IA qui trouve vraiment
+
+- 🔎 L'IA propose des **mots-clés alternatifs** (synonymes, français/anglais, noms de dossiers :
+  « plage » → beach, mer, vacances…) et la recherche regarde aussi **le nom des dossiers** :
+  `Vacances/Plage 2024/IMG_0001.jpg` est trouvé.
+- 🌐 « Partout » inclut maintenant les **disques réseau (kDrive…) et les disques USB**.
+- ⚡ Les résultats s'affichent au fur et à mesure, même quand un disque réseau est lent.
+- 💬 Message plus clair quand rien n'est trouvé (Galet ne voit pas le contenu des photos).
+- 🇬🇧 AI keywords + folder-name matching, network drives in "Everywhere", progressive results.
+
 ## 0.5.1 — Mode IA plus clair, installation depuis la Logithèque
 
 - 🌐 Site web : https://floderail.github.io/galet/

@@ -111,24 +111,31 @@ def date_matches(date, mtime, now=None):
 class SearchQuery:
     """What to look for. ``root`` is a local folder path ("" = home folder)."""
 
-    __slots__ = ("text", "root", "kind", "date", "content", "recursive")
+    __slots__ = ("text", "root", "kind", "date", "content", "recursive", "keywords", "extra_roots")
 
-    def __init__(self, text="", root="", kind="any", date="any", content=False, recursive=True):
+    def __init__(self, text="", root="", kind="any", date="any", content=False, recursive=True,
+                 keywords=(), extra_roots=()):
         self.text = text.strip()
         self.root = root or GLib.get_home_dir()
         self.kind = kind
         self.date = date
         self.content = bool(content)
         self.recursive = bool(recursive)
+        # Alternative words (synonyms, translations) proposed by the AI; any of them may match.
+        self.keywords = tuple(k.strip() for k in keywords if k and k.strip())
+        # Other places searched too, e.g. network drives and USB disks for "Everywhere".
+        self.extra_roots = tuple(r for r in extra_roots if r and r != self.root)
 
     def to_dict(self):
         return {"text": self.text, "root": self.root, "kind": self.kind, "date": self.date,
-                "content": self.content, "recursive": self.recursive}
+                "content": self.content, "recursive": self.recursive, "keywords": list(self.keywords),
+                "extra_roots": list(self.extra_roots)}
 
     @classmethod
     def from_dict(cls, data):
         return cls(data.get("text", ""), data.get("root", ""), data.get("kind", "any"), data.get("date", "any"),
-                   data.get("content", False), data.get("recursive", True))
+                   data.get("content", False), data.get("recursive", True), data.get("keywords", ()),
+                   data.get("extra_roots", ()))
 
     def __eq__(self, other):
         return isinstance(other, SearchQuery) and self.to_dict() == other.to_dict()
@@ -172,15 +179,25 @@ class SearchModel(GObject.Object):
     def _walk(self):
         query = self.query
         needle = fold(query.text)
+        needles = [n for n in dict.fromkeys([needle] + [fold(k) for k in query.keywords]) if n]
         now = time.time()
         pending, found = [], 0
-        stack = [query.root]
+        last_flush = time.monotonic()
+        roots = [query.root, *query.extra_roots]
+        stack = [(root, root) for root in reversed(roots)]
         while stack and not self._cancelled.is_set():
-            directory = stack.pop()
+            directory, root = stack.pop()
             try:
                 entries = list(os.scandir(directory))
             except OSError:
                 continue
+            # Show results as they come: slow network drives must not hold back the others.
+            if pending and time.monotonic() - last_flush > 0.3:
+                GLib.idle_add(self._add, pending)
+                pending, last_flush = [], time.monotonic()
+            # Folder names count too: ".../Vacances/Plage 2024/IMG_0001.jpg" matches "plage".
+            folder_path = fold(os.path.relpath(directory, root)) if directory != root else ""
+            in_matching_folder = bool(needles) and any(n in folder_path for n in needles)
             for entry in entries:
                 name = entry.name
                 if name.startswith(".") and not self.show_hidden:
@@ -191,9 +208,10 @@ class SearchModel(GObject.Object):
                     continue
                 if (is_dir and query.recursive and entry.path not in SKIPPED_ROOT_DIRS
                         and not os.path.ismount(entry.path)):
-                    stack.append(entry.path)
-                if needle and needle not in fold(name):
-                    if not query.content or is_dir:
+                    stack.append((entry.path, root))
+                folded_name = fold(name)
+                if needles and not in_matching_folder and not any(n in folded_name for n in needles):
+                    if not query.content or is_dir or not needle:
                         continue
                     try:
                         size = entry.stat(follow_symlinks=False).st_size
@@ -215,7 +233,7 @@ class SearchModel(GObject.Object):
                 found += 1
                 if len(pending) >= 50:
                     GLib.idle_add(self._add, pending)
-                    pending = []
+                    pending, last_flush = [], time.monotonic()
                 if found >= MAX_RESULTS:
                     self.truncated = True
                     stack = []

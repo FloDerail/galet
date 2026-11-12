@@ -475,114 +475,114 @@ msgid "No Results"
 msgstr ""
 
 #: galet/pane.py:211
-msgid "Try other words or remove some filters."
-msgstr ""
-
-#: galet/pane.py:215
-msgid "No Tagged Files"
+msgid "Galet searches file and folder names (and the text of documents with the Contents option). It cannot see what a photo shows: try another word, a folder name, or remove some filters."
 msgstr ""
 
 #: galet/pane.py:217
+msgid "No Tagged Files"
+msgstr ""
+
+#: galet/pane.py:219
 msgid "Right-click a file and choose a colour to tag it."
 msgstr ""
 
-#: galet/pane.py:227
+#: galet/pane.py:229
 msgid "Unable to Open This Folder"
 msgstr ""
 
-#: galet/pane.py:244
+#: galet/pane.py:246
 msgid "{size} available"
 msgstr ""
 
-#: galet/pane.py:442
+#: galet/pane.py:444
 msgid "{n} item selected"
 msgstr ""
 
-#: galet/pane.py:442
+#: galet/pane.py:444
 msgid "{n} items selected"
 msgstr ""
 
-#: galet/pane.py:474
+#: galet/pane.py:476
 msgid "Open"
 msgstr ""
 
-#: galet/pane.py:476
+#: galet/pane.py:478
 msgid "Open in New Tab"
 msgstr ""
 
-#: galet/pane.py:478
+#: galet/pane.py:480
 msgid "Open With…"
 msgstr ""
 
-#: galet/pane.py:483
+#: galet/pane.py:485
 msgid "Put Back"
 msgstr ""
 
-#: galet/pane.py:484
+#: galet/pane.py:486
 msgid "Delete Permanently…"
 msgstr ""
 
-#: galet/pane.py:487
+#: galet/pane.py:489
 msgid "Quick Look"
 msgstr ""
 
-#: galet/pane.py:489
+#: galet/pane.py:491
 msgid "Rename…"
 msgstr ""
 
-#: galet/pane.py:491
+#: galet/pane.py:493
 msgid "Duplicate"
 msgstr ""
 
-#: galet/pane.py:493
+#: galet/pane.py:495
 msgid "Cut"
 msgstr ""
 
-#: galet/pane.py:494
+#: galet/pane.py:496
 msgid "Copy Path"
 msgstr ""
 
-#: galet/pane.py:506
+#: galet/pane.py:508
 msgid "Quick Actions"
 msgstr ""
 
-#: galet/pane.py:508
+#: galet/pane.py:510
 msgid "New Folder With Selection"
 msgstr ""
 
-#: galet/pane.py:516
+#: galet/pane.py:518
 msgid "Send to Phone"
 msgstr ""
 
-#: galet/pane.py:523
+#: galet/pane.py:525
 msgid "Add to Sidebar"
 msgstr ""
 
-#: galet/pane.py:527
+#: galet/pane.py:529
 msgid "Folder Colour"
 msgstr ""
 
-#: galet/pane.py:533
+#: galet/pane.py:535
 msgid "Tags…"
 msgstr ""
 
-#: galet/pane.py:535
+#: galet/pane.py:537
 msgid "Suggest Tags (AI)"
 msgstr ""
 
-#: galet/pane.py:548
+#: galet/pane.py:550
 msgid "Paste"
 msgstr ""
 
-#: galet/pane.py:549
+#: galet/pane.py:551
 msgid "Undo"
 msgstr ""
 
-#: galet/pane.py:552
+#: galet/pane.py:554
 msgid "Open in Terminal"
 msgstr ""
 
-#: galet/pane.py:553
+#: galet/pane.py:555
 msgid "Show Hidden Files"
 msgstr ""
 
@@ -1070,15 +1070,15 @@ msgstr ""
 msgid "This Year"
 msgstr ""
 
-#: galet/search.py:147
+#: galet/search.py:154
 msgid "“{text}” in {folder}"
 msgstr ""
 
-#: galet/search.py:148
+#: galet/search.py:155
 msgid "Search in {folder}"
 msgstr ""
 
-#: galet/search.py:253
+#: galet/search.py:271
 msgid "Smart Folder"
 msgstr ""
 
@@ -1326,70 +1326,70 @@ msgstr ""
 msgid "AI mode: describe what you are looking for, then press Enter"
 msgstr ""
 
-#: galet/window.py:157
+#: galet/window.py:158
 msgid "Save as Smart Folder"
 msgstr ""
 
-#: galet/window.py:344
+#: galet/window.py:345
 msgid "Sending {n} file to {device}…"
 msgstr ""
 
-#: galet/window.py:344
+#: galet/window.py:345
 msgid "Sending {n} files to {device}…"
 msgstr ""
 
-#: galet/window.py:351
+#: galet/window.py:352
 msgid "Describe what you are looking for, then press Enter"
 msgstr ""
 
-#: galet/window.py:373
+#: galet/window.py:374
 msgid "Describe what you are looking for, e.g. “PDF invoices from this week”"
 msgstr ""
 
-#: galet/window.py:381
+#: galet/window.py:382
 msgid "The AI is not available: {error}"
 msgstr ""
 
-#: galet/window.py:386
+#: galet/window.py:388
 msgid "“{text}”"
 msgstr ""
 
-#: galet/window.py:388
+#: galet/window.py:391
 msgid "inside documents"
 msgstr ""
 
-#: galet/window.py:399
+#: galet/window.py:402
 msgid "AI understood: {summary}"
 msgstr ""
 
-#: galet/window.py:409
+#: galet/window.py:412
 msgid "Asking the AI…"
 msgstr ""
 
-#: galet/window.py:545
+#: galet/window.py:548
 msgid "Could not change the folder colour: {error}"
 msgstr ""
 
-#: galet/window.py:603
+#: galet/window.py:606
 msgid "Tag “{tag}” added"
 msgstr ""
 
-#: galet/window.py:715
+#: galet/window.py:730
 msgid "Save Smart Folder"
 msgstr ""
 
-#: galet/window.py:715
+#: galet/window.py:730
 msgid "Save"
 msgstr ""
 
-#: galet/window.py:717
+#: galet/window.py:732
 msgid "Smart folder “{name}” saved"
 msgstr ""
 
-#: galet/window.py:761
+#: galet/window.py:776
 msgid "No folder at “{path}”"
 msgstr ""
 
-#: galet/window.py:763
+#: galet/window.py:778
 msgid "Go to Location"
 msgstr ""
