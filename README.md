@@ -1,12 +1,22 @@
+<p align="center">
+  <img src="data/icons/hicolor/scalable/apps/io.github.FloDerail.Galet.svg" width="128" alt="Galet logo">
+</p>
+
 # Galet
 
 **A Finder-inspired file manager for GNOME / Zorin OS / Ubuntu.**
+Free and open source software by **[Florian Dérail](https://florianderail.fr)**.
 *Un gestionnaire de fichiers inspiré du Finder d'Apple, pour GNOME.*
 
 ![Galet: icon view with colour tags](docs/screenshots/icones-tags.png)
 
 🇫🇷 **Présentation et tutoriel d'installation en français : [docs/FICHE.md](docs/FICHE.md)** ·
 **Nouveautés : [CHANGELOG.md](CHANGELOG.md)**
+
+> *« Je n'ai jamais trouvé un explorateur de fichiers qui me convienne vraiment.
+> Alors j'ai développé le mien, exactement comme je le voulais. »* — Florian Dérail
+>
+> *"I never found a file manager that really suited me, so I built my own, exactly the way I wanted it."*
 
 Galet brings the parts of macOS Finder people miss most on Linux, while
 staying a native GTK4 / libadwaita application that blends in with GNOME and Zorin OS.
@@ -166,6 +176,12 @@ Contributions are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md).
 - [ ] Flatpak packaging and Flathub release
 - [ ] Optional local AI features (natural-language search, tag suggestions)
 
+## Author
+
+Galet is created and maintained by **Florian Dérail** — 🌐 [florianderail.fr](https://florianderail.fr)
+· GitHub [@FloDerail](https://github.com/FloDerail).
+
 ## License
 
-GPL-3.0-or-later. See [LICENSE](LICENSE).
+Galet is free and open source software: © 2026 Florian Dérail, released under the
+GPL-3.0-or-later license. See [LICENSE](LICENSE).

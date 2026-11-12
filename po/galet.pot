@@ -2,8 +2,12 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 
-#: galet/application.py:196
-msgid "A Finder-inspired file manager with tabs, columns and colour tags."
+#: galet/application.py:198
+msgid "A Finder-inspired file manager with tabs, columns and colour tags.\nFree and open source software."
+msgstr ""
+
+#: galet/application.py:206
+msgid "Source Code"
 msgstr ""
 
 #: galet/dialogs.py:19

@@ -1,5 +1,8 @@
 # Contributing to Galet
 
+Galet is maintained by **Florian Dérail** ([florianderail.fr](https://florianderail.fr), GitHub
+[@FloDerail](https://github.com/FloDerail)).
+
 Thanks for helping! Galet is plain Python + PyGObject (GTK 4, libadwaita), so there is
 no build step: clone the repository and run `./bin/galet`.
 

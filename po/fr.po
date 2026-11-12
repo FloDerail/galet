@@ -1045,3 +1045,9 @@ msgstr "Trier, grouper et options d’affichage"
 
 msgid "Could not change the folder colour: {error}"
 msgstr "Impossible de changer la couleur du dossier : {error}"
+
+msgid "Source Code"
+msgstr "Code source"
+
+msgid "A Finder-inspired file manager with tabs, columns and colour tags.\nFree and open source software."
+msgstr "Un gestionnaire de fichiers inspiré du Finder, avec onglets, colonnes et tags de couleur.\nLogiciel libre et open source."

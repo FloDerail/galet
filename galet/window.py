@@ -107,7 +107,7 @@ class GaletWindow(Adw.ApplicationWindow):
         header.pack_end(Gtk.MenuButton(icon_name="view-sort-descending-symbolic", menu_model=arrange,
                                        tooltip_text=_("Sort, Group and Display Options")))
 
-        modes = Gtk.Box(css_classes=["linked"])
+        modes = self.view_modes = Gtk.Box(css_classes=["linked"])
         for mode, icon, tooltip in (("grid", "view-grid-symbolic", _("Icons")),
                                     ("list", "view-list-symbolic", _("List")),
                                     ("columns", "galet-view-columns-symbolic", _("Columns")),
@@ -188,11 +188,17 @@ class GaletWindow(Adw.ApplicationWindow):
                                  GObject.BindingFlags.BIDIRECTIONAL | GObject.BindingFlags.SYNC_CREATE)
         self.set_content(self.split)
 
-        breakpoint = Adw.Breakpoint.new(Adw.BreakpointCondition.parse("max-width: 640sp"))
-        breakpoint.add_setter(self.split, "collapsed", GObject.Value(GObject.TYPE_BOOLEAN, True))
-        breakpoint.add_setter(self.split, "show-sidebar", GObject.Value(GObject.TYPE_BOOLEAN, False))
-        breakpoint.add_setter(self.sidebar_button, "visible", GObject.Value(GObject.TYPE_BOOLEAN, True))
-        self.add_breakpoint(breakpoint)
+        def breakpoint(condition, hide_modes):
+            point = Adw.Breakpoint.new(Adw.BreakpointCondition.parse(condition))
+            point.add_setter(self.split, "collapsed", GObject.Value(GObject.TYPE_BOOLEAN, True))
+            point.add_setter(self.split, "show-sidebar", GObject.Value(GObject.TYPE_BOOLEAN, False))
+            point.add_setter(self.sidebar_button, "visible", GObject.Value(GObject.TYPE_BOOLEAN, True))
+            if hide_modes:  # still reachable with Ctrl+1…4
+                point.add_setter(self.view_modes, "visible", GObject.Value(GObject.TYPE_BOOLEAN, False))
+            self.add_breakpoint(point)
+
+        breakpoint("max-width: 940sp", hide_modes=False)
+        breakpoint("max-width: 700sp", hide_modes=True)
 
     # --------------------------------------------------------------- actions
 

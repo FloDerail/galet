@@ -1,5 +1,14 @@
 # Nouveautés / Changelog
 
+Galet — logiciel libre et open source de [Florian Dérail](https://florianderail.fr).
+
+## 0.3.0 — Logo
+
+- 🇫🇷 Nouveau **logo** : un galet poli avec un dossier gravé et des pastilles de tags.
+  L'icône apparaît dans le menu des applications, la barre des tâches et « À propos ».
+- 🇫🇷 Fenêtre « À propos » : auteur, site [florianderail.fr](https://florianderail.fr), lien vers le code source.
+- 🇬🇧 New **logo** and app icon; About window shows the author, website and source code link.
+
 ## 0.2.0 — Thèmes et touches Finder
 
 ### 🇫🇷 Nouveautés

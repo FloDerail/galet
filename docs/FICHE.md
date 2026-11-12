@@ -1,4 +1,10 @@
+<p align="center">
+  <img src="../data/icons/hicolor/scalable/apps/io.github.FloDerail.Galet.svg" width="128" alt="Logo de Galet">
+</p>
+
 # Galet — fiche de présentation et installation
+
+*Un logiciel libre et open source créé par **Florian Dérail** — [florianderail.fr](https://florianderail.fr)*
 
 ![Galet, vue Icônes avec tags de couleur](screenshots/icones-tags.png)
 
@@ -9,10 +15,16 @@ Il est pensé pour Zorin OS, Ubuntu et tous les bureaux GNOME. C'est une applica
 **libre et gratuite** (licence GPL-3.0), écrite en Python avec GTK 4 et libadwaita :
 elle s'intègre naturellement au thème et aux couleurs de votre système.
 
-**Pourquoi Galet ?** L'explorateur de GNOME est simple, mais il lui manque ce que les
-utilisateurs de Mac adorent : les **tags de couleur**, la **vue en colonnes**, la
-**galerie**, les **actions rapides** ou les **dossiers intelligents**. Galet les apporte,
-sans changer vos habitudes Linux.
+## Pourquoi Galet ?
+
+> *« Je n'ai jamais trouvé un explorateur de fichiers qui me convienne vraiment. Alors j'ai
+> décidé de développer le mien, pour qu'il corresponde exactement à ce que je voulais. »*
+> — Florian Dérail, créateur de Galet
+
+L'explorateur de GNOME est simple, mais il lui manque ce que les utilisateurs de Mac adorent :
+les **tags de couleur**, la **vue en colonnes**, la **galerie**, les **actions rapides** ou les
+**dossiers intelligents**. Galet les apporte, sans changer vos habitudes Linux. Et comme c'est un
+logiciel libre, il peut maintenant convenir à d'autres aussi.
 
 ## Ce que Galet sait faire
 
@@ -154,6 +166,14 @@ effacer.
 | La touche `Espace` n'affiche rien | Installez `gnome-sushi`. |
 | Galet n'apparaît pas dans le menu | Déconnectez-vous puis reconnectez-vous, ou lancez `update-desktop-database ~/.local/share/applications`. |
 | Un bug ? | Joignez le fichier `~/.cache/galet/galet.log` à votre signalement sur la page *Issues* du projet GitHub. |
+
+## L'auteur
+
+Galet est conçu et développé par **Florian Dérail**.
+🌐 Site : [florianderail.fr](https://florianderail.fr) · 💻 GitHub : [@FloDerail](https://github.com/FloDerail)
+
+Galet est un **logiciel libre et open source** (licence GPL-3.0) : vous pouvez l'utiliser,
+l'étudier, le modifier et le partager librement.
 
 ## Contribuer
 

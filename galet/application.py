@@ -140,6 +140,7 @@ class GaletApplication(Adw.Application):
 
         display = Gdk.Display.get_default()
         Gtk.IconTheme.get_for_display(display).add_search_path(str(DATA_DIR / "icons"))
+        Gtk.Window.set_default_icon_name(APP_ID)
         from .themes import ThemeManager
 
         self.themes = ThemeManager(self.settings)
@@ -191,12 +192,16 @@ class GaletApplication(Adw.Application):
     def _on_about(self, *_args):
         about = Adw.AboutDialog(
             application_name="Galet",
-            application_icon="system-file-manager",
+            application_icon=APP_ID,
             version=__version__,
-            comments=_("A Finder-inspired file manager with tabs, columns and colour tags."),
+            developer_name="Florian Dérail",
+            comments=_("A Finder-inspired file manager with tabs, columns and colour tags.\n"
+                       "Free and open source software."),
             license_type=Gtk.License.GPL_3_0,
-            developers=["Florian Dérail"],
-            website="https://github.com/FloDerail/galet",
+            copyright="© 2026 Florian Dérail",
+            developers=["Florian Dérail https://florianderail.fr"],
+            website="https://florianderail.fr",
             issue_url="https://github.com/FloDerail/galet/issues",
         )
+        about.add_link(_("Source Code"), "https://github.com/FloDerail/galet")
         about.present(self.get_active_window())
