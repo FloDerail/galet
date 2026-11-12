@@ -1,56 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
   <title>Galet</title>
   <defs>
-    <linearGradient id="stone" x1="0.2" y1="0" x2="0.8" y2="1">
-      <stop offset="0" stop-color="#6fd6d3"/>
-      <stop offset="0.55" stop-color="#2f9bc4"/>
-      <stop offset="1" stop-color="#1f5f9e"/>
-    </linearGradient>
-    <radialGradient id="shine" cx="0.36" cy="0.26" r="0.55">
-      <stop offset="0" stop-color="#ffffff" stop-opacity="0.55"/>
-      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
-    </radialGradient>
-    <linearGradient id="rim" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#ffffff" stop-opacity="0"/>
-      <stop offset="1" stop-color="#0b2f57" stop-opacity="0.35"/>
-    </linearGradient>
-    <linearGradient id="folder" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#ffffff"/>
-      <stop offset="1" stop-color="#e3f3fb"/>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#d9d4f5"/><stop offset="1" stop-color="#a8c6ef"/>
     </linearGradient>
   </defs>
-
-  <defs>
-    <linearGradient id="sand" x1="0" y1="0" x2="0.4" y2="1">
-      <stop offset="0" stop-color="#e9dcc6"/>
-      <stop offset="1" stop-color="#b9a68a"/>
-    </linearGradient>
-  </defs>
-  <!-- soft shadow under the pebbles -->
-  <ellipse cx="66" cy="112" rx="50" ry="7" fill="#000000" opacity="0.18"/>
-  <!-- small sand-coloured pebble behind -->
-  <path d="M84 98C82 84 95 76 108 77C121 78 127 87 124 97C121 107 110 111 100 110C91 109 85 106 84 98Z"
-        fill="url(#sand)"/>
-
-  <!-- the pebble -->
-  <path d="M10 71C7 48 31 29 64 27C99 25 121 43 118 67C115 92 92 105 61 105C31 105 13 92 10 71Z"
-        fill="url(#stone)"/>
-  <path d="M10 71C7 48 31 29 64 27C99 25 121 43 118 67C115 92 92 105 61 105C31 105 13 92 10 71Z"
-        fill="url(#rim)"/>
-  <path d="M10 71C7 48 31 29 64 27C99 25 121 43 118 67C115 92 92 105 61 105C31 105 13 92 10 71Z"
-        fill="url(#shine)"/>
-
-  <!-- engraved folder -->
-  <g transform="translate(0 3)">
-  <path d="M38 47a4 4 0 0 1 4-4h15l6 6h25a4 4 0 0 1 4 4v29a5 5 0 0 1-5 5H43a5 5 0 0 1-5-5z"
-        fill="#0b3d6b" opacity="0.25" transform="translate(0 2.5)"/>
-  <path d="M38 47a4 4 0 0 1 4-4h15l6 6h25a4 4 0 0 1 4 4v29a5 5 0 0 1-5 5H43a5 5 0 0 1-5-5z"
-        fill="url(#folder)"/>
-  <path d="M38 56h54v-3a4 4 0 0 0-4-4H63l-6-6H42a4 4 0 0 0-4 4z" fill="#bfe3f3"/>
-
-  <!-- Finder-style tag dots -->
-  <circle cx="69" cy="76" r="6.5" fill="#34c759" stroke="#ffffff" stroke-width="2.5"/>
-  <circle cx="77" cy="76" r="6.5" fill="#ff9500" stroke="#ffffff" stroke-width="2.5"/>
-  <circle cx="85" cy="76" r="6.5" fill="#ff3b30" stroke="#ffffff" stroke-width="2.5"/>
-  </g>
+  <path d="M14 68C11 46 34 28 65 27C97 26 117 43 114 66C111 89 90 101 62 101C34 101 17 88 14 68Z" fill="url(#g)"/>
+  <path d="M44 52a4 4 0 0 1 4-4h11l5 5h16a4 4 0 0 1 4 4v19a4 4 0 0 1-4 4H48a4 4 0 0 1-4-4z" fill="none" stroke="#ffffff" stroke-width="5" stroke-linejoin="round"/>
 </svg>

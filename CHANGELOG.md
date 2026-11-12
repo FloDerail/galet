@@ -4,7 +4,7 @@ Galet — logiciel libre et open source de [Florian Dérail](https://floriandera
 
 ## 0.3.0 — Logo
 
-- 🇫🇷 Nouveau **logo** : un galet poli avec un dossier gravé et des pastilles de tags.
+- 🇫🇷 Nouveau **logo**, doux et épuré : un galet lavande-bleu avec le contour d'un dossier.
   L'icône apparaît dans le menu des applications, la barre des tâches et « À propos ».
 - 🇫🇷 Fenêtre « À propos » : auteur, site [florianderail.fr](https://florianderail.fr), lien vers le code source.
 - 🇬🇧 New **logo** and app icon; About window shows the author, website and source code link.
