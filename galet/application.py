@@ -37,6 +37,12 @@ ACCELS = {
     "app.preferences": ["<Control>comma"],
     "win.connect-server": ["<Control>k"],
     "win.new-folder-with-selection": ["<Control><Alt>n"],
+    "win.go-home": ["<Control><Shift>h"],
+    "win.go-desktop": ["<Control><Shift>d"],
+    "win.go-documents": ["<Control><Shift>o"],
+    "win.go-downloads": ["<Control><Alt>l"],
+    "win.go-recent": ["<Control><Shift>f"],
+    "win.go-network": ["<Control><Shift>k"],
 }
 
 
@@ -57,6 +63,10 @@ DEFAULTS = {
     "servers": [],
     "show_preview": False,
     "smart_folders": [],
+    "theme": "system",
+    "color_scheme": "auto",
+    "sort_by": "name",
+    "folder_views": {},
     "group_by": "none",
     "recent_servers": [],
 }
@@ -130,6 +140,9 @@ class GaletApplication(Adw.Application):
 
         display = Gdk.Display.get_default()
         Gtk.IconTheme.get_for_display(display).add_search_path(str(DATA_DIR / "icons"))
+        from .themes import ThemeManager
+
+        self.themes = ThemeManager(self.settings)
         css = Gtk.CssProvider()
         css.load_from_path(str(Path(__file__).resolve().parent / "style.css"))
         Gtk.StyleContext.add_provider_for_display(display, css, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)

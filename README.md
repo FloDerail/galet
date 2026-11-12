@@ -5,7 +5,8 @@
 
 ![Galet: icon view with colour tags](docs/screenshots/icones-tags.png)
 
-🇫🇷 **Présentation et tutoriel d'installation en français : [docs/FICHE.md](docs/FICHE.md)**
+🇫🇷 **Présentation et tutoriel d'installation en français : [docs/FICHE.md](docs/FICHE.md)** ·
+**Nouveautés : [CHANGELOG.md](CHANGELOG.md)**
 
 Galet brings the parts of macOS Finder people miss most on Linux, while
 staying a native GTK4 / libadwaita application that blends in with GNOME and Zorin OS.
@@ -47,6 +48,22 @@ staying a native GTK4 / libadwaita application that blends in with GNOME and Zor
 - **Connect to Server** (<kbd>Ctrl</kbd>+<kbd>K</kbd>): SMB, SFTP, FTP, WebDAV (Nextcloud, kDrive…), favourite
   and recent servers, servers in the sidebar with eject buttons, passwords in the GNOME keyring,
   GNOME Online Accounts drives reconnect in one click.
+
+**Themes**
+
+| macOS | Windows 11 (dark) |
+|---|---|
+| ![macOS theme](docs/screenshots/theme-macos.png) | ![Windows 11 theme](docs/screenshots/theme-windows-sombre.png) |
+
+- **System** (follows Zorin/GNOME), **macOS** (traffic-light window buttons on the left, Finder colours,
+  Inter font), **Windows 11** (rectangular buttons, Explorer colours) or **Custom** (accent colour,
+  window-button side and style, rounded corners, font, tinted sidebar). Light, dark or automatic.
+
+**More Finder touches**
+- **Coloured folders** (right-click → Folder Colour), **Sort By** name/kind/date/size/tags,
+  each folder **remembers its view**, **add folders to the sidebar** (right-click or drop on "Favorites"),
+  **Go** shortcuts (<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>H</kbd>/<kbd>D</kbd>/<kbd>O</kbd>, <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>L</kbd>…),
+  **Merge All Windows**, drag a tab out to open it in a new window.
 
 **And also**
 - **Send to Phone** through Zorin Connect / GSConnect (AirDrop-like).
@@ -128,6 +145,8 @@ galet/
   operations.py    progress of long file operations
   dnd.py           drag and drop
   phone.py         Send to Phone (Zorin Connect / GSConnect)
+  themes.py        System / macOS / Windows 11 / Custom themes
+  folders.py       coloured folders
   preferences.py   Settings window
   fileops.py       open, trash, rename, clipboard, copy/move
   dialogs.py       tag editing dialogs
@@ -143,7 +162,6 @@ Contributions are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 - [ ] Full-text search in document contents (LocalSearch)
 - [ ] Grouping in icon view (needs GTK section support in GridView)
-- [ ] Drag tabs out into new windows
 - [ ] More translations (via Weblate)
 - [ ] Flatpak packaging and Flathub release
 - [ ] Optional local AI features (natural-language search, tag suggestions)

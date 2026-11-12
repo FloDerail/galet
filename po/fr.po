@@ -952,3 +952,96 @@ msgstr "Dossier intelligent « {name} » enregistré"
 
 msgid "Location"
 msgstr "Emplacement"
+
+msgid "Teal"
+msgstr "Turquoise"
+
+msgid "Pink"
+msgstr "Rose"
+
+msgid "Add to Sidebar"
+msgstr "Ajouter à la barre latérale"
+
+msgid "Folder Colour"
+msgstr "Couleur du dossier"
+
+msgid "Appearance"
+msgstr "Apparence"
+
+msgid "Theme"
+msgstr "Thème"
+
+msgid "Change the look of Galet: colours, window buttons, font."
+msgstr "Changez l’apparence de Galet : couleurs, boutons de fenêtre, police."
+
+msgid "Style"
+msgstr "Style"
+
+msgid "Custom Theme"
+msgstr "Thème personnalisé"
+
+msgid "Accent colour"
+msgstr "Couleur d’accentuation"
+
+msgid "Window buttons position"
+msgstr "Position des boutons de fenêtre"
+
+msgid "Window buttons style"
+msgstr "Style des boutons de fenêtre"
+
+msgid "Rounded corners"
+msgstr "Coins arrondis"
+
+msgid "Font"
+msgstr "Police"
+
+msgid "Tint the sidebar with the accent colour"
+msgstr "Teinter la barre latérale avec la couleur d’accentuation"
+
+msgid "system"
+msgstr "system"
+
+msgid "Remove from Sidebar"
+msgstr "Retirer de la barre latérale"
+
+msgid "System"
+msgstr "Système"
+
+msgid "Custom"
+msgstr "Personnalisé"
+
+msgid "Follow System"
+msgstr "Suivre le système"
+
+msgid "Light"
+msgstr "Clair"
+
+msgid "Dark"
+msgstr "Sombre"
+
+msgid "Left"
+msgstr "À gauche"
+
+msgid "Right"
+msgstr "À droite"
+
+msgid "Coloured dots (macOS)"
+msgstr "Pastilles colorées (macOS)"
+
+msgid "Rectangles (Windows)"
+msgstr "Rectangles (Windows)"
+
+msgid "Default Colour"
+msgstr "Couleur par défaut"
+
+msgid "Merge All Windows"
+msgstr "Fusionner toutes les fenêtres"
+
+msgid "Sort By"
+msgstr "Trier par"
+
+msgid "Sort, Group and Display Options"
+msgstr "Trier, grouper et options d’affichage"
+
+msgid "Could not change the folder colour: {error}"
+msgstr "Impossible de changer la couleur du dossier : {error}"

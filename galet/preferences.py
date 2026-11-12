@@ -1,6 +1,6 @@
 """Settings window, organised like Finder's: General, Sidebar, Tags, Advanced."""
 
-from gi.repository import Adw, Gtk
+from gi.repository import Adw, Gdk, Gtk, Pango
 
 from . import servers
 from .i18n import _
@@ -26,10 +26,14 @@ def _switch(settings, key, title, subtitle=None):
     return row
 
 
-def _combo(settings, key, title, choices):
+def _hex(rgba):
+    return "#" + "".join(f"{round(c * 255):02x}" for c in (rgba.red, rgba.green, rgba.blue))
+
+
+def _combo(settings, key, title, choices, default=None):
     row = Adw.ComboRow(title=title, model=Gtk.StringList.new([_(label) for _k, label in choices]))
     keys = [k for k, _label in choices]
-    current = settings.get(key)
+    current = settings.get(key, default)
     if current in keys:
         row.set_selected(keys.index(current))
     row.connect("notify::selected", lambda r, _p: settings.set(key, keys[r.get_selected()]))
@@ -49,6 +53,7 @@ class PreferencesDialog(Adw.PreferencesDialog):
         super().__init__(title=_("Settings"), search_enabled=False)
         self.settings = app.settings
         self.tagstore = app.tagstore
+        self.add(self._appearance_page())
         self.add(self._general_page())
         self.add(self._sidebar_page())
         self.add(self._tags_page())
@@ -63,6 +68,83 @@ class PreferencesDialog(Adw.PreferencesDialog):
     def _on_closed(self, *_args):
         self.tagstore.disconnect(self._tags_handler)
         self.settings.disconnect(self._settings_handler)
+
+    # ------------------------------------------------------------- appearance
+
+    def _appearance_page(self):
+        from . import themes
+
+        page = Adw.PreferencesPage(title=_("Appearance"), icon_name="applications-graphics-symbolic")
+        group = Adw.PreferencesGroup(title=_("Theme"),
+                                     description=_("Change the look of Galet: colours, window buttons, font."))
+        cards = Gtk.FlowBox(selection_mode=Gtk.SelectionMode.NONE, max_children_per_line=4, min_children_per_line=2,
+                            homogeneous=True, column_spacing=12, row_spacing=12, margin_top=6)
+        dark = Adw.StyleManager.get_default().get_dark()
+        first = None
+        self.theme_buttons = {}
+        for name in themes.THEME_ORDER:
+            preview = Gtk.DrawingArea(content_width=120, content_height=78)
+            preview.set_draw_func(lambda _a, cr, w, h, n=name: themes.draw_preview(cr, w, h, n, dark))
+            box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
+            box.append(preview)
+            box.append(Gtk.Label(label=_(themes.THEMES[name]["label"])))
+            button = Gtk.ToggleButton(child=box, group=first, css_classes=["flat", "galet-theme-card"])
+            first = first or button
+            button.set_active(self.settings.get("theme", "system") == name)
+            button.connect("toggled", lambda b, n=name: b.get_active() and self._set_theme(n))
+            cards.append(button)
+            self.theme_buttons[name] = button
+        group.add(cards)
+        page.add(group)
+
+        style = Adw.PreferencesGroup()
+        style.add(_combo(self.settings, "color_scheme", _("Style"), themes.COLOR_SCHEMES))
+        page.add(style)
+
+        self.custom_group = Adw.PreferencesGroup(title=_("Custom Theme"))
+        accent = Adw.ActionRow(title=_("Accent colour"))
+        color_button = Gtk.ColorDialogButton(dialog=Gtk.ColorDialog(with_alpha=False), valign=Gtk.Align.CENTER)
+        rgba = Gdk.RGBA()
+        rgba.parse(self.settings.get("custom_accent", themes.CUSTOM_DEFAULTS["custom_accent"]))
+        color_button.set_rgba(rgba)
+        color_button.connect("notify::rgba", lambda b, _p: self.settings.set("custom_accent", _hex(b.get_rgba())))
+        accent.add_suffix(color_button)
+        self.custom_group.add(accent)
+        self.custom_group.add(_combo(self.settings, "custom_controls", _("Window buttons position"),
+                                     themes.CONTROL_SIDES, default=themes.CUSTOM_DEFAULTS["custom_controls"]))
+        self.custom_group.add(_combo(self.settings, "custom_buttons", _("Window buttons style"),
+                                     themes.BUTTON_STYLES, default=themes.CUSTOM_DEFAULTS["custom_buttons"]))
+        radius = Adw.ActionRow(title=_("Rounded corners"))
+        scale = Gtk.Scale.new_with_range(Gtk.Orientation.HORIZONTAL, 0, 16, 1)
+        scale.set_value(self.settings.get("custom_radius", themes.CUSTOM_DEFAULTS["custom_radius"]))
+        scale.set_size_request(180, -1)
+        scale.set_draw_value(False)
+        scale.set_valign(Gtk.Align.CENTER)
+        scale.connect("value-changed", lambda sc: self.settings.set("custom_radius", int(sc.get_value())))
+        radius.add_suffix(scale)
+        self.custom_group.add(radius)
+        font_row = Adw.ActionRow(title=_("Font"))
+        font_button = Gtk.FontDialogButton(dialog=Gtk.FontDialog(), level=Gtk.FontLevel.FAMILY,
+                                           valign=Gtk.Align.CENTER)
+        current_font = self.settings.get("custom_font", "")
+        if current_font:
+            font_button.set_font_desc(Pango.FontDescription.from_string(current_font))
+        font_button.connect("notify::font-desc",
+                            lambda b, _p: self.settings.set("custom_font", b.get_font_desc().get_family() or ""))
+        font_row.add_suffix(font_button)
+        self.custom_group.add(font_row)
+        tint = Adw.SwitchRow(title=_("Tint the sidebar with the accent colour"),
+                             active=bool(self.settings.get("custom_sidebar_tint",
+                                                           themes.CUSTOM_DEFAULTS["custom_sidebar_tint"])))
+        tint.connect("notify::active", lambda r, _p: self.settings.set("custom_sidebar_tint", r.get_active()))
+        self.custom_group.add(tint)
+        self.custom_group.set_visible(self.settings.get("theme") == "custom")
+        page.add(self.custom_group)
+        return page
+
+    def _set_theme(self, name):
+        self.settings.set("theme", name)
+        self.custom_group.set_visible(name == "custom")
 
     # ---------------------------------------------------------------- general
 

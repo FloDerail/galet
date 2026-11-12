@@ -75,11 +75,15 @@ class Sidebar(Gtk.ScrolledWindow):
         shows = self.settings.sidebar_shows
         shown = set()
 
-        def place(title, gfile, icon):
+        def place(title, gfile, icon, bookmark=False):
             shown.add(gfile.get_uri())
-            self._row(title, Location(gfile), icon, droppable=gfile.get_uri_scheme() == "file")
+            self._row(title, Location(gfile), icon, droppable=gfile.get_uri_scheme() == "file",
+                      bookmark_uri=gfile.get_uri() if bookmark else None)
 
-        self._heading(_("Favorites"))
+        favorites = self._heading(_("Favorites"))
+        # Drop folders on "Favorites" to add them to the sidebar, like Finder.
+        dnd.add_drop_target(favorites, lambda: "favorites",
+                            lambda files, _d, _a: self.add_bookmarks(files), fixed_action=Gdk.DragAction.COPY)
         if shows("recent"):
             place(_("Recent"), Gio.File.new_for_uri("recent:///"), "document-open-recent-symbolic")
         if shows("home"):
@@ -92,7 +96,7 @@ class Sidebar(Gtk.ScrolledWindow):
         if shows("bookmarks"):
             for gfile, label in self._read_bookmarks():
                 if gfile.get_uri() not in shown:
-                    place(label, gfile, "folder-symbolic")
+                    place(label, gfile, "folder-symbolic", bookmark=True)
 
         saved = servers.saved_servers(self.settings)
         saved_files = [Gio.File.new_for_uri(s["uri"]) for s in saved]
@@ -166,10 +170,12 @@ class Sidebar(Gtk.ScrolledWindow):
 
     def _heading(self, text):
         label = Gtk.Label(label=text, xalign=0, css_classes=["dim-label", "caption-heading", "sidebar-heading"])
-        self.listbox.append(Gtk.ListBoxRow(child=label, activatable=False, selectable=False))
+        row = Gtk.ListBoxRow(child=label, activatable=False, selectable=False)
+        self.listbox.append(row)
+        return row
 
     def _row(self, title, location, icon_name=None, gicon=None, color=None, mount=None,
-             server_uri=None, trash=False, droppable=True, smart_name=None):
+             server_uri=None, trash=False, droppable=True, smart_name=None, bookmark_uri=None):
         box = Gtk.Box(spacing=10)
         if color is not None:
             dots = TagDots(self.tagstore, 12)
@@ -203,6 +209,8 @@ class Sidebar(Gtk.ScrolledWindow):
         elif droppable:
             dnd.add_drop_target(row, lambda: location.gfile, self.window.drop_files)
             dnd.add_spring_load(row, lambda: location.gfile, lambda f: self.window.navigate(Location(f)))
+        if bookmark_uri is not None:
+            menu.append((_("Remove from Sidebar"), "win.remove-bookmark", bookmark_uri))
         if smart_name is not None:
             menu.append((_("Remove Smart Folder"), "win.remove-smart-folder", smart_name))
         if server_uri is not None:
@@ -214,6 +222,36 @@ class Sidebar(Gtk.ScrolledWindow):
             gesture.connect("pressed", lambda _g, _n, x, y: self._popup_menu(row, x, y, menu))
             row.add_controller(gesture)
         self.listbox.append(row)
+
+    def _write_bookmarks(self, lines):
+        BOOKMARKS.parent.mkdir(parents=True, exist_ok=True)
+        BOOKMARKS.write_text("".join(line + "\n" for line in lines), encoding="utf-8")
+        self._queue_rebuild()
+
+    def _bookmark_lines(self):
+        try:
+            return [line for line in BOOKMARKS.read_text(encoding="utf-8").splitlines() if line.strip()]
+        except OSError:
+            return []
+
+    def add_bookmarks(self, gfiles):
+        """Add folders to the sidebar (shared with GNOME Files' bookmarks)."""
+        lines = self._bookmark_lines()
+        existing = {line.split(" ", 1)[0] for line in lines}
+        added = 0
+        for gfile in gfiles:
+            if gfile.query_file_type(Gio.FileQueryInfoFlags.NONE, None) != Gio.FileType.DIRECTORY:
+                continue
+            uri = gfile.get_uri()
+            if uri not in existing:
+                lines.append(uri)
+                existing.add(uri)
+                added += 1
+        if added:
+            self._write_bookmarks(lines)
+
+    def remove_bookmark(self, uri):
+        self._write_bookmarks([line for line in self._bookmark_lines() if line.split(" ", 1)[0] != uri])
 
     def _volume_row(self, volume):
         """An unmounted drive or online account: clicking it connects it."""

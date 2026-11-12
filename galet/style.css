@@ -82,3 +82,14 @@ listview.galet-gallery-strip > row {
   padding: 6px;
   margin: 0 3px;
 }
+
+/* Theme picker cards in Settings */
+button.galet-theme-card {
+  padding: 8px;
+  border-radius: 12px;
+}
+
+button.galet-theme-card:checked {
+  box-shadow: inset 0 0 0 2px @accent_bg_color;
+  background-color: alpha(@accent_bg_color, 0.08);
+}

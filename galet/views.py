@@ -7,6 +7,7 @@ from gi.repository import Adw, Gdk, Gio, GLib, GObject, Gtk, Pango
 from . import dnd
 from .i18n import _
 from .model import DirectoryModel, FileItem, make_sorter
+from .folders import icon_path as folder_icon_path
 from .thumbnails import THUMBNAILER
 from .widgets import TagDots
 
@@ -38,7 +39,24 @@ def display_label(item, settings):
     return item.name.rsplit(".", 1)[0]
 
 
+SORT_KEYS = {
+    "name": None,
+    "kind": lambda i: i.kind.casefold(),
+    "date": lambda i: -i.mtime,
+    "size": lambda i: -i.size,
+    "tags": lambda i: (0, i.tags[0].casefold()) if i.tags else (1, ""),
+}
+
+
+def view_sorter(settings):
+    """Sorter for icon, column and gallery views ("Sort By" menu)."""
+    return make_sorter(SORT_KEYS.get(settings.get("sort_by", "name")), folders_first=settings.get("folders_first"))
+
+
 def set_item_image(image, item, size):
+    if item.folder_color:
+        image.set_from_file(folder_icon_path(item.folder_color))
+        return
     if not item.thumbnail and size >= 32:
         THUMBNAILER.request(item)  # the cell refreshes when the thumbnail is ready
     if item.thumbnail and size >= 32:
@@ -286,8 +304,7 @@ class IconGridView(_SelectionView, Gtk.ScrolledWindow):
     def __init__(self, pane, model):
         super().__init__(hscrollbar_policy=Gtk.PolicyType.NEVER)
         settings = pane.settings
-        self.sorted = Gtk.SortListModel(model=model,
-                                        sorter=make_sorter(folders_first=settings.get("folders_first")))
+        self.sorted = Gtk.SortListModel(model=model, sorter=view_sorter(settings))
         self.selection = Gtk.MultiSelection(model=self.sorted)
         tagstore = pane.tagstore
         self.view = Gtk.GridView(model=self.selection, max_columns=64, enable_rubberband=True,
@@ -450,7 +467,7 @@ class GalleryView(_SelectionView, Gtk.Box):
         super().__init__(orientation=Gtk.Orientation.VERTICAL)
         settings = pane.settings
         tagstore = pane.tagstore
-        self.sorted = Gtk.SortListModel(model=model, sorter=make_sorter(folders_first=settings.get("folders_first")))
+        self.sorted = Gtk.SortListModel(model=model, sorter=view_sorter(settings))
         self.selection = Gtk.SingleSelection(model=self.sorted, autoselect=True, can_unselect=False)
         self.view = Gtk.ListView(model=self.selection, orientation=Gtk.Orientation.HORIZONTAL,
                                  factory=make_factory(lambda: GalleryThumb(tagstore, settings), self.attach_cell))
@@ -566,8 +583,7 @@ class ColumnBrowser(Gtk.ScrolledWindow):
         col.model = DirectoryModel(gfile, self.pane.tagstore)
         filtered = Gtk.FilterListModel(model=col.model.store, filter=self.pane.filter)
         settings = self.pane.settings
-        ordered = Gtk.SortListModel(model=filtered,
-                                    sorter=make_sorter(folders_first=settings.get("folders_first")))
+        ordered = Gtk.SortListModel(model=filtered, sorter=view_sorter(settings))
         col.selection = Gtk.SingleSelection(model=ordered, autoselect=False, can_unselect=True)
         tagstore = self.pane.tagstore
         col.view = Gtk.ListView(model=col.selection,

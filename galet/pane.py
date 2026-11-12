@@ -8,7 +8,7 @@ from .model import DirectoryModel, Location, TagModel, fold
 from .search import SearchModel, date_matches, kind_matches
 from .info import InfoPanel
 from .views import ColumnBrowser, DetailListView, GalleryView, IconGridView
-from .widgets import TagPicker
+from .widgets import FolderColorPicker, TagPicker
 
 VIEW_MODES = ("grid", "list", "columns", "gallery")
 
@@ -129,8 +129,19 @@ class BrowserPane(Gtk.Box):
     def reload(self):
         self._load(self.location)
 
+    def _view_mode_for(self, location):
+        """Finder remembers the presentation of each folder."""
+        if location.is_virtual:
+            return self.view_mode
+        stored = self.settings.get("folder_views", {}).get(location.gfile.get_uri())
+        if stored in VIEW_MODES:
+            return stored
+        default = self.settings.get("view_mode", "grid")
+        return default if default in VIEW_MODES else "grid"
+
     def _load(self, location):
         self._close_model()
+        self.view_mode = self._view_mode_for(location)
         self.location = location
         self.search_text = ""
         self.filter.changed(Gtk.FilterChange.DIFFERENT)
@@ -503,6 +514,15 @@ class BrowserPane(Gtk.Box):
                     section.append_submenu(_("Send to Phone"), targets)
                 menu.append_section(None, section)
 
+            folders = [i for i in items if i.is_dir]
+            if folders and not self.in_trash:
+                section = Gio.Menu()
+                if len(items) == 1:
+                    section.append(_("Add to Sidebar"), "win.add-to-sidebar")
+                color_item = Gio.MenuItem.new(None, None)
+                color_item.set_attribute_value("custom", GLib.Variant("s", "folder-color"))
+                section.append_item(color_item)
+                menu.append_section(_("Folder Colour"), section)
             if any(i.path for i in items):
                 section = Gio.Menu()
                 custom = Gio.MenuItem.new(None, None)
@@ -530,6 +550,13 @@ class BrowserPane(Gtk.Box):
             menu.append_section(None, section)
 
         popover = Gtk.PopoverMenu.new_from_model(menu)
+        folders = [i for i in items if i.is_dir] if items else []
+        if folders and not self.in_trash:
+            def on_color(color):
+                popover.popdown()
+                self.window.set_folder_color(folders, color)
+
+            popover.add_child(FolderColorPicker(self.tagstore, folders[0].folder_color, on_color), "folder-color")
         if picker is not None:
             common, toggle = picker
 

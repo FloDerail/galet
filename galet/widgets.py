@@ -6,6 +6,7 @@ import cairo
 from gi.repository import Gdk, Gio, GLib, Gtk, Pango
 
 from . import dnd
+from .i18n import _
 from .model import Location, display_name
 
 
@@ -159,3 +160,27 @@ class PathBar(Gtk.ScrolledWindow):
         adjustment = self.get_hadjustment()
         adjustment.set_value(adjustment.get_upper())
         return GLib.SOURCE_REMOVE
+
+
+class FolderColorPicker(Gtk.Box):
+    """Row of folder colours in the context menu (first button = default colour)."""
+
+    def __init__(self, tagstore, current, on_pick):
+        from .folders import PALETTE
+
+        super().__init__(spacing=0, halign=Gtk.Align.CENTER, margin_top=2, margin_bottom=2)
+        self.add_css_class("tag-picker")
+        reset = Gtk.Button(icon_name="edit-clear-symbolic", tooltip_text=_("Default Colour"))
+        reset.add_css_class("flat")
+        reset.add_css_class("circular")
+        reset.connect("clicked", lambda _b: on_pick(None))
+        self.append(reset)
+        for name, color in PALETTE:
+            dots = TagDots(tagstore, size=16)
+            dots.set_colors([color])
+            dots.marked = color == current
+            button = Gtk.Button(child=dots, tooltip_text=_(name))
+            button.add_css_class("flat")
+            button.add_css_class("circular")
+            button.connect("clicked", lambda _b, c=color: on_pick(c))
+            self.append(button)

@@ -6,7 +6,7 @@ from gi.repository import Adw, Gdk, Gio, GLib, GObject, Gtk
 
 from . import dialogs, dnd, fileops, quickactions, search, servers
 from .i18n import _, ngettext
-from .model import Location, start_location
+from .model import ATTRIBUTES, Location, start_location
 from .operations import OperationsButton
 from .pane import BrowserPane
 from .sidebar import Sidebar
@@ -17,8 +17,9 @@ SELECTION_ACTIONS = ("open", "open-new-tab", "quicklook", "copy", "cut", "copy-p
 
 
 class GaletWindow(Adw.ApplicationWindow):
-    def __init__(self, app, location=None):
-        super().__init__(application=app, title="Galet", width_request=360, height_request=320)
+    def __init__(self, app, location=None, empty=False):
+        super().__init__(application=app, title="Galet", width_request=360, height_request=320,
+                         css_classes=["galet-window"])
         self.app = app
         self._resetting_search = False
         self.tagstore = app.tagstore
@@ -29,7 +30,9 @@ class GaletWindow(Adw.ApplicationWindow):
         self._setup_actions()
         self.connect("close-request", self._on_close_request)
         self._settings_handler = self.settings.connect("changed", self._on_setting_changed)
-        self.new_tab(location or start_location(self.settings.get("new_window_location")))
+        self._apply_window_buttons()
+        if not empty:
+            self.new_tab(location or start_location(self.settings.get("new_window_location")))
 
     # -------------------------------------------------------------------- UI
 
@@ -37,11 +40,12 @@ class GaletWindow(Adw.ApplicationWindow):
         # Sidebar
         self.sidebar = Sidebar(self)
         sidebar_view = Adw.ToolbarView()
-        sidebar_view.add_top_bar(Adw.HeaderBar(show_title=False))
+        self.sidebar_header = Adw.HeaderBar(show_title=False)
+        sidebar_view.add_top_bar(self.sidebar_header)
         sidebar_view.set_content(self.sidebar)
 
         # Header bar
-        header = Adw.HeaderBar()
+        header = self.content_header = Adw.HeaderBar()
         self.sidebar_button = Gtk.ToggleButton(icon_name="sidebar-show-symbolic", visible=False,
                                                tooltip_text=_("Show Sidebar"))
         header.pack_start(self.sidebar_button)
@@ -59,15 +63,16 @@ class GaletWindow(Adw.ApplicationWindow):
         section.append(_("New Window"), "app.new-window")
         section.append(_("New Tab"), "win.new-tab")
         menu.append_section(None, section)
-        section = Gio.Menu()
-        section.append(_("Show Preview"), "win.show-preview")
-        group_menu = Gio.Menu()
-        for key, label in (("none", _("None")), ("kind", _("Kind")), ("date", _("Date Modified")),
-                           ("tags", _("Tags"))):
-            group_menu.append(label, f"win.group-by::{key}")
-        section.append_submenu(_("Group By (List View)"), group_menu)
+        section.append(_("Merge All Windows"), "win.merge-windows")
         menu.append_section(None, section)
+        go_menu = Gio.Menu()
+        for label, action in ((_("Recent"), "win.go-recent"), (_("Home"), "win.go-home"),
+                              (_("Desktop"), "win.go-desktop"), (_("Documents"), "win.go-documents"),
+                              (_("Downloads"), "win.go-downloads"), (_("Computer"), "win.go-computer"),
+                              (_("Network"), "win.go-network"), (_("Trash"), "win.go-trash")):
+            go_menu.append(label, action)
         section = Gio.Menu()
+        section.append_submenu(_("Go"), go_menu)
         section.append(_("Go to Location…"), "win.go-to")
         section.append(_("Connect to Server…"), "win.connect-server")
         section.append(_("Show Hidden Files"), "win.show-hidden")
@@ -83,6 +88,24 @@ class GaletWindow(Adw.ApplicationWindow):
         header.pack_end(search_button)
         self.operations_button = OperationsButton()
         header.pack_end(self.operations_button)
+
+        arrange = Gio.Menu()
+        sort_section = Gio.Menu()
+        for key, label in (("name", _("Name")), ("kind", _("Kind")), ("date", _("Date Modified")),
+                           ("size", _("Size")), ("tags", _("Tags"))):
+            sort_section.append(label, f"win.sort-by::{key}")
+        arrange.append_section(_("Sort By"), sort_section)
+        group_section = Gio.Menu()
+        for key, label in (("none", _("None")), ("kind", _("Kind")), ("date", _("Date Modified")),
+                           ("tags", _("Tags"))):
+            group_section.append(label, f"win.group-by::{key}")
+        arrange.append_section(_("Group By (List View)"), group_section)
+        options = Gio.Menu()
+        options.append(_("Show Preview"), "win.show-preview")
+        options.append(_("Show Hidden Files"), "win.show-hidden")
+        arrange.append_section(None, options)
+        header.pack_end(Gtk.MenuButton(icon_name="view-sort-descending-symbolic", menu_model=arrange,
+                                       tooltip_text=_("Sort, Group and Display Options")))
 
         modes = Gtk.Box(css_classes=["linked"])
         for mode, icon, tooltip in (("grid", "view-grid-symbolic", _("Icons")),
@@ -134,6 +157,8 @@ class GaletWindow(Adw.ApplicationWindow):
         self.tab_view.connect("notify::selected-page", lambda *_a: self._sync_chrome())
         self.tab_view.connect("close-page", self._on_close_page)
         self.tab_view.connect("notify::n-pages", self._on_n_pages)
+        self.tab_view.connect("page-attached", self._on_page_attached)
+        self.tab_view.connect("create-window", self._on_create_window)
         self.tab_bar = Adw.TabBar(view=self.tab_view, autohide=True)
         self.tab_bar.setup_extra_drop_target(dnd.ACTIONS, [Gdk.FileList])
         self.tab_bar.connect("extra-drag-drop", self._on_tab_drop)
@@ -205,6 +230,16 @@ class GaletWindow(Adw.ApplicationWindow):
             "edit-tags": lambda: dialogs.edit_tags(self, self.selection),
             "connect-server": lambda: servers.ConnectDialog(self).present(self),
             "get-info": self._get_info,
+            "merge-windows": self.merge_windows,
+            "add-to-sidebar": lambda: self.sidebar.add_bookmarks([i.target_file for i in self.selection if i.is_dir]),
+            "go-recent": lambda: self._go_special("recent"),
+            "go-home": lambda: self._go_special("home"),
+            "go-desktop": lambda: self._go_special("desktop"),
+            "go-documents": lambda: self._go_special("documents"),
+            "go-downloads": lambda: self._go_special("downloads"),
+            "go-computer": lambda: self._go_special("computer"),
+            "go-network": lambda: self._go_special("network"),
+            "go-trash": lambda: self._go_special("trash"),
         }
         for name, callback in simple.items():
             action = Gio.SimpleAction.new(name, None)
@@ -217,7 +252,8 @@ class GaletWindow(Adw.ApplicationWindow):
                                ("remove-server", lambda uri: servers.remove_server(self.settings, uri)),
                                ("quick-action", lambda name: quickactions.run(self, name, self.selection)),
                                ("remove-smart-folder", lambda name: search.remove_smart_folder(self.settings, name)),
-                               ("send-to-device", self._send_to_device)):
+                               ("send-to-device", self._send_to_device),
+                               ("remove-bookmark", lambda uri: self.sidebar.remove_bookmark(uri))):
             action = Gio.SimpleAction.new(name, GLib.VariantType.new("s"))
             action.connect("activate", lambda _a, param, cb=callback: cb(param.get_string()))
             self.add_action(action)
@@ -231,6 +267,11 @@ class GaletWindow(Adw.ApplicationWindow):
             "show-preview", None, GLib.Variant("b", bool(self.settings.get("show_preview", False))))
         self.preview_action.connect("change-state", self._on_toggle_setting, "show_preview")
         self.add_action(self.preview_action)
+        self.sort_action = Gio.SimpleAction.new_stateful(
+            "sort-by", GLib.VariantType.new("s"), GLib.Variant("s", self.settings.get("sort_by", "name")))
+        self.sort_action.connect("change-state", lambda a, v: (a.set_state(v),
+                                                               self.settings.set("sort_by", v.get_string())))
+        self.add_action(self.sort_action)
         self.group_action = Gio.SimpleAction.new_stateful(
             "group-by", GLib.VariantType.new("s"), GLib.Variant("s", self.settings.get("group_by", "none")))
         self.group_action.connect("change-state", self._on_group_by)
@@ -295,6 +336,13 @@ class GaletWindow(Adw.ApplicationWindow):
         action.set_state(value)
         mode = value.get_string()
         self.settings.set("view_mode", mode)
+        pane = self.current_pane
+        if pane is not None and not pane.location.is_virtual:
+            views = dict(self.settings.get("folder_views", {}))
+            views[pane.location.gfile.get_uri()] = mode
+            if len(views) > 500:
+                views = dict(list(views.items())[-500:])
+            self.settings.set("folder_views", views)
         if self.current_pane is not None:
             self.current_pane.set_view_mode(mode)
             self._sync_chrome()
@@ -312,7 +360,13 @@ class GaletWindow(Adw.ApplicationWindow):
             value = GLib.Variant("b", bool(self.settings.get(key)))
             if self.preview_action.get_state() != value:
                 self.preview_action.set_state(value)
-        elif key in ("icon_size", "folders_first", "show_extensions", "group_by"):
+        elif key == "theme" or key.startswith("custom_"):
+            self._apply_window_buttons()
+        elif key in ("icon_size", "folders_first", "show_extensions", "group_by", "sort_by"):
+            for state_key, action in (("sort_by", self.sort_action), ("group_by", self.group_action)):
+                value = GLib.Variant("s", self.settings.get(state_key, "name" if state_key == "sort_by" else "none"))
+                if action.get_state() != value:
+                    action.set_state(value)
             for pane in self.panes:
                 pane.reload()
         elif key == "show_bottom_bar":
@@ -341,14 +395,73 @@ class GaletWindow(Adw.ApplicationWindow):
     def new_tab(self, location=None, select=True):
         pane = BrowserPane(self, location or Location.home(), self.view_mode_action.get_state().get_string(),
                            self.hidden_action.get_state().get_boolean())
-        page = self.tab_view.append(pane)
+        page = self.tab_view.append(pane)  # "page-attached" connects the pane to this window
         page.set_title(pane.location.title)
         page.set_icon(Gio.ThemedIcon.new("folder-symbolic"))
-        pane.connect("location-changed", self._on_pane_location, page)
-        pane.connect("status-changed", self._on_pane_status)
         if select:
             self.tab_view.set_selected_page(page)
         return pane
+
+    def _on_page_attached(self, _view, page, _position):
+        """A tab was created here, dragged in from another window or merged."""
+        pane = page.get_child()
+        for obj, handler in getattr(pane, "window_handlers", []):
+            obj.disconnect(handler)
+        moved = pane.window is not self
+        pane.window = self
+        pane.info_panel.window = self
+        pane.window_handlers = [
+            (pane, pane.connect("location-changed", self._on_pane_location, page)),
+            (pane, pane.connect("status-changed", self._on_pane_status)),
+        ]
+        if moved:
+            pane.reload()  # rebuild views so drops and menus target this window
+
+    def _on_create_window(self, _view):
+        """A tab was dragged out of the window: open it in a new window."""
+        window = GaletWindow(self.app, empty=True)
+        window.present()
+        return window.tab_view
+
+    def merge_windows(self):
+        for window in self.app.get_windows():
+            if window is self or not isinstance(window, GaletWindow):
+                continue
+            while window.tab_view.get_n_pages():
+                page = window.tab_view.get_nth_page(0)
+                window.tab_view.transfer_page(page, self.tab_view, self.tab_view.get_n_pages())
+
+    def _go_special(self, key):
+        directories = {"desktop": GLib.UserDirectory.DIRECTORY_DESKTOP,
+                       "documents": GLib.UserDirectory.DIRECTORY_DOCUMENTS,
+                       "downloads": GLib.UserDirectory.DIRECTORY_DOWNLOAD}
+        uris = {"recent": "recent:///", "computer": "file:///", "network": "network:///", "trash": "trash:///"}
+        if key in uris:
+            gfile = Gio.File.new_for_uri(uris[key])
+        elif key in directories and GLib.get_user_special_dir(directories[key]):
+            gfile = Gio.File.new_for_path(GLib.get_user_special_dir(directories[key]))
+        else:
+            gfile = Gio.File.new_for_path(GLib.get_home_dir())
+        self.navigate(Location(gfile))
+
+    def set_folder_color(self, folders, color):
+        from . import folders as folder_colors
+
+        for item in folders:
+            try:
+                folder_colors.set_color(item.gfile, color)
+                info = item.gfile.query_info(ATTRIBUTES, Gio.FileQueryInfoFlags.NONE, None)
+                item.update(info, item.tags)
+            except GLib.Error as err:
+                self.toast(_("Could not change the folder colour: {error}").format(error=err.message))
+                return
+
+    def _apply_window_buttons(self):
+        from . import themes
+
+        layout = themes.decoration_layout(self.settings)
+        for header in (self.content_header, self.sidebar_header):
+            header.set_decoration_layout(layout)
 
     def navigate(self, location):
         pane = self.current_pane

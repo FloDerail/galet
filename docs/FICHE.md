@@ -27,11 +27,25 @@ sans changer vos habitudes Linux.
 | 🔍 **Recherche** | Dans le dossier, ses sous-dossiers ou tout le dossier personnel, avec filtres par type et par date. Les recherches s'enregistrent en **dossiers intelligents**. |
 | 🌐 **Serveurs** | `Ctrl+K` : partages Windows (SMB), SFTP, FTP, WebDAV (Nextcloud, kDrive…), serveurs favoris dans la barre latérale. |
 | 📱 **Envoi vers le téléphone** | Avec Zorin Connect ou GSConnect, comme AirDrop. |
+| 🎨 **Thèmes** | Système, **macOS** (pastilles rouge-orange-vert à gauche), **Windows 11** ou **Personnalisé** (couleur, boutons, coins, police), en clair ou en sombre. |
+| 📁 **Dossiers colorés** | Clic droit → « Couleur du dossier ». Chaque dossier retient aussi sa présentation, comme sur Mac. |
 | ⚙️ **Réglages** | `Ctrl+,` : dossier de départ, présentation par défaut, taille des icônes, éléments de la barre latérale, tags, serveurs… |
 
 | Colonnes | Galerie |
 |---|---|
 | ![Vue Colonnes](screenshots/colonnes.png) | ![Vue Galerie](screenshots/galerie.png) |
+
+### Thèmes
+
+Réglages (`Ctrl+,`) → **Apparence** : Système, macOS, Windows 11 ou Personnalisé, en clair ou en sombre.
+
+| macOS | Windows 11 (sombre) |
+|---|---|
+| ![Thème macOS](screenshots/theme-macos.png) | ![Thème Windows 11](screenshots/theme-windows-sombre.png) |
+
+![Réglages → Apparence](screenshots/reglages-apparence.png)
+
+Toutes les nouveautés de chaque version sont listées dans [CHANGELOG.md](../CHANGELOG.md).
 
 ### Où sont stockés les tags ?
 

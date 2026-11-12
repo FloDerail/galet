@@ -23,6 +23,7 @@ ATTRIBUTES = ",".join((
     "thumbnail::path",
     "trash::orig-path",
     "trash::deletion-date",
+    "metadata::galet-folder-color",
 ))
 
 _DIGITS = re.compile(r"([0-9]+)")
@@ -85,6 +86,7 @@ class FileItem(GObject.Object):
         self.icon = info.get_attribute_object("standard::icon")
         self.thumbnail = info.get_attribute_byte_string("thumbnail::path")
         self.tags = list(tags)
+        self.folder_color = (info.get_attribute_string("metadata::galet-folder-color") or None) if self.is_dir else None
         self.path = local_path(self.gfile, info)
         self.sort_key = natural_key(self.name)
         self.search_key = fold(self.name)
