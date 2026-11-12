@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Galet — l'explorateur de fichiers inspiré du Finder</title>
+  <meta name="description" content="Galet est un explorateur de fichiers libre pour Linux (GNOME, Zorin OS, Ubuntu) inspiré du Finder d'Apple : tags de couleur, colonnes, galerie, actions rapides, recherche dans les documents, thèmes macOS et Windows.">
+  <meta property="og:title" content="Galet — l'explorateur de fichiers inspiré du Finder">
+  <meta property="og:description" content="Tags de couleur, colonnes, galerie, actions rapides, recherche dans les documents. Libre et gratuit, pour Linux.">
+  <meta property="og:image" content="https://floderail.github.io/galet/screenshots/icones-tags.png">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f7f7fb;
+      --surface: #ffffff;
+      --surface-2: #eef0fa;
+      --text: #1d1d27;
+      --muted: #5d6275;
+      --line: #e1e3ee;
+      --accent: #5b6ee1;
+      --accent-2: #8f7ee8;
+      --accent-soft: #e6e8fb;
+      --on-accent: #ffffff;
+      --shadow: 0 18px 50px -20px rgba(40, 46, 90, 0.35);
+      --radius: 18px;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #12131a;
+        --surface: #1b1d27;
+        --surface-2: #232636;
+        --text: #eceef7;
+        --muted: #a2a7bd;
+        --line: #2d3043;
+        --accent: #8d9bff;
+        --accent-2: #b3a6ff;
+        --accent-soft: #272b47;
+        --on-accent: #10121c;
+        --shadow: 0 18px 50px -20px rgba(0, 0, 0, 0.7);
+      }
+    }
+    :root[data-theme="dark"] {
+      --bg: #12131a; --surface: #1b1d27; --surface-2: #232636; --text: #eceef7; --muted: #a2a7bd;
+      --line: #2d3043; --accent: #8d9bff; --accent-2: #b3a6ff; --accent-soft: #272b47; --on-accent: #10121c;
+      --shadow: 0 18px 50px -20px rgba(0, 0, 0, 0.7);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; background: var(--bg); color: var(--text);
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif; line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: var(--accent); }
+    .wrap { width: min(1120px, 100% - 32px); margin-inline: auto; }
+
+    /* Header */
+    header.top {
+      position: sticky; top: 0; z-index: 10; backdrop-filter: blur(14px);
+      background: color-mix(in srgb, var(--bg) 82%, transparent); border-bottom: 1px solid var(--line);
+    }
+    .top .wrap { display: flex; align-items: center; gap: 16px; height: 64px; }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.15rem; color: var(--text); text-decoration: none; }
+    .brand img { width: 34px; height: 34px; }
+    nav { margin-left: auto; display: flex; gap: 22px; }
+    nav a { color: var(--muted); text-decoration: none; font-weight: 500; font-size: .95rem; }
+    nav a:hover { color: var(--text); }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px; padding: 12px 22px; border-radius: 999px;
+      font-weight: 600; text-decoration: none; border: 1px solid transparent; cursor: pointer; font-size: 1rem;
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-primary { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: var(--on-accent); box-shadow: var(--shadow); }
+    .btn-ghost { background: var(--surface); color: var(--text); border-color: var(--line); }
+    .btn-small { padding: 8px 16px; font-size: .9rem; }
+
+    /* Hero */
+    .hero { padding: 72px 0 40px; text-align: center; }
+    .hero .logo { width: 120px; height: 120px; margin: 0 auto 18px; filter: drop-shadow(0 14px 30px rgba(91, 110, 225, .35)); }
+    .hero h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); line-height: 1.1; margin: 0 0 16px; letter-spacing: -0.03em; }
+    .hero h1 span { background: linear-gradient(135deg, var(--accent), var(--accent-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .hero p.lead { font-size: 1.2rem; color: var(--muted); max-width: 680px; margin: 0 auto 30px; }
+    .hero .actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .badges { margin-top: 18px; color: var(--muted); font-size: .9rem; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .shot-hero { margin: 48px auto 0; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); border: 1px solid var(--line); max-width: 1000px; }
+
+    /* Quote */
+    .quote { margin: 64px auto; max-width: 760px; text-align: center; font-size: 1.25rem; }
+    .quote blockquote { margin: 0; font-style: italic; }
+    .quote cite { display: block; margin-top: 12px; font-style: normal; color: var(--muted); font-size: 1rem; }
+
+    /* Sections */
+    section { padding: 56px 0; }
+    section h2 { font-size: clamp(1.7rem, 3vw, 2.3rem); margin: 0 0 10px; letter-spacing: -0.02em; text-align: center; }
+    section .sub { color: var(--muted); text-align: center; max-width: 640px; margin: 0 auto 36px; }
+
+    .grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+    .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; }
+    .card .ico { font-size: 1.6rem; line-height: 1; margin-bottom: 10px; }
+    .card h3 { margin: 0 0 6px; font-size: 1.08rem; }
+    .card p { margin: 0; color: var(--muted); font-size: .96rem; }
+
+    .gallery { display: grid; gap: 22px; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+    .gallery figure { margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+    .gallery figcaption { padding: 12px 16px; font-weight: 600; font-size: .95rem; }
+
+    /* Download */
+    .download { background: var(--surface-2); border-block: 1px solid var(--line); }
+    .steps { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+    .step h3 { margin-top: 0; display: flex; align-items: center; gap: 10px; }
+    .num { display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); font-weight: 800; font-size: .9rem; }
+    pre {
+      position: relative; margin: 12px 0 0; padding: 14px 16px; padding-right: 74px; border-radius: 12px;
+      background: #14151d; color: #e6e8f5; font: 500 .88rem/1.55 ui-monospace, "JetBrains Mono", "Fira Code", monospace;
+      overflow-x: auto; white-space: pre;
+    }
+    .copy {
+      position: absolute; top: 8px; right: 8px; border: 0; border-radius: 8px; padding: 5px 10px; font: 600 .78rem "Inter", sans-serif;
+      background: #2b2e3f; color: #e6e8f5; cursor: pointer;
+    }
+    .copy:hover { background: #3a3e55; }
+    .note { color: var(--muted); font-size: .92rem; margin-top: 12px; }
+    .soon { display: inline-block; padding: 2px 10px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-size: .78rem; font-weight: 700; margin-left: 6px; vertical-align: middle; }
+
+    /* Themes + AI */
+    .split { display: grid; gap: 28px; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); align-items: center; }
+    .split img { border-radius: var(--radius); border: 1px solid var(--line); box-shadow: var(--shadow); }
+    ul.check { list-style: none; padding: 0; margin: 0; }
+    ul.check li { padding: 6px 0 6px 30px; position: relative; }
+    ul.check li::before { content: "✓"; position: absolute; left: 0; top: 6px; color: var(--accent); font-weight: 800; }
+    .providers { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .chip { padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); font-size: .88rem; font-weight: 500; }
+    .chip.local { border-color: var(--accent); color: var(--accent); }
+
+    /* FAQ */
+    details { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px 20px; margin-bottom: 12px; }
+    summary { cursor: pointer; font-weight: 600; }
+    details p { color: var(--muted); margin: 10px 0 0; }
+
+    footer { padding: 40px 0 56px; border-top: 1px solid var(--line); color: var(--muted); font-size: .95rem; }
+    footer .wrap { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; justify-content: space-between; }
+    footer a { color: var(--text); font-weight: 600; text-decoration: none; }
+    .theme-toggle { background: none; border: 1px solid var(--line); color: var(--text); border-radius: 999px; padding: 6px 12px; cursor: pointer; font: 500 .85rem "Inter", sans-serif; }
+
+    @media (max-width: 720px) {
+      nav { display: none; }
+      .hero { padding-top: 44px; }
+      pre { font-size: .8rem; }
+    }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <div class="wrap">
+      <a class="brand" href="#"><img src="assets/logo.svg" alt="">Galet</a>
+      <nav>
+        <a href="#fonctions">Fonctions</a>
+        <a href="#captures">Captures</a>
+        <a href="#telecharger">Télécharger</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <a class="btn btn-primary btn-small" href="#telecharger">Télécharger</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <img class="logo" src="assets/logo.svg" alt="Logo de Galet">
+        <h1>L'explorateur de fichiers<br><span>inspiré du Finder</span>, pour Linux</h1>
+        <p class="lead">Tags de couleur, vue en colonnes, galerie, actions rapides, recherche dans vos documents,
+          thèmes macOS et Windows… Une application GNOME native, libre et gratuite.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#telecharger">⬇ Télécharger Galet</a>
+          <a class="btn btn-ghost" href="https://github.com/FloDerail/galet">Code source sur GitHub</a>
+        </div>
+        <div class="badges">
+          <span>🐧 Zorin OS · Ubuntu · Mint · Fedora · Arch</span>
+          <span>🆓 Logiciel libre (GPL-3.0)</span>
+          <span>🌍 6 langues</span>
+        </div>
+        <div class="shot-hero">
+          <img src="screenshots/icones-groupees.png" alt="Galet : vue Icônes avec dossiers colorés et tags" width="1100" height="680">
+        </div>
+      </div>
+    </section>
+
+    <div class="quote wrap">
+      <blockquote>« Je n'ai jamais trouvé un explorateur de fichiers qui me convienne vraiment.
+        Alors j'ai développé le mien, exactement comme je le voulais. »</blockquote>
+      <cite>— Florian Dérail, créateur de Galet</cite>
+    </div>
+
+    <section id="fonctions">
+      <div class="wrap">
+        <h2>Tout ce qui manquait sous Linux</h2>
+        <p class="sub">Les meilleures idées du Finder d'Apple, adaptées à GNOME, sans changer vos habitudes.</p>
+        <div class="grid">
+          <div class="card"><div class="ico">🏷️</div><h3>Tags de couleur</h3><p>Clic droit → une pastille. Tous les fichiers d'un même tag en un clic depuis la barre latérale.</p></div>
+          <div class="card"><div class="ico">🗂️</div><h3>4 présentations</h3><p>Icônes, liste, colonnes avec aperçu, galerie. Chaque dossier retient la sienne.</p></div>
+          <div class="card"><div class="ico">🔍</div><h3>Recherche puissante</h3><p>Dans les sous-dossiers et <strong>dans le contenu</strong> des PDF et documents. Dossiers intelligents.</p></div>
+          <div class="card"><div class="ico">⚡</div><h3>Actions rapides</h3><p>Pivoter, convertir, réduire une image, créer un PDF, compresser, extraire.</p></div>
+          <div class="card"><div class="ico">↩️</div><h3>Confort</h3><p>Annuler (Ctrl+Z), renommer sur place, onglets, glisser-déposer, Coup d'œil (Espace).</p></div>
+          <div class="card"><div class="ico">📁</div><h3>Dossiers colorés</h3><p>Choisissez la couleur d'un dossier, ou laissez-le prendre celle de son tag.</p></div>
+          <div class="card"><div class="ico">🌐</div><h3>Serveurs & téléphone</h3><p>SMB, SFTP, FTP, WebDAV (Nextcloud, kDrive…). Envoi vers le téléphone avec Zorin Connect.</p></div>
+          <div class="card"><div class="ico">🎨</div><h3>Thèmes</h3><p>Système, macOS, Windows 11 ou le vôtre, en clair ou en sombre.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="captures">
+      <div class="wrap">
+        <h2>En images</h2>
+        <p class="sub">Une vraie application GNOME, qui suit le style de votre bureau.</p>
+        <div class="gallery">
+          <figure><img loading="lazy" src="screenshots/colonnes.png" alt="Vue en colonnes avec aperçu"><figcaption>Vue en colonnes, comme sur Mac</figcaption></figure>
+          <figure><img loading="lazy" src="screenshots/galerie.png" alt="Vue Galerie"><figcaption>Galerie de photos</figcaption></figure>
+          <figure><img loading="lazy" src="screenshots/panneau-apercu.png" alt="Panneau d'aperçu et actions rapides"><figcaption>Aperçu et actions rapides</figcaption></figure>
+          <figure><img loading="lazy" src="screenshots/recherche-contenu.png" alt="Recherche dans le contenu des documents"><figcaption>Recherche dans le contenu des documents</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap split">
+        <div>
+          <h2 style="text-align:left">Votre style : macOS, Windows ou le vôtre</h2>
+          <ul class="check">
+            <li>Thème <strong>macOS</strong> : pastilles rouge-orange-vert, couleurs du Finder</li>
+            <li>Thème <strong>Windows 11</strong> : boutons rectangulaires, couleurs de l'Explorateur</li>
+            <li>Thème <strong>personnalisé</strong> : couleur, coins arrondis, police, boutons</li>
+            <li>Clair, sombre ou automatique</li>
+          </ul>
+        </div>
+        <img loading="lazy" src="screenshots/theme-macos.png" alt="Thème macOS">
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap split">
+        <img loading="lazy" src="screenshots/reglages-ia-claude.png" alt="Réglages de l'IA">
+        <div>
+          <h2 style="text-align:left">Une IA, seulement si vous le voulez</h2>
+          <p>Cherchez en langage naturel (« les factures PDF de cette semaine ») et obtenez des suggestions de tags.
+            Désactivée par défaut. Avec Ollama, <strong>rien ne quitte votre ordinateur</strong>.</p>
+          <div class="providers">
+            <span class="chip local">Ollama (local)</span>
+            <span class="chip">Claude</span><span class="chip">Mistral</span><span class="chip">Gemini</span>
+            <span class="chip">ChatGPT</span><span class="chip">Claude Code</span><span class="chip">Gemini CLI</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="telecharger" class="download">
+      <div class="wrap">
+        <h2>Télécharger Galet</h2>
+        <p class="sub">Gratuit, sans compte, sans publicité. Il faut GTK 4.12+ et libadwaita 1.5+ (Zorin OS 17+, Ubuntu 24.04+, Fedora 40+).</p>
+        <div class="steps">
+          <div class="card step">
+            <h3><span class="num">1</span> Installer en une commande</h3>
+            <p>Ouvrez un terminal (Ctrl+Alt+T) et collez :</p>
+            <pre><button class="copy">Copier</button>sudo apt install git python3-gi python3-gi-cairo gir1.2-gtk-4.0 gir1.2-adw-1 gnome-sushi
+git clone https://github.com/FloDerail/galet.git
+cd galet && ./install.sh</pre>
+            <p class="note">Galet apparaît ensuite dans le menu des applications. Pour en faire l'explorateur par défaut : <code>./install.sh --default</code></p>
+          </div>
+          <div class="card step">
+            <h3><span class="num">2</span> Ou télécharger l'archive</h3>
+            <p>Téléchargez, décompressez, puis lancez <code>./install.sh</code> dans le dossier.</p>
+            <p style="margin-top:16px"><a class="btn btn-primary" href="https://github.com/FloDerail/galet/archive/refs/heads/main.zip">⬇ galet.zip</a></p>
+            <p class="note">Pour l'essayer sans rien installer : <code>./bin/galet</code></p>
+          </div>
+          <div class="card step">
+            <h3><span class="num">3</span> Flathub <span class="soon">bientôt</span></h3>
+            <p>Galet est en cours de publication sur Flathub, la boutique d'applications Linux. Il s'installera alors en un clic depuis la Logithèque.</p>
+            <pre><button class="copy">Copier</button>flatpak install flathub io.github.FloDerail.Galet</pre>
+          </div>
+        </div>
+        <p class="note" style="text-align:center;margin-top:22px">Mettre à jour : <code>cd galet && git pull && ./install.sh</code> · Désinstaller : <code>./install.sh --remove</code> ·
+          <a href="https://github.com/FloDerail/galet/blob/main/docs/FICHE.md">Tutoriel complet</a></p>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="wrap" style="max-width:820px">
+        <h2>Questions fréquentes</h2>
+        <details><summary>Galet remplace-t-il l'explorateur de mon système ?</summary><p>Seulement si vous le souhaitez (<code>./install.sh --default</code>). Vous pouvez revenir à l'explorateur d'origine à tout moment avec <code>xdg-mime default org.gnome.Nautilus.desktop inode/directory</code>.</p></details>
+        <details><summary>Où sont stockés mes tags ?</summary><p>Dans les fichiers eux-mêmes (attribut étendu <code>user.xdg.tags</code>, norme freedesktop, compatible KDE Dolphin). Ils suivent le fichier quand vous le déplacez ou le renommez.</p></details>
+        <details><summary>L'IA envoie-t-elle mes fichiers sur Internet ?</summary><p>L'IA est désactivée par défaut. Avec Ollama, tout reste sur votre ordinateur. Si vous choisissez un service en ligne (Claude, Mistral, Gemini, ChatGPT), Galet vous prévient et n'envoie des noms de fichiers et de courts extraits que lorsque vous utilisez une fonction d'IA.</p></details>
+        <details><summary>Galet est-il gratuit ?</summary><p>Oui, totalement. C'est un logiciel libre sous licence GPL-3.0 : vous pouvez l'utiliser, l'étudier, le modifier et le partager.</p></details>
+        <details><summary>Comment signaler un bug ou proposer une idée ?</summary><p>Sur la page <a href="https://github.com/FloDerail/galet/issues">Issues</a> du projet. Joignez le fichier <code>~/.cache/galet/galet.log</code> si possible.</p></details>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div>Galet — créé par <a href="https://florianderail.fr">Florian Dérail</a> · Logiciel libre et open source (GPL-3.0)</div>
+      <div style="display:flex;gap:14px;align-items:center">
+        <a href="https://github.com/FloDerail/galet">GitHub</a>
+        <a href="https://florianderail.fr">florianderail.fr</a>
+        <button class="theme-toggle" id="theme" type="button">◐ Thème</button>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelectorAll("button.copy").forEach(function (button) {
+      button.addEventListener("click", function () {
+        var text = button.parentElement.textContent.replace(button.textContent, "").trim();
+        navigator.clipboard.writeText(text).then(function () {
+          button.textContent = "Copié ✓";
+          setTimeout(function () { button.textContent = "Copier"; }, 1600);
+        });
+      });
+    });
+    (function () {
+      var root = document.documentElement, key = "galet-theme";
+      try { var saved = localStorage.getItem(key); if (saved) root.dataset.theme = saved; } catch (e) {}
+      document.getElementById("theme").addEventListener("click", function () {
+        var dark = root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+        root.dataset.theme = dark ? "light" : "dark";
+        try { localStorage.setItem(key, root.dataset.theme); } catch (e) {}
+      });
+    })();
+  </script>
+</body>
+</html>

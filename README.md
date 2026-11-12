@@ -10,6 +10,7 @@ Free and open source software by **[Florian Dérail](https://florianderail.fr)**
 
 ![Galet: icon view with colour tags](docs/screenshots/icones-tags.png)
 
+🌐 **Site web : [floderail.github.io/galet](https://floderail.github.io/galet/)** ·
 🇫🇷 **Présentation et tutoriel d'installation en français : [docs/FICHE.md](docs/FICHE.md)** ·
 **Nouveautés : [CHANGELOG.md](CHANGELOG.md)**
 

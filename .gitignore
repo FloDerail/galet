@@ -3,3 +3,5 @@ __pycache__/
 *.tmp
 /build/
 /.flatpak-builder/
+/build-dir/
+/repo/
