@@ -2,6 +2,19 @@
 
 Galet — logiciel libre et open source de [Florian Dérail](https://florianderail.fr).
 
+## 0.5.0 — Choix du fournisseur d'IA
+
+### 🇫🇷 Nouveautés
+- 🤖 L'IA peut maintenant utiliser, au choix : **Ollama** (local, par défaut), **Claude**, **Mistral**,
+  **Gemini**, **ChatGPT** par clé d'API, ou **Claude Code** / **Gemini CLI** en ligne de commande
+  (votre abonnement, sans clé).
+- 🔐 Les clés d'API sont rangées dans le **trousseau GNOME**, jamais dans un fichier.
+- 🛡️ Avant d'activer un service en ligne, Galet explique ce qui est envoyé et demande votre accord.
+
+### 🇬🇧 What's new
+- AI provider choice: Ollama (local, default), Claude, Mistral, Gemini, ChatGPT (API keys in the GNOME
+  keyring) or the Claude Code / Gemini CLI tools; privacy confirmation before any online provider.
+
 ## 0.4.0 — Recherche dans le contenu, IA locale, Flatpak
 
 ### 🇫🇷 Nouveautés

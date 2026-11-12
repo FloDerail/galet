@@ -73,6 +73,9 @@ DEFAULTS = {
     "ai_enabled": False,
     "ai_url": "http://localhost:11434",
     "ai_model": "llama3.2",
+    "ai_provider": "ollama",
+    "ai_models": {},
+    "ai_cloud_ok": [],
     "group_by": "none",
     "recent_servers": [],
 }

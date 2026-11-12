@@ -25,7 +25,7 @@
       <li>Quick actions: rotate, convert, resize, create PDF, compress, extract</li>
       <li>Network servers (SMB, SFTP, FTP, WebDAV), send to phone</li>
       <li>Themes: System, macOS, Windows 11 or your own</li>
-      <li>Optional local AI (Ollama): plain-language search and tag suggestions</li>
+      <li>Optional AI (local Ollama by default, or Claude, Mistral, Gemini, ChatGPT): plain-language search and tag suggestions</li>
     </ul>
   </description>
   <launchable type="desktop-id">io.github.FloDerail.Galet.desktop</launchable>
@@ -85,6 +85,9 @@
     <keyword>explorer</keyword>
   </keywords>
   <releases>
+    <release version="0.5.0" date="2026-11-13">
+      <description><p>Choose the AI provider: Ollama, Claude, Mistral, Gemini, ChatGPT or command-line tools.</p></description>
+    </release>
     <release version="0.4.0" date="2026-11-13">
       <description>
         <p>Content search, grouped icon view, configurable folder colours, optional local AI, Flatpak.</p>

@@ -144,7 +144,7 @@ class GaletWindow(Adw.ApplicationWindow):
                                                tooltip_text=_("Also search inside documents (text, PDF, office files)"))
         self.content_button.connect("toggled", lambda *_a: self._apply_search())
         search_row.append(self.content_button)
-        self.ai_button = Gtk.Button(icon_name="galet-ai-symbolic", tooltip_text=_("Ask the local AI (Ollama)"),
+        self.ai_button = Gtk.Button(icon_name="galet-ai-symbolic", tooltip_text=_("Ask the AI"),
                                     visible=bool(self.settings.get("ai_enabled")), css_classes=["flat"])
         self.ai_button.connect("clicked", lambda *_a: self._ai_search())
         search_row.append(self.ai_button)
@@ -349,12 +349,12 @@ class GaletWindow(Adw.ApplicationWindow):
             self.toast(_("Describe what you are looking for, e.g. “PDF invoices from this week”"))
             return
         self.ai_button.set_sensitive(False)
-        self.toast(_("Asking the local AI…"))
+        self.toast(_("Asking the AI…"))
 
         def done(result, error):
             self.ai_button.set_sensitive(True)
             if error:
-                self.toast(_("The local AI is not available: {error}").format(error=error))
+                self.toast(_("The AI is not available: {error}").format(error=error))
                 return
             self._resetting_search = True
             self.search_entry.set_text(result["text"])
@@ -373,10 +373,10 @@ class GaletWindow(Adw.ApplicationWindow):
         items = [i for i in self.selection if i.path]
         if not items:
             return
-        self.toast(_("Asking the local AI…"))
+        self.toast(_("Asking the AI…"))
         existing = [t["name"] for t in self.tagstore.tags]
         ai.run(lambda: ai.suggest_tags(self.settings, items, existing),
-               lambda result, error: self.toast(_("The local AI is not available: {error}").format(error=error))
+               lambda result, error: self.toast(_("The AI is not available: {error}").format(error=error))
                if error else dialogs.apply_suggested_tags(self, result))
 
     def _get_info(self):

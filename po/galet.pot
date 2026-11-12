@@ -2,11 +2,23 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 
-#: galet/application.py:207
+#: galet/ai.py:34
+msgid "Ollama (local, private)"
+msgstr ""
+
+#: galet/ai.py:39
+msgid "Claude Code (command line)"
+msgstr ""
+
+#: galet/ai.py:40
+msgid "Gemini CLI (command line)"
+msgstr ""
+
+#: galet/application.py:210
 msgid "A Finder-inspired file manager with tabs, columns and colour tags.\nFree and open source software."
 msgstr ""
 
-#: galet/application.py:215
+#: galet/application.py:218
 msgid "Source Code"
 msgstr ""
 
@@ -758,59 +770,115 @@ msgstr ""
 msgid "AI"
 msgstr ""
 
-#: galet/preferences.py:384
-msgid "Local AI (optional)"
-msgstr ""
-
 #: galet/preferences.py:385
-msgid "Search in plain language and get tag suggestions. Galet only talks to Ollama running on your own computer: your files never leave it."
+msgid "AI (optional)"
 msgstr ""
 
-#: galet/preferences.py:387
-msgid "Enable AI features"
+#: galet/preferences.py:386
+msgid "Search in plain language and get tag suggestions. With Ollama everything stays on your computer; online services receive file names and short document excerpts."
 msgstr ""
 
 #: galet/preferences.py:388
+msgid "Enable AI features"
+msgstr ""
+
+#: galet/preferences.py:390
+msgid "Provider"
+msgstr ""
+
+#: galet/preferences.py:408
+msgid "Send data to {service}?"
+msgstr ""
+
+#: galet/preferences.py:409
+msgid "When you use AI features, Galet will send file names and short excerpts of the selected documents to this online service. Nothing is sent until you use an AI feature."
+msgstr ""
+
+#: galet/preferences.py:412
+msgid "I Agree"
+msgstr ""
+
+#: galet/preferences.py:444
 msgid "Ollama address"
 msgstr ""
 
-#: galet/preferences.py:392
+#: galet/preferences.py:449
 msgid "Model"
 msgstr ""
 
-#: galet/preferences.py:394
+#: galet/preferences.py:451
 msgid "Refresh the list of models"
 msgstr ""
 
-#: galet/preferences.py:401
+#: galet/preferences.py:456
 msgid "Install Ollama"
 msgstr ""
 
-#: galet/preferences.py:402
+#: galet/preferences.py:457
 msgid "In a terminal: install Ollama, then download a model."
 msgstr ""
 
-#: galet/preferences.py:435
+#: galet/preferences.py:466
+msgid "API key"
+msgstr ""
+
+#: galet/preferences.py:475
+msgid "API key saved in the GNOME keyring"
+msgstr ""
+
+#: galet/preferences.py:482
+msgid "Get a key"
+msgstr ""
+
+#: galet/preferences.py:485
+msgid "Forget the API key"
+msgstr ""
+
+#: galet/preferences.py:486
+msgid "Forget"
+msgstr ""
+
+#: galet/preferences.py:498
+msgid "Requires the “anthropic” Python package"
+msgstr ""
+
+#: galet/preferences.py:506
+msgid "“{program}” is installed"
+msgstr ""
+
+#: galet/preferences.py:507
+msgid "“{program}” is not installed"
+msgstr ""
+
+#: galet/preferences.py:508
+msgid "Uses your existing subscription: no API key needed."
+msgstr ""
+
+#: galet/preferences.py:514
+msgid "Privacy: file names and short excerpts of the documents you select are sent to this service only when you use an AI feature."
+msgstr ""
+
+#: galet/preferences.py:548
 msgid "Advanced"
 msgstr ""
 
-#: galet/preferences.py:436
+#: galet/preferences.py:549
 msgid "Files"
 msgstr ""
 
-#: galet/preferences.py:437
+#: galet/preferences.py:550
 msgid "Show all filename extensions"
 msgstr ""
 
-#: galet/preferences.py:438
+#: galet/preferences.py:551
 msgid "Show hidden files"
 msgstr ""
 
-#: galet/preferences.py:439
+#: galet/preferences.py:552
 msgid "Keep folders on top"
 msgstr ""
 
-#: galet/preferences.py:440
+#: galet/preferences.py:553
 msgid "In icon, list and column views"
 msgstr ""
 
@@ -1250,16 +1318,12 @@ msgstr ""
 msgid "Search your whole home folder"
 msgstr ""
 
-#: galet/window.py:143
-msgid "Contents"
-msgstr ""
-
 #: galet/window.py:144
 msgid "Also search inside documents (text, PDF, office files)"
 msgstr ""
 
 #: galet/window.py:147
-msgid "Ask the local AI (Ollama)"
+msgid "Ask the AI"
 msgstr ""
 
 #: galet/window.py:154
@@ -1279,11 +1343,11 @@ msgid "Describe what you are looking for, e.g. “PDF invoices from this week”
 msgstr ""
 
 #: galet/window.py:352
-msgid "Asking the local AI…"
+msgid "Asking the AI…"
 msgstr ""
 
 #: galet/window.py:357
-msgid "The local AI is not available: {error}"
+msgid "The AI is not available: {error}"
 msgstr ""
 
 #: galet/window.py:512

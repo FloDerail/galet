@@ -37,7 +37,7 @@ logiciel libre, il peut maintenant convenir à d'autres aussi.
 | ⚡ **Actions rapides** | Pivoter, convertir en JPEG ou PNG, réduire une image, créer un PDF, compresser en ZIP, extraire une archive. |
 | ↩️ **Confort** | Annuler (`Ctrl+Z`), renommer sur place (`F2`), dupliquer (`Ctrl+D`), sélection en tapant un nom, gestion des conflits de copie, barre de progression. |
 | 🔍 **Recherche** | Dans le dossier, ses sous-dossiers ou tout le dossier personnel, avec filtres par type et par date, **et même dans le contenu** des textes, PDF et documents LibreOffice/Word. Les recherches s'enregistrent en **dossiers intelligents**. |
-| 🤖 **IA locale (facultative)** | Recherche en langage naturel (« les factures PDF de cette semaine ») et suggestions de tags, avec Ollama sur votre ordinateur : vos fichiers ne le quittent jamais. Désactivée par défaut. |
+| 🤖 **IA (facultative)** | Recherche en langage naturel (« les factures PDF de cette semaine ») et suggestions de tags. Au choix : **Ollama** (local, rien ne quitte votre ordinateur), **Claude**, **Mistral**, **Gemini**, **ChatGPT** (clé d'API rangée dans le trousseau GNOME), ou **Claude Code** / **Gemini CLI** (votre abonnement, sans clé). Désactivée par défaut. |
 | 🌍 **Langues** | Français, anglais, espagnol, allemand, italien, portugais. |
 | 🌐 **Serveurs** | `Ctrl+K` : partages Windows (SMB), SFTP, FTP, WebDAV (Nextcloud, kDrive…), serveurs favoris dans la barre latérale. |
 | 📱 **Envoi vers le téléphone** | Avec Zorin Connect ou GSConnect, comme AirDrop. |
@@ -150,15 +150,23 @@ flatpak run org.flatpak.Builder --user --install --force-clean build-dir flatpak
 flatpak run io.github.FloDerail.Galet
 ```
 
-### Activer l'IA locale (facultatif)
+### Activer l'IA (facultatif)
 
-```sh
-curl -fsSL https://ollama.com/install.sh | sh
-ollama pull llama3.2
-```
+Réglages (`Ctrl+,`) → **IA** → « Activer les fonctions d'IA », puis choisissez un **fournisseur** :
 
-Puis Réglages (`Ctrl+,`) → **IA** → « Activer les fonctions d'IA ». Un bouton ✨ apparaît dans la
+| Fournisseur | Ce qu'il faut | Confidentialité |
+|---|---|---|
+| **Ollama** (par défaut) | `curl -fsSL https://ollama.com/install.sh \| sh` puis `ollama pull llama3.2` | 100 % local |
+| **Claude Code** | Claude Code installé et connecté (`claude`) | Envoi à Anthropic |
+| **Gemini CLI** | `npm install -g @google/gemini-cli` | Envoi à Google |
+| **Claude (API)** | Une clé d'API + `pip install --user anthropic` | Envoi à Anthropic |
+| **Mistral / Gemini / ChatGPT (API)** | Une clé d'API (lien « Obtenir une clé » dans les Réglages) | Envoi au service |
+
+Avec un service en ligne, Galet demande une confirmation, et n'envoie des noms de fichiers et de
+courts extraits **que** quand vous utilisez une fonction d'IA. Un bouton ✨ apparaît dans la
 recherche, et « Suggérer des tags (IA) » dans le clic droit.
+
+![Réglages → IA avec Claude Code](screenshots/reglages-ia-claude.png)
 
 ### Mettre à jour
 

@@ -987,3 +987,69 @@ msgstr "No hay ninguna carpeta en «{path}»"
 
 msgid "Go to Location"
 msgstr "Ir a la ubicación"
+
+msgid "AI (optional)"
+msgstr "IA (opcional)"
+
+msgid "API key"
+msgstr "Clave de API"
+
+msgid "API key saved in the GNOME keyring"
+msgstr "Clave de API guardada en el depósito de claves de GNOME"
+
+msgid "Asking the AI…"
+msgstr "Consultando a la IA…"
+
+msgid "Ask the AI"
+msgstr "Preguntar a la IA"
+
+msgid "Claude Code (command line)"
+msgstr "Claude Code (línea de órdenes)"
+
+msgid "Forget"
+msgstr "Olvidar"
+
+msgid "Forget the API key"
+msgstr "Olvidar la clave de API"
+
+msgid "Gemini CLI (command line)"
+msgstr "Gemini CLI (línea de órdenes)"
+
+msgid "Get a key"
+msgstr "Obtener una clave"
+
+msgid "I Agree"
+msgstr "Acepto"
+
+msgid "Ollama (local, private)"
+msgstr "Ollama (local, privado)"
+
+msgid "Privacy: file names and short excerpts of the documents you select are sent to this service only when you use an AI feature."
+msgstr "Privacidad: los nombres de archivo y breves extractos de los documentos seleccionados se envían a este servicio solo cuando usa una función de IA."
+
+msgid "“{program}” is installed"
+msgstr "«{program}» está instalado"
+
+msgid "“{program}” is not installed"
+msgstr "«{program}» no está instalado"
+
+msgid "Provider"
+msgstr "Proveedor"
+
+msgid "Requires the “anthropic” Python package"
+msgstr "Requiere el paquete de Python «anthropic»"
+
+msgid "Search in plain language and get tag suggestions. With Ollama everything stays on your computer; online services receive file names and short document excerpts."
+msgstr "Busque en lenguaje natural y obtenga sugerencias de etiquetas. Con Ollama todo se queda en su equipo; los servicios en línea reciben nombres de archivo y breves extractos de documentos."
+
+msgid "Send data to {service}?"
+msgstr "¿Enviar datos a {service}?"
+
+msgid "The AI is not available: {error}"
+msgstr "La IA no está disponible: {error}"
+
+msgid "Uses your existing subscription: no API key needed."
+msgstr "Usa su suscripción actual: no necesita clave de API."
+
+msgid "When you use AI features, Galet will send file names and short excerpts of the selected documents to this online service. Nothing is sent until you use an AI feature."
+msgstr "Cuando use funciones de IA, Galet enviará nombres de archivo y breves extractos de los documentos seleccionados a este servicio en línea. No se envía nada hasta que use una función de IA."

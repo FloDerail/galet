@@ -81,9 +81,13 @@ staying a native GTK4 / libadwaita application that blends in with GNOME and Zor
 - Folders can **take the colour of their tag**, a **default colour** for all folders, and your own
   **folder colour palette** (Settings → Folders).
 
-**Optional local AI** (off by default, Settings → AI)
-- **Plain-language search** ("PDF invoices from this week") and **tag suggestions**, powered by
-  [Ollama](https://ollama.com) running on your own computer: your files never leave it.
+**Optional AI** (off by default, Settings → AI)
+- **Plain-language search** ("PDF invoices from this week") and **tag suggestions**.
+- Choose your provider: **Ollama** (local, nothing leaves your computer — the default),
+  **Claude**, **Mistral**, **Gemini**, **ChatGPT** (API key stored in the GNOME keyring), or the
+  **Claude Code** / **Gemini CLI** command-line tools (use your existing subscription, no key).
+- Online providers receive file names and short document excerpts, only when you use an AI
+  feature; Galet asks for confirmation before enabling one.
 
 **And also**
 - **Send to Phone** through Zorin Connect / GSConnect (AirDrop-like).
@@ -185,7 +189,7 @@ galet/
   operations.py    progress of long file operations
   dnd.py           drag and drop
   phone.py         Send to Phone (Zorin Connect / GSConnect)
-  ai.py            optional local AI through Ollama
+  ai.py            optional AI: Ollama, Claude, Mistral, Gemini, ChatGPT, Claude Code / Gemini CLI
   sandbox.py       Flatpak helpers (host programs)
   themes.py        System / macOS / Windows 11 / Custom themes
   folders.py       coloured folders

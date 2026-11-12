@@ -380,54 +380,167 @@ class PreferencesDialog(Adw.PreferencesDialog):
         from . import ai
 
         page = Adw.PreferencesPage(title=_("AI"), icon_name="galet-ai-symbolic")
+        self.ai_page = page
         intro = Adw.PreferencesGroup(
-            title=_("Local AI (optional)"),
-            description=_("Search in plain language and get tag suggestions. Galet only talks to Ollama "
-                          "running on your own computer: your files never leave it."))
+            title=_("AI (optional)"),
+            description=_("Search in plain language and get tag suggestions. With Ollama everything stays on "
+                          "your computer; online services receive file names and short document excerpts."))
         intro.add(_switch(self.settings, "ai_enabled", _("Enable AI features")))
-        url = Adw.EntryRow(title=_("Ollama address"), text=self.settings.get("ai_url", ai.DEFAULT_URL),
-                           show_apply_button=True)
-        url.connect("apply", lambda r: self.settings.set("ai_url", r.get_text().strip() or ai.DEFAULT_URL))
-        intro.add(url)
-        self.model_row = Adw.ComboRow(title=_("Model"), model=Gtk.StringList.new([self.settings.get("ai_model")]))
-        refresh = Gtk.Button(icon_name="view-refresh-symbolic", css_classes=["flat"], valign=Gtk.Align.CENTER,
-                             tooltip_text=_("Refresh the list of models"))
-        refresh.connect("clicked", lambda _b: self._load_models())
-        self.model_row.add_suffix(refresh)
-        self.model_row.connect("notify::selected", self._on_model_selected)
-        intro.add(self.model_row)
+        names = list(ai.PROVIDER_ORDER)
+        self.provider_row = Adw.ComboRow(title=_("Provider"),
+                                         model=Gtk.StringList.new([_(ai.PROVIDERS[n]["label"]) for n in names]))
+        self.provider_row.set_selected(names.index(ai.provider(self.settings)))
+        self.provider_row.connect("notify::selected", lambda r, _p: self._on_provider(names[r.get_selected()]))
+        intro.add(self.provider_row)
         page.add(intro)
-
-        help_group = Adw.PreferencesGroup(title=_("Install Ollama"),
-                                          description=_("In a terminal: install Ollama, then download a model."))
-        for command in ("curl -fsSL https://ollama.com/install.sh | sh", "ollama pull llama3.2"):
-            row = Adw.ActionRow(title=command, title_selectable=True)
-            row.add_css_class("monospace")
-            help_group.add(row)
-        page.add(help_group)
-        self._models = [self.settings.get("ai_model")]
-        GLib.idle_add(self._load_models)
+        self.ai_group = None
+        self._fill_ai_provider()
         return page
+
+    def _on_provider(self, name):
+        from . import ai
+
+        if name == ai.provider(self.settings):
+            return
+        accepted = self.settings.get("ai_cloud_ok", []) or []
+        if ai.is_cloud(name) and name not in accepted:
+            dialog = Adw.AlertDialog(
+                heading=_("Send data to {service}?").format(service=_(ai.PROVIDERS[name]["label"])),
+                body=_("When you use AI features, Galet will send file names and short excerpts of the selected "
+                       "documents to this online service. Nothing is sent until you use an AI feature."))
+            dialog.add_response("cancel", _("Cancel"))
+            dialog.add_response("ok", _("I Agree"))
+            dialog.set_response_appearance("ok", Adw.ResponseAppearance.SUGGESTED)
+            dialog.set_close_response("cancel")
+
+            def on_response(_d, response):
+                if response == "ok":
+                    self.settings.set("ai_cloud_ok", accepted + [name])
+                    self.settings.set("ai_provider", name)
+                    self._fill_ai_provider()
+                else:
+                    names = list(ai.PROVIDER_ORDER)
+                    self.provider_row.set_selected(names.index(ai.provider(self.settings)))
+
+            dialog.connect("response", on_response)
+            dialog.present(self)
+            return
+        self.settings.set("ai_provider", name)
+        self._fill_ai_provider()
+
+    def _fill_ai_provider(self):
+        from . import ai
+
+        if self.ai_group is not None:
+            for group in self.ai_group:
+                self.ai_page.remove(group)
+        name = ai.provider(self.settings)
+        info = ai.PROVIDERS[name]
+        groups = []
+        group = Adw.PreferencesGroup(title=_(info["label"]))
+        groups.append(group)
+
+        if name == "ollama":
+            url = Adw.EntryRow(title=_("Ollama address"), text=self.settings.get("ai_url", ai.DEFAULT_OLLAMA_URL),
+                               show_apply_button=True)
+            url.connect("apply", lambda r: self.settings.set("ai_url", r.get_text().strip() or ai.DEFAULT_OLLAMA_URL))
+            group.add(url)
+            self._models = [ai.model(self.settings, "ollama")]
+            self.model_row = Adw.ComboRow(title=_("Model"), model=Gtk.StringList.new(self._models))
+            refresh = Gtk.Button(icon_name="view-refresh-symbolic", css_classes=["flat"], valign=Gtk.Align.CENTER,
+                                 tooltip_text=_("Refresh the list of models"))
+            refresh.connect("clicked", lambda _b: self._load_models())
+            self.model_row.add_suffix(refresh)
+            self.model_row.connect("notify::selected", self._on_model_selected)
+            group.add(self.model_row)
+            install = Adw.PreferencesGroup(title=_("Install Ollama"),
+                                           description=_("In a terminal: install Ollama, then download a model."))
+            for command in ("curl -fsSL https://ollama.com/install.sh | sh", "ollama pull llama3.2"):
+                row = Adw.ActionRow(title=command, title_selectable=True)
+                row.add_css_class("monospace")
+                install.add(row)
+            groups.append(install)
+            GLib.idle_add(self._load_models)
+        else:
+            if info["key"]:
+                key = Adw.PasswordEntryRow(title=_("API key"), show_apply_button=True)
+                if ai.get_key(name):
+                    key.set_text("••••••••••••")
+
+                def save_key(row, n=name):
+                    text = row.get_text().strip()
+                    if text and set(text) != {"•"}:
+                        try:
+                            ai.set_key(n, text)
+                            self.add_toast(Adw.Toast(title=_("API key saved in the GNOME keyring")))
+                        except Exception as err:  # noqa: BLE001
+                            self.add_toast(Adw.Toast(title=GLib.markup_escape_text(str(err))))
+                        row.set_text("••••••••••••")
+
+                key.connect("apply", save_key)
+                if name in ai.KEY_URLS:
+                    link = Gtk.LinkButton(uri=ai.KEY_URLS[name], label=_("Get a key"), valign=Gtk.Align.CENTER)
+                    key.add_suffix(link)
+                group.add(key)
+                clear = Adw.ActionRow(title=_("Forget the API key"))
+                forget = Gtk.Button(label=_("Forget"), css_classes=["flat"], valign=Gtk.Align.CENTER)
+                forget.connect("clicked", lambda _b, n=name: (ai.set_key(n, ""), self._fill_ai_provider()))
+                clear.add_suffix(forget)
+                group.add(clear)
+            if info["model"]:
+                model_row = Adw.EntryRow(title=_("Model"), text=ai.model(self.settings, name), show_apply_button=True)
+                model_row.connect("apply", lambda r, n=name: ai.set_model(self.settings, n, r.get_text()))
+                group.add(model_row)
+            if name == "claude":
+                try:
+                    import anthropic  # noqa: F401
+                except ImportError:
+                    row = Adw.ActionRow(title=_("Requires the “anthropic” Python package"),
+                                        subtitle="pip install --user anthropic", subtitle_selectable=True)
+                    row.add_prefix(Gtk.Image(icon_name="dialog-warning-symbolic"))
+                    group.add(row)
+            if name in ("claude-cli", "gemini-cli"):
+                program = "claude" if name == "claude-cli" else "gemini"
+                found = ai.cli_available(name)
+                status = Adw.ActionRow(
+                    title=_("“{program}” is installed").format(program=program) if found
+                    else _("“{program}” is not installed").format(program=program),
+                    subtitle=_("Uses your existing subscription: no API key needed.") if found else
+                    ("npm install -g @anthropic-ai/claude-code" if program == "claude"
+                     else "npm install -g @google/gemini-cli"),
+                    subtitle_selectable=True)
+                status.add_prefix(Gtk.Image(icon_name="emblem-ok-symbolic" if found else "dialog-warning-symbolic"))
+                group.add(status)
+            privacy = Adw.PreferencesGroup(description=_(
+                "Privacy: file names and short excerpts of the documents you select are sent to this service "
+                "only when you use an AI feature."))
+            groups.append(privacy)
+
+        for g in groups:
+            self.ai_page.add(g)
+        self.ai_group = groups
 
     def _load_models(self):
         from . import ai
 
         def done(names, error):
-            if error or not names:
+            if error or not names or getattr(self, "model_row", None) is None:
                 return
             self._models = names
             self.model_row.set_model(Gtk.StringList.new(names))
-            current = self.settings.get("ai_model")
+            current = ai.model(self.settings, "ollama")
             if current in names:
                 self.model_row.set_selected(names.index(current))
 
-        ai.run(lambda: ai.models(self.settings), done)
+        ai.run(lambda: ai.ollama_models(self.settings), done)
         return GLib.SOURCE_REMOVE
 
     def _on_model_selected(self, row, _pspec):
+        from . import ai
+
         index = row.get_selected()
         if 0 <= index < len(self._models):
-            self.settings.set("ai_model", self._models[index])
+            ai.set_model(self.settings, "ollama", self._models[index])
 
     # --------------------------------------------------------------- advanced
 
