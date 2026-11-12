@@ -85,6 +85,9 @@
     <keyword>explorer</keyword>
   </keywords>
   <releases>
+    <release version="0.5.1" date="2026-11-13">
+      <description><p>Clearer AI search mode, install from the Software store.</p></description>
+    </release>
     <release version="0.5.0" date="2026-11-13">
       <description><p>Choose the AI provider: Ollama, Claude, Mistral, Gemini, ChatGPT or command-line tools.</p></description>
     </release>

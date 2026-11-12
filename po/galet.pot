@@ -1322,58 +1322,74 @@ msgstr ""
 msgid "Also search inside documents (text, PDF, office files)"
 msgstr ""
 
-#: galet/window.py:147
-msgid "Ask the AI"
+#: galet/window.py:149
+msgid "AI mode: describe what you are looking for, then press Enter"
 msgstr ""
 
-#: galet/window.py:154
+#: galet/window.py:157
 msgid "Save as Smart Folder"
 msgstr ""
 
-#: galet/window.py:341
+#: galet/window.py:344
 msgid "Sending {n} file to {device}…"
 msgstr ""
 
-#: galet/window.py:341
+#: galet/window.py:344
 msgid "Sending {n} files to {device}…"
 msgstr ""
 
-#: galet/window.py:349
+#: galet/window.py:351
+msgid "Describe what you are looking for, then press Enter"
+msgstr ""
+
+#: galet/window.py:373
 msgid "Describe what you are looking for, e.g. “PDF invoices from this week”"
 msgstr ""
 
-#: galet/window.py:352
-msgid "Asking the AI…"
-msgstr ""
-
-#: galet/window.py:357
+#: galet/window.py:381
 msgid "The AI is not available: {error}"
 msgstr ""
 
-#: galet/window.py:512
+#: galet/window.py:386
+msgid "“{text}”"
+msgstr ""
+
+#: galet/window.py:388
+msgid "inside documents"
+msgstr ""
+
+#: galet/window.py:399
+msgid "AI understood: {summary}"
+msgstr ""
+
+#: galet/window.py:409
+msgid "Asking the AI…"
+msgstr ""
+
+#: galet/window.py:545
 msgid "Could not change the folder colour: {error}"
 msgstr ""
 
-#: galet/window.py:570
+#: galet/window.py:603
 msgid "Tag “{tag}” added"
 msgstr ""
 
-#: galet/window.py:678
+#: galet/window.py:715
 msgid "Save Smart Folder"
 msgstr ""
 
-#: galet/window.py:678
+#: galet/window.py:715
 msgid "Save"
 msgstr ""
 
-#: galet/window.py:680
+#: galet/window.py:717
 msgid "Smart folder “{name}” saved"
 msgstr ""
 
-#: galet/window.py:724
+#: galet/window.py:761
 msgid "No folder at “{path}”"
 msgstr ""
 
-#: galet/window.py:726
+#: galet/window.py:763
 msgid "Go to Location"
 msgstr ""

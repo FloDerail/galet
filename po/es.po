@@ -1053,3 +1053,18 @@ msgstr "Usa su suscripción actual: no necesita clave de API."
 
 msgid "When you use AI features, Galet will send file names and short excerpts of the selected documents to this online service. Nothing is sent until you use an AI feature."
 msgstr "Cuando use funciones de IA, Galet enviará nombres de archivo y breves extractos de los documentos seleccionados a este servicio en línea. No se envía nada hasta que use una función de IA."
+
+msgid "AI mode: describe what you are looking for, then press Enter"
+msgstr "Modo IA: describa lo que busca y pulse Intro"
+
+msgid "Describe what you are looking for, then press Enter"
+msgstr "Describa lo que busca y pulse Intro"
+
+msgid "“{text}”"
+msgstr "«{text}»"
+
+msgid "inside documents"
+msgstr "dentro de los documentos"
+
+msgid "AI understood: {summary}"
+msgstr "La IA ha entendido: {summary}"

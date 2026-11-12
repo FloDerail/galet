@@ -144,9 +144,12 @@ class GaletWindow(Adw.ApplicationWindow):
                                                tooltip_text=_("Also search inside documents (text, PDF, office files)"))
         self.content_button.connect("toggled", lambda *_a: self._apply_search())
         search_row.append(self.content_button)
-        self.ai_button = Gtk.Button(icon_name="galet-ai-symbolic", tooltip_text=_("Ask the AI"),
-                                    visible=bool(self.settings.get("ai_enabled")), css_classes=["flat"])
-        self.ai_button.connect("clicked", lambda *_a: self._ai_search())
+        # AI mode: type a sentence, press Enter (no live filtering while typing).
+        self.ai_button = Gtk.ToggleButton(icon_name="galet-ai-symbolic", visible=bool(self.settings.get("ai_enabled")),
+                                          tooltip_text=_("AI mode: describe what you are looking for, then press Enter"))
+        self.ai_button.connect("toggled", self._on_ai_mode)
+        self.search_entry.connect("activate", lambda *_a: self.ai_button.get_active() and self._ai_search())
+        self._ai_applying = False
         search_row.append(self.ai_button)
         search_row.append(self.kind_dropdown)
         search_row.append(self.date_dropdown)
@@ -341,22 +344,51 @@ class GaletWindow(Adw.ApplicationWindow):
             self.toast(ngettext("Sending {n} file to {device}…", "Sending {n} files to {device}…",
                                 len(files)).format(n=len(files), device=name))
 
+    def _on_ai_mode(self, button):
+        if self._resetting_search:
+            return
+        if button.get_active():
+            self.search_entry.set_placeholder_text(_("Describe what you are looking for, then press Enter"))
+            self.search_entry.grab_focus()
+            if self.search_entry.get_text().strip():
+                self._ai_search()
+        else:
+            self.search_entry.set_placeholder_text(_("Search"))
+            self._apply_search()
+
+    def _set_ai_busy(self, busy):
+        if busy:
+            spinner = Gtk.Spinner(spinning=True)
+            self.ai_button.set_child(spinner)
+        else:
+            self.ai_button.set_icon_name("galet-ai-symbolic")
+        self.search_entry.set_sensitive(not busy)
+
     def _ai_search(self):
         from . import ai
+        from .logs import log
 
         request = self.search_entry.get_text().strip()
         if not request:
             self.toast(_("Describe what you are looking for, e.g. “PDF invoices from this week”"))
             return
-        self.ai_button.set_sensitive(False)
-        self.toast(_("Asking the AI…"))
+        self._set_ai_busy(True)
 
         def done(result, error):
-            self.ai_button.set_sensitive(True)
+            self._set_ai_busy(False)
             if error:
+                log.warning("AI search failed (%s): %s", ai.provider(self.settings), error)
                 self.toast(_("The AI is not available: {error}").format(error=error))
                 return
+            kinds, dates = dict(search.KINDS), dict(search.DATES)
+            parts = [_(kinds[result["kind"]]), _(dates[result["date"]])]
+            if result["text"]:
+                parts.append(_("“{text}”").format(text=result["text"]))
+            if result["content"]:
+                parts.append(_("inside documents"))
             self._resetting_search = True
+            self.ai_button.set_active(False)  # back to normal search, so the filters can be tweaked
+            self.search_entry.set_placeholder_text(_("Search"))
             self.search_entry.set_text(result["text"])
             self.kind_dropdown.set_selected([k for k, _l in search.KINDS].index(result["kind"]))
             self.date_dropdown.set_selected([k for k, _l in search.DATES].index(result["date"]))
@@ -364,6 +396,7 @@ class GaletWindow(Adw.ApplicationWindow):
             self.scope_buttons["home"].set_active(True)
             self._resetting_search = False
             self._apply_search()
+            self.toast(_("AI understood: {summary}").format(summary=" · ".join(parts)))
 
         ai.run(lambda: ai.parse_search(self.settings, request), done)
 
@@ -634,6 +667,8 @@ class GaletWindow(Adw.ApplicationWindow):
     def _apply_search(self):
         if getattr(self, "tab_view", None) is None or self._resetting_search:
             return  # still building the window
+        if self.ai_button.get_active():
+            return  # AI mode: wait for Enter
         pane = self.current_pane
         if pane is None:
             return
@@ -667,6 +702,8 @@ class GaletWindow(Adw.ApplicationWindow):
         self.date_dropdown.set_selected(0)
         self.scope_buttons["folder"].set_active(True)
         self.content_button.set_active(False)
+        self.ai_button.set_active(False)
+        self.search_entry.set_placeholder_text(_("Search"))
         self._resetting_search = False
         self.save_search_button.set_sensitive(False)
 
