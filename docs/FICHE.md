@@ -79,6 +79,19 @@ réseau), Galet garde les tags dans son propre index.
 Ce tutoriel couvre **Zorin OS 17/18, Ubuntu 24.04 et plus récents, Linux Mint 22,
 Pop!_OS 24** et les autres distributions basées sur Debian ou Ubuntu.
 
+### Le plus simple : depuis la Logithèque
+
+Ouvrez [galet.flatpakref](https://floderail.github.io/galet/galet.flatpakref) (ou le bouton
+« Installer dans la Logithèque » du [site](https://floderail.github.io/galet/)) : la Logithèque
+s'ouvre sur la fiche de Galet, cliquez sur « Installer ». Les mises à jour arrivent ensuite
+automatiquement. En ligne de commande :
+
+```sh
+flatpak install --user --from https://floderail.github.io/galet/galet.flatpakref
+```
+
+Les étapes ci-dessous installent Galet depuis le code source.
+
 ### Étape 1 — Installer les dépendances
 
 Ouvrez un terminal (`Ctrl+Alt+T`) et tapez :

@@ -177,7 +177,8 @@
         <p class="lead">Tags de couleur, vue en colonnes, galerie, actions rapides, recherche dans vos documents,
           thèmes macOS et Windows… Une application GNOME native, libre et gratuite.</p>
         <div class="actions">
-          <a class="btn btn-primary" href="#telecharger">⬇ Télécharger Galet</a>
+          <a class="btn btn-primary" href="galet.flatpakref">🛍️ Installer dans la Logithèque</a>
+          <a class="btn btn-ghost" href="#telecharger">Autres façons d'installer</a>
           <a class="btn btn-ghost" href="https://github.com/FloDerail/galet">Code source sur GitHub</a>
         </div>
         <div class="badges">
@@ -262,6 +263,14 @@
       <div class="wrap">
         <h2>Télécharger Galet</h2>
         <p class="sub">Gratuit, sans compte, sans publicité. Il faut GTK 4.12+ et libadwaita 1.5+ (Zorin OS 17+, Ubuntu 24.04+, Fedora 40+).</p>
+        <div class="card step" style="margin-bottom:18px;text-align:center">
+          <h3 style="justify-content:center">🛍️ Le plus simple : la Logithèque</h3>
+          <p>Cliquez sur le bouton : votre Logithèque (GNOME Logiciels, Zorin, Ubuntu…) s'ouvre sur la fiche de Galet.
+            Cliquez sur « Installer ». <strong>Les mises à jour arrivent ensuite automatiquement.</strong></p>
+          <p style="margin-top:16px"><a class="btn btn-primary" href="galet.flatpakref">🛍️ Installer dans la Logithèque</a></p>
+          <pre style="text-align:left"><button class="copy">Copier</button>flatpak install --user --from https://floderail.github.io/galet/galet.flatpakref</pre>
+          <p class="note">Si le fichier se télécharge au lieu de s'ouvrir, double-cliquez sur <code>galet.flatpakref</code>. Les versions sont signées (clé <code>FB3C 833A 7E51 613E</code>).</p>
+        </div>
         <div class="steps">
           <div class="card step">
             <h3><span class="num">1</span> Installer en une commande</h3>
@@ -297,7 +306,7 @@ cd galet && ./install.sh</pre>
         <details><summary>Où sont stockés mes tags ?</summary><p>Dans les fichiers eux-mêmes (attribut étendu <code>user.xdg.tags</code>, norme freedesktop, compatible KDE Dolphin). Ils suivent le fichier quand vous le déplacez ou le renommez.</p></details>
         <details><summary>L'IA envoie-t-elle mes fichiers sur Internet ?</summary><p>L'IA est désactivée par défaut. Avec Ollama, tout reste sur votre ordinateur. Si vous choisissez un service en ligne (Claude, Mistral, Gemini, ChatGPT), Galet vous prévient et n'envoie des noms de fichiers et de courts extraits que lorsque vous utilisez une fonction d'IA.</p></details>
         <details><summary>Galet a-t-il été fait avec une IA ?</summary><p>Oui, et nous préférons le dire clairement. Galet est conçu et dirigé par Florian Dérail et développé avec l'aide de Claude, l'assistant d'IA d'Anthropic : une grande partie du code, des traductions, du logo et de la documentation a été générée avec l'IA, puis testée et utilisée au quotidien par l'auteur. Les relectures humaines sont les bienvenues sur GitHub.</p></details>
-        <details><summary>Galet sera-t-il sur Flathub ?</summary><p>Plus tard. Flathub demande un historique de développement plus long : en attendant, le fichier Flatpak ci-dessus s'installe aussi simplement.</p></details>
+        <details><summary>Galet sera-t-il sur Flathub ?</summary><p>Plus tard. Flathub demande un historique de développement plus long. En attendant, le bouton « Installer dans la Logithèque » utilise le dépôt Flatpak officiel de Galet, signé, avec mises à jour automatiques.</p></details>
         <details><summary>Galet est-il gratuit ?</summary><p>Oui, totalement. C'est un logiciel libre sous licence GPL-3.0 : vous pouvez l'utiliser, l'étudier, le modifier et le partager.</p></details>
         <details><summary>Comment signaler un bug ou proposer une idée ?</summary><p>Sur la page <a href="https://github.com/FloDerail/galet/issues">Issues</a> du projet. Joignez le fichier <code>~/.cache/galet/galet.log</code> si possible.</p></details>
       </div>

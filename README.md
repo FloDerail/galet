@@ -147,6 +147,15 @@ Install for your user (menu entry + `galet` command):
 ./install.sh --remove    # uninstall
 ```
 
+**Easiest — from your Software store** (GNOME Software / Zorin / Ubuntu): open
+[galet.flatpakref](https://floderail.github.io/galet/galet.flatpakref), or run
+
+```sh
+flatpak install --user --from https://floderail.github.io/galet/galet.flatpakref
+```
+
+This adds Galet's signed Flatpak repository (key `FB3C833A7E51613E`): updates arrive automatically.
+
 Or install the **Flatpak file** from the [latest release](https://github.com/FloDerail/galet/releases/latest)
 (double-click it, or run `flatpak install --user galet.flatpak`; the GNOME runtime is fetched from Flathub).
 
