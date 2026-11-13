@@ -232,16 +232,7 @@ Contributions are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md).
 - [ ] Publish on Flathub (later: Flathub asks for a longer development history and human-made submissions)
 - [ ] Translation platform (Weblate) for more languages
 
-## How Galet is made (AI disclosure)
 
-Galet is designed and directed by Florian Dérail and developed **with the help of Claude**
-(Anthropic's AI assistant). A large part of the code, the Spanish, German, Italian and Portuguese
-translations, the logo and the documentation were generated with AI, then tested and used day to day
-by the author. Contributions and reviews from humans are very welcome.
-
-*Galet est conçu et dirigé par Florian Dérail et développé **avec l'aide de Claude** (l'assistant
-d'IA d'Anthropic). Une grande partie du code, des traductions, du logo et de la documentation a été
-générée avec l'IA, puis testée et utilisée au quotidien par l'auteur.*
 
 ## Author
 
