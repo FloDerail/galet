@@ -2,6 +2,16 @@
 
 Galet — logiciel libre et open source de [Florian Dérail](https://florianderail.fr).
 
+## 0.6.1 — Galet s'ouvre aussi depuis VS Code et les navigateurs
+
+- 📂 « Afficher dans le dossier » / « Reveal in File Explorer » (VS Code, navigateurs, gestionnaires de
+  téléchargement…) ouvre maintenant **Galet** au lieu de l'ancien explorateur, avec le fichier
+  sélectionné. Galet fournit le service système `org.freedesktop.FileManager1` (installé par
+  `./install.sh --default`).
+- 📄 `galet fichier.txt` ouvre le dossier et sélectionne le fichier.
+- 🇬🇧 Galet now provides the org.freedesktop.FileManager1 D-Bus service, so "Show in folder" from
+  VS Code, browsers and other apps opens Galet with the file selected.
+
 ## 0.6.0 — Grande barre de recherche et IA qui comprend vos fichiers
 
 - 🔍 **Grande barre de recherche façon Spotlight** (`Ctrl+F` ou 🔍) avec un choix **Simple / IA**,

@@ -172,29 +172,45 @@ class GaletApplication(Adw.Application):
         for action, accels in ACCELS.items():
             self.set_accels_for_action(action, accels)
 
+        # Answer "show in folder" requests from other apps (VS Code, browsers…).
+        from .dbus_service import FileManagerService
+
+        self.file_manager_service = FileManagerService(self)
+        self.file_manager_service.start()
+        # When started by D-Bus (--gapplication-service), stay alive long enough to get the call.
+        self.set_inactivity_timeout(15000)
+
     def do_activate(self):
         self._new_window()
 
     def do_open(self, files, _n_files, _hint):
         window = self.get_active_window()
         for gfile in files:
+            reveal = None
             if gfile.query_file_type(Gio.FileQueryInfoFlags.NONE, None) != Gio.FileType.DIRECTORY:
-                gfile = gfile.get_parent() or gfile
+                reveal, gfile = gfile, gfile.get_parent() or gfile  # open the folder, select the file
             if window is not None and self.settings.get("open_in_tabs"):
                 window.new_tab(Location(gfile))
                 window.present()
             else:
                 window = self._new_window(Location(gfile))
+            if reveal is not None:
+                window.current_pane.reveal(reveal)
 
     def do_shutdown(self):
+        if getattr(self, "file_manager_service", None) is not None:
+            self.file_manager_service.stop()
         if self.tagstore is not None:
             self.tagstore.flush()
         Adw.Application.do_shutdown(self)
 
     def _new_window(self, location=None):
+        return self.new_window(location)
+
+    def new_window(self, location=None, empty=False):
         from .window import GaletWindow
 
-        window = GaletWindow(self, location)
+        window = GaletWindow(self, location, empty=empty)
         window.present()
         return window
 

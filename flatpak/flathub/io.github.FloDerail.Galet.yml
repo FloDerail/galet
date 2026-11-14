@@ -24,6 +24,8 @@ finish-args:
   - --talk-name=org.gnome.NautilusPreviewer
   - --talk-name=org.gnome.Shell.Extensions.ZorinConnect
   - --talk-name=org.gnome.Shell.Extensions.GSConnect
+  # Answer "Show in folder" from other apps (VS Code, browsers…)
+  - --own-name=org.freedesktop.FileManager1
   # Open a terminal, run thumbnailers, pdftotext and 7z from the host system
   - --talk-name=org.freedesktop.Flatpak
 modules:

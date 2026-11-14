@@ -11,10 +11,11 @@ DEST="$PREFIX/galet"
 BIN="$HOME/.local/bin/galet"
 DESKTOP="$PREFIX/applications/$APP_ID.desktop"
 ICONS="$PREFIX/icons/hicolor"
+DBUS_SERVICE="$PREFIX/dbus-1/services/org.freedesktop.FileManager1.service"
 
 if [ "$1" = "--remove" ]; then
     rm -f "$BIN" "$DESKTOP" "$PREFIX/applications/galet.desktop"
-    rm -f "$ICONS/scalable/apps/$APP_ID.svg" "$ICONS/symbolic/apps/$APP_ID-symbolic.svg"
+    rm -f "$ICONS/scalable/apps/$APP_ID.svg" "$ICONS/symbolic/apps/$APP_ID-symbolic.svg" "$DBUS_SERVICE"
     rm -rf "$DEST"
     echo "Galet removed (your tags and settings in ~/.config/galet are kept)."
     exit 0
@@ -32,6 +33,12 @@ update-desktop-database "$PREFIX/applications" 2>/dev/null || true
 
 if [ "$1" = "--default" ]; then
     xdg-mime default "$APP_ID.desktop" inode/directory
-    echo "Galet is now the default file manager."
+    # Apps like VS Code or web browsers ("Show in folder") use the FileManager1 D-Bus
+    # service instead of the default application: let Galet answer it too.
+    mkdir -p "$(dirname "$DBUS_SERVICE")"
+    printf '[D-BUS Service]\nName=org.freedesktop.FileManager1\nExec=%s --gapplication-service\n' "$BIN" > "$DBUS_SERVICE"
+    # GNOME Files may be running in the background and still own the service.
+    if command -v nautilus >/dev/null 2>&1; then nautilus -q 2>/dev/null || true; fi
+    echo "Galet is now the default file manager (also for “Show in folder” in other apps)."
 fi
 echo "Galet installed. Launch it from the applications menu or run: galet"

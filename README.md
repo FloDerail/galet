@@ -172,7 +172,10 @@ flatpak run org.flatpak.Builder --user --install --force-clean build-dir flatpak
 flatpak run io.github.FloDerail.Galet
 ```
 
-To go back to GNOME Files as the default: `xdg-mime default org.gnome.Nautilus.desktop inode/directory`.
+`--default` also makes Galet answer "Show in folder" / "Reveal in File Explorer" from other apps
+(VS Code, web browsers…), through the `org.freedesktop.FileManager1` D-Bus service.
+
+To go back to GNOME Files as the default (`./install.sh --remove` also does the second line): `xdg-mime default org.gnome.Nautilus.desktop inode/directory`.
 
 ## Keyboard shortcuts
 

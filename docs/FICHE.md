@@ -149,12 +149,15 @@ L'installation se fait **uniquement pour votre utilisateur**, sans `sudo`.
 ./install.sh --default
 ```
 
-Les dossiers ouverts depuis le bureau, une clé USB ou le navigateur s'ouvriront dans Galet.
+Les dossiers ouverts depuis le bureau, une clé USB ou le navigateur s'ouvriront dans Galet, ainsi que
+« Afficher dans le dossier » / « Reveal in File Explorer » dans VS Code, les navigateurs et les
+gestionnaires de téléchargement (le fichier est sélectionné).
 
 **Pour revenir à l'explorateur d'origine** :
 
 ```sh
 xdg-mime default org.gnome.Nautilus.desktop inode/directory
+rm ~/.local/share/dbus-1/services/org.freedesktop.FileManager1.service
 ```
 
 ### Variante : installer le fichier Flatpak
