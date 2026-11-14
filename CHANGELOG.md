@@ -43,8 +43,6 @@ Galet — logiciel libre et open source de [Florian Dérail](https://floriandera
 - 📦 Fichier `galet.flatpak` installable par double-clic (dans les versions GitHub).
 - 🛍️ Dépôt Flatpak officiel et signé : bouton « Installer dans la Logithèque » sur le site,
   mises à jour automatiques. / Signed Flatpak repository on GitHub Pages, one-click install.
-- 🤖 Transparence : Galet est développé avec l'aide de Claude (Anthropic) ; voir « Comment Galet est
-  fait » dans le README. / AI disclosure added to the README, website and docs.
 - ✨ **Mode IA** plus clair : activez ✨, écrivez votre phrase, appuyez sur Entrée. Une animation montre
   que l'IA réfléchit, puis une notification indique ce qu'elle a compris. Plus de filtrage pendant la
   frappe. / Clearer AI mode: type a sentence, press Enter; spinner and "AI understood: …" summary.

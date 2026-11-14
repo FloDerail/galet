@@ -232,7 +232,7 @@ Contributions are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md).
 - [x] Spanish, German, Italian and Portuguese translations
 - [x] Flatpak packaging
 - [x] Optional local AI (natural-language search, tag suggestions)
-- [ ] Publish on Flathub (later: Flathub asks for a longer development history and human-made submissions)
+- [ ] Publish on Flathub
 - [ ] Translation platform (Weblate) for more languages
 
 

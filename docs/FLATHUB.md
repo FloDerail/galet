@@ -9,7 +9,6 @@ terrain ; la demande elle-même, c'est toi qui l'écris.
 - Utiliser Galet au quotidien, corriger les bugs, publier des versions régulières
   (`tools/publish-flatpak.sh` met à jour le dépôt Flatpak du site).
 - Recueillir des retours : issues GitHub, étoiles, utilisateurs du dépôt Flatpak.
-- Garder la mention de l'IA à jour (section « How Galet is made » du README).
 
 ## 2. Préparer la demande
 - Relire les règles : https://docs.flathub.org/docs/for-app-authors/requirements

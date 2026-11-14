@@ -228,13 +228,6 @@ effacer.
 | Galet n'apparaît pas dans le menu | Déconnectez-vous puis reconnectez-vous, ou lancez `update-desktop-database ~/.local/share/applications`. |
 | Un bug ? | Joignez le fichier `~/.cache/galet/galet.log` à votre signalement sur la page *Issues* du projet GitHub. |
 
-## Comment Galet est fait
-
-Galet est conçu et dirigé par **Florian Dérail** et développé **avec l'aide de Claude**,
-l'assistant d'IA d'Anthropic. Une grande partie du code, des traductions (espagnol, allemand,
-italien, portugais), du logo et de cette documentation a été générée avec l'IA, puis testée et
-utilisée au quotidien par l'auteur. Les relectures et contributions humaines sont les bienvenues.
-
 ## L'auteur
 
 Galet est conçu et développé par **Florian Dérail**.
