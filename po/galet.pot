@@ -14,11 +14,11 @@ msgstr ""
 msgid "Gemini CLI (command line)"
 msgstr ""
 
-#: galet/application.py:212
+#: galet/application.py:228
 msgid "A Finder-inspired file manager with tabs, columns and colour tags.\nFree and open source software."
 msgstr ""
 
-#: galet/application.py:220
+#: galet/application.py:236
 msgid "Source Code"
 msgstr ""
 
@@ -282,39 +282,39 @@ msgstr ""
 msgid "Moving Back"
 msgstr ""
 
-#: galet/folders.py:17
+#: galet/folders.py:19
 msgid "Red"
 msgstr ""
 
-#: galet/folders.py:17
+#: galet/folders.py:19
 msgid "Orange"
 msgstr ""
 
-#: galet/folders.py:17
+#: galet/folders.py:19
 msgid "Yellow"
 msgstr ""
 
-#: galet/folders.py:18
+#: galet/folders.py:20
 msgid "Green"
 msgstr ""
 
-#: galet/folders.py:18
+#: galet/folders.py:20
 msgid "Teal"
 msgstr ""
 
-#: galet/folders.py:18
+#: galet/folders.py:20
 msgid "Blue"
 msgstr ""
 
-#: galet/folders.py:19
+#: galet/folders.py:21
 msgid "Purple"
 msgstr ""
 
-#: galet/folders.py:19
+#: galet/folders.py:21
 msgid "Pink"
 msgstr ""
 
-#: galet/folders.py:19
+#: galet/folders.py:21
 msgid "Gray"
 msgstr ""
 
@@ -462,135 +462,135 @@ msgstr ""
 msgid "File Operations"
 msgstr ""
 
-#: galet/pane.py:70
+#: galet/pane.py:72
 msgid "Items in the trash"
 msgstr ""
 
-#: galet/pane.py:70
+#: galet/pane.py:72
 msgid "Empty Trash…"
 msgstr ""
 
-#: galet/pane.py:210
+#: galet/pane.py:212
 msgid "No Results"
 msgstr ""
 
-#: galet/pane.py:211
+#: galet/pane.py:213
 msgid "Galet searches file and folder names (and the text of documents with the Contents option). It cannot see what a photo shows: try another word, a folder name, or remove some filters."
 msgstr ""
 
-#: galet/pane.py:217
+#: galet/pane.py:219
 msgid "No Tagged Files"
 msgstr ""
 
-#: galet/pane.py:219
+#: galet/pane.py:221
 msgid "Right-click a file and choose a colour to tag it."
 msgstr ""
 
-#: galet/pane.py:229
+#: galet/pane.py:231
 msgid "Unable to Open This Folder"
 msgstr ""
 
-#: galet/pane.py:246
+#: galet/pane.py:248
 msgid "{size} available"
 msgstr ""
 
-#: galet/pane.py:444
+#: galet/pane.py:446
 msgid "{n} item selected"
 msgstr ""
 
-#: galet/pane.py:444
+#: galet/pane.py:446
 msgid "{n} items selected"
 msgstr ""
 
-#: galet/pane.py:476
+#: galet/pane.py:490
 msgid "Open"
 msgstr ""
 
-#: galet/pane.py:478
+#: galet/pane.py:492
 msgid "Open in New Tab"
 msgstr ""
 
-#: galet/pane.py:480
+#: galet/pane.py:494
 msgid "Open With…"
 msgstr ""
 
-#: galet/pane.py:485
+#: galet/pane.py:499
 msgid "Put Back"
 msgstr ""
 
-#: galet/pane.py:486
+#: galet/pane.py:500
 msgid "Delete Permanently…"
 msgstr ""
 
-#: galet/pane.py:489
+#: galet/pane.py:503
 msgid "Quick Look"
 msgstr ""
 
-#: galet/pane.py:491
+#: galet/pane.py:505
 msgid "Rename…"
 msgstr ""
 
-#: galet/pane.py:493
+#: galet/pane.py:507
 msgid "Duplicate"
 msgstr ""
 
-#: galet/pane.py:495
+#: galet/pane.py:509
 msgid "Cut"
 msgstr ""
 
-#: galet/pane.py:496
+#: galet/pane.py:510
 msgid "Copy Path"
 msgstr ""
 
-#: galet/pane.py:508
+#: galet/pane.py:522
 msgid "Quick Actions"
 msgstr ""
 
-#: galet/pane.py:510
+#: galet/pane.py:524
 msgid "New Folder With Selection"
 msgstr ""
 
-#: galet/pane.py:518
+#: galet/pane.py:532
 msgid "Send to Phone"
 msgstr ""
 
-#: galet/pane.py:525
+#: galet/pane.py:539
 msgid "Add to Sidebar"
 msgstr ""
 
-#: galet/pane.py:529
+#: galet/pane.py:543
 msgid "Folder Colour"
 msgstr ""
 
-#: galet/pane.py:535
+#: galet/pane.py:549
 msgid "Tags…"
 msgstr ""
 
-#: galet/pane.py:537
+#: galet/pane.py:551
 msgid "Suggest Tags (AI)"
 msgstr ""
 
-#: galet/pane.py:539
+#: galet/pane.py:553
 msgid "Analyse Photos (AI)"
 msgstr ""
 
-#: galet/pane.py:552
+#: galet/pane.py:566
 msgid "Paste"
 msgstr ""
 
-#: galet/pane.py:553
+#: galet/pane.py:567
 msgid "Undo"
 msgstr ""
 
-#: galet/pane.py:557
+#: galet/pane.py:571
 msgid "Analyse Photos in This Folder (AI)"
 msgstr ""
 
-#: galet/pane.py:558
+#: galet/pane.py:572
 msgid "Open in Terminal"
 msgstr ""
 
-#: galet/pane.py:559
+#: galet/pane.py:573
 msgid "Show Hidden Files"
 msgstr ""
 
@@ -886,27 +886,119 @@ msgstr ""
 msgid "Privacy: file names and short excerpts of the documents you select are sent to this service only when you use an AI feature."
 msgstr ""
 
-#: galet/preferences.py:567
+#: galet/preferences.py:572
+msgid "Backup"
+msgstr ""
+
+#: galet/preferences.py:573
+msgid "Save your settings, tags, folder colours and favourites in a file, to restore them later or on another computer. API keys are not included."
+msgstr ""
+
+#: galet/preferences.py:575
+msgid "Tag names and colours"
+msgstr ""
+
+#: galet/preferences.py:576
+msgid "Tags of your files and folders"
+msgstr ""
+
+#: galet/preferences.py:576
+msgid "Folder colours"
+msgstr ""
+
+#: galet/preferences.py:577
+msgid "Sidebar favourites"
+msgstr ""
+
+#: galet/preferences.py:577
+msgid "AI photo descriptions"
+msgstr ""
+
+#: galet/preferences.py:578
+msgid "What to include"
+msgstr ""
+
+#: galet/preferences.py:578
+msgid "Everything, by default"
+msgstr ""
+
+#: galet/preferences.py:585
+msgid "Backup file"
+msgstr ""
+
+#: galet/preferences.py:586
+msgid "Export…"
+msgstr ""
+
+#: galet/preferences.py:588
+msgid "Import…"
+msgstr ""
+
+#: galet/preferences.py:606
+msgid "Export Galet Backup"
+msgstr ""
+
+#: galet/preferences.py:626
+msgid "Could not save the backup: {error}"
+msgstr ""
+
+#: galet/preferences.py:628
+msgid "Backup saved: {tags} tags, {files} tagged items, {colors} folder colours"
+msgstr ""
+
+#: galet/preferences.py:632
+msgid "Saving the backup…"
+msgstr ""
+
+#: galet/preferences.py:640
+msgid "Galet backups (JSON)"
+msgstr ""
+
+#: galet/preferences.py:644
+msgid "Import Galet Backup"
+msgstr ""
+
+#: galet/preferences.py:655
+msgid "This file can't be imported: {error}"
+msgstr ""
+
+#: galet/preferences.py:658
+msgid "Backup of {date}: {tags} tags, {files} tagged items, {colors} folder colours, {bookmarks} favourites, {photos} photo descriptions.\n\nTags, colours and favourites are added to yours; settings are replaced."
+msgstr ""
+
+#: galet/preferences.py:664
+msgid "Import this backup?"
+msgstr ""
+
+#: galet/preferences.py:666
+msgid "Import"
+msgstr ""
+
+#: galet/preferences.py:674
+msgid "Backup imported: {tags} tags, {files} tagged items, {colors} folder colours"
+msgstr ""
+
+#: galet/preferences.py:683
 msgid "Advanced"
 msgstr ""
 
-#: galet/preferences.py:568
+#: galet/preferences.py:684
 msgid "Files"
 msgstr ""
 
-#: galet/preferences.py:569
+#: galet/preferences.py:685
 msgid "Show all filename extensions"
 msgstr ""
 
-#: galet/preferences.py:570
+#: galet/preferences.py:686
 msgid "Show hidden files"
 msgstr ""
 
-#: galet/preferences.py:571
+#: galet/preferences.py:687
 msgid "Keep folders on top"
 msgstr ""
 
-#: galet/preferences.py:572
+#: galet/preferences.py:688
 msgid "In icon, list and column views"
 msgstr ""
 
@@ -992,6 +1084,10 @@ msgstr ""
 
 #: galet/preferences.py
 msgid "AI (plain-language sentences)"
+msgstr ""
+
+#: galet/preferences.py
+msgid "?"
 msgstr ""
 
 #: galet/quickactions.py:40
@@ -1198,7 +1294,7 @@ msgstr ""
 msgid "Remove Smart Folder"
 msgstr ""
 
-#: galet/sidebar.py:262
+#: galet/sidebar.py:263
 msgid "Click to connect"
 msgstr ""
 
@@ -1302,35 +1398,35 @@ msgstr ""
 msgid "Yesterday at {time}"
 msgstr ""
 
-#: galet/views.py:348
+#: galet/views.py:373
 msgid "Date Modified"
 msgstr ""
 
-#: galet/views.py:364
+#: galet/views.py:389
 msgid "Location"
 msgstr ""
 
-#: galet/views.py:410
+#: galet/views.py:435
 msgid "Applications"
 msgstr ""
 
-#: galet/views.py:411
+#: galet/views.py:436
 msgid "Other"
 msgstr ""
 
-#: galet/views.py:416
+#: galet/views.py:441
 msgid "Unknown"
 msgstr ""
 
-#: galet/views.py:424
+#: galet/views.py:449
 msgid "Yesterday"
 msgstr ""
 
-#: galet/views.py:430
+#: galet/views.py:455
 msgid "Earlier This Year"
 msgstr ""
 
-#: galet/views.py:437
+#: galet/views.py:462
 msgid "No Tags"
 msgstr ""
 
@@ -1434,74 +1530,74 @@ msgstr ""
 msgid "Save as Smart Folder"
 msgstr ""
 
-#: galet/window.py:345
+#: galet/window.py:346
 msgid "Sending {n} file to {device}…"
 msgstr ""
 
-#: galet/window.py:345
+#: galet/window.py:346
 msgid "Sending {n} files to {device}…"
 msgstr ""
 
-#: galet/window.py:374
+#: galet/window.py:375
 msgid "Describe what you are looking for, e.g. “PDF invoices from this week”"
 msgstr ""
 
-#: galet/window.py:435
+#: galet/window.py:436
 msgid "No new photo to analyse here"
 msgstr ""
 
-#: galet/window.py:438
+#: galet/window.py:439
 msgid "{n} photos will be described by {service} so you can find them by what they show."
 msgstr ""
 
-#: galet/window.py:441
+#: galet/window.py:442
 msgid "Reduced copies of the photos (512 pixels) are sent to this online service."
 msgstr ""
 
-#: galet/window.py:470
+#: galet/window.py:471
 msgid "{n} photo analysed"
 msgstr ""
 
-#: galet/window.py:470
+#: galet/window.py:471
 msgid "{n} photos analysed"
 msgstr ""
 
-#: galet/window.py:472
+#: galet/window.py:473
 msgid "Analysing Photos"
 msgstr ""
 
-#: galet/window.py:474
+#: galet/window.py:475
 msgid "Analyse photos with the AI?"
 msgstr ""
 
-#: galet/window.py:474
+#: galet/window.py:475
 msgid "Analyse"
 msgstr ""
 
-#: galet/window.py:618
+#: galet/window.py:619
 msgid "Could not change the folder colour: {error}"
 msgstr ""
 
-#: galet/window.py:676
+#: galet/window.py:677
 msgid "Tag “{tag}” added"
 msgstr ""
 
-#: galet/window.py:800
+#: galet/window.py:801
 msgid "Save Smart Folder"
 msgstr ""
 
-#: galet/window.py:800
+#: galet/window.py:801
 msgid "Save"
 msgstr ""
 
-#: galet/window.py:802
+#: galet/window.py:803
 msgid "Smart folder “{name}” saved"
 msgstr ""
 
-#: galet/window.py:846
+#: galet/window.py:847
 msgid "No folder at “{path}”"
 msgstr ""
 
-#: galet/window.py:848
+#: galet/window.py:849
 msgid "Go to Location"
 msgstr ""

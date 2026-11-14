@@ -99,6 +99,8 @@ staying a native GTK4 / libadwaita application that blends in with GNOME and Zor
 - **Send to Phone** through Zorin Connect / GSConnect (AirDrop-like).
 - Settings window (<kbd>Ctrl</kbd>+<kbd>,</kbd>): start folder, default view, icon size, sidebar items, tags,
   servers, extensions, hidden files, folders on top.
+- **Backup**: export settings, tags (and the tags of your files), folder colours, favourites and photo
+  descriptions to one file, and import them later or on another computer (Settings → Advanced).
 - Log file for bug reports: `~/.cache/galet/galet.log`.
 - **Languages**: English, French, Spanish, German, Italian, Portuguese.
 - **Flatpak** manifest ready for Flathub (`flatpak/`).

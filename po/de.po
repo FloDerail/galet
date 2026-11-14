@@ -1483,3 +1483,75 @@ msgstr "Einfach"
 
 msgid "Simple (file and folder names)"
 msgstr "Einfach (Datei- und Ordnernamen)"
+
+msgid "?"
+msgstr "?"
+
+msgid "AI photo descriptions"
+msgstr "KI-Fotobeschreibungen"
+
+msgid "Backup"
+msgstr "Sicherung"
+
+msgid "Backup file"
+msgstr "Sicherungsdatei"
+
+msgid "Backup imported: {tags} tags, {files} tagged items, {colors} folder colours"
+msgstr "Sicherung importiert: {tags} Schlagwörter, {files} markierte Objekte, {colors} Ordnerfarben"
+
+msgid "Backup of {date}: {tags} tags, {files} tagged items, {colors} folder colours, {bookmarks} favourites, {photos} photo descriptions.\n\nTags, colours and favourites are added to yours; settings are replaced."
+msgstr "Sicherung vom {date}: {tags} Schlagwörter, {files} markierte Objekte, {colors} Ordnerfarben, {bookmarks} Favoriten, {photos} Fotobeschreibungen.\n\nSchlagwörter, Farben und Favoriten werden zu Ihren hinzugefügt; Einstellungen werden ersetzt."
+
+msgid "Backup saved: {tags} tags, {files} tagged items, {colors} folder colours"
+msgstr "Sicherung gespeichert: {tags} Schlagwörter, {files} markierte Objekte, {colors} Ordnerfarben"
+
+msgid "Could not save the backup: {error}"
+msgstr "Die Sicherung konnte nicht gespeichert werden: {error}"
+
+msgid "Everything, by default"
+msgstr "Standardmäßig alles"
+
+msgid "Export…"
+msgstr "Exportieren …"
+
+msgid "Export Galet Backup"
+msgstr "Galet-Sicherung exportieren"
+
+msgid "Folder colours"
+msgstr "Ordnerfarben"
+
+msgid "Galet backups (JSON)"
+msgstr "Galet-Sicherungen (JSON)"
+
+msgid "Import"
+msgstr "Importieren"
+
+msgid "Import…"
+msgstr "Importieren …"
+
+msgid "Import Galet Backup"
+msgstr "Galet-Sicherung importieren"
+
+msgid "Import this backup?"
+msgstr "Diese Sicherung importieren?"
+
+msgid "Save your settings, tags, folder colours and favourites in a file, to restore them later or on another computer. API keys are not included."
+msgstr "Speichern Sie Einstellungen, Schlagwörter, Ordnerfarben und Favoriten in einer Datei, um sie später oder auf einem anderen Rechner wiederherzustellen. API-Schlüssel werden nicht gespeichert."
+
+msgid "Saving the backup…"
+msgstr "Sicherung wird gespeichert …"
+
+msgid "Sidebar favourites"
+msgstr "Favoriten der Seitenleiste"
+
+msgid "Tag names and colours"
+msgstr "Namen und Farben der Schlagwörter"
+
+msgid "Tags of your files and folders"
+msgstr "Schlagwörter Ihrer Dateien und Ordner"
+
+msgid "This file can't be imported: {error}"
+msgstr "Diese Datei kann nicht importiert werden: {error}"
+
+msgid "What to include"
+msgstr "Inhalt der Sicherung"

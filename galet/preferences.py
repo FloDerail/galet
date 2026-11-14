@@ -1,6 +1,6 @@
 """Settings window, organised like Finder's: General, Sidebar, Tags, Advanced."""
 
-from gi.repository import Adw, Gdk, GLib, Gtk, Pango
+from gi.repository import Adw, Gdk, Gio, GLib, Gtk, Pango
 
 from . import servers
 from .i18n import _
@@ -563,6 +563,122 @@ class PreferencesDialog(Adw.PreferencesDialog):
 
     # --------------------------------------------------------------- advanced
 
+    # ----------------------------------------------------------------- backup
+
+    def _backup_group(self):
+        from . import backup
+
+        group = Adw.PreferencesGroup(
+            title=_("Backup"),
+            description=_("Save your settings, tags, folder colours and favourites in a file, to restore them "
+                          "later or on another computer. API keys are not included."))
+        labels = {"settings": _("Settings"), "tags": _("Tag names and colours"),
+                  "file_tags": _("Tags of your files and folders"), "folder_colors": _("Folder colours"),
+                  "bookmarks": _("Sidebar favourites"), "photo_descriptions": _("AI photo descriptions")}
+        expander = Adw.ExpanderRow(title=_("What to include"), subtitle=_("Everything, by default"))
+        self.backup_rows = {}
+        for key in backup.SECTIONS:
+            row = Adw.SwitchRow(title=labels[key], active=True)
+            expander.add_row(row)
+            self.backup_rows[key] = row
+        group.add(expander)
+        actions = Adw.ActionRow(title=_("Backup file"))
+        export = Gtk.Button(label=_("Export…"), valign=Gtk.Align.CENTER, css_classes=["suggested-action"])
+        export.connect("clicked", lambda _b: self._export_backup())
+        restore = Gtk.Button(label=_("Import…"), valign=Gtk.Align.CENTER)
+        restore.connect("clicked", lambda _b: self._import_backup())
+        actions.add_suffix(restore)
+        actions.add_suffix(export)
+        group.add(actions)
+        return group
+
+    def _backup_sections(self):
+        return tuple(key for key, row in self.backup_rows.items() if row.get_active())
+
+    def _toast(self, text):
+        self.add_toast(Adw.Toast(title=GLib.markup_escape_text(text), timeout=4))
+
+    def _export_backup(self):
+        import threading
+
+        from . import backup
+
+        dialog = Gtk.FileDialog(title=_("Export Galet Backup"), initial_name=backup.default_file_name())
+        sections = self._backup_sections()
+
+        def chosen(source, result, *_args):
+            try:
+                gfile = source.save_finish(result)
+            except GLib.Error:
+                return  # cancelled
+            path = gfile.get_path()
+
+            def work():
+                try:
+                    data = backup.collect(self.app, sections)
+                    backup.write(path, data)
+                    GLib.idle_add(done, backup.summary(data), None)
+                except (OSError, backup.BackupError) as err:
+                    GLib.idle_add(done, None, str(err))
+
+            def done(counts, error):
+                if error:
+                    self._toast(_("Could not save the backup: {error}").format(error=error))
+                else:
+                    self._toast(_("Backup saved: {tags} tags, {files} tagged items, {colors} folder colours").format(
+                        tags=counts["tags"], files=counts["file_tags"], colors=counts["folder_colors"]))
+                return GLib.SOURCE_REMOVE
+
+            self._toast(_("Saving the backup…"))
+            threading.Thread(target=work, daemon=True).start()
+
+        dialog.save(self.app.get_active_window(), None, chosen)
+
+    def _import_backup(self):
+        from . import backup
+
+        json_filter = Gtk.FileFilter(name=_("Galet backups (JSON)"))
+        json_filter.add_pattern("*.json")
+        filters = Gio.ListStore.new(Gtk.FileFilter)
+        filters.append(json_filter)
+        dialog = Gtk.FileDialog(title=_("Import Galet Backup"), filters=filters)
+        sections = self._backup_sections()
+
+        def chosen(source, result, *_args):
+            try:
+                gfile = source.open_finish(result)
+            except GLib.Error:
+                return
+            try:
+                data = backup.read(gfile.get_path())
+            except backup.BackupError as err:
+                self._toast(_("This file can't be imported: {error}").format(error=err))
+                return
+            counts = backup.summary(data)
+            body = _("Backup of {date}: {tags} tags, {files} tagged items, {colors} folder colours, "
+                     "{bookmarks} favourites, {photos} photo descriptions.\n\nTags, colours and favourites "
+                     "are added to yours; settings are replaced.").format(
+                date=str(data.get("created", "?")).replace("T", " ")[:16], tags=counts["tags"],
+                files=counts["file_tags"], colors=counts["folder_colors"], bookmarks=counts["bookmarks"],
+                photos=counts["photo_descriptions"])
+            confirm = Adw.AlertDialog(heading=_("Import this backup?"), body=body)
+            confirm.add_response("cancel", _("Cancel"))
+            confirm.add_response("import", _("Import"))
+            confirm.set_response_appearance("import", Adw.ResponseAppearance.SUGGESTED)
+            confirm.set_close_response("cancel")
+
+            def on_response(_d, response):
+                if response != "import":
+                    return
+                report = backup.restore(self.app, data, sections)
+                self._toast(_("Backup imported: {tags} tags, {files} tagged items, {colors} folder colours").format(
+                    tags=report["tags"], files=report["file_tags"], colors=report["folder_colors"]))
+
+            confirm.connect("response", on_response)
+            confirm.present(self)
+
+        dialog.open(self.app.get_active_window(), None, chosen)
+
     def _advanced_page(self):
         page = Adw.PreferencesPage(title=_("Advanced"), icon_name="emblem-system-symbolic")
         group = Adw.PreferencesGroup(title=_("Files"))
@@ -571,4 +687,5 @@ class PreferencesDialog(Adw.PreferencesDialog):
         group.add(_switch(self.settings, "folders_first", _("Keep folders on top"),
                           _("In icon, list and column views")))
         page.add(group)
+        page.add(self._backup_group())
         return page

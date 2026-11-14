@@ -85,6 +85,9 @@
     <keyword>explorer</keyword>
   </keywords>
   <releases>
+    <release version="0.7.0" date="2026-11-14">
+      <description><p>Back up and restore settings, tags, folder colours and favourites in one file.</p></description>
+    </release>
     <release version="0.6.3" date="2026-11-14">
       <description><p>Right-click menu and drag and drop fixed in the Flatpak build.</p></description>
     </release>

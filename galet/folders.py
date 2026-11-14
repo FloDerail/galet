@@ -4,6 +4,8 @@ The colour is stored as GIO metadata (``metadata::galet-folder-color``), so it
 never modifies the folder itself. Icons are small SVGs generated on demand.
 """
 
+import json
+import os
 from pathlib import Path
 
 from gi.repository import Gio, GLib
@@ -65,6 +67,67 @@ def icon_path(color):
     return str(path)
 
 
+REGISTRY = Path(GLib.get_user_data_dir()) / "galet" / "folder-colors.json"
+
+
+def registry():
+    """{path: colour} of folders coloured with Galet (used by backups)."""
+    try:
+        data = json.loads(REGISTRY.read_text(encoding="utf-8"))
+        return {str(k): str(v) for k, v in data.items() if v}
+    except (OSError, ValueError, AttributeError):
+        return {}
+
+
+def _save_registry(data):
+    REGISTRY.parent.mkdir(parents=True, exist_ok=True)
+    tmp = REGISTRY.with_suffix(".tmp")
+    tmp.write_text(json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8")
+    os.replace(tmp, REGISTRY)
+
+
 def set_color(gfile, color):
     """Set (or clear, with ``None``) the colour of a folder. Raises GLib.Error."""
     gfile.set_attribute_string(ATTRIBUTE, color or "", Gio.FileQueryInfoFlags.NONE, None)
+    path = gfile.get_path()
+    if path:
+        data = registry()
+        if color:
+            data[path] = color
+        else:
+            data.pop(path, None)
+        try:
+            _save_registry(data)
+        except OSError:
+            pass
+
+
+def get_color(path):
+    try:
+        info = Gio.File.new_for_path(path).query_info(ATTRIBUTE, Gio.FileQueryInfoFlags.NONE, None)
+        return info.get_attribute_string(ATTRIBUTE) or None
+    except GLib.Error:
+        return None
+
+
+def all_colored(max_depth=4, max_folders=5000):
+    """Coloured folders: those Galet remembers, plus a scan of the home folder (older colours)."""
+    found = {path: color for path, color in registry().items() if os.path.isdir(path)}
+    home = GLib.get_home_dir()
+    stack, seen = [(home, 0)], 0
+    while stack and seen < max_folders:
+        directory, depth = stack.pop()
+        try:
+            entries = [e for e in os.scandir(directory) if e.is_dir(follow_symlinks=False)
+                       and not e.name.startswith(".")]
+        except OSError:
+            continue
+        for entry in entries:
+            seen += 1
+            if entry.path not in found:
+                color = get_color(entry.path)
+                if color:
+                    found[entry.path] = color
+            if depth + 1 < max_depth and entry.name not in ("node_modules", "__pycache__", "venv", ".git"):
+                stack.append((entry.path, depth + 1))
+    return found

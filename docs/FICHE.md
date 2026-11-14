@@ -45,6 +45,7 @@ logiciel libre, il peut maintenant convenir à d'autres aussi.
 | 📱 **Envoi vers le téléphone** | Avec Zorin Connect ou GSConnect, comme AirDrop. |
 | 🎨 **Thèmes** | Système, **macOS** (pastilles rouge-orange-vert à gauche), **Windows 11** ou **Personnalisé** (couleur, boutons, coins, police), en clair ou en sombre. |
 | 📁 **Dossiers colorés** | Clic droit → « Couleur du dossier ». Un dossier peut prendre la couleur de son tag, et la palette se règle dans Réglages → Dossiers. Chaque dossier retient aussi sa présentation, comme sur Mac. |
+| 💾 **Sauvegarde** | Réglages → Avancé : exportez réglages, tags, couleurs de dossiers et favoris dans un fichier, et réimportez-les plus tard ou sur un autre PC. |
 | ⚙️ **Réglages** | `Ctrl+,` : dossier de départ, présentation par défaut, taille des icônes, éléments de la barre latérale, tags, serveurs… |
 
 | Colonnes | Galerie |

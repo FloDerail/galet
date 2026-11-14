@@ -1155,3 +1155,75 @@ msgstr "Simple"
 
 msgid "Simple (file and folder names)"
 msgstr "Simple (nombres de archivos y carpetas)"
+
+msgid "?"
+msgstr "?"
+
+msgid "AI photo descriptions"
+msgstr "Descripciones de fotos por la IA"
+
+msgid "Backup"
+msgstr "Copia de seguridad"
+
+msgid "Backup file"
+msgstr "Archivo de copia de seguridad"
+
+msgid "Backup imported: {tags} tags, {files} tagged items, {colors} folder colours"
+msgstr "Copia importada: {tags} etiquetas, {files} elementos etiquetados, {colors} colores de carpetas"
+
+msgid "Backup of {date}: {tags} tags, {files} tagged items, {colors} folder colours, {bookmarks} favourites, {photos} photo descriptions.\n\nTags, colours and favourites are added to yours; settings are replaced."
+msgstr "Copia del {date}: {tags} etiquetas, {files} elementos etiquetados, {colors} colores de carpetas, {bookmarks} favoritos, {photos} descripciones de fotos.\n\nLas etiquetas, colores y favoritos se añaden a los suyos; la configuración se reemplaza."
+
+msgid "Backup saved: {tags} tags, {files} tagged items, {colors} folder colours"
+msgstr "Copia guardada: {tags} etiquetas, {files} elementos etiquetados, {colors} colores de carpetas"
+
+msgid "Could not save the backup: {error}"
+msgstr "No se pudo guardar la copia: {error}"
+
+msgid "Everything, by default"
+msgstr "Todo, de forma predeterminada"
+
+msgid "Export…"
+msgstr "Exportar…"
+
+msgid "Export Galet Backup"
+msgstr "Exportar copia de seguridad de Galet"
+
+msgid "Folder colours"
+msgstr "Colores de carpetas"
+
+msgid "Galet backups (JSON)"
+msgstr "Copias de seguridad de Galet (JSON)"
+
+msgid "Import"
+msgstr "Importar"
+
+msgid "Import…"
+msgstr "Importar…"
+
+msgid "Import Galet Backup"
+msgstr "Importar copia de seguridad de Galet"
+
+msgid "Import this backup?"
+msgstr "¿Importar esta copia de seguridad?"
+
+msgid "Save your settings, tags, folder colours and favourites in a file, to restore them later or on another computer. API keys are not included."
+msgstr "Guarde su configuración, etiquetas, colores de carpetas y favoritos en un archivo para restaurarlos más tarde o en otro equipo. Las claves de API no se incluyen."
+
+msgid "Saving the backup…"
+msgstr "Guardando la copia de seguridad…"
+
+msgid "Sidebar favourites"
+msgstr "Favoritos de la barra lateral"
+
+msgid "Tag names and colours"
+msgstr "Nombres y colores de las etiquetas"
+
+msgid "Tags of your files and folders"
+msgstr "Etiquetas de sus archivos y carpetas"
+
+msgid "This file can't be imported: {error}"
+msgstr "Este archivo no se puede importar: {error}"
+
+msgid "What to include"
+msgstr "Qué incluir"

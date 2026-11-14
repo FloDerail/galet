@@ -1483,3 +1483,75 @@ msgstr "Semplice"
 
 msgid "Simple (file and folder names)"
 msgstr "Semplice (nomi di file e cartelle)"
+
+msgid "?"
+msgstr "?"
+
+msgid "AI photo descriptions"
+msgstr "Descrizioni delle foto fatte dall’IA"
+
+msgid "Backup"
+msgstr "Backup"
+
+msgid "Backup file"
+msgstr "File di backup"
+
+msgid "Backup imported: {tags} tags, {files} tagged items, {colors} folder colours"
+msgstr "Backup importato: {tags} etichette, {files} elementi etichettati, {colors} colori di cartelle"
+
+msgid "Backup of {date}: {tags} tags, {files} tagged items, {colors} folder colours, {bookmarks} favourites, {photos} photo descriptions.\n\nTags, colours and favourites are added to yours; settings are replaced."
+msgstr "Backup del {date}: {tags} etichette, {files} elementi etichettati, {colors} colori di cartelle, {bookmarks} preferiti, {photos} descrizioni di foto.\n\nEtichette, colori e preferiti vengono aggiunti ai tuoi; le impostazioni vengono sostituite."
+
+msgid "Backup saved: {tags} tags, {files} tagged items, {colors} folder colours"
+msgstr "Backup salvato: {tags} etichette, {files} elementi etichettati, {colors} colori di cartelle"
+
+msgid "Could not save the backup: {error}"
+msgstr "Impossibile salvare il backup: {error}"
+
+msgid "Everything, by default"
+msgstr "Tutto, per impostazione predefinita"
+
+msgid "Export…"
+msgstr "Esporta…"
+
+msgid "Export Galet Backup"
+msgstr "Esporta backup di Galet"
+
+msgid "Folder colours"
+msgstr "Colori delle cartelle"
+
+msgid "Galet backups (JSON)"
+msgstr "Backup di Galet (JSON)"
+
+msgid "Import"
+msgstr "Importa"
+
+msgid "Import…"
+msgstr "Importa…"
+
+msgid "Import Galet Backup"
+msgstr "Importa backup di Galet"
+
+msgid "Import this backup?"
+msgstr "Importare questo backup?"
+
+msgid "Save your settings, tags, folder colours and favourites in a file, to restore them later or on another computer. API keys are not included."
+msgstr "Salva impostazioni, etichette, colori delle cartelle e preferiti in un file, per ripristinarli più tardi o su un altro computer. Le chiavi API non sono incluse."
+
+msgid "Saving the backup…"
+msgstr "Salvataggio del backup…"
+
+msgid "Sidebar favourites"
+msgstr "Preferiti della barra laterale"
+
+msgid "Tag names and colours"
+msgstr "Nomi e colori delle etichette"
+
+msgid "Tags of your files and folders"
+msgstr "Etichette dei tuoi file e cartelle"
+
+msgid "This file can't be imported: {error}"
+msgstr "Questo file non può essere importato: {error}"
+
+msgid "What to include"
+msgstr "Cosa includere"

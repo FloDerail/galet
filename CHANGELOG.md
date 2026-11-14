@@ -2,6 +2,15 @@
 
 Galet — logiciel libre et open source de [Florian Dérail](https://florianderail.fr).
 
+## 0.7.0 — Sauvegarde de la configuration
+
+- 💾 **Réglages → Avancé → Sauvegarde** : exportez dans un seul fichier vos réglages, vos tags, les
+  tags de vos fichiers et dossiers, les couleurs des dossiers, les favoris de la barre latérale et les
+  descriptions de photos de l'IA, puis réimportez-les plus tard ou sur un autre ordinateur (les chemins
+  sont adaptés automatiquement). Les clés d'API ne sont jamais incluses.
+- 🇬🇧 Backup and restore of settings, tags, file tags, folder colours, favourites and photo
+  descriptions in one JSON file (Settings → Advanced).
+
 ## 0.6.3 — Clic droit vraiment corrigé (version Flatpak)
 
 - 🖱️ Le clic droit sur un fichier ou un dossier ouvre de nouveau le menu complet (couleur du

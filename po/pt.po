@@ -1483,3 +1483,75 @@ msgstr "Simples"
 
 msgid "Simple (file and folder names)"
 msgstr "Simples (nomes de arquivos e pastas)"
+
+msgid "?"
+msgstr "?"
+
+msgid "AI photo descriptions"
+msgstr "Descrições de fotos pela IA"
+
+msgid "Backup"
+msgstr "Backup"
+
+msgid "Backup file"
+msgstr "Arquivo de backup"
+
+msgid "Backup imported: {tags} tags, {files} tagged items, {colors} folder colours"
+msgstr "Backup importado: {tags} etiquetas, {files} itens etiquetados, {colors} cores de pastas"
+
+msgid "Backup of {date}: {tags} tags, {files} tagged items, {colors} folder colours, {bookmarks} favourites, {photos} photo descriptions.\n\nTags, colours and favourites are added to yours; settings are replaced."
+msgstr "Backup de {date}: {tags} etiquetas, {files} itens etiquetados, {colors} cores de pastas, {bookmarks} favoritos, {photos} descrições de fotos.\n\nEtiquetas, cores e favoritos são adicionados aos seus; as configurações são substituídas."
+
+msgid "Backup saved: {tags} tags, {files} tagged items, {colors} folder colours"
+msgstr "Backup salvo: {tags} etiquetas, {files} itens etiquetados, {colors} cores de pastas"
+
+msgid "Could not save the backup: {error}"
+msgstr "Não foi possível salvar o backup: {error}"
+
+msgid "Everything, by default"
+msgstr "Tudo, por padrão"
+
+msgid "Export…"
+msgstr "Exportar…"
+
+msgid "Export Galet Backup"
+msgstr "Exportar backup do Galet"
+
+msgid "Folder colours"
+msgstr "Cores das pastas"
+
+msgid "Galet backups (JSON)"
+msgstr "Backups do Galet (JSON)"
+
+msgid "Import"
+msgstr "Importar"
+
+msgid "Import…"
+msgstr "Importar…"
+
+msgid "Import Galet Backup"
+msgstr "Importar backup do Galet"
+
+msgid "Import this backup?"
+msgstr "Importar este backup?"
+
+msgid "Save your settings, tags, folder colours and favourites in a file, to restore them later or on another computer. API keys are not included."
+msgstr "Salve configurações, etiquetas, cores de pastas e favoritos em um arquivo para restaurá-los depois ou em outro computador. Chaves de API não são incluídas."
+
+msgid "Saving the backup…"
+msgstr "Salvando o backup…"
+
+msgid "Sidebar favourites"
+msgstr "Favoritos da barra lateral"
+
+msgid "Tag names and colours"
+msgstr "Nomes e cores das etiquetas"
+
+msgid "Tags of your files and folders"
+msgstr "Etiquetas dos seus arquivos e pastas"
+
+msgid "This file can't be imported: {error}"
+msgstr "Este arquivo não pode ser importado: {error}"
+
+msgid "What to include"
+msgstr "O que incluir"
