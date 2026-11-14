@@ -43,8 +43,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/FloDerail/galet.git
-        tag: v0.6.3
-        commit: ac2067f81a4288edfaa677f655a975ed9759fae2
+        tag: v0.7.0
+        commit: b9e7476b275d94578d87ff8bee1e0329bed4c5c7
         x-checker-data:
           type: git
           tag-pattern: ^v([\d.]+)$
