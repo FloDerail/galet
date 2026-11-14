@@ -106,7 +106,18 @@ class _Cell(Gtk.Box):
 
     def position(self):
         list_item = self.list_item_ref() if self.list_item_ref else None
-        return list_item.get_position() if list_item is not None else Gtk.INVALID_LIST_POSITION
+        if list_item is not None:
+            position = list_item.get_position()
+            if position != Gtk.INVALID_LIST_POSITION:
+                return position
+        # Newer PyGObject releases free the GtkListItem wrapper, so the weak reference can be dead:
+        # find the item in the view's model instead.
+        model = getattr(self, "model_ref", None)
+        if model is not None and self.item is not None:
+            for index in range(model.get_n_items()):
+                if model.get_item(index) is self.item:
+                    return index
+        return Gtk.INVALID_LIST_POSITION
 
     def refresh(self):
         pass
@@ -207,6 +218,16 @@ def make_factory(create_cell, attach=None):
     return factory
 
 
+def cell_at(view, x, y):
+    """The Galet cell under (x, y) in ``view`` coordinates, or None (empty area)."""
+    widget = view.pick(x, y, Gtk.PickFlags.DEFAULT)
+    while widget is not None and widget is not view:
+        if isinstance(widget, _Cell):
+            return widget
+        widget = widget.get_parent()
+    return None
+
+
 def secondary_click(widget, handler, capture=False):
     """Right-click handler. ``capture=True`` for files and folders: recent GTK versions let the
     list item take the right-click (to select it) before our handler would see it."""
@@ -227,7 +248,9 @@ class _SelectionView:
         self.pane = pane
         self.selection.connect("selection-changed", lambda *_a: self.emit("selection-changed"))
         self.view.connect("activate", self._on_activate)
-        secondary_click(self.view, self._on_background_menu)
+        # One right-click handler for the whole view, in the capture phase: it runs before the
+        # list items, which in recent GTK versions keep the secondary click for themselves.
+        secondary_click(self.view, self._on_secondary, capture=True)
         dnd.add_drop_target(self.view, pane.current_dir, pane.window.drop_files)
         self._place_view()
 
@@ -238,8 +261,8 @@ class _SelectionView:
         if not hasattr(self, "_cells"):
             self._cells = []
         self._cells.append(weakref.ref(cell))
+        cell.model_ref = self.selection
         folder = lambda: cell.item.target_file if cell.item is not None and cell.item.is_dir else None  # noqa: E731
-        secondary_click(cell, lambda g, n, x, y: self._on_cell_menu(g, x, y, cell), capture=True)
         dnd.add_drag_source(cell, lambda: self._drag_files(cell), self.pane.drag_started, self.pane.drag_finished)
         cell.drop_target = dnd.add_drop_target(cell, folder, self.pane.window.drop_files)
         dnd.add_spring_load(cell, folder, self.pane.spring_open)
@@ -276,19 +299,17 @@ class _SelectionView:
             self.selection.select_item(position, True)
         return [item.gfile for item in self.get_selected_items()]
 
-    def _on_cell_menu(self, gesture, x, y, cell):
+    def _on_secondary(self, gesture, _n, x, y):
         gesture.set_state(Gtk.EventSequenceState.CLAIMED)
-        position = cell.position()
-        if position == Gtk.INVALID_LIST_POSITION:
-            return
-        if not self.selection.is_selected(position):
-            self.selection.select_item(position, True)
-        self.pane.popup_context_menu(cell, x, y, on_item=True)
-
-    def _on_background_menu(self, gesture, _n, x, y):
-        gesture.set_state(Gtk.EventSequenceState.CLAIMED)
-        self.selection.unselect_all()
-        self.pane.popup_context_menu(self.view, x, y, on_item=False)
+        cell = cell_at(self.view, x, y)
+        position = cell.position() if cell is not None else Gtk.INVALID_LIST_POSITION
+        if position != Gtk.INVALID_LIST_POSITION:
+            if not self.selection.is_selected(position):
+                self.selection.select_item(position, True)
+            self.pane.popup_context_menu(self.view, x, y, on_item=True)
+        else:
+            self.selection.unselect_all()
+            self.pane.popup_context_menu(self.view, x, y, on_item=False)
 
     def _on_activate(self, _view, position):
         item = self.selection.get_item(position)
@@ -750,7 +771,7 @@ class ColumnBrowser(Gtk.ScrolledWindow):
 
         col.selection.connect("selection-changed", lambda *_a: self._on_selected(col))
         col.view.connect("activate", lambda _v, pos: self._on_activate(col, pos))
-        secondary_click(col.view, lambda g, n, x, y: self._on_background_menu(col, x, y))
+        secondary_click(col.view, lambda g, n, x, y: self._on_column_secondary(g, col, x, y), capture=True)
         dnd.add_drop_target(col.view, lambda: col.gfile, self.pane.window.drop_files)
         keys = Gtk.EventControllerKey(propagation_phase=Gtk.PropagationPhase.CAPTURE)
         keys.connect("key-pressed", lambda c, keyval, code, state: self._on_key(col, keyval, state))
@@ -826,8 +847,8 @@ class ColumnBrowser(Gtk.ScrolledWindow):
 
     def _attach_cell(self, cell, col):
         self._cells.append(weakref.ref(cell))
+        cell.model_ref = col.selection
         folder = lambda: cell.item.target_file if cell.item is not None and cell.item.is_dir else None  # noqa: E731
-        secondary_click(cell, lambda g, n, x, y: self._on_cell_menu(g, x, y, cell, col), capture=True)
         dnd.add_drag_source(cell, lambda: self._drag_files(cell, col), self.pane.drag_started,
                             self.pane.drag_finished)
         cell.drop_target = dnd.add_drop_target(cell, folder, self.pane.window.drop_files)
@@ -880,15 +901,17 @@ class ColumnBrowser(Gtk.ScrolledWindow):
         item = col.selection.get_selected_item()
         return [item.gfile] if item is not None else []
 
-    def _on_cell_menu(self, gesture, x, y, cell, col):
+    def _on_column_secondary(self, gesture, col, x, y):
         gesture.set_state(Gtk.EventSequenceState.CLAIMED)
-        position = cell.position()
-        if position != Gtk.INVALID_LIST_POSITION and col in self.columns:
+        if col not in self.columns:
+            return
+        cell = cell_at(col.view, x, y)
+        position = cell.position() if cell is not None else Gtk.INVALID_LIST_POSITION
+        if position != Gtk.INVALID_LIST_POSITION:
             col.selection.set_selected(position)
-            self.pane.popup_context_menu(cell, x, y, on_item=True)
-
-    def _on_background_menu(self, col, x, y):
-        if col in self.columns:
+            # Selecting a folder adds a column: point the menu at the row itself.
+            self.pane.popup_context_menu(cell, cell.get_width() / 2, cell.get_height() / 2, on_item=True)
+        else:
             col.selection.unselect_all()
             self.pane.popup_context_menu(col.view, x, y, on_item=False)
 

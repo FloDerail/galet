@@ -2,6 +2,14 @@
 
 Galet — logiciel libre et open source de [Florian Dérail](https://florianderail.fr).
 
+## 0.6.3 — Clic droit vraiment corrigé (version Flatpak)
+
+- 🖱️ Le clic droit sur un fichier ou un dossier ouvre de nouveau le menu complet (couleur du
+  dossier, tags, actions rapides…) dans la version Flatpak / Logithèque. Avec la version récente de
+  Python qu'elle utilise, Galet perdait la trace de la ligne cliquée et croyait cliquer dans le vide.
+- 🖐️ Même correction pour le glisser-déposer depuis la version Flatpak.
+- 🇬🇧 Right-click and drag and drop fixed in the Flatpak build (newer PyGObject freed list item wrappers).
+
 ## 0.6.2 — Clic droit corrigé
 
 - 🖱️ Le **clic droit** sur les fichiers et dossiers fonctionne à nouveau avec les versions récentes de
