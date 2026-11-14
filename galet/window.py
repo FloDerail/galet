@@ -249,6 +249,7 @@ class GaletWindow(Adw.ApplicationWindow):
             "get-info": self._get_info,
             "ai-tags": self._ai_tags,
             "analyze-photos": self._analyze_photos,
+            "context-menu": lambda: self.current_pane.popup_context_menu_for_selection(),
             "merge-windows": self.merge_windows,
             "add-to-sidebar": lambda: self.sidebar.add_bookmarks([i.target_file for i in self.selection if i.is_dir]),
             "go-recent": lambda: self._go_special("recent"),

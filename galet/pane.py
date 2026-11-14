@@ -26,6 +26,8 @@ LOCAL_SHORTCUTS = (
     ("space", "win.quicklook"),
     ("<Control>Return", "win.open-new-tab"),
     ("<Control><Shift>c", "win.copy-path"),
+    ("<Shift>F10", "win.context-menu"),
+    ("Menu", "win.context-menu"),
 )
 
 
@@ -463,7 +465,19 @@ class BrowserPane(Gtk.Box):
             for item in folders:
                 self.window.new_tab(Location(item.target_file), select=False)
 
+    def popup_context_menu_for_selection(self):
+        """Keyboard (Shift+F10 / Menu key): open the menu next to the selected file."""
+        items = self.get_selected_items()
+        cell = self.view.find_cell(items[0]) if items else None
+        if cell is not None and cell.get_mapped():
+            self.popup_context_menu(cell, cell.get_width() / 2, cell.get_height() / 2, on_item=True)
+        else:
+            self.popup_context_menu(self, self.get_width() / 2, self.get_height() / 3, on_item=False)
+
     def popup_context_menu(self, widget, x, y, on_item):
+        from .logs import log
+
+        log.info("context menu (%s)", "item" if on_item else "background")
         ok, point = widget.compute_point(self, Graphene.Point().init(x, y))
         if not ok:
             return

@@ -85,6 +85,9 @@
     <keyword>explorer</keyword>
   </keywords>
   <releases>
+    <release version="0.6.2" date="2026-11-14">
+      <description><p>Right-click menu fixed with recent GTK versions; Shift+F10 and the Menu key open it.</p></description>
+    </release>
     <release version="0.6.1" date="2026-11-14">
       <description><p>"Show in folder" from other applications (VS Code, browsers) opens Galet.</p></description>
     </release>

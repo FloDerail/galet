@@ -2,6 +2,13 @@
 
 Galet — logiciel libre et open source de [Florian Dérail](https://florianderail.fr).
 
+## 0.6.2 — Clic droit corrigé
+
+- 🖱️ Le **clic droit** sur les fichiers et dossiers fonctionne à nouveau avec les versions récentes de
+  GTK (version Flatpak / Logithèque) : couleur du dossier, tags, actions rapides…
+- ⌨️ **Maj+F10** et la touche **Menu** ouvrent aussi le menu contextuel.
+- 🇬🇧 Right-click menu fixed with recent GTK (Flatpak); Shift+F10 and the Menu key open it too.
+
 ## 0.6.1 — Galet s'ouvre aussi depuis VS Code et les navigateurs
 
 - 📂 « Afficher dans le dossier » / « Reveal in File Explorer » (VS Code, navigateurs, gestionnaires de

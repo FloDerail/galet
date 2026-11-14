@@ -207,8 +207,12 @@ def make_factory(create_cell, attach=None):
     return factory
 
 
-def secondary_click(widget, handler):
+def secondary_click(widget, handler, capture=False):
+    """Right-click handler. ``capture=True`` for files and folders: recent GTK versions let the
+    list item take the right-click (to select it) before our handler would see it."""
     gesture = Gtk.GestureClick(button=Gdk.BUTTON_SECONDARY)
+    if capture:
+        gesture.set_propagation_phase(Gtk.PropagationPhase.CAPTURE)
     gesture.connect("pressed", handler)
     widget.add_controller(gesture)
     return gesture
@@ -235,7 +239,7 @@ class _SelectionView:
             self._cells = []
         self._cells.append(weakref.ref(cell))
         folder = lambda: cell.item.target_file if cell.item is not None and cell.item.is_dir else None  # noqa: E731
-        secondary_click(cell, lambda g, n, x, y: self._on_cell_menu(g, x, y, cell))
+        secondary_click(cell, lambda g, n, x, y: self._on_cell_menu(g, x, y, cell), capture=True)
         dnd.add_drag_source(cell, lambda: self._drag_files(cell), self.pane.drag_started, self.pane.drag_finished)
         cell.drop_target = dnd.add_drop_target(cell, folder, self.pane.window.drop_files)
         dnd.add_spring_load(cell, folder, self.pane.spring_open)
@@ -823,7 +827,7 @@ class ColumnBrowser(Gtk.ScrolledWindow):
     def _attach_cell(self, cell, col):
         self._cells.append(weakref.ref(cell))
         folder = lambda: cell.item.target_file if cell.item is not None and cell.item.is_dir else None  # noqa: E731
-        secondary_click(cell, lambda g, n, x, y: self._on_cell_menu(g, x, y, cell, col))
+        secondary_click(cell, lambda g, n, x, y: self._on_cell_menu(g, x, y, cell, col), capture=True)
         dnd.add_drag_source(cell, lambda: self._drag_files(cell, col), self.pane.drag_started,
                             self.pane.drag_finished)
         cell.drop_target = dnd.add_drop_target(cell, folder, self.pane.window.drop_files)

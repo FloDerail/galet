@@ -218,7 +218,8 @@ class Sidebar(Gtk.ScrolledWindow):
                 menu.append((_("Disconnect"), "win.disconnect", server_uri))
             menu.append((_("Remove from Favorites"), "win.remove-server", server_uri))
         if menu:
-            gesture = Gtk.GestureClick(button=Gdk.BUTTON_SECONDARY)
+            gesture = Gtk.GestureClick(button=Gdk.BUTTON_SECONDARY,
+                                       propagation_phase=Gtk.PropagationPhase.CAPTURE)
             gesture.connect("pressed", lambda _g, _n, x, y: self._popup_menu(row, x, y, menu))
             row.add_controller(gesture)
         self.listbox.append(row)
