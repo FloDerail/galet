@@ -2,6 +2,23 @@
 
 Galet — logiciel libre et open source de [Florian Dérail](https://florianderail.fr).
 
+## 0.9.0 — Coffre chiffré, terminal intégré et double panneau
+
+- 🔐 **Liste des serveurs chiffrée** (AES-256 avec GnuPG) : hôtes, identifiants, ports et dossiers ne
+  sont plus lisibles dans le fichier de réglages ; la clé est gardée dans le trousseau GNOME. Vos
+  serveurs existants sont chiffrés automatiquement au premier lancement.
+- 🗝️ **Mot de passe maître** facultatif (Réglages → Serveurs → Sécurité) : la liste des serveurs reste
+  verrouillée comme un coffre jusqu'à ce que vous le saisissiez, une fois par session.
+- 💾 **Sauvegardes chiffrées** par mot de passe (activé par défaut) ; les serveurs sont inclus dans la
+  sauvegarde, sans leurs mots de passe.
+- 💻 **Terminal intégré** (Ctrl+` ou F4) : un panneau terminal sous les fichiers, avec des onglets,
+  ouvert dans le dossier courant — ou directement en SSH quand vous êtes sur un serveur SFTP. Pendant
+  que vous tapez, les raccourcis Ctrl+lettre vont au terminal (Ctrl+R, Ctrl+L, Ctrl+C…).
+- ↔️ **Double panneau** (F3) : votre ordinateur d'un côté, le serveur de l'autre ; glisser-déposer ou
+  « Copier / Déplacer de l'autre côté ». Bouton « Transférer » dans le gestionnaire de serveurs.
+- 🇬🇧 Encrypted server list with optional master password, encrypted backups, built-in terminal panel
+  (local or SSH) and dual pane for transfers.
+
 ## 0.8.0 — Gestionnaire de serveurs
 
 - 🌐 **Ctrl+K** ouvre un vrai **gestionnaire de serveurs** : chaque serveur a sa fiche (nom, protocole

@@ -1,9 +1,12 @@
 """Back up and restore Galet's configuration in a single JSON file.
 
 Contents: settings, tag definitions, tags of files and folders, folder colours,
-sidebar favourites and AI photo descriptions. API keys are never included (they
-stay in the GNOME keyring). Paths are adapted when the home folder differs
-(another computer or user name).
+sidebar favourites, AI photo descriptions and server cards. API keys and server
+passwords are never included (they stay in the GNOME keyring). Paths are adapted
+when the home folder differs (another computer or user name).
+
+A backup can be encrypted with a password (GnuPG, AES-256): the file is then an
+OpenPGP message instead of JSON.
 """
 
 import json
@@ -17,7 +20,7 @@ from . import __version__
 
 FORMAT = "galet-backup"
 FORMAT_VERSION = 1
-SECTIONS = ("settings", "tags", "file_tags", "folder_colors", "bookmarks", "photo_descriptions")
+SECTIONS = ("settings", "tags", "file_tags", "folder_colors", "bookmarks", "photo_descriptions", "servers")
 SKIPPED_SETTINGS = ("window_size",)
 BOOKMARKS = Path(GLib.get_user_config_dir()) / "gtk-3.0" / "bookmarks"
 
@@ -26,8 +29,12 @@ class BackupError(Exception):
     pass
 
 
-def default_file_name():
-    return time.strftime("Galet-sauvegarde-%Y-%m-%d.json")
+class PasswordNeeded(BackupError):
+    """The backup is encrypted (or the password was wrong)."""
+
+
+def default_file_name(encrypted=False):
+    return time.strftime("Galet-sauvegarde-%Y-%m-%d.json") + (".gpg" if encrypted else "")
 
 
 # ------------------------------------------------------------------ export
@@ -67,6 +74,9 @@ def collect(app, sections=SECTIONS):
         PHOTO_INDEX.count()  # loads the index
         with PHOTO_INDEX._lock:
             data["photo_descriptions"] = dict(PHOTO_INDEX._entries or {})
+    if "servers" in sections:
+        from . import vault
+        data["servers"] = vault.get(app.settings).export()["servers"]
     return data
 
 
@@ -79,21 +89,51 @@ def summary(data):
         "folder_colors": len(data.get("folder_colors", {})),
         "bookmarks": len(data.get("bookmarks", [])),
         "photo_descriptions": len(data.get("photo_descriptions", {})),
+        "servers": len(data.get("servers", [])),
     }
 
 
-def write(path, data):
+def write(path, data, password=None):
+    raw = json.dumps(data, ensure_ascii=False, indent=1).encode("utf-8")
+    if password:
+        from . import vault
+        try:
+            raw = vault.encrypt(raw, password, strong=True)
+        except vault.VaultError as err:
+            raise BackupError(str(err)) from err
     tmp = path + ".tmp"
-    with open(tmp, "w", encoding="utf-8") as handle:
-        json.dump(data, handle, ensure_ascii=False, indent=1)
+    fd = os.open(tmp, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
+    with os.fdopen(fd, "wb") as handle:
+        handle.write(raw)
     os.replace(tmp, path)
 
 
-def read(path):
+def is_encrypted(path):
+    from . import vault
     try:
-        with open(path, encoding="utf-8") as handle:
-            data = json.load(handle)
-    except (OSError, ValueError) as err:
+        with open(path, "rb") as handle:
+            return vault.is_encrypted(handle.read(64))
+    except OSError:
+        return False
+
+
+def read(path, password=None):
+    from . import vault
+    try:
+        with open(path, "rb") as handle:
+            raw = handle.read()
+    except OSError as err:
+        raise BackupError(str(err)) from err
+    if vault.is_encrypted(raw):
+        if not password:
+            raise PasswordNeeded("password needed")
+        try:
+            raw = vault.decrypt(raw, password)
+        except vault.VaultError as err:
+            raise PasswordNeeded(str(err)) from err
+    try:
+        data = json.loads(raw.decode("utf-8"))
+    except (UnicodeDecodeError, ValueError) as err:
         raise BackupError(str(err)) from err
     if not isinstance(data, dict) or data.get("format") != FORMAT:
         raise BackupError("not a Galet backup file")
@@ -191,5 +231,8 @@ def restore(app, data, sections=SECTIONS):
                     PHOTO_INDEX._folded[path] = PHOTO_INDEX._fold_entry(entry)
                 report["photo_descriptions"] += 1
         PHOTO_INDEX.save()
+    if "servers" in sections and data.get("servers"):
+        from . import vault
+        report["servers"] = vault.get(app.settings).merge(data["servers"])
     tagstore.flush()
     return report

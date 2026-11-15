@@ -106,3 +106,11 @@ searchbar entry.galet-spotlight-entry {
 .galet-spotlight-list > row {
   border-radius: 10px;
 }
+
+/* Built-in terminal */
+.galet-terminal-panel vte-terminal { padding: 6px 10px; }
+.galet-terminal-header { border-top: 1px solid alpha(currentColor, 0.12); }
+
+/* Dual pane */
+.galet-side-header { padding: 4px 6px; border-bottom: 1px solid alpha(currentColor, 0.1); }
+.galet-active-side { box-shadow: inset 0 2px 0 0 @accent_bg_color; }

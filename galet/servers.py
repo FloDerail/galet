@@ -187,8 +187,21 @@ def _complete(server):
     return server
 
 
+def _vault(settings):
+    from . import vault
+    return vault.get(settings)
+
+
+def vault_locked(settings):
+    return _vault(settings).locked
+
+
 def saved_servers(settings):
-    return [_complete(s) for s in settings.get("servers", []) if isinstance(s, dict) and s.get("uri")]
+    return [_complete(s) for s in _vault(settings).servers() if isinstance(s, dict) and s.get("uri")]
+
+
+def _store(settings, servers):
+    _vault(settings).set_servers(servers)
 
 
 def save_server(settings, server):
@@ -204,7 +217,7 @@ def save_server(settings, server):
             break
     else:
         servers.append(server)
-    settings.set("servers", servers)
+    _store(settings, servers)
     return server
 
 
@@ -220,7 +233,7 @@ def remove_server(settings, uri):
     for server in saved_servers(settings):
         if server["uri"] == uri:
             set_password(server["id"], "")
-    settings.set("servers", [s for s in saved_servers(settings) if s["uri"] != uri])
+    _store(settings, [s for s in saved_servers(settings) if s["uri"] != uri])
 
 
 def rename_server(settings, uri, name):
@@ -228,7 +241,7 @@ def rename_server(settings, uri, name):
     for server in servers:
         if server["uri"] == uri and name.strip():
             server["name"] = name.strip()
-    settings.set("servers", servers)
+    _store(settings, servers)
 
 
 def server_for(settings, gfile):
@@ -248,12 +261,12 @@ def server_for(settings, gfile):
 
 
 def recent_servers(settings):
-    return [u for u in settings.get("recent_servers", []) if isinstance(u, str)]
+    return [u for u in _vault(settings).recent() if isinstance(u, str)]
 
 
 def remember_recent(settings, uri):
     recent = [uri] + [u for u in recent_servers(settings) if u != uri]
-    settings.set("recent_servers", recent[:MAX_RECENT])
+    _vault(settings).set_recent(recent[:MAX_RECENT])
 
 
 # ------------------------------------------------------------- login window
@@ -452,6 +465,12 @@ def unmount(window, mount):
 
 def open_ssh(window, server):
     """Open an SSH session to the server in the system terminal."""
+    panel = getattr(window, "terminal_panel", None)
+    from . import terminal
+    if panel is not None and terminal.available():  # built-in terminal
+        window.show_terminal(True, create=False)
+        panel.open_ssh(server)
+        return
     from .sandbox import find_program
 
     args = ["ssh"]
@@ -466,6 +485,55 @@ def open_ssh(window, server):
             subprocess.Popen([*command, *extra], start_new_session=True)
             return
     window.toast(_("No terminal application found."))
+
+
+# ------------------------------------------------------------ master password
+
+def master_password_dialog(parent, settings, on_done=None):
+    """Set, change or remove the master password that locks the server list."""
+    vault = _vault(settings)
+    has = vault.uses_master
+    dialog = Adw.AlertDialog(
+        heading=_("Change Master Password") if has else _("Set a Master Password"),
+        body=_("Your server list is encrypted. With a master password, it stays locked until you type it "
+               "(once per session). If you forget it, the server list cannot be recovered."))
+    group = Adw.PreferencesGroup()
+    first = Adw.PasswordEntryRow(title=_("New Master Password"))
+    second = Adw.PasswordEntryRow(title=_("Confirm"))
+    group.add(first)
+    group.add(second)
+    dialog.set_extra_child(group)
+    dialog.add_response("cancel", _("Cancel"))
+    if has:
+        dialog.add_response("remove", _("Remove"))
+        dialog.set_response_appearance("remove", Adw.ResponseAppearance.DESTRUCTIVE)
+    dialog.add_response("save", _("Save"))
+    dialog.set_response_appearance("save", Adw.ResponseAppearance.SUGGESTED)
+    dialog.set_response_enabled("save", False)
+    dialog.set_close_response("cancel")
+
+    def check(*_args):
+        text = first.get_text()
+        dialog.set_response_enabled("save", len(text) >= 6 and text == second.get_text())
+        second.remove_css_class("error") if not second.get_text() or text.startswith(second.get_text()) \
+            else second.add_css_class("error")
+
+    first.connect("changed", check)
+    second.connect("changed", check)
+
+    def on_response(_dialog, response):
+        if response not in ("save", "remove"):
+            return
+        try:
+            vault.set_master_password(first.get_text() if response == "save" else None)
+        except Exception as err:  # noqa: BLE001
+            log.warning("Cannot change the master password: %s", err)
+            return
+        if on_done:
+            on_done()
+
+    dialog.connect("response", on_response)
+    dialog.present(parent)
 
 
 # ---------------------------------------------------------------- server card
@@ -597,6 +665,8 @@ class ConnectDialog(Adw.Dialog):
         super().__init__(title=_("Servers"), content_width=600, content_height=640)
         self.window = window
         self.settings = window.settings
+        self.lock_button = Gtk.Button(icon_name="system-lock-screen-symbolic", tooltip_text=_("Lock Servers"))
+        self.lock_button.connect("clicked", lambda *_a: (_vault(self.settings).lock(), self._fill_lists()))
 
         self.entry = Adw.EntryRow(title=_("Quick Connect — address"))
         self.entry.connect("entry-activated", lambda *_a: self._quick_connect())
@@ -627,6 +697,7 @@ class ConnectDialog(Adw.Dialog):
         self._fill_lists()
 
         header = Adw.HeaderBar()
+        header.pack_start(self.lock_button)
         toolbar = Adw.ToolbarView()
         toolbar.add_top_bar(header)
         toolbar.set_content(self.page)
@@ -640,6 +711,13 @@ class ConnectDialog(Adw.Dialog):
             self.page.remove(group)
         self.lists = []
         self.rows = []
+        vault = _vault(self.settings)
+        self.lock_button.set_visible(vault.uses_master and not vault.locked)
+        if vault.locked:
+            self.search_group.set_visible(False)
+            self.lists.append(self._unlock_group(vault))
+            self.page.add(self.lists[0])
+            return
         servers = saved_servers(self.settings)
         self.search_group.set_visible(len(servers) > 4)
 
@@ -676,6 +754,34 @@ class ConnectDialog(Adw.Dialog):
             self.page.add(group)
         self._filter()
 
+    def _unlock_group(self, vault):
+        if vault.uses_master:
+            group = Adw.PreferencesGroup(
+                title=_("Servers Locked"),
+                description=_("Your server list is encrypted. Type your master password to open it."))
+            row = Adw.PasswordEntryRow(title=_("Master Password"))
+            unlock = Gtk.Button(label=_("Unlock"), valign=Gtk.Align.CENTER, css_classes=["suggested-action"])
+
+            def try_unlock(*_args):
+                if vault.unlock(row.get_text()):
+                    self._fill_lists()
+                else:
+                    row.set_text("")
+                    row.add_css_class("error")
+                    group.set_description(_("Wrong master password."))
+
+            row.connect("entry-activated", try_unlock)
+            unlock.connect("clicked", try_unlock)
+            row.add_suffix(unlock)
+            group.add(row)
+            GLib.idle_add(lambda: row.grab_focus() and False)
+        else:
+            group = Adw.PreferencesGroup(
+                title=_("Servers Unavailable"),
+                description=_("The encrypted server list could not be opened: the GNOME keyring is not "
+                              "available or its key is missing."))
+        return group
+
     def _filter(self):
         needle = self.search.get_text().strip().lower()
         for row, haystack in self.rows:
@@ -692,8 +798,12 @@ class ConnectDialog(Adw.Dialog):
         if server["protocol"] == "sftp":
             ssh = Gtk.Button(icon_name="utilities-terminal-symbolic", valign=Gtk.Align.CENTER,
                              css_classes=["flat"], tooltip_text=_("Open SSH Terminal"))
-            ssh.connect("clicked", lambda *_a: open_ssh(self.window, server))
+            ssh.connect("clicked", lambda *_a: (self.close(), open_ssh(self.window, server)))
             row.add_suffix(ssh)
+        transfer = Gtk.Button(icon_name="view-dual-symbolic", valign=Gtk.Align.CENTER, css_classes=["flat"],
+                              tooltip_text=_("Transfer Files (dual pane)"))
+        transfer.connect("clicked", lambda *_a: (self.close(), self.window.open_transfer(server["uri"])))
+        row.add_suffix(transfer)
         edit = Gtk.Button(icon_name="document-edit-symbolic", valign=Gtk.Align.CENTER, css_classes=["flat"],
                           tooltip_text=_("Edit Server…"))
         edit.connect("clicked", lambda *_a: self._edit(server))

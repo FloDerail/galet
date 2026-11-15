@@ -43,7 +43,11 @@ ACCELS = {
     "win.go-downloads": ["<Control><Alt>l"],
     "win.go-recent": ["<Control><Shift>f"],
     "win.go-network": ["<Control><Shift>k"],
+    "win.toggle-terminal": ["<Control>grave", "F4"],
+    "win.dual-pane": ["F3"],
 }
+
+KEEP_IN_TERMINAL = ("win.toggle-terminal",)
 
 
 SIDEBAR_ITEMS = ("recent", "home", "desktop", "documents", "downloads", "pictures", "music",
@@ -145,6 +149,9 @@ class GaletApplication(Adw.Application):
         logs.setup(__version__)
         self.tagstore = TagStore()
         self.settings = Settings()
+        from . import vault
+
+        vault.get(self.settings)  # opens the encrypted server list (moves old clear-text cards into it)
         from .views import FOLDER_STYLE
 
         FOLDER_STYLE.update(settings=self.settings, tagstore=self.tagstore)
@@ -171,6 +178,7 @@ class GaletApplication(Adw.Application):
             self.add_action(action)
         for action, accels in ACCELS.items():
             self.set_accels_for_action(action, accels)
+        self._accels_suspended = False
 
         # Answer "show in folder" requests from other apps (VS Code, browsers…).
         from .dbus_service import FileManagerService
@@ -213,6 +221,17 @@ class GaletApplication(Adw.Application):
         window = GaletWindow(self, location, empty=empty)
         window.present()
         return window
+
+    def suspend_accels(self, suspend):
+        """While typing in the built-in terminal, Ctrl+letter keys belong to the shell
+        (Ctrl+R, Ctrl+L, Ctrl+W…): keep only Ctrl+Shift shortcuts and the terminal toggle."""
+        if suspend == self._accels_suspended:
+            return
+        self._accels_suspended = suspend
+        for action, accels in ACCELS.items():
+            if suspend and action not in KEEP_IN_TERMINAL:
+                accels = [a for a in accels if "<Control>" in a and "<Shift>" in a]
+            self.set_accels_for_action(action, accels)
 
     def _on_preferences(self, *_args):
         from .preferences import PreferencesDialog

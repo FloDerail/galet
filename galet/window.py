@@ -2,7 +2,7 @@
 
 import os
 
-from gi.repository import Adw, Gdk, Gio, GLib, GObject, Gtk
+from gi.repository import Adw, Gdk, Gio, GLib, GObject, Gtk, Pango
 
 from . import dialogs, dnd, fileops, quickactions, search, servers
 from .i18n import _, ngettext
@@ -32,6 +32,8 @@ class GaletWindow(Adw.ApplicationWindow):
         self._settings_handler = self.settings.connect("changed", self._on_setting_changed)
         self._apply_window_buttons()
         self._install_file_shortcuts()
+        self.connect("notify::focus-widget", self._on_focus_changed)
+        self.connect("notify::is-active", self._on_focus_changed)
         if not empty:
             self.new_tab(location or start_location(self.settings.get("new_window_location")))
 
@@ -76,6 +78,8 @@ class GaletWindow(Adw.ApplicationWindow):
         section.append_submenu(_("Go"), go_menu)
         section.append(_("Go to Location…"), "win.go-to")
         section.append(_("Connect to Server…"), "win.connect-server")
+        section.append(_("Terminal"), "win.toggle-terminal")
+        section.append(_("Dual Pane"), "win.dual-pane")
         section.append(_("Show Hidden Files"), "win.show-hidden")
         menu.append_section(None, section)
         section = Gio.Menu()
@@ -186,7 +190,25 @@ class GaletWindow(Adw.ApplicationWindow):
         bottom.append(self.path_bar)
         bottom.append(self.status_label)
 
-        self.toast_overlay = Adw.ToastOverlay(child=self.tab_view)
+        from .terminal import TerminalPanel
+
+        self.terminal_panel = TerminalPanel(self)
+        # Dual pane (local ↔ server): a second file pane to the right of the tabs
+        self.side_pane = None
+        self._side_active = False
+        self.side_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, css_classes=["galet-side"], visible=False)
+        self.dual_paned = Gtk.Paned(orientation=Gtk.Orientation.HORIZONTAL, start_child=self.tab_view,
+                                    end_child=self.side_box, resize_start_child=True, resize_end_child=True,
+                                    shrink_start_child=False, shrink_end_child=False, wide_handle=True)
+        for side, widget in ((False, self.tab_view), (True, self.side_box)):
+            click = Gtk.GestureClick(button=0, propagation_phase=Gtk.PropagationPhase.CAPTURE)
+            click.connect("pressed", lambda *_a, s=side: self._set_side_active(s))
+            widget.add_controller(click)
+        self.terminal_paned = Gtk.Paned(orientation=Gtk.Orientation.VERTICAL, start_child=self.dual_paned,
+                                        end_child=self.terminal_panel, resize_start_child=True,
+                                        resize_end_child=False, shrink_end_child=False, wide_handle=True)
+        self.terminal_panel.set_visible(False)
+        self.toast_overlay = Adw.ToastOverlay(child=self.terminal_paned)
         content = Adw.ToolbarView()
         content.add_top_bar(header)
         content.add_top_bar(self.tab_bar)
@@ -245,6 +267,10 @@ class GaletWindow(Adw.ApplicationWindow):
             "new-folder": lambda: fileops.new_folder(self, self.current_pane.current_dir(),
                                                       lambda folder: self.current_pane.reveal(folder, rename=True)),
             "open-terminal": lambda: fileops.open_terminal(self, self.current_pane.current_dir()),
+            "copy-to-other": lambda: self.transfer_to_other(move=False),
+            "move-to-other": lambda: self.transfer_to_other(move=True),
+            "toggle-terminal": lambda: self.show_terminal(not self.terminal_panel.get_visible()
+                                                          or not self._terminal_focused()),
             "edit-tags": lambda: dialogs.edit_tags(self, self.selection),
             "connect-server": lambda: servers.ConnectDialog(self).present(self),
             "get-info": self._get_info,
@@ -305,6 +331,10 @@ class GaletWindow(Adw.ApplicationWindow):
             "show-hidden", None, GLib.Variant("b", self.settings.get("show_hidden", False)))
         self.hidden_action.connect("change-state", self._on_show_hidden)
         self.add_action(self.hidden_action)
+
+        self.dual_action = Gio.SimpleAction.new_stateful("dual-pane", None, GLib.Variant("b", False))
+        self.dual_action.connect("change-state", lambda _a, value: self.show_dual(value.get_boolean()))
+        self.add_action(self.dual_action)
 
     def _enable(self, name, enabled):
         action = self.lookup_action(name)
@@ -425,6 +455,8 @@ class GaletWindow(Adw.ApplicationWindow):
             if pane is None or self.get_visible_dialog() is not None:
                 return False
             focus = self.get_focus()
+            if focus is not None and focus.is_ancestor(self.terminal_panel):
+                return False  # keys go to the shell
             widget = focus
             while widget is not None:  # typing text, or inside a popover menu: let it handle the key
                 if isinstance(widget, (Gtk.Editable, Gtk.Popover)):
@@ -574,12 +606,20 @@ class GaletWindow(Adw.ApplicationWindow):
 
     @property
     def current_pane(self):
+        if self._side_active and self.dual_active():
+            return self.side_pane
+        page = self.tab_view.get_selected_page()
+        return page.get_child() if page is not None else None
+
+    @property
+    def main_pane(self):
         page = self.tab_view.get_selected_page()
         return page.get_child() if page is not None else None
 
     @property
     def panes(self):
-        return [self.tab_view.get_nth_page(i).get_child() for i in range(self.tab_view.get_n_pages())]
+        panes = [self.tab_view.get_nth_page(i).get_child() for i in range(self.tab_view.get_n_pages())]
+        return panes + ([self.side_pane] if self.side_pane is not None else [])
 
     @property
     def selection(self):
@@ -681,6 +721,144 @@ class GaletWindow(Adw.ApplicationWindow):
         server = self._saved_server(uri)
         if server is not None:
             servers.open_ssh(self, server)
+
+    # ------------------------------------------------------------- terminal
+
+    def _terminal_focused(self):
+        focus = self.get_focus()
+        return focus is not None and focus.is_ancestor(self.terminal_panel)
+
+    def show_terminal(self, show=True, create=True):
+        """Show (and focus) or hide the terminal panel under the files."""
+        panel = self.terminal_panel
+        if show:
+            if not panel.get_visible():
+                panel.set_visible(True)
+                height = self.terminal_paned.get_height() or self.get_height()
+                self.terminal_paned.set_position(max(120, height - self.settings.get("terminal_height", 260)))
+            if create:
+                panel.ensure_terminal()
+        else:
+            if panel.get_visible():
+                self.settings.set("terminal_height", max(120, self.terminal_paned.get_height()
+                                                         - self.terminal_paned.get_position()))
+            panel.set_visible(False)
+            pane = self.current_pane
+            if pane is not None and pane.view is not None:
+                pane.view.grab_focus()
+
+    def _on_focus_changed(self, *_args):
+        self.app.suspend_accels(self._terminal_focused())
+        focus = self.get_focus()
+        if focus is not None and self.dual_active():
+            if focus.is_ancestor(self.side_box):
+                self._set_side_active(True)
+            elif focus.is_ancestor(self.tab_view):
+                self._set_side_active(False)
+
+    # ------------------------------------------------------------ dual pane
+
+    def dual_active(self):
+        return self.side_pane is not None and self.side_box.get_visible()
+
+    def _set_side_active(self, side):
+        if not self.dual_active():
+            side = False
+        if side == self._side_active:
+            return
+        self._side_active = side
+        self._mark_active_side()
+        self._sync_chrome()
+
+    def _mark_active_side(self):
+        dual = self.dual_active()
+        for widget, active in ((self.tab_view, dual and not self._side_active), (self.side_box, dual and self._side_active)):
+            (widget.add_css_class if active else widget.remove_css_class)("galet-active-side")
+
+    def show_dual(self, show=True, location=None):
+        """Show the second pane (for transfers), optionally at ``location``."""
+        if show:
+            if self.side_pane is None:
+                main = self.main_pane
+                start = location or (main.location if main is not None else Location.home())
+                pane = BrowserPane(self, start, self.view_mode_action.get_state().get_string(),
+                                   self.hidden_action.get_state().get_boolean())
+                pane.window = self
+                pane.connect("location-changed", self._on_side_location)
+                pane.connect("status-changed", self._on_pane_status)
+                self.side_pane = pane
+                self.side_title = Gtk.Label(css_classes=["heading"], ellipsize=Pango.EllipsizeMode.MIDDLE,
+                                            hexpand=True, xalign=0)
+                header = Gtk.Box(spacing=4, css_classes=["galet-side-header"])
+                for icon, tooltip, callback in (
+                        ("go-previous-symbolic", _("Back"), lambda: self.side_pane.go_back()),
+                        ("go-up-symbolic", _("Enclosing Folder"), lambda: self.side_pane.go_up())):
+                    button = Gtk.Button(icon_name=icon, tooltip_text=tooltip, css_classes=["flat"])
+                    button.connect("clicked", lambda _b, cb=callback: (self._set_side_active(True), cb()))
+                    header.append(button)
+                header.append(self.side_title)
+                close = Gtk.Button(icon_name="window-close-symbolic", tooltip_text=_("Close Dual Pane"),
+                                   css_classes=["flat", "circular"])
+                close.connect("clicked", lambda *_a: self.show_dual(False))
+                header.append(close)
+                self.side_box.append(header)
+                self.side_box.append(pane)
+                pane.set_vexpand(True)
+                self._on_side_location(pane)
+            elif location is not None:
+                self.side_pane.go_to(location)
+            if not self.side_box.get_visible():
+                self.side_box.set_visible(True)
+                width = self.dual_paned.get_width() or self.get_width()
+                self.dual_paned.set_position(width // 2)
+            self._set_side_active(True)
+            self._mark_active_side()
+        else:
+            self._set_side_active(False)
+            if self.side_pane is not None:
+                self.side_pane.teardown()
+                self.side_box.remove(self.side_pane)
+                child = self.side_box.get_first_child()
+                while child is not None:
+                    following = child.get_next_sibling()
+                    self.side_box.remove(child)
+                    child = following
+                self.side_pane = None
+            self.side_box.set_visible(False)
+            self._mark_active_side()
+            self._sync_chrome()
+        self.dual_action.set_state(GLib.Variant("b", show))
+
+    def _on_side_location(self, pane):
+        self.side_title.set_text(pane.location.title)
+        self.side_title.set_tooltip_text(pane.location.gfile.get_uri() if not pane.location.is_virtual else None)
+        if pane is self.current_pane:
+            self._sync_chrome()
+
+    def other_pane(self):
+        if not self.dual_active():
+            return None
+        return self.main_pane if self._side_active else self.side_pane
+
+    def transfer_to_other(self, move):
+        other = self.other_pane()
+        items = self.selection
+        if other is None or not items or other.location.is_virtual:
+            return
+        destination = other.location.gfile
+        uris = [item.gfile.get_uri() for item in items]
+        servers.ensure_mounted(self, destination, lambda: fileops.transfer(self, uris, destination, move))
+
+    def open_transfer(self, server_uri):
+        """Termius-style SFTP view: your computer on the left, the server on the right."""
+        gfile = Gio.File.new_for_uri(server_uri)
+        main = self.main_pane
+        if main is not None and (main.location.is_virtual or servers.needs_mount(main.location.gfile)):
+            main.go_to(Location.home())
+        servers.ensure_mounted(self, gfile, lambda: self.show_dual(True, Location(gfile)))
+        remember = getattr(servers, "remember_recent", None)
+        if remember is not None:
+            remember(self.settings, server_uri)
 
     def _disconnect_uri(self, uri):
         mount = servers.find_mount(Gio.File.new_for_uri(uri))

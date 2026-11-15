@@ -1501,3 +1501,147 @@ msgstr "Supprimer « {name} » ?"
 
 msgid "The server and its saved password are removed. Your files on the server are not touched."
 msgstr "Le serveur et son mot de passe enregistré sont supprimés. Vos fichiers sur le serveur ne sont pas touchés."
+
+msgid "Copy to the Other Side {arrow}"
+msgstr "Copier de l'autre côté {arrow}"
+
+msgid "Move to the Other Side {arrow}"
+msgstr "Déplacer de l'autre côté {arrow}"
+
+msgid "Not encrypted: the GNOME keyring is not available."
+msgstr "Non chiffrée : le trousseau GNOME n'est pas disponible."
+
+msgid "Encrypted (AES-256), locked by your master password."
+msgstr "Chiffrée (AES-256), verrouillée par votre mot de passe maître."
+
+msgid "Encrypted (AES-256) with a key kept in the GNOME keyring."
+msgstr "Chiffrée (AES-256) avec une clé gardée dans le trousseau GNOME."
+
+msgid "Security"
+msgstr "Sécurité"
+
+msgid "Server List"
+msgstr "Liste des serveurs"
+
+msgid "Master Password"
+msgstr "Mot de passe maître"
+
+msgid "Lock the server list like a vault: asked once per session."
+msgstr "Verrouille la liste des serveurs comme un coffre : demandé une fois par session."
+
+msgid "On"
+msgstr "Activé"
+
+msgid "Off"
+msgstr "Désactivé"
+
+msgid "Lock Servers"
+msgstr "Verrouiller les serveurs"
+
+msgid "Save your settings, tags, folder colours, favourites and servers in a file, to restore them later or on another computer. API keys and passwords are not included."
+msgstr "Enregistrez vos réglages, tags, couleurs de dossiers, favoris et serveurs dans un fichier, pour les restaurer plus tard ou sur un autre ordinateur. Les clés d'API et les mots de passe ne sont pas inclus."
+
+msgid "Servers (without their passwords)"
+msgstr "Serveurs (sans leurs mots de passe)"
+
+msgid "Encrypt the backup"
+msgstr "Chiffrer la sauvegarde"
+
+msgid "Protected by a password you choose (AES-256)"
+msgstr "Protégée par un mot de passe de votre choix (AES-256)"
+
+msgid "Backup Password"
+msgstr "Mot de passe de la sauvegarde"
+
+msgid "Confirm"
+msgstr "Confirmer"
+
+msgid "Continue"
+msgstr "Continuer"
+
+msgid "Choose a password (6 characters or more). It will be asked to import the backup; without it, the file cannot be opened."
+msgstr "Choisissez un mot de passe (6 caractères ou plus). Il sera demandé pour importer la sauvegarde ; sans lui, le fichier ne peut pas être ouvert."
+
+msgid "Galet backups"
+msgstr "Sauvegardes Galet"
+
+msgid "Encrypted Backup"
+msgstr "Sauvegarde chiffrée"
+
+msgid "Wrong password, try again."
+msgstr "Mot de passe incorrect, réessayez."
+
+msgid "This backup is encrypted. Type its password."
+msgstr "Cette sauvegarde est chiffrée. Saisissez son mot de passe."
+
+msgid "Backup of {date}: {tags} tags, {files} tagged items, {colors} folder colours, {bookmarks} favourites, {photos} photo descriptions, {servers} servers.\n\nTags, colours, favourites and servers are added to yours; settings are replaced."
+msgstr "Sauvegarde du {date} : {tags} tags, {files} éléments tagués, {colors} couleurs de dossiers, {bookmarks} favoris, {photos} descriptions de photos, {servers} serveurs.\n\nLes tags, couleurs, favoris et serveurs s'ajoutent aux vôtres ; les réglages sont remplacés."
+
+msgid "Change Master Password"
+msgstr "Changer le mot de passe maître"
+
+msgid "Set a Master Password"
+msgstr "Définir un mot de passe maître"
+
+msgid "Your server list is encrypted. With a master password, it stays locked until you type it (once per session). If you forget it, the server list cannot be recovered."
+msgstr "Votre liste de serveurs est chiffrée. Avec un mot de passe maître, elle reste verrouillée tant que vous ne l'avez pas saisi (une fois par session). Si vous l'oubliez, la liste ne pourra pas être récupérée."
+
+msgid "New Master Password"
+msgstr "Nouveau mot de passe maître"
+
+msgid "Servers Locked"
+msgstr "Serveurs verrouillés"
+
+msgid "Your server list is encrypted. Type your master password to open it."
+msgstr "Votre liste de serveurs est chiffrée. Saisissez votre mot de passe maître pour l'ouvrir."
+
+msgid "Unlock"
+msgstr "Déverrouiller"
+
+msgid "Wrong master password."
+msgstr "Mot de passe maître incorrect."
+
+msgid "Servers Unavailable"
+msgstr "Serveurs indisponibles"
+
+msgid "The encrypted server list could not be opened: the GNOME keyring is not available or its key is missing."
+msgstr "La liste chiffrée des serveurs n'a pas pu être ouverte : le trousseau GNOME n'est pas disponible ou sa clé est manquante."
+
+msgid "Transfer Files (dual pane)"
+msgstr "Transférer des fichiers (double panneau)"
+
+msgid "Unlock Servers…"
+msgstr "Déverrouiller les serveurs…"
+
+msgid "Could not start the terminal: {error}"
+msgstr "Impossible de lancer le terminal : {error}"
+
+msgid "New Terminal"
+msgstr "Nouveau terminal"
+
+msgid "Go to the Current Folder"
+msgstr "Aller au dossier courant"
+
+msgid "Hide Terminal"
+msgstr "Masquer le terminal"
+
+msgid "Terminal Unavailable"
+msgstr "Terminal indisponible"
+
+msgid "The built-in terminal needs VTE: install the package gir1.2-vte-3.91 (Ubuntu, Zorin, Debian) or vte4 (Fedora, Arch), or use the Flatpak version of Galet."
+msgstr "Le terminal intégré a besoin de VTE : installez le paquet gir1.2-vte-3.91 (Ubuntu, Zorin, Debian) ou vte4 (Fedora, Arch), ou utilisez la version Flatpak de Galet."
+
+msgid "Open the System Terminal"
+msgstr "Ouvrir le terminal du système"
+
+msgid "Terminal"
+msgstr "Terminal"
+
+msgid "Dual Pane"
+msgstr "Double panneau"
+
+msgid "Enclosing Folder"
+msgstr "Dossier parent"
+
+msgid "Close Dual Pane"
+msgstr "Fermer le double panneau"

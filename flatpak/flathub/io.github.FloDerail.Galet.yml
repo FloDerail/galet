@@ -29,6 +29,29 @@ finish-args:
   # Open a terminal, run thumbnailers, pdftotext and 7z from the host system
   - --talk-name=org.freedesktop.Flatpak
 modules:
+  # Terminal widget for the built-in terminal panel (not in the GNOME runtime)
+  - name: vte
+    buildsystem: meson
+    config-opts:
+      - -Dgtk3=false
+      - -Dgtk4=true
+      - -Dgir=true
+      - -Dvapi=false
+      - -Dglade=false
+      - -Ddocs=false
+      - -D_systemd=false
+    cleanup:
+      - /bin
+      - /include
+      - /lib/pkgconfig
+      - /libexec
+      - /share/gir-1.0
+      - /share/vala
+      - /etc
+    sources:
+      - type: archive
+        url: https://download.gnome.org/sources/vte/0.84/vte-0.84.1.tar.xz
+        sha256: aca1caa8478aebcdbb1d67897fb3511eb7601debae6810e16a15b6fa25f31ac8
   - name: galet
     buildsystem: simple
     build-commands:

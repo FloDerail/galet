@@ -152,7 +152,7 @@ class NameCell(_Cell):
         super().__init__(spacing=8)
         self.settings = settings
         self.image = Gtk.Image(pixel_size=20)
-        self.label = Gtk.Label(xalign=0, hexpand=True, ellipsize=Pango.EllipsizeMode.MIDDLE)
+        self.label = Gtk.Label(xalign=0, hexpand=True, ellipsize=Pango.EllipsizeMode.MIDDLE, width_chars=16)
         self.dots = TagDots(tagstore, 10)
         self.append(self.image)
         self.append(self.label)

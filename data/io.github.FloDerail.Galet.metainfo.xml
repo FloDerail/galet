@@ -85,6 +85,9 @@
     <keyword>explorer</keyword>
   </keywords>
   <releases>
+    <release version="0.9.0" date="2026-11-15">
+      <description><p>Encrypted server list with an optional master password, encrypted backups, a built-in terminal panel (local or SSH) and a dual pane for file transfers.</p></description>
+    </release>
     <release version="0.8.0" date="2026-11-15">
       <description><p>Server manager: server cards with protocol, host, port and user name, passwords in the GNOME keyring, Galet's own login window, clear connection errors and a one-click SSH terminal.</p></description>
     </release>

@@ -134,8 +134,17 @@ class Sidebar(Gtk.ScrolledWindow):
             self._heading(_("Servers"))
             for server, gfile in zip(saved, saved_files):
                 mount = servers.find_mount(gfile, self._volumes)
-                self._row(server["name"], Location(gfile), "network-server-symbolic", mount=mount,
-                          server_uri=server["uri"])
+                self._row(server["name"], Location(gfile), servers.protocol_info(server["protocol"])[3],
+                          mount=mount, server_uri=server["uri"])
+        elif shows("servers") and servers.vault_locked(self.settings):
+            self._heading(_("Servers"))
+            box = Gtk.Box(spacing=10)
+            box.append(Gtk.Image(icon_name="system-lock-screen-symbolic"))
+            box.append(Gtk.Label(label=_("Unlock Servers…"), xalign=0, hexpand=True,
+                                 ellipsize=Pango.EllipsizeMode.END))
+            row = Gtk.ListBoxRow(child=box)
+            row.callback = lambda: servers.ConnectDialog(self.window).present(self.window)
+            self.listbox.append(row)
 
         smart = search.smart_folders(self.settings)
         if smart:
@@ -286,6 +295,10 @@ class Sidebar(Gtk.ScrolledWindow):
     # ------------------------------------------------------------- behaviour
 
     def _on_row_activated(self, _listbox, row):
+        callback = getattr(row, "callback", None)
+        if callback is not None:
+            callback()
+            return
         volume = getattr(row, "volume", None)
         if volume is not None:
             servers.mount_volume(self.window, volume, lambda root: self.window.navigate(Location(root)))

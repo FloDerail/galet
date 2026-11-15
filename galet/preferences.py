@@ -374,6 +374,38 @@ class PreferencesDialog(Adw.PreferencesDialog):
             group.add(row)
         self.servers_group = group
         self.servers_page.add(group)
+        self._fill_security()
+
+    def _fill_security(self):
+        from . import vault as vault_module
+
+        if getattr(self, "security_group", None) is not None:
+            self.servers_page.remove(self.security_group)
+        vault = vault_module.get(self.settings)
+        if vault.plain:
+            status = _("Not encrypted: the GNOME keyring is not available.")
+        elif vault.uses_master:
+            status = _("Encrypted (AES-256), locked by your master password.")
+        else:
+            status = _("Encrypted (AES-256) with a key kept in the GNOME keyring.")
+        group = Adw.PreferencesGroup(title=_("Security"))
+        row = Adw.ActionRow(title=_("Server List"), subtitle=status)
+        row.add_prefix(Gtk.Image(icon_name="security-high-symbolic"))
+        group.add(row)
+        master = Adw.ActionRow(title=_("Master Password"),
+                               subtitle=_("Lock the server list like a vault: asked once per session."),
+                               activatable=not vault.locked and not vault.plain)
+        master.add_suffix(Gtk.Label(label=_("On") if vault.uses_master else _("Off"), css_classes=["dim-label"]))
+        master.add_suffix(Gtk.Image(icon_name="go-next-symbolic"))
+        master.connect("activated", lambda *_a: servers.master_password_dialog(self, self.settings,
+                                                                               self._fill_security))
+        group.add(master)
+        if vault.uses_master and not vault.locked:
+            lock = Gtk.Button(label=_("Lock Servers"), valign=Gtk.Align.CENTER, css_classes=["flat"])
+            lock.connect("clicked", lambda *_a: vault.lock())
+            row.add_suffix(lock)
+        self.security_group = group
+        self.servers_page.add(group)
 
     # --------------------------------------------------------------------- AI
 
@@ -562,11 +594,12 @@ class PreferencesDialog(Adw.PreferencesDialog):
 
         group = Adw.PreferencesGroup(
             title=_("Backup"),
-            description=_("Save your settings, tags, folder colours and favourites in a file, to restore them "
-                          "later or on another computer. API keys are not included."))
+            description=_("Save your settings, tags, folder colours, favourites and servers in a file, to "
+                          "restore them later or on another computer. API keys and passwords are not included."))
         labels = {"settings": _("Settings"), "tags": _("Tag names and colours"),
                   "file_tags": _("Tags of your files and folders"), "folder_colors": _("Folder colours"),
-                  "bookmarks": _("Sidebar favourites"), "photo_descriptions": _("AI photo descriptions")}
+                  "bookmarks": _("Sidebar favourites"), "photo_descriptions": _("AI photo descriptions"),
+                  "servers": _("Servers (without their passwords)")}
         expander = Adw.ExpanderRow(title=_("What to include"), subtitle=_("Everything, by default"))
         self.backup_rows = {}
         for key in backup.SECTIONS:
@@ -574,6 +607,9 @@ class PreferencesDialog(Adw.PreferencesDialog):
             expander.add_row(row)
             self.backup_rows[key] = row
         group.add(expander)
+        self.backup_encrypt = Adw.SwitchRow(title=_("Encrypt the backup"), active=True,
+                                            subtitle=_("Protected by a password you choose (AES-256)"))
+        group.add(self.backup_encrypt)
         actions = Adw.ActionRow(title=_("Backup file"))
         export = Gtk.Button(label=_("Export…"), valign=Gtk.Align.CENTER, css_classes=["suggested-action"])
         export.connect("clicked", lambda _b: self._export_backup())
@@ -590,12 +626,61 @@ class PreferencesDialog(Adw.PreferencesDialog):
     def _toast(self, text):
         self.add_toast(Adw.Toast(title=GLib.markup_escape_text(text), timeout=4))
 
+    def _ask_backup_password(self, confirm, callback, heading=None, body=None):
+        dialog = Adw.AlertDialog(heading=heading or _("Backup Password"), body=body or "")
+        group = Adw.PreferencesGroup()
+        first = Adw.PasswordEntryRow(title=_("Password"))
+        group.add(first)
+        second = Adw.PasswordEntryRow(title=_("Confirm"))
+        if confirm:
+            group.add(second)
+        dialog.set_extra_child(group)
+        dialog.add_response("cancel", _("Cancel"))
+        dialog.add_response("ok", _("Continue"))
+        dialog.set_response_appearance("ok", Adw.ResponseAppearance.SUGGESTED)
+        dialog.set_response_enabled("ok", False)
+        dialog.set_close_response("cancel")
+
+        def valid():
+            return bool(first.get_text()) and (not confirm or (len(first.get_text()) >= 6
+                                                               and first.get_text() == second.get_text()))
+
+        for row in (first, second):
+            row.connect("changed", lambda *_a: dialog.set_response_enabled("ok", valid()))
+
+        answered = []
+
+        def respond(_d, response):
+            if answered:
+                return
+            answered.append(response)
+            if response == "ok" and valid():
+                callback(first.get_text())
+
+        def submit(*_args):
+            if valid():
+                respond(dialog, "ok")
+                dialog.close()
+
+        (second if confirm else first).connect("entry-activated", submit)
+        dialog.connect("response", respond)
+        dialog.present(self)
+
     def _export_backup(self):
+        if self.backup_encrypt.get_active():
+            self._ask_backup_password(True, self._export_backup_to, body=_(
+                "Choose a password (6 characters or more). It will be asked to import the backup; without "
+                "it, the file cannot be opened."))
+        else:
+            self._export_backup_to(None)
+
+    def _export_backup_to(self, password):
         import threading
 
         from . import backup
 
-        dialog = Gtk.FileDialog(title=_("Export Galet Backup"), initial_name=backup.default_file_name())
+        dialog = Gtk.FileDialog(title=_("Export Galet Backup"),
+                                initial_name=backup.default_file_name(encrypted=bool(password)))
         sections = self._backup_sections()
 
         def chosen(source, result, *_args):
@@ -608,7 +693,7 @@ class PreferencesDialog(Adw.PreferencesDialog):
             def work():
                 try:
                     data = backup.collect(self.app, sections)
-                    backup.write(path, data)
+                    backup.write(path, data, password)
                     GLib.idle_add(done, backup.summary(data), None)
                 except (OSError, backup.BackupError) as err:
                     GLib.idle_add(done, None, str(err))
@@ -629,8 +714,9 @@ class PreferencesDialog(Adw.PreferencesDialog):
     def _import_backup(self):
         from . import backup
 
-        json_filter = Gtk.FileFilter(name=_("Galet backups (JSON)"))
+        json_filter = Gtk.FileFilter(name=_("Galet backups"))
         json_filter.add_pattern("*.json")
+        json_filter.add_pattern("*.gpg")
         filters = Gio.ListStore.new(Gtk.FileFilter)
         filters.append(json_filter)
         dialog = Gtk.FileDialog(title=_("Import Galet Backup"), filters=filters)
@@ -641,18 +727,30 @@ class PreferencesDialog(Adw.PreferencesDialog):
                 gfile = source.open_finish(result)
             except GLib.Error:
                 return
+            open_file(gfile.get_path(), None)
+
+        def open_file(path, password):
             try:
-                data = backup.read(gfile.get_path())
+                data = backup.read(path, password)
+            except backup.PasswordNeeded:
+                self._ask_backup_password(
+                    False, lambda pw: open_file(path, pw), heading=_("Encrypted Backup"),
+                    body=_("Wrong password, try again.") if password else
+                    _("This backup is encrypted. Type its password."))
+                return
             except backup.BackupError as err:
                 self._toast(_("This file can't be imported: {error}").format(error=err))
                 return
+            confirm_import(data)
+
+        def confirm_import(data):
             counts = backup.summary(data)
             body = _("Backup of {date}: {tags} tags, {files} tagged items, {colors} folder colours, "
-                     "{bookmarks} favourites, {photos} photo descriptions.\n\nTags, colours and favourites "
-                     "are added to yours; settings are replaced.").format(
+                     "{bookmarks} favourites, {photos} photo descriptions, {servers} servers.\n\nTags, colours, "
+                     "favourites and servers are added to yours; settings are replaced.").format(
                 date=str(data.get("created", "?")).replace("T", " ")[:16], tags=counts["tags"],
                 files=counts["file_tags"], colors=counts["folder_colors"], bookmarks=counts["bookmarks"],
-                photos=counts["photo_descriptions"])
+                photos=counts["photo_descriptions"], servers=counts["servers"])
             confirm = Adw.AlertDialog(heading=_("Import this backup?"), body=body)
             confirm.add_response("cancel", _("Cancel"))
             confirm.add_response("import", _("Import"))

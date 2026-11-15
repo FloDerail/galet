@@ -65,6 +65,15 @@ staying a native GTK4 / libadwaita application that blends in with GNOME and Zor
   message when a connection fails, one-click SSH terminal for SFTP servers, quick connect, search,
   recent servers, servers in the sidebar with eject buttons. GNOME Online Accounts drives reconnect
   in one click.
+- **Encrypted server list**: server cards are stored encrypted (GnuPG, AES-256) with a key kept in the
+  GNOME keyring, or locked by an optional **master password**, like a vault. Backups can be encrypted
+  with a password too.
+- **Built-in terminal** (<kbd>Ctrl</kbd>+<kbd>`</kbd> or <kbd>F4</kbd>): a terminal panel under the
+  files, with tabs. It opens in the current folder, or as an SSH session when you are on an SFTP
+  server. Ctrl+letter shortcuts go to the shell while you type.
+- **Dual pane** (<kbd>F3</kbd>): your computer on one side, a server (or any folder) on the other;
+  drag and drop or “Copy/Move to the Other Side”. From the server manager, “Transfer Files” opens it
+  directly.
 
 **Themes**
 
@@ -133,7 +142,7 @@ Requirements (already present on Zorin OS 17+/Ubuntu 24.04+):
 Python 3.10+, GTK 4.12+, libadwaita 1.5+, PyGObject, pycairo, and optionally `gnome-sushi` for Quick Look.
 
 ```sh
-sudo apt install python3-gi python3-gi-cairo gir1.2-gtk-4.0 gir1.2-adw-1 gnome-sushi
+sudo apt install python3-gi python3-gi-cairo gir1.2-gtk-4.0 gir1.2-adw-1 gnome-sushi gir1.2-vte-3.91 gnupg
 ```
 
 Run from the source tree:

@@ -42,6 +42,9 @@ logiciel libre, il peut maintenant convenir à d'autres aussi.
 | 🤖 **IA (facultative)** | Recherche en langage naturel (« les factures PDF de cette semaine ») et suggestions de tags. Au choix : **Ollama** (local, rien ne quitte votre ordinateur), **Claude**, **Mistral**, **Gemini**, **ChatGPT** (clé d'API rangée dans le trousseau GNOME), ou **Claude Code** / **Gemini CLI** (votre abonnement, sans clé). Désactivée par défaut. |
 | 🌍 **Langues** | Français, anglais, espagnol, allemand, italien, portugais. |
 | 🌐 **Serveurs** | `Ctrl+K` : gestionnaire de serveurs — partages Windows (SMB), SFTP, FTP, WebDAV (Nextcloud, kDrive…), NFS. Fiches avec identifiant et mot de passe (trousseau GNOME), connexion en un clic, terminal SSH, serveurs dans la barre latérale. |
+| 🔐 **Chiffrement** | Liste des serveurs chiffrée (AES-256), mot de passe maître facultatif comme un coffre, sauvegardes chiffrées par mot de passe. |
+| 💻 **Terminal intégré** | `Ctrl+`` ` ou `F4` : panneau terminal sous les fichiers, en onglets, ouvert dans le dossier courant ou en SSH sur un serveur SFTP. |
+| ↔️ **Double panneau** | `F3` : ordinateur d'un côté, serveur de l'autre, glisser-déposer ou « Copier / Déplacer de l'autre côté ». |
 | 📱 **Envoi vers le téléphone** | Avec Zorin Connect ou GSConnect, comme AirDrop. |
 | 🎨 **Thèmes** | Système, **macOS** (pastilles rouge-orange-vert à gauche), **Windows 11** ou **Personnalisé** (couleur, boutons, coins, police), en clair ou en sombre. |
 | 📁 **Dossiers colorés** | Clic droit → « Couleur du dossier ». Un dossier peut prendre la couleur de son tag, et la palette se règle dans Réglages → Dossiers. Chaque dossier retient aussi sa présentation, comme sur Mac. |
@@ -101,7 +104,7 @@ Ouvrez un terminal (`Ctrl+Alt+T`) et tapez :
 
 ```sh
 sudo apt update
-sudo apt install git python3-gi python3-gi-cairo gir1.2-gtk-4.0 gir1.2-adw-1 gnome-sushi
+sudo apt install git python3-gi python3-gi-cairo gir1.2-gtk-4.0 gir1.2-adw-1 gnome-sushi gir1.2-vte-3.91 gnupg
 ```
 
 > Sur Zorin OS et Ubuntu récents, la plupart sont déjà installées : la commande ne fera que

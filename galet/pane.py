@@ -490,6 +490,13 @@ class BrowserPane(Gtk.Box):
             if len(items) == 1 and not items[0].is_dir:
                 section.append(_("Open With…"), "win.open-with")
             menu.append_section(None, section)
+            other = self.window.other_pane() if hasattr(self.window, "other_pane") else None
+            if other is not None and not other.location.is_virtual and not self.in_trash:
+                section = Gio.Menu()
+                arrow = "→" if other is self.window.side_pane else "←"
+                section.append(_("Copy to the Other Side {arrow}").format(arrow=arrow), "win.copy-to-other")
+                section.append(_("Move to the Other Side {arrow}").format(arrow=arrow), "win.move-to-other")
+                menu.append_section(None, section)
 
             section = Gio.Menu()
             if self.in_trash:

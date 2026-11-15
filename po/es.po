@@ -1347,3 +1347,147 @@ msgstr "¿Eliminar «{name}»?"
 
 msgid "The server and its saved password are removed. Your files on the server are not touched."
 msgstr "Se eliminan el servidor y su contraseña guardada. Sus archivos en el servidor no se tocan."
+
+msgid "Copy to the Other Side {arrow}"
+msgstr "Copiar al otro lado {arrow}"
+
+msgid "Move to the Other Side {arrow}"
+msgstr "Mover al otro lado {arrow}"
+
+msgid "Not encrypted: the GNOME keyring is not available."
+msgstr "Sin cifrar: el llavero de GNOME no está disponible."
+
+msgid "Encrypted (AES-256), locked by your master password."
+msgstr "Cifrada (AES-256), bloqueada con su contraseña maestra."
+
+msgid "Encrypted (AES-256) with a key kept in the GNOME keyring."
+msgstr "Cifrada (AES-256) con una clave guardada en el llavero de GNOME."
+
+msgid "Security"
+msgstr "Seguridad"
+
+msgid "Server List"
+msgstr "Lista de servidores"
+
+msgid "Master Password"
+msgstr "Contraseña maestra"
+
+msgid "Lock the server list like a vault: asked once per session."
+msgstr "Bloquea la lista de servidores como una caja fuerte: se pide una vez por sesión."
+
+msgid "On"
+msgstr "Activado"
+
+msgid "Off"
+msgstr "Desactivado"
+
+msgid "Lock Servers"
+msgstr "Bloquear los servidores"
+
+msgid "Save your settings, tags, folder colours, favourites and servers in a file, to restore them later or on another computer. API keys and passwords are not included."
+msgstr "Guarde sus ajustes, etiquetas, colores de carpetas, favoritos y servidores en un archivo para restaurarlos más tarde o en otro equipo. No se incluyen claves de API ni contraseñas."
+
+msgid "Servers (without their passwords)"
+msgstr "Servidores (sin sus contraseñas)"
+
+msgid "Encrypt the backup"
+msgstr "Cifrar la copia de seguridad"
+
+msgid "Protected by a password you choose (AES-256)"
+msgstr "Protegida con una contraseña elegida por usted (AES-256)"
+
+msgid "Backup Password"
+msgstr "Contraseña de la copia"
+
+msgid "Confirm"
+msgstr "Confirmar"
+
+msgid "Continue"
+msgstr "Continuar"
+
+msgid "Choose a password (6 characters or more). It will be asked to import the backup; without it, the file cannot be opened."
+msgstr "Elija una contraseña (6 caracteres o más). Se pedirá para importar la copia; sin ella, el archivo no se puede abrir."
+
+msgid "Galet backups"
+msgstr "Copias de Galet"
+
+msgid "Encrypted Backup"
+msgstr "Copia cifrada"
+
+msgid "Wrong password, try again."
+msgstr "Contraseña incorrecta, inténtelo de nuevo."
+
+msgid "This backup is encrypted. Type its password."
+msgstr "Esta copia está cifrada. Escriba su contraseña."
+
+msgid "Backup of {date}: {tags} tags, {files} tagged items, {colors} folder colours, {bookmarks} favourites, {photos} photo descriptions, {servers} servers.\n\nTags, colours, favourites and servers are added to yours; settings are replaced."
+msgstr "Copia del {date}: {tags} etiquetas, {files} elementos etiquetados, {colors} colores de carpetas, {bookmarks} favoritos, {photos} descripciones de fotos, {servers} servidores.\n\nLas etiquetas, colores, favoritos y servidores se añaden a los suyos; los ajustes se reemplazan."
+
+msgid "Change Master Password"
+msgstr "Cambiar la contraseña maestra"
+
+msgid "Set a Master Password"
+msgstr "Establecer una contraseña maestra"
+
+msgid "Your server list is encrypted. With a master password, it stays locked until you type it (once per session). If you forget it, the server list cannot be recovered."
+msgstr "Su lista de servidores está cifrada. Con una contraseña maestra, permanece bloqueada hasta que la escriba (una vez por sesión). Si la olvida, la lista no se podrá recuperar."
+
+msgid "New Master Password"
+msgstr "Nueva contraseña maestra"
+
+msgid "Servers Locked"
+msgstr "Servidores bloqueados"
+
+msgid "Your server list is encrypted. Type your master password to open it."
+msgstr "Su lista de servidores está cifrada. Escriba su contraseña maestra para abrirla."
+
+msgid "Unlock"
+msgstr "Desbloquear"
+
+msgid "Wrong master password."
+msgstr "Contraseña maestra incorrecta."
+
+msgid "Servers Unavailable"
+msgstr "Servidores no disponibles"
+
+msgid "The encrypted server list could not be opened: the GNOME keyring is not available or its key is missing."
+msgstr "No se pudo abrir la lista cifrada de servidores: el llavero de GNOME no está disponible o falta su clave."
+
+msgid "Transfer Files (dual pane)"
+msgstr "Transferir archivos (doble panel)"
+
+msgid "Unlock Servers…"
+msgstr "Desbloquear los servidores…"
+
+msgid "Could not start the terminal: {error}"
+msgstr "No se pudo iniciar el terminal: {error}"
+
+msgid "New Terminal"
+msgstr "Nuevo terminal"
+
+msgid "Go to the Current Folder"
+msgstr "Ir a la carpeta actual"
+
+msgid "Hide Terminal"
+msgstr "Ocultar el terminal"
+
+msgid "Terminal Unavailable"
+msgstr "Terminal no disponible"
+
+msgid "The built-in terminal needs VTE: install the package gir1.2-vte-3.91 (Ubuntu, Zorin, Debian) or vte4 (Fedora, Arch), or use the Flatpak version of Galet."
+msgstr "El terminal integrado necesita VTE: instale el paquete gir1.2-vte-3.91 (Ubuntu, Zorin, Debian) o vte4 (Fedora, Arch), o use la versión Flatpak de Galet."
+
+msgid "Open the System Terminal"
+msgstr "Abrir el terminal del sistema"
+
+msgid "Terminal"
+msgstr "Terminal"
+
+msgid "Dual Pane"
+msgstr "Doble panel"
+
+msgid "Enclosing Folder"
+msgstr "Carpeta contenedora"
+
+msgid "Close Dual Pane"
+msgstr "Cerrar el doble panel"
