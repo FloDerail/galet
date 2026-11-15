@@ -267,6 +267,7 @@ class GaletWindow(Adw.ApplicationWindow):
             "new-folder": lambda: fileops.new_folder(self, self.current_pane.current_dir(),
                                                       lambda folder: self.current_pane.reveal(folder, rename=True)),
             "open-terminal": lambda: fileops.open_terminal(self, self.current_pane.current_dir()),
+            "sync-with-other": self.sync_with_other,
             "copy-to-other": lambda: self.transfer_to_other(move=False),
             "move-to-other": lambda: self.transfer_to_other(move=True),
             "toggle-terminal": lambda: self.show_terminal(not self.terminal_panel.get_visible()
@@ -797,6 +798,10 @@ class GaletWindow(Adw.ApplicationWindow):
                     button.connect("clicked", lambda _b, cb=callback: (self._set_side_active(True), cb()))
                     header.append(button)
                 header.append(self.side_title)
+                sync_button = Gtk.Button(icon_name="media-playlist-repeat-symbolic", css_classes=["flat"],
+                                         tooltip_text=_("Synchronise the two folders…"))
+                sync_button.connect("clicked", lambda *_a: self.sync_with_other())
+                header.append(sync_button)
                 close = Gtk.Button(icon_name="window-close-symbolic", tooltip_text=_("Close Dual Pane"),
                                    css_classes=["flat", "circular"])
                 close.connect("clicked", lambda *_a: self.show_dual(False))
@@ -848,6 +853,14 @@ class GaletWindow(Adw.ApplicationWindow):
         destination = other.location.gfile
         uris = [item.gfile.get_uri() for item in items]
         servers.ensure_mounted(self, destination, lambda: fileops.transfer(self, uris, destination, move))
+
+    def sync_with_other(self):
+        """Send what changed from the active side to the other one (preview first)."""
+        from . import syncdialog
+
+        if not self.dual_active():
+            return
+        syncdialog.open_for(self, self.current_pane, self.other_pane())
 
     def open_transfer(self, server_uri):
         """Termius-style SFTP view: your computer on the left, the server on the right."""

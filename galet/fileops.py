@@ -497,24 +497,30 @@ def _move_one(source, destination, cancellable=None, progress=None):
         _delete_recursive(source, cancellable)
 
 
-def ask_conflict(window, operation, name):
+def ask_conflict(window, operation, name, can_merge=False):
     """Ask from the worker thread what to do with an existing item.
 
-    Returns ("replace" | "keep" | "skip", apply_to_all).
+    Returns ("replace" | "keep" | "skip" | "merge", apply_to_all). "merge" is offered
+    when both items are folders: only new and modified files are copied.
     """
     answered = threading.Event()
     answer = {"response": "skip", "all": False}
 
     def show():
-        dialog = Adw.AlertDialog(heading=_("“{name}” already exists").format(name=name),
-                                 body=_("An item with the same name already exists in this location."))
+        body = _("An item with the same name already exists in this location.")
+        if can_merge:
+            body += "\n\n" + _("Merge: only new and modified files are copied; nothing is deleted.")
+        dialog = Adw.AlertDialog(heading=_("“{name}” already exists").format(name=name), body=body)
         apply_all = Gtk.CheckButton(label=_("Apply to all"))
         dialog.set_extra_child(apply_all)
         dialog.add_response("skip", _("Skip"))
         dialog.add_response("keep", _("Keep Both"))
         dialog.add_response("replace", _("Replace"))
         dialog.set_response_appearance("replace", Adw.ResponseAppearance.DESTRUCTIVE)
-        dialog.set_default_response("keep")
+        if can_merge:
+            dialog.add_response("merge", _("Merge"))
+            dialog.set_response_appearance("merge", Adw.ResponseAppearance.SUGGESTED)
+        dialog.set_default_response("merge" if can_merge else "keep")
         dialog.set_close_response("skip")
 
         def on_response(_dialog, response):
@@ -532,6 +538,50 @@ def ask_conflict(window, operation, name):
     return answer["response"], answer["all"]
 
 
+def _is_dir(gfile, cancellable=None):
+    try:
+        return gfile.query_file_type(Gio.FileQueryInfoFlags.NOFOLLOW_SYMLINKS, cancellable) == Gio.FileType.DIRECTORY
+    except GLib.Error:
+        return False
+
+
+def _merge(source, destination, both_dirs, move, operation, errors, merged, index, count):
+    """Copy only what is new or modified from ``source`` into the existing ``destination``.
+    Not undoable on purpose: undoing would delete the whole existing destination."""
+    from . import sync
+
+    if both_dirs:
+        operation.update(detail=_("Comparing “{name}”…").format(name=source.get_basename()))
+        plan = sync.scan(source, destination, cancellable=operation.cancellable)
+        errors.extend(plan.errors)
+        entries = [e for e in plan.entries if e.kind in (sync.NEW, sync.MODIFIED)]
+
+        def progress(i, total, path, fraction):
+            operation.update(detail=_("Merging — {name}").format(name=path),
+                             fraction=(index + (i + fraction) / max(1, total)) / count)
+
+        done, failed = sync.apply(plan, entries, operation.cancellable, progress)
+        errors.extend(failed)
+        merged["files"] += sum(1 for e in entries if not e.is_dir) if not failed else done
+        merged["folders"] += 1
+        if move and not failed and not plan.errors and not operation.cancellable.is_cancelled():
+            _delete_recursive(source, operation.cancellable)  # everything is now at the destination
+        return
+    # a file with "merge" applied to all: replace it only if it changed
+    try:
+        flags = Gio.FileQueryInfoFlags.NOFOLLOW_SYMLINKS
+        changed, _newer = sync.is_modified(source.query_info(sync.ATTRS, flags, operation.cancellable),
+                                           destination.query_info(sync.ATTRS, flags, operation.cancellable))
+        if changed:
+            source.copy(destination, sync.COPY_FLAGS, operation.cancellable, None, None)
+            merged["files"] += 1
+        if move:
+            source.delete(operation.cancellable)
+        merged["folders"] += 1
+    except GLib.Error as err:
+        errors.append(f"{source.get_basename()}: {err.message}")
+
+
 def transfer(window, uris, directory, move, record=True, on_done=None):
     """Copy or move files into ``directory`` with progress, conflicts and undo."""
     sources = [Gio.File.new_for_uri(uri) for uri in uris]
@@ -540,6 +590,8 @@ def transfer(window, uris, directory, move, record=True, on_done=None):
         return
     title = (ngettext("Moving {n} item", "Moving {n} items", count) if move
              else ngettext("Copying {n} item", "Copying {n} items", count)).format(n=count)
+
+    merged = {"files": 0, "folders": 0}
 
     def work(operation, errors):
         pairs, policy = [], None
@@ -563,12 +615,17 @@ def transfer(window, uris, directory, move, record=True, on_done=None):
                     if same_folder:
                         destination = unique_child(directory, name)  # duplicate
                     else:
+                        both_dirs = (_is_dir(source, operation.cancellable)
+                                     and _is_dir(destination, operation.cancellable))
                         choice = policy
                         if choice is None:
-                            choice, apply_all = ask_conflict(window, operation, name)
+                            choice, apply_all = ask_conflict(window, operation, name, can_merge=both_dirs)
                             if apply_all:
                                 policy = choice
                         if choice == "skip":
+                            continue
+                        if choice == "merge":
+                            _merge(source, destination, both_dirs, move, operation, errors, merged, index, count)
                             continue
                         if choice == "keep":
                             destination = unique_child(directory, name)
@@ -600,6 +657,9 @@ def transfer(window, uris, directory, move, record=True, on_done=None):
                     window.tagstore.moved(source.get_path(), destination.get_path())
         if errors:
             window.toast(_("Some items could not be copied: {error}").format(error=errors[0]))
+        if merged["folders"] and not errors and not on_done:
+            window.toast(ngettext("Merged: {n} new or modified file sent", "Merged: {n} new or modified files sent",
+                                  merged["files"]).format(n=merged["files"]))
         if pairs:
             done = len(pairs)
             if move:

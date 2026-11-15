@@ -202,83 +202,107 @@ msgstr ""
 msgid "{name} copy {n}{ext}"
 msgstr ""
 
-#: galet/fileops.py:509
-msgid "“{name}” already exists"
-msgstr ""
-
 #: galet/fileops.py:510
 msgid "An item with the same name already exists in this location."
 msgstr ""
 
-#: galet/fileops.py:511
-msgid "Apply to all"
+#: galet/fileops.py:512
+msgid "Merge: only new and modified files are copied; nothing is deleted."
 msgstr ""
 
 #: galet/fileops.py:513
-msgid "Skip"
+msgid "“{name}” already exists"
 msgstr ""
 
 #: galet/fileops.py:514
+msgid "Apply to all"
+msgstr ""
+
+#: galet/fileops.py:516
+msgid "Skip"
+msgstr ""
+
+#: galet/fileops.py:517
 msgid "Keep Both"
 msgstr ""
 
-#: galet/fileops.py:515
+#: galet/fileops.py:518
 msgid "Replace"
 msgstr ""
 
-#: galet/fileops.py:541
+#: galet/fileops.py:521
+msgid "Merge"
+msgstr ""
+
+#: galet/fileops.py:554
+msgid "Comparing “{name}”…"
+msgstr ""
+
+#: galet/fileops.py:560
+msgid "Merging — {name}"
+msgstr ""
+
+#: galet/fileops.py:591
 msgid "Moving {n} item"
 msgstr ""
 
-#: galet/fileops.py:541
+#: galet/fileops.py:591
 msgid "Moving {n} items"
 msgstr ""
 
-#: galet/fileops.py:542
+#: galet/fileops.py:592
 msgid "Copying {n} item"
 msgstr ""
 
-#: galet/fileops.py:542
+#: galet/fileops.py:592
 msgid "Copying {n} items"
 msgstr ""
 
-#: galet/fileops.py:550
+#: galet/fileops.py:602
 msgid "{current} of {total} — {name}"
 msgstr ""
 
-#: galet/fileops.py:555
+#: galet/fileops.py:607
 msgid "cannot copy a folder into itself"
 msgstr ""
 
-#: galet/fileops.py:602
+#: galet/fileops.py:659
 msgid "Some items could not be copied: {error}"
 msgstr ""
 
-#: galet/fileops.py:606
+#: galet/fileops.py:661
+msgid "Merged: {n} new or modified file sent"
+msgstr ""
+
+#: galet/fileops.py:661
+msgid "Merged: {n} new or modified files sent"
+msgstr ""
+
+#: galet/fileops.py:666
 msgid "{n} item moved"
 msgstr ""
 
-#: galet/fileops.py:606
+#: galet/fileops.py:666
 msgid "{n} items moved"
 msgstr ""
 
-#: galet/fileops.py:609
+#: galet/fileops.py:669
 msgid "{n} item copied"
 msgstr ""
 
-#: galet/fileops.py:609
+#: galet/fileops.py:669
 msgid "{n} items copied"
 msgstr ""
 
-#: galet/fileops.py:611
+#: galet/fileops.py:671
 msgid "Move"
 msgstr ""
 
-#: galet/fileops.py:611
+#: galet/fileops.py:671
 msgid "Copy"
 msgstr ""
 
-#: galet/fileops.py:634
+#: galet/fileops.py:694
 msgid "Moving Back"
 msgstr ""
 
@@ -590,15 +614,19 @@ msgstr ""
 msgid "Undo"
 msgstr ""
 
-#: galet/pane.py:575
+#: galet/pane.py:576
+msgid "Synchronise With the Other Side…"
+msgstr ""
+
+#: galet/pane.py:580
 msgid "Analyse Photos in This Folder (AI)"
 msgstr ""
 
-#: galet/pane.py:576
+#: galet/pane.py:581
 msgid "Open in Terminal"
 msgstr ""
 
-#: galet/pane.py:577
+#: galet/pane.py:582
 msgid "Show Hidden Files"
 msgstr ""
 
@@ -1622,6 +1650,162 @@ msgstr ""
 msgid "{n} results"
 msgstr ""
 
+#: galet/syncdialog.py:15
+msgid "New folder"
+msgstr ""
+
+#: galet/syncdialog.py:15
+msgid "New"
+msgstr ""
+
+#: galet/syncdialog.py:16
+msgid "More recent at destination"
+msgstr ""
+
+#: galet/syncdialog.py:17
+msgid "To delete"
+msgstr ""
+
+#: galet/syncdialog.py:27
+msgid "Synchronise"
+msgstr ""
+
+#: galet/syncdialog.py:34
+msgid "Send"
+msgstr ""
+
+#: galet/syncdialog.py:47
+msgid "Reverse the direction"
+msgstr ""
+
+#: galet/syncdialog.py:56
+msgid "Ignore .git, node_modules and temporary files"
+msgstr ""
+
+#: galet/syncdialog.py:58
+msgid "Also delete at the destination what no longer exists at the source"
+msgstr ""
+
+#: galet/syncdialog.py:59
+msgid "Off by default. Deleted items go to the trash when possible."
+msgstr ""
+
+#: galet/syncdialog.py:71
+msgid "Select All"
+msgstr ""
+
+#: galet/syncdialog.py:121
+msgid "Comparing the two folders…"
+msgstr ""
+
+#: galet/syncdialog.py:129
+msgid "Comparing… {path}"
+msgstr ""
+
+#: galet/syncdialog.py:144
+msgid "{n} modified file"
+msgstr ""
+
+#: galet/syncdialog.py:144
+msgid "{n} modified files"
+msgstr ""
+
+#: galet/syncdialog.py:145
+msgid "{n} new item"
+msgstr ""
+
+#: galet/syncdialog.py:145
+msgid "{n} new items"
+msgstr ""
+
+#: galet/syncdialog.py:146
+msgid "{n} item more recent at destination"
+msgstr ""
+
+#: galet/syncdialog.py:146
+msgid "{n} items more recent at destination"
+msgstr ""
+
+#: galet/syncdialog.py:149
+msgid "{n} item to delete"
+msgstr ""
+
+#: galet/syncdialog.py:149
+msgid "{n} items to delete"
+msgstr ""
+
+#: galet/syncdialog.py:152
+msgid "{n} identical file (skipped)"
+msgstr ""
+
+#: galet/syncdialog.py:152
+msgid "{n} identical files (skipped)"
+msgstr ""
+
+#: galet/syncdialog.py:155
+msgid "Everything is already up to date."
+msgstr ""
+
+#: galet/syncdialog.py:157
+msgid "Some folders could not be read: {error}"
+msgstr ""
+
+#: galet/syncdialog.py:162
+msgid "… and {n} more"
+msgstr ""
+
+#: galet/syncdialog.py:208
+msgid "Send {n} file"
+msgstr ""
+
+#: galet/syncdialog.py:208
+msgid "Send {n} files"
+msgstr ""
+
+#: galet/syncdialog.py:212
+msgid "delete {n} item"
+msgstr ""
+
+#: galet/syncdialog.py:212
+msgid "delete {n} items"
+msgstr ""
+
+#: galet/syncdialog.py:216
+msgid "Select None"
+msgstr ""
+
+#: galet/syncdialog.py:249
+msgid "Some items could not be synchronised: {error}"
+msgstr ""
+
+#: galet/syncdialog.py:251
+msgid "Synchronised: {n} item"
+msgstr ""
+
+#: galet/syncdialog.py:251
+msgid "Synchronised: {n} items"
+msgstr ""
+
+#: galet/syncdialog.py:254
+msgid "Synchronising to “{name}”"
+msgstr ""
+
+#: galet/syncdialog.py:257
+msgid "Delete {n} items at the destination?"
+msgstr ""
+
+#: galet/syncdialog.py:258
+msgid "They no longer exist at the source. They go to the trash when the destination supports it; on most servers they are deleted for good."
+msgstr ""
+
+#: galet/syncdialog.py:277
+msgid "Synchronising works between two real folders."
+msgstr ""
+
+#: galet/syncdialog.py:281
+msgid "Choose two different folders, not one inside the other."
+msgstr ""
+
 #: galet/terminal.py:101
 msgid "Could not start the terminal: {error}"
 msgstr ""
@@ -1838,78 +2022,82 @@ msgstr ""
 msgid "Save as Smart Folder"
 msgstr ""
 
-#: galet/window.py:380
+#: galet/window.py:381
 msgid "Sending {n} file to {device}…"
 msgstr ""
 
-#: galet/window.py:380
+#: galet/window.py:381
 msgid "Sending {n} files to {device}…"
 msgstr ""
 
-#: galet/window.py:409
+#: galet/window.py:410
 msgid "Describe what you are looking for, e.g. “PDF invoices from this week”"
 msgstr ""
 
-#: galet/window.py:499
+#: galet/window.py:500
 msgid "No new photo to analyse here"
 msgstr ""
 
-#: galet/window.py:502
+#: galet/window.py:503
 msgid "{n} photos will be described by {service} so you can find them by what they show."
 msgstr ""
 
-#: galet/window.py:505
+#: galet/window.py:506
 msgid "Reduced copies of the photos (512 pixels) are sent to this online service."
 msgstr ""
 
-#: galet/window.py:534
+#: galet/window.py:535
 msgid "{n} photo analysed"
 msgstr ""
 
-#: galet/window.py:534
+#: galet/window.py:535
 msgid "{n} photos analysed"
 msgstr ""
 
-#: galet/window.py:536
+#: galet/window.py:537
 msgid "Analysing Photos"
 msgstr ""
 
-#: galet/window.py:538
+#: galet/window.py:539
 msgid "Analyse photos with the AI?"
 msgstr ""
 
-#: galet/window.py:538
+#: galet/window.py:539
 msgid "Analyse"
 msgstr ""
 
-#: galet/window.py:690
+#: galet/window.py:691
 msgid "Could not change the folder colour: {error}"
 msgstr ""
 
-#: galet/window.py:795
+#: galet/window.py:796
 msgid "Enclosing Folder"
 msgstr ""
 
-#: galet/window.py:800
+#: galet/window.py:802
+msgid "Synchronise the two folders…"
+msgstr ""
+
+#: galet/window.py:805
 msgid "Close Dual Pane"
 msgstr ""
 
-#: galet/window.py:899
+#: galet/window.py:912
 msgid "Tag “{tag}” added"
 msgstr ""
 
-#: galet/window.py:1023
+#: galet/window.py:1036
 msgid "Save Smart Folder"
 msgstr ""
 
-#: galet/window.py:1025
+#: galet/window.py:1038
 msgid "Smart folder “{name}” saved"
 msgstr ""
 
-#: galet/window.py:1069
+#: galet/window.py:1082
 msgid "No folder at “{path}”"
 msgstr ""
 
-#: galet/window.py:1071
+#: galet/window.py:1084
 msgid "Go to Location"
 msgstr ""

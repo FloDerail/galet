@@ -2,6 +2,18 @@
 
 Galet — logiciel libre et open source de [Florian Dérail](https://florianderail.fr).
 
+## 0.10.0 — Fusionner et synchroniser
+
+- 🔀 **Fusionner** : en copiant un dossier qui existe déjà (par exemple `www` sur le serveur), la
+  fenêtre de conflit propose « Fusionner » (choix par défaut) : seuls les fichiers nouveaux ou
+  modifiés sont copiés, rien n'est supprimé.
+- ⟳ **Synchroniser** (double panneau, bouton ⟳ ou clic droit) : comparaison des deux dossiers et
+  **aperçu** avant l'envoi — modifiés, nouveaux, identiques ignorés, plus récents à destination
+  (décochés). `.git`, `node_modules` et fichiers temporaires ignorés ; sens inversable ; suppression
+  à destination en option, désactivée par défaut et confirmée.
+- 🇬🇧 Merge existing folders (only new and modified files) and a Synchronise window with preview in
+  the dual pane.
+
 ## 0.9.2 — Miniatures des photos dans la version Flatpak
 
 - 🖼️ Les **miniatures des photos JPEG** s'affichent de nouveau dans la version Flatpak / Logithèque :

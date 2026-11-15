@@ -109,6 +109,25 @@ de l'autre côté ». Le côté actif est souligné en couleur.
 
 ![Double panneau](screenshots/double-panneau.png)
 
+#### Fusionner et synchroniser (nouveau en 0.10)
+
+Inutile de renvoyer tout un site pour trois pages modifiées :
+
+- **Fusionner** : quand vous copiez un dossier qui existe déjà (par exemple `www` sur le serveur),
+  la fenêtre de conflit propose « Fusionner » — seuls les fichiers **nouveaux ou modifiés** sont
+  copiés, rien n'est supprimé.
+- **Synchroniser** : dans le double panneau, le bouton ⟳ (ou clic droit → « Synchroniser avec
+  l'autre côté… ») compare les deux dossiers et montre un **aperçu** avant d'envoyer : fichiers
+  modifiés, nouveaux, identiques (ignorés), plus récents à destination (décochés). Vous cochez ce
+  qui part. `.git`, `node_modules` et les fichiers temporaires sont ignorés. Le sens s'inverse d'un
+  clic pour récupérer depuis le serveur. L'option « Supprimer aussi à destination… » est
+  désactivée par défaut et demande une confirmation.
+- Un fichier est considéré comme modifié si sa **taille** a changé ou s'il est **plus récent** que
+  celui de la destination (comme rsync). En SFTP, les dates sont conservées : la comparaison est
+  fiable.
+
+![Synchroniser deux dossiers](screenshots/synchroniser.png)
+
 ### Thèmes
 
 Réglages (`Ctrl+,`) → **Apparence** : Système, macOS, Windows 11 ou Personnalisé, en clair ou en sombre.

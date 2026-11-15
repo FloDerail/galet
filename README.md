@@ -71,6 +71,11 @@ staying a native GTK4 / libadwaita application that blends in with GNOME and Zor
 - **Built-in terminal** (<kbd>Ctrl</kbd>+<kbd>`</kbd>, <kbd>Ctrl</kbd>+<kbd>²</kbd> on AZERTY, or <kbd>F4</kbd>): a terminal panel under the
   files, with tabs. It opens in the current folder, or as an SSH session when you are on an SFTP
   server. Ctrl+letter shortcuts go to the shell while you type.
+- **Merge & synchronise**: copying a folder that already exists offers **Merge** (only new and
+  modified files are copied). In the dual pane, **Synchronise** compares both folders and previews
+  what will be sent (modified, new, identical skipped, newer at destination unchecked, optional
+  deletions), ignoring `.git`, `node_modules` and temporary files. Size and date are compared, like
+  rsync's quick check.
 - **Dual pane** (<kbd>F3</kbd>): your computer on one side, a server (or any folder) on the other;
   drag and drop or “Copy/Move to the Other Side”. From the server manager, “Transfer Files” opens it
   directly.
@@ -141,6 +146,8 @@ index is used as the storage.
 | ![Built-in terminal](docs/screenshots/terminal-integre.png) | ![Dual pane](docs/screenshots/double-panneau.png) |
 | **Login window** | **Encrypted server list, master password** |
 | ![Login window](docs/screenshots/serveur-connexion.png) | ![Security settings](docs/screenshots/reglages-securite.png) |
+| **Synchronise: only what changed** | |
+| ![Synchronise](docs/screenshots/synchroniser.png) | |
 
 ## Install
 

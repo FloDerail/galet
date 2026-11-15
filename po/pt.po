@@ -1819,3 +1819,144 @@ msgstr "Pasta superior"
 
 msgid "Close Dual Pane"
 msgstr "Fechar o painel duplo"
+
+msgid "Merge: only new and modified files are copied; nothing is deleted."
+msgstr "Combinar: só são copiados os ficheiros novos ou alterados; nada é eliminado."
+
+msgid "Merge"
+msgstr "Combinar"
+
+msgid "Comparing “{name}”…"
+msgstr "A comparar «{name}»…"
+
+msgid "Merging — {name}"
+msgstr "A combinar — {name}"
+
+msgid "Merged: {n} new or modified file sent"
+msgstr "Combinado: {n} ficheiro novo ou alterado enviado"
+
+msgid "Merged: {n} new or modified files sent"
+msgstr "Combinado: {n} ficheiros novos ou alterados enviados"
+
+msgid "Synchronise With the Other Side…"
+msgstr "Sincronizar com o outro lado…"
+
+msgid "New folder"
+msgstr "Nova pasta"
+
+msgid "New"
+msgstr "Novo"
+
+msgid "More recent at destination"
+msgstr "Mais recente no destino"
+
+msgid "To delete"
+msgstr "A eliminar"
+
+msgid "Synchronise"
+msgstr "Sincronizar"
+
+msgid "Send"
+msgstr "Enviar"
+
+msgid "Reverse the direction"
+msgstr "Inverter o sentido"
+
+msgid "Ignore .git, node_modules and temporary files"
+msgstr "Ignorar .git, node_modules e ficheiros temporários"
+
+msgid "Also delete at the destination what no longer exists at the source"
+msgstr "Eliminar também no destino o que já não existe na origem"
+
+msgid "Off by default. Deleted items go to the trash when possible."
+msgstr "Desativado por omissão. Os itens eliminados vão para o lixo quando possível."
+
+msgid "Select All"
+msgstr "Marcar tudo"
+
+msgid "Comparing the two folders…"
+msgstr "A comparar as duas pastas…"
+
+msgid "Comparing… {path}"
+msgstr "A comparar… {path}"
+
+msgid "{n} modified file"
+msgstr "{n} ficheiro alterado"
+
+msgid "{n} modified files"
+msgstr "{n} ficheiros alterados"
+
+msgid "{n} new item"
+msgstr "{n} novo"
+
+msgid "{n} new items"
+msgstr "{n} novos"
+
+msgid "{n} item more recent at destination"
+msgstr "{n} mais recente no destino"
+
+msgid "{n} items more recent at destination"
+msgstr "{n} mais recentes no destino"
+
+msgid "{n} item to delete"
+msgstr "{n} a eliminar"
+
+msgid "{n} items to delete"
+msgstr "{n} a eliminar"
+
+msgid "{n} identical file (skipped)"
+msgstr "{n} idêntico (ignorado)"
+
+msgid "{n} identical files (skipped)"
+msgstr "{n} idênticos (ignorados)"
+
+msgid "Everything is already up to date."
+msgstr "Está tudo atualizado."
+
+msgid "Some folders could not be read: {error}"
+msgstr "Não foi possível ler algumas pastas: {error}"
+
+msgid "… and {n} more"
+msgstr "… e mais {n}"
+
+msgid "Send {n} file"
+msgstr "Enviar {n} ficheiro"
+
+msgid "Send {n} files"
+msgstr "Enviar {n} ficheiros"
+
+msgid "delete {n} item"
+msgstr "eliminar {n} item"
+
+msgid "delete {n} items"
+msgstr "eliminar {n} itens"
+
+msgid "Select None"
+msgstr "Desmarcar tudo"
+
+msgid "Some items could not be synchronised: {error}"
+msgstr "Não foi possível sincronizar alguns itens: {error}"
+
+msgid "Synchronised: {n} item"
+msgstr "Sincronizado: {n} item"
+
+msgid "Synchronised: {n} items"
+msgstr "Sincronizado: {n} itens"
+
+msgid "Synchronising to “{name}”"
+msgstr "A sincronizar para «{name}»"
+
+msgid "Delete {n} items at the destination?"
+msgstr "Eliminar {n} itens no destino?"
+
+msgid "They no longer exist at the source. They go to the trash when the destination supports it; on most servers they are deleted for good."
+msgstr "Já não existem na origem. Vão para o lixo se o destino o permitir; na maioria dos servidores são eliminados definitivamente."
+
+msgid "Synchronising works between two real folders."
+msgstr "A sincronização funciona entre duas pastas reais."
+
+msgid "Choose two different folders, not one inside the other."
+msgstr "Escolha duas pastas diferentes, não uma dentro da outra."
+
+msgid "Synchronise the two folders…"
+msgstr "Sincronizar as duas pastas…"

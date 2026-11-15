@@ -85,6 +85,9 @@
     <keyword>explorer</keyword>
   </keywords>
   <releases>
+    <release version="0.10.0" date="2026-11-15">
+      <description><p>Merge existing folders (only new and modified files are copied) and synchronise two folders with a preview, in the dual pane.</p></description>
+    </release>
     <release version="0.9.2" date="2026-11-15">
       <description><p>Photo thumbnails are shown again in the Flatpak build.</p></description>
     </release>
