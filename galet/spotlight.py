@@ -35,6 +35,8 @@ class SpotlightDialog(Adw.Dialog):
         self.entry = Gtk.SearchEntry(hexpand=True, css_classes=["galet-spotlight-entry"])
         self.entry.connect("search-changed", lambda *_a: self._on_changed())
         self.entry.connect("activate", lambda *_a: self._on_activate())
+        # Esc in a search entry only clears the text: here it closes the window, like Spotlight.
+        self.entry.connect("stop-search", lambda *_a: self.close())
         keys = Gtk.EventControllerKey()
         keys.connect("key-pressed", self._on_entry_key)
         self.entry.add_controller(keys)
@@ -56,6 +58,10 @@ class SpotlightDialog(Adw.Dialog):
         top = Gtk.Box(spacing=10)
         top.append(self.entry)
         top.append(modes)
+        close = Gtk.Button(icon_name="window-close-symbolic", tooltip_text=_("Close search"),
+                           css_classes=["flat", "circular"], valign=Gtk.Align.CENTER)
+        close.connect("clicked", lambda *_a: self.close())
+        top.append(close)
 
         self.status = Gtk.Label(xalign=0, wrap=True, css_classes=["dim-label"])
         self.spinner = Gtk.Spinner(visible=False)

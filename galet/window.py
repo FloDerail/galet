@@ -31,6 +31,7 @@ class GaletWindow(Adw.ApplicationWindow):
         self.connect("close-request", self._on_close_request)
         self._settings_handler = self.settings.connect("changed", self._on_setting_changed)
         self._apply_window_buttons()
+        self._install_file_shortcuts()
         if not empty:
             self.new_tab(location or start_location(self.settings.get("new_window_location")))
 
@@ -250,6 +251,7 @@ class GaletWindow(Adw.ApplicationWindow):
             "ai-tags": self._ai_tags,
             "analyze-photos": self._analyze_photos,
             "context-menu": lambda: self.current_pane.popup_context_menu_for_selection(),
+            "select-all": lambda: self.current_pane.select_all(),
             "merge-windows": self.merge_windows,
             "add-to-sidebar": lambda: self.sidebar.add_bookmarks([i.target_file for i in self.selection if i.is_dir]),
             "go-recent": lambda: self._go_special("recent"),
@@ -403,6 +405,33 @@ class GaletWindow(Adw.ApplicationWindow):
             self.toast(_("AI understood: {summary}").format(summary=" · ".join(parts)))
 
         ai.run(lambda: ai.parse_search(self.settings, request), done)
+
+    def _install_file_shortcuts(self):
+        """Ctrl+A/C/X/V, Delete, F2… for the files, wherever the keyboard focus is in the window
+        (sidebar, toolbar…), except while typing text, in a menu or in a dialog."""
+        from .pane import LOCAL_SHORTCUTS
+
+        controller = Gtk.ShortcutController(propagation_phase=Gtk.PropagationPhase.CAPTURE)
+        for trigger, action in LOCAL_SHORTCUTS:
+            controller.add_shortcut(Gtk.Shortcut(trigger=Gtk.ShortcutTrigger.parse_string(trigger),
+                                                 action=Gtk.CallbackAction.new(self._file_shortcut(action))))
+        self.add_controller(controller)
+
+    def _file_shortcut(self, action):
+        def callback(*_args):
+            pane = self.current_pane
+            if pane is None or self.get_visible_dialog() is not None:
+                return False
+            focus = self.get_focus()
+            widget = focus
+            while widget is not None:  # typing text, or inside a popover menu: let it handle the key
+                if isinstance(widget, (Gtk.Editable, Gtk.Popover)):
+                    return False
+                widget = widget.get_parent()
+            if action == "win.quicklook" and (focus is None or not focus.is_ancestor(pane)):
+                return False  # Space activates the focused button outside the file view
+            return bool(self.activate_action(action, None))
+        return callback
 
     def open_search(self):
         """Ctrl+F: the big Spotlight-style window, or the classic bar (Settings → General)."""

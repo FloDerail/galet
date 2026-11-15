@@ -5,7 +5,7 @@ import weakref
 from gi.repository import Adw, Gdk, Gio, GLib, GObject, Gtk, Pango
 
 from . import dnd
-from .i18n import _
+from .i18n import _, ngettext
 from .model import DirectoryModel, FileItem, make_sorter
 from .folders import effective_color
 from .folders import icon_path as folder_icon_path
@@ -316,6 +316,9 @@ class _SelectionView:
         if item is not None:
             self.emit("activate-item", item)
 
+    def select_all(self):
+        self.selection.select_all()
+
     def get_selected_items(self):
         bitset = self.selection.get_selection()
         items = (self.selection.get_item(bitset.get_nth(i)) for i in range(bitset.get_size()))
@@ -585,6 +588,13 @@ class GroupedIconView(Gtk.ScrolledWindow):
     def get_selected_items(self):
         return [item for section in self._ordered() for item in section.get_selected_items()]
 
+    def select_all(self):
+        self._busy = True  # selecting in one section must not clear the others
+        for section in self._ordered():
+            section.selection.select_all()
+        self._busy = False
+        self.emit("selection-changed")
+
     def select_prefix(self, prefix):
         return any(section.select_prefix(prefix) for section in self._ordered())
 
@@ -726,6 +736,19 @@ class PreviewPanel(Gtk.Box):
         self.append(grid)
 
 
+class MultiPreview(Gtk.Box):
+    """Last column when several items are selected."""
+
+    def __init__(self, items):
+        super().__init__(orientation=Gtk.Orientation.VERTICAL, spacing=8, width_request=280,
+                         valign=Gtk.Align.START, css_classes=["galet-preview"])
+        self.append(Gtk.Image(icon_name="edit-copy-symbolic", pixel_size=96, css_classes=["dim-label"]))
+        self.append(Gtk.Label(label=ngettext("{n} item", "{n} items", len(items)).format(n=len(items)),
+                              css_classes=["title-4"]))
+        total = sum(i.size for i in items if not i.is_dir)
+        self.append(Gtk.Label(label=GLib.format_size(total), css_classes=["dim-label"]))
+
+
 class _Column:
     __slots__ = ("gfile", "model", "selection", "view", "scroller", "current")
 
@@ -759,7 +782,8 @@ class ColumnBrowser(Gtk.ScrolledWindow):
         filtered = Gtk.FilterListModel(model=col.model.store, filter=self.pane.filter)
         settings = self.pane.settings
         ordered = Gtk.SortListModel(model=filtered, sorter=view_sorter(settings))
-        col.selection = Gtk.SingleSelection(model=ordered, autoselect=False, can_unselect=True)
+        # Several items can be selected in a column (Ctrl+A, Ctrl+click, Shift+click), as in Finder.
+        col.selection = Gtk.MultiSelection(model=ordered)
         tagstore = self.pane.tagstore
         col.view = Gtk.ListView(model=col.selection,
                                 factory=make_factory(lambda: ColumnRow(tagstore, settings),
@@ -791,10 +815,23 @@ class ColumnBrowser(Gtk.ScrolledWindow):
             self.box.remove(self.preview)
             self.preview = None
 
+    @staticmethod
+    def _positions(col):
+        bitset = col.selection.get_selection()
+        return [bitset.get_nth(i) for i in range(bitset.get_size())]
+
+    def _selected(self, col):
+        return [item for item in (col.selection.get_item(p) for p in self._positions(col)) if item is not None]
+
+    def _first_position(self, col):
+        positions = self._positions(col)
+        return positions[0] if positions else Gtk.INVALID_LIST_POSITION
+
     def _on_selected(self, col):
         if col not in self.columns:
             return
-        item = col.selection.get_selected_item()
+        items = self._selected(col)
+        item = items[0] if len(items) == 1 else None
         previous = col.current
         if (item is not None and previous is not None and item.gfile.equal(previous.gfile)
                 and len(self.columns) > self.columns.index(col) + (1 if item.is_dir else 0)):
@@ -807,6 +844,9 @@ class ColumnBrowser(Gtk.ScrolledWindow):
             else:
                 self.preview = PreviewPanel(item, self.pane.tagstore)
                 self.box.append(self.preview)
+        elif len(items) > 1:
+            self.preview = MultiPreview(items)
+            self.box.append(self.preview)
         self.emit("directory-changed", self.columns[-1].gfile)
         self.emit("selection-changed")
         GLib.timeout_add(60, self._scroll_to_end)
@@ -828,7 +868,7 @@ class ColumnBrowser(Gtk.ScrolledWindow):
         if keyval == Gdk.KEY_Right and index + 1 < len(self.columns):
             following = self.columns[index + 1]
             if following.selection.get_n_items():
-                position = following.selection.get_selected()
+                position = self._first_position(following)
                 if position == Gtk.INVALID_LIST_POSITION:
                     position = 0
                 following.view.scroll_to(position, Gtk.ListScrollFlags.FOCUS | Gtk.ListScrollFlags.SELECT,
@@ -837,7 +877,7 @@ class ColumnBrowser(Gtk.ScrolledWindow):
         if keyval == Gdk.KEY_Left and index > 0:
             previous = self.columns[index - 1]
             col.selection.unselect_all()
-            position = previous.selection.get_selected()
+            position = self._first_position(previous)
             if position != Gtk.INVALID_LIST_POSITION:
                 previous.view.scroll_to(position, Gtk.ListScrollFlags.FOCUS, None)
             return True
@@ -856,7 +896,7 @@ class ColumnBrowser(Gtk.ScrolledWindow):
         def spring(_folder):
             position = cell.position()
             if col in self.columns and position != Gtk.INVALID_LIST_POSITION:
-                col.selection.set_selected(position)
+                col.selection.select_item(position, True)
 
         dnd.add_spring_load(cell, folder, spring)
 
@@ -896,10 +936,9 @@ class ColumnBrowser(Gtk.ScrolledWindow):
         position = cell.position()
         if position == Gtk.INVALID_LIST_POSITION or col not in self.columns:
             return []
-        if col.selection.get_selected() != position:
-            col.selection.set_selected(position)
-        item = col.selection.get_selected_item()
-        return [item.gfile] if item is not None else []
+        if not col.selection.is_selected(position):
+            col.selection.select_item(position, True)
+        return [item.gfile for item in self._selected(col)]
 
     def _on_column_secondary(self, gesture, col, x, y):
         gesture.set_state(Gtk.EventSequenceState.CLAIMED)
@@ -908,7 +947,8 @@ class ColumnBrowser(Gtk.ScrolledWindow):
         cell = cell_at(col.view, x, y)
         position = cell.position() if cell is not None else Gtk.INVALID_LIST_POSITION
         if position != Gtk.INVALID_LIST_POSITION:
-            col.selection.set_selected(position)
+            if not col.selection.is_selected(position):
+                col.selection.select_item(position, True)
             # Selecting a folder adds a column: point the menu at the row itself.
             self.pane.popup_context_menu(cell, cell.get_width() / 2, cell.get_height() / 2, on_item=True)
         else:
@@ -922,10 +962,14 @@ class ColumnBrowser(Gtk.ScrolledWindow):
 
     def get_selected_items(self):
         for col in reversed(self.columns):
-            item = col.selection.get_selected_item()
-            if item is not None:
-                return [item]
+            items = self._selected(col)
+            if items:
+                return items
         return []
+
+    def select_all(self):
+        col = self._active_column()
+        col.selection.select_all()
 
     def focus_view(self):
         self.columns[-1].view.grab_focus()

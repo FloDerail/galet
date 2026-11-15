@@ -1381,3 +1381,6 @@ msgstr "Ce fichier ne peut pas être importé : {error}"
 
 msgid "What to include"
 msgstr "Contenu de la sauvegarde"
+
+msgid "Close search"
+msgstr "Fermer la recherche"

@@ -2,6 +2,17 @@
 
 Galet — logiciel libre et open source de [Florian Dérail](https://florianderail.fr).
 
+## 0.7.1 — Raccourcis clavier et recherche
+
+- ⌨️ **Ctrl+A, Ctrl+C, Ctrl+X, Ctrl+V, Suppr, F2, Espace** fonctionnent partout dans la fenêtre, même
+  quand on vient de cliquer dans la barre latérale (et restent inactifs pendant la saisie d'un texte).
+- ☑️ **Ctrl+A en vue Colonnes** sélectionne tous les éléments de la colonne ; la vue Colonnes accepte
+  maintenant la sélection multiple (Ctrl/Maj + clic), avec un aperçu « N éléments ».
+- 🔎 La grande fenêtre de recherche se ferme avec **Échap** ou le nouveau bouton **✕**.
+- 📁 Après « Nouveau dossier », le champ de renommage apparaît de façon fiable.
+- 🇬🇧 Keyboard shortcuts work window-wide; Ctrl+A and multi-selection in Columns view; the search
+  window closes with Esc or its close button; reliable in-place rename of new folders.
+
 ## 0.7.0 — Sauvegarde de la configuration
 
 - 💾 **Réglages → Avancé → Sauvegarde** : exportez dans un seul fichier vos réglages, vos tags, les

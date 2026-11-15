@@ -462,135 +462,135 @@ msgstr ""
 msgid "File Operations"
 msgstr ""
 
-#: galet/pane.py:72
+#: galet/pane.py:73
 msgid "Items in the trash"
 msgstr ""
 
-#: galet/pane.py:72
+#: galet/pane.py:73
 msgid "Empty Trash…"
 msgstr ""
 
-#: galet/pane.py:212
+#: galet/pane.py:208
 msgid "No Results"
 msgstr ""
 
-#: galet/pane.py:213
+#: galet/pane.py:209
 msgid "Galet searches file and folder names (and the text of documents with the Contents option). It cannot see what a photo shows: try another word, a folder name, or remove some filters."
 msgstr ""
 
-#: galet/pane.py:219
+#: galet/pane.py:215
 msgid "No Tagged Files"
 msgstr ""
 
-#: galet/pane.py:221
+#: galet/pane.py:217
 msgid "Right-click a file and choose a colour to tag it."
 msgstr ""
 
-#: galet/pane.py:231
+#: galet/pane.py:227
 msgid "Unable to Open This Folder"
 msgstr ""
 
-#: galet/pane.py:248
+#: galet/pane.py:244
 msgid "{size} available"
 msgstr ""
 
-#: galet/pane.py:446
+#: galet/pane.py:439
 msgid "{n} item selected"
 msgstr ""
 
-#: galet/pane.py:446
+#: galet/pane.py:439
 msgid "{n} items selected"
 msgstr ""
 
-#: galet/pane.py:490
+#: galet/pane.py:487
 msgid "Open"
 msgstr ""
 
-#: galet/pane.py:492
+#: galet/pane.py:489
 msgid "Open in New Tab"
 msgstr ""
 
-#: galet/pane.py:494
+#: galet/pane.py:491
 msgid "Open With…"
 msgstr ""
 
-#: galet/pane.py:499
+#: galet/pane.py:496
 msgid "Put Back"
 msgstr ""
 
-#: galet/pane.py:500
+#: galet/pane.py:497
 msgid "Delete Permanently…"
 msgstr ""
 
-#: galet/pane.py:503
+#: galet/pane.py:500
 msgid "Quick Look"
 msgstr ""
 
-#: galet/pane.py:505
+#: galet/pane.py:502
 msgid "Rename…"
 msgstr ""
 
-#: galet/pane.py:507
+#: galet/pane.py:504
 msgid "Duplicate"
 msgstr ""
 
-#: galet/pane.py:509
+#: galet/pane.py:506
 msgid "Cut"
 msgstr ""
 
-#: galet/pane.py:510
+#: galet/pane.py:507
 msgid "Copy Path"
 msgstr ""
 
-#: galet/pane.py:522
+#: galet/pane.py:519
 msgid "Quick Actions"
 msgstr ""
 
-#: galet/pane.py:524
+#: galet/pane.py:521
 msgid "New Folder With Selection"
 msgstr ""
 
-#: galet/pane.py:532
+#: galet/pane.py:529
 msgid "Send to Phone"
 msgstr ""
 
-#: galet/pane.py:539
+#: galet/pane.py:536
 msgid "Add to Sidebar"
 msgstr ""
 
-#: galet/pane.py:543
+#: galet/pane.py:540
 msgid "Folder Colour"
 msgstr ""
 
-#: galet/pane.py:549
+#: galet/pane.py:546
 msgid "Tags…"
 msgstr ""
 
-#: galet/pane.py:551
+#: galet/pane.py:548
 msgid "Suggest Tags (AI)"
 msgstr ""
 
-#: galet/pane.py:553
+#: galet/pane.py:550
 msgid "Analyse Photos (AI)"
 msgstr ""
 
-#: galet/pane.py:566
+#: galet/pane.py:563
 msgid "Paste"
 msgstr ""
 
-#: galet/pane.py:567
+#: galet/pane.py:564
 msgid "Undo"
 msgstr ""
 
-#: galet/pane.py:571
+#: galet/pane.py:568
 msgid "Analyse Photos in This Folder (AI)"
 msgstr ""
 
-#: galet/pane.py:572
+#: galet/pane.py:569
 msgid "Open in Terminal"
 msgstr ""
 
-#: galet/pane.py:573
+#: galet/pane.py:570
 msgid "Show Hidden Files"
 msgstr ""
 
@@ -1298,59 +1298,63 @@ msgstr ""
 msgid "Click to connect"
 msgstr ""
 
-#: galet/spotlight.py:42
+#: galet/spotlight.py:44
 msgid "Simple"
 msgstr ""
 
-#: galet/spotlight.py:74
+#: galet/spotlight.py:61
+msgid "Close search"
+msgstr ""
+
+#: galet/spotlight.py:80
 msgid "Show All in Galet"
 msgstr ""
 
-#: galet/spotlight.py:76
+#: galet/spotlight.py:82
 msgid "Enter: open · Ctrl+Enter: show in folder · Esc: close"
 msgstr ""
 
-#: galet/spotlight.py:99
+#: galet/spotlight.py:105
 msgid "Describe what you are looking for, then press Enter"
 msgstr ""
 
-#: galet/spotlight.py:100
+#: galet/spotlight.py:106
 msgid "Example: “beach photos”, “a piece of code that reads JSON”, “my invoices from this month”"
 msgstr ""
 
-#: galet/spotlight.py:103
+#: galet/spotlight.py:109
 msgid "Search files and folders by name"
 msgstr ""
 
-#: galet/spotlight.py:142
+#: galet/spotlight.py:148
 msgid "Asking the AI…"
 msgstr ""
 
-#: galet/spotlight.py:148
+#: galet/spotlight.py:154
 msgid "The AI is not available: {error}"
 msgstr ""
 
-#: galet/spotlight.py:153
+#: galet/spotlight.py:159
 msgid "“{text}”"
 msgstr ""
 
-#: galet/spotlight.py:155
+#: galet/spotlight.py:161
 msgid "inside documents"
 msgstr ""
 
-#: galet/spotlight.py:156
+#: galet/spotlight.py:162
 msgid "AI understood: {summary}"
 msgstr ""
 
-#: galet/spotlight.py:173
+#: galet/spotlight.py:179
 msgid "Searching…"
 msgstr ""
 
-#: galet/spotlight.py:215
+#: galet/spotlight.py:221
 msgid "{n} result"
 msgstr ""
 
-#: galet/spotlight.py:215
+#: galet/spotlight.py:221
 msgid "{n} results"
 msgstr ""
 
@@ -1398,35 +1402,35 @@ msgstr ""
 msgid "Yesterday at {time}"
 msgstr ""
 
-#: galet/views.py:373
+#: galet/views.py:376
 msgid "Date Modified"
 msgstr ""
 
-#: galet/views.py:389
+#: galet/views.py:392
 msgid "Location"
 msgstr ""
 
-#: galet/views.py:435
+#: galet/views.py:438
 msgid "Applications"
 msgstr ""
 
-#: galet/views.py:436
+#: galet/views.py:439
 msgid "Other"
 msgstr ""
 
-#: galet/views.py:441
+#: galet/views.py:444
 msgid "Unknown"
 msgstr ""
 
-#: galet/views.py:449
+#: galet/views.py:452
 msgid "Yesterday"
 msgstr ""
 
-#: galet/views.py:455
+#: galet/views.py:458
 msgid "Earlier This Year"
 msgstr ""
 
-#: galet/views.py:462
+#: galet/views.py:465
 msgid "No Tags"
 msgstr ""
 
@@ -1434,170 +1438,170 @@ msgstr ""
 msgid "Default Colour"
 msgstr ""
 
-#: galet/window.py:50
+#: galet/window.py:51
 msgid "Show Sidebar"
 msgstr ""
 
-#: galet/window.py:54
+#: galet/window.py:55
 msgid "Back"
 msgstr ""
 
-#: galet/window.py:56
+#: galet/window.py:57
 msgid "Forward"
 msgstr ""
 
-#: galet/window.py:63
+#: galet/window.py:64
 msgid "New Window"
 msgstr ""
 
-#: galet/window.py:64
+#: galet/window.py:65
 msgid "New Tab"
 msgstr ""
 
-#: galet/window.py:66
+#: galet/window.py:67
 msgid "Merge All Windows"
 msgstr ""
 
-#: galet/window.py:75
+#: galet/window.py:76
 msgid "Go"
 msgstr ""
 
-#: galet/window.py:76
+#: galet/window.py:77
 msgid "Go to Location…"
 msgstr ""
 
-#: galet/window.py:82
+#: galet/window.py:83
 msgid "About Galet"
 msgstr ""
 
-#: galet/window.py:85
+#: galet/window.py:86
 msgid "Main Menu"
 msgstr ""
 
-#: galet/window.py:87
+#: galet/window.py:88
 msgid "Search (Ctrl+F)"
 msgstr ""
 
-#: galet/window.py:98
+#: galet/window.py:99
 msgid "Sort By"
 msgstr ""
 
-#: galet/window.py:103
+#: galet/window.py:104
 msgid "Group By"
 msgstr ""
 
-#: galet/window.py:105
+#: galet/window.py:106
 msgid "Show Preview"
 msgstr ""
 
-#: galet/window.py:109
+#: galet/window.py:110
 msgid "Sort, Group and Display Options"
 msgstr ""
 
-#: galet/window.py:130
+#: galet/window.py:131
 msgid "This Folder"
 msgstr ""
 
-#: galet/window.py:130
+#: galet/window.py:131
 msgid "Filter the current folder"
 msgstr ""
 
-#: galet/window.py:131
+#: galet/window.py:132
 msgid "Subfolders"
 msgstr ""
 
-#: galet/window.py:131
+#: galet/window.py:132
 msgid "Search this folder and all its subfolders"
 msgstr ""
 
-#: galet/window.py:132
+#: galet/window.py:133
 msgid "Everywhere"
 msgstr ""
 
-#: galet/window.py:132
+#: galet/window.py:133
 msgid "Search your whole home folder"
 msgstr ""
 
-#: galet/window.py:145
+#: galet/window.py:146
 msgid "Also search inside documents (text, PDF, office files)"
 msgstr ""
 
-#: galet/window.py:150
+#: galet/window.py:151
 msgid "AI mode: describe what you are looking for, then press Enter"
 msgstr ""
 
-#: galet/window.py:159
+#: galet/window.py:160
 msgid "Save as Smart Folder"
 msgstr ""
 
-#: galet/window.py:346
+#: galet/window.py:348
 msgid "Sending {n} file to {device}…"
 msgstr ""
 
-#: galet/window.py:346
+#: galet/window.py:348
 msgid "Sending {n} files to {device}…"
 msgstr ""
 
-#: galet/window.py:375
+#: galet/window.py:377
 msgid "Describe what you are looking for, e.g. “PDF invoices from this week”"
 msgstr ""
 
-#: galet/window.py:436
+#: galet/window.py:465
 msgid "No new photo to analyse here"
 msgstr ""
 
-#: galet/window.py:439
+#: galet/window.py:468
 msgid "{n} photos will be described by {service} so you can find them by what they show."
 msgstr ""
 
-#: galet/window.py:442
+#: galet/window.py:471
 msgid "Reduced copies of the photos (512 pixels) are sent to this online service."
 msgstr ""
 
-#: galet/window.py:471
+#: galet/window.py:500
 msgid "{n} photo analysed"
 msgstr ""
 
-#: galet/window.py:471
+#: galet/window.py:500
 msgid "{n} photos analysed"
 msgstr ""
 
-#: galet/window.py:473
+#: galet/window.py:502
 msgid "Analysing Photos"
 msgstr ""
 
-#: galet/window.py:475
+#: galet/window.py:504
 msgid "Analyse photos with the AI?"
 msgstr ""
 
-#: galet/window.py:475
+#: galet/window.py:504
 msgid "Analyse"
 msgstr ""
 
-#: galet/window.py:619
+#: galet/window.py:648
 msgid "Could not change the folder colour: {error}"
 msgstr ""
 
-#: galet/window.py:677
+#: galet/window.py:706
 msgid "Tag “{tag}” added"
 msgstr ""
 
-#: galet/window.py:801
+#: galet/window.py:830
 msgid "Save Smart Folder"
 msgstr ""
 
-#: galet/window.py:801
+#: galet/window.py:830
 msgid "Save"
 msgstr ""
 
-#: galet/window.py:803
+#: galet/window.py:832
 msgid "Smart folder “{name}” saved"
 msgstr ""
 
-#: galet/window.py:847
+#: galet/window.py:876
 msgid "No folder at “{path}”"
 msgstr ""
 
-#: galet/window.py:849
+#: galet/window.py:878
 msgid "Go to Location"
 msgstr ""

@@ -12,9 +12,10 @@ from .widgets import FolderColorPicker, TagPicker
 
 VIEW_MODES = ("grid", "list", "columns", "gallery")
 
-# Shortcuts that must only work when the file view has the focus (not while
-# typing in the search field or a dialog).
+# File shortcuts, active in the whole window except while typing text or in a dialog
+# (installed by the window, see GaletWindow._install_file_shortcuts).
 LOCAL_SHORTCUTS = (
+    ("<Control>a", "win.select-all"),
     ("Delete", "win.trash"),
     ("<Shift>Delete", "win.delete-permanently"),
     ("<Control>z", "win.undo"),
@@ -73,11 +74,6 @@ class BrowserPane(Gtk.Box):
                                        action_name="win.empty-trash")
         self.prepend(self.trash_banner)
 
-        shortcuts = Gtk.ShortcutController(propagation_phase=Gtk.PropagationPhase.CAPTURE)
-        for trigger, action in LOCAL_SHORTCUTS:
-            shortcuts.add_shortcut(Gtk.Shortcut(trigger=Gtk.ShortcutTrigger.parse_string(trigger),
-                                                action=Gtk.CallbackAction.new(self._guarded(action))))
-        self.add_controller(shortcuts)
 
         # Type-ahead: typing a name selects the matching file.
         self._typed = ""
@@ -279,16 +275,6 @@ class BrowserPane(Gtk.Box):
 
     # ---------------------------------------------------- keyboard helpers
 
-    def _guarded(self, action):
-        def callback(widget, *_args):
-            focus = widget.get_root().get_focus() if widget.get_root() else None
-            if isinstance(focus, Gtk.Editable):
-                return False  # let text fields handle Delete, Ctrl+C, Ctrl+Z...
-            if action == "win.quicklook" and (focus is None or not focus.is_ancestor(self)):
-                return False
-            return bool(widget.activate_action(action, None))
-        return callback
-
     def _on_type_ahead(self, _controller, keyval, _keycode, state):
         if state & (Gdk.ModifierType.CONTROL_MASK | Gdk.ModifierType.ALT_MASK | Gdk.ModifierType.SUPER_MASK):
             return False
@@ -313,13 +299,17 @@ class BrowserPane(Gtk.Box):
             return
         if self.view.select_file(gfile):
             if rename:
-                GLib.timeout_add(150, lambda: self.start_rename() and False)
+                GLib.timeout_add(150, lambda: self.start_rename(wait=10) and False)
             return
         if attempts:
             GLib.timeout_add(100, lambda: self.reveal(gfile, rename, attempts - 1) and False)
 
-    def start_rename(self):
-        """Rename in place: an entry appears over the file name, like Finder."""
+    def start_rename(self, wait=0):
+        """Rename in place: an entry appears over the file name, like Finder.
+
+        ``wait``: retries (every 100 ms) while the cell is not shown yet, e.g.
+        right after a new folder appeared in the view.
+        """
         items = self.get_selected_items()
         if len(items) != 1:
             return False
@@ -331,6 +321,9 @@ class BrowserPane(Gtk.Box):
         item = items[0]
         cell = self.view.find_cell(item)
         if cell is None or not cell.get_mapped():
+            if wait:
+                GLib.timeout_add(100, lambda: self.start_rename(wait - 1) and False)
+                return False
             fileops.rename(self.window, item)
             return False
 
@@ -464,6 +457,10 @@ class BrowserPane(Gtk.Box):
         else:
             for item in folders:
                 self.window.new_tab(Location(item.target_file), select=False)
+
+    def select_all(self):
+        if self.view is not None and hasattr(self.view, "select_all"):
+            self.view.select_all()
 
     def popup_context_menu_for_selection(self):
         """Keyboard (Shift+F10 / Menu key): open the menu next to the selected file."""

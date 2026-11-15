@@ -85,6 +85,9 @@
     <keyword>explorer</keyword>
   </keywords>
   <releases>
+    <release version="0.7.1" date="2026-11-15">
+      <description><p>Keyboard shortcuts work window-wide, Ctrl+A and multi-selection in Columns view, the search window closes with Esc or its close button.</p></description>
+    </release>
     <release version="0.7.0" date="2026-11-14">
       <description><p>Back up and restore settings, tags, folder colours and favourites in one file.</p></description>
     </release>

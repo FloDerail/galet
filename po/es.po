@@ -1227,3 +1227,6 @@ msgstr "Este archivo no se puede importar: {error}"
 
 msgid "What to include"
 msgstr "Qué incluir"
+
+msgid "Close search"
+msgstr "Cerrar la búsqueda"
