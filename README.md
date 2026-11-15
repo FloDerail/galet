@@ -68,7 +68,7 @@ staying a native GTK4 / libadwaita application that blends in with GNOME and Zor
 - **Encrypted server list**: server cards are stored encrypted (GnuPG, AES-256) with a key kept in the
   GNOME keyring, or locked by an optional **master password**, like a vault. Backups can be encrypted
   with a password too.
-- **Built-in terminal** (<kbd>Ctrl</kbd>+<kbd>`</kbd> or <kbd>F4</kbd>): a terminal panel under the
+- **Built-in terminal** (<kbd>Ctrl</kbd>+<kbd>`</kbd>, <kbd>Ctrl</kbd>+<kbd>²</kbd> on AZERTY, or <kbd>F4</kbd>): a terminal panel under the
   files, with tabs. It opens in the current folder, or as an SSH session when you are on an SFTP
   server. Ctrl+letter shortcuts go to the shell while you type.
 - **Dual pane** (<kbd>F3</kbd>): your computer on one side, a server (or any folder) on the other;
@@ -135,11 +135,19 @@ index is used as the storage.
 | ![Preview pane](docs/screenshots/panneau-apercu.png) | ![Column view](docs/screenshots/colonnes.png) |
 | **Gallery view** | **Settings → Folders** |
 | ![Gallery](docs/screenshots/galerie.png) | ![Folder settings](docs/screenshots/reglages-dossiers.png) |
+| **Server manager** (Ctrl+K) | **Server card with login** |
+| ![Server manager](docs/screenshots/serveurs-gestionnaire.png) | ![Server card](docs/screenshots/serveur-fiche.png) |
+| **Built-in terminal** (F4) | **Dual pane for transfers** (F3) |
+| ![Built-in terminal](docs/screenshots/terminal-integre.png) | ![Dual pane](docs/screenshots/double-panneau.png) |
+| **Login window** | **Encrypted server list, master password** |
+| ![Login window](docs/screenshots/serveur-connexion.png) | ![Security settings](docs/screenshots/reglages-securite.png) |
 
 ## Install
 
 Requirements (already present on Zorin OS 17+/Ubuntu 24.04+):
-Python 3.10+, GTK 4.12+, libadwaita 1.5+, PyGObject, pycairo, and optionally `gnome-sushi` for Quick Look.
+Python 3.10+, GTK 4.12+, libadwaita 1.5+, PyGObject, pycairo, GnuPG (encrypted server list and
+backups), and optionally `gnome-sushi` for Quick Look and VTE 0.76+ (`gir1.2-vte-3.91`) for the built-in
+terminal. The Flatpak includes everything.
 
 ```sh
 sudo apt install python3-gi python3-gi-cairo gir1.2-gtk-4.0 gir1.2-adw-1 gnome-sushi gir1.2-vte-3.91 gnupg

@@ -43,7 +43,7 @@ ACCELS = {
     "win.go-downloads": ["<Control><Alt>l"],
     "win.go-recent": ["<Control><Shift>f"],
     "win.go-network": ["<Control><Shift>k"],
-    "win.toggle-terminal": ["<Control>grave", "F4"],
+    "win.toggle-terminal": ["<Control>grave", "<Control>twosuperior", "F4"],  # ² = key under Esc on AZERTY
     "win.dual-pane": ["F3"],
 }
 

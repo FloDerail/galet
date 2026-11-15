@@ -43,12 +43,12 @@ logiciel libre, il peut maintenant convenir à d'autres aussi.
 | 🌍 **Langues** | Français, anglais, espagnol, allemand, italien, portugais. |
 | 🌐 **Serveurs** | `Ctrl+K` : gestionnaire de serveurs — partages Windows (SMB), SFTP, FTP, WebDAV (Nextcloud, kDrive…), NFS. Fiches avec identifiant et mot de passe (trousseau GNOME), connexion en un clic, terminal SSH, serveurs dans la barre latérale. |
 | 🔐 **Chiffrement** | Liste des serveurs chiffrée (AES-256), mot de passe maître facultatif comme un coffre, sauvegardes chiffrées par mot de passe. |
-| 💻 **Terminal intégré** | `Ctrl+`` ` ou `F4` : panneau terminal sous les fichiers, en onglets, ouvert dans le dossier courant ou en SSH sur un serveur SFTP. |
+| 💻 **Terminal intégré** | `Ctrl+²` / `Ctrl+`` ` ou `F4` : panneau terminal sous les fichiers, en onglets, ouvert dans le dossier courant ou en SSH sur un serveur SFTP. |
 | ↔️ **Double panneau** | `F3` : ordinateur d'un côté, serveur de l'autre, glisser-déposer ou « Copier / Déplacer de l'autre côté ». |
 | 📱 **Envoi vers le téléphone** | Avec Zorin Connect ou GSConnect, comme AirDrop. |
 | 🎨 **Thèmes** | Système, **macOS** (pastilles rouge-orange-vert à gauche), **Windows 11** ou **Personnalisé** (couleur, boutons, coins, police), en clair ou en sombre. |
 | 📁 **Dossiers colorés** | Clic droit → « Couleur du dossier ». Un dossier peut prendre la couleur de son tag, et la palette se règle dans Réglages → Dossiers. Chaque dossier retient aussi sa présentation, comme sur Mac. |
-| 💾 **Sauvegarde** | Réglages → Avancé : exportez réglages, tags, couleurs de dossiers et favoris dans un fichier, et réimportez-les plus tard ou sur un autre PC. |
+| 💾 **Sauvegarde** | Réglages → Avancé : exportez réglages, tags, couleurs de dossiers, favoris et serveurs dans un fichier **chiffré par mot de passe**, et réimportez-les plus tard ou sur un autre PC. |
 | ⚙️ **Réglages** | `Ctrl+,` : dossier de départ, présentation par défaut, taille des icônes, éléments de la barre latérale, tags, serveurs… |
 
 | Colonnes | Galerie |
@@ -58,6 +58,56 @@ logiciel libre, il peut maintenant convenir à d'autres aussi.
 | ![Vue groupée](screenshots/icones-groupees.png) | ![Recherche dans le contenu](screenshots/recherche-contenu.png) |
 | **Aperçu et actions rapides** | **Réglages → IA locale** |
 | ![Panneau d'aperçu](screenshots/panneau-apercu.png) | ![IA locale](screenshots/reglages-ia.png) |
+
+### Serveurs, terminal et transferts (nouveau en 0.8 et 0.9)
+
+Galet gère vos serveurs un peu comme **Termius** : chaque serveur a sa **fiche** (protocole, hôte,
+port, dossier, identifiant) et se connecte en un clic depuis la barre latérale ou le gestionnaire
+(`Ctrl+K`). Le mot de passe est rangé dans le **trousseau GNOME**, jamais dans un fichier.
+
+| Gestionnaire de serveurs (`Ctrl+K`) | Fiche d'un serveur |
+|---|---|
+| ![Gestionnaire de serveurs](screenshots/serveurs-gestionnaire.png) | ![Fiche d'un serveur](screenshots/serveur-fiche.png) |
+
+- **Connexion** : quand un serveur demande un mot de passe, Galet affiche sa propre fenêtre,
+  pré-remplie, avec « Retenir le mot de passe ». Si la connexion échoue, un message clair l'explique.
+- **Terminal SSH** en un clic pour les serveurs SFTP (vos clés `~/.ssh` sont utilisées).
+- **Transférer** : le bouton ▥ d'une fiche ouvre le **double panneau**, votre ordinateur à gauche et
+  le serveur à droite.
+
+| Fenêtre de connexion | Liste des serveurs verrouillée |
+|---|---|
+| ![Fenêtre de connexion](screenshots/serveur-connexion.png) | ![Coffre verrouillé](screenshots/coffre-verrouille.png) |
+
+#### Tout est chiffré
+
+- La **liste des serveurs** (hôtes, identifiants, ports, dossiers) est chiffrée en **AES-256** avec
+  GnuPG ; la clé est gardée dans le trousseau GNOME. Les serveurs déjà enregistrés sont chiffrés
+  automatiquement au premier lancement de la version 0.9.
+- **Mot de passe maître** (facultatif, Réglages → Serveurs → Sécurité) : la liste reste verrouillée
+  comme un coffre jusqu'à ce que vous le saisissiez, une fois par session. Attention : s'il est
+  oublié, la liste des serveurs ne peut pas être récupérée (vos fichiers sur les serveurs, eux, ne
+  sont pas touchés).
+- Les **sauvegardes** (Réglages → Avancé) sont chiffrées par un mot de passe de votre choix.
+
+![Réglages → Serveurs → Sécurité](screenshots/reglages-securite.png)
+
+#### Terminal intégré
+
+`Ctrl+²` (la touche sous Échap) ou `F4` ouvre un **terminal sous les fichiers**, avec des onglets.
+Il démarre dans le dossier affiché — ou directement en **SSH** quand vous êtes sur un serveur SFTP.
+Le bouton 📁 y tape `cd` vers le dossier courant. Pendant que vous écrivez dans le terminal, les
+raccourcis `Ctrl+lettre` lui sont réservés (`Ctrl+C`, `Ctrl+R`, `Ctrl+L`…).
+
+![Terminal intégré](screenshots/terminal-integre.png)
+
+#### Double panneau
+
+`F3` affiche un **second panneau** à droite : votre ordinateur d'un côté, le serveur (ou n'importe
+quel dossier) de l'autre. Glissez-déposez entre les deux, ou faites clic droit → « Copier / Déplacer
+de l'autre côté ». Le côté actif est souligné en couleur.
+
+![Double panneau](screenshots/double-panneau.png)
 
 ### Thèmes
 

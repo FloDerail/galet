@@ -2,6 +2,14 @@
 
 Galet — logiciel libre et open source de [Florian Dérail](https://florianderail.fr).
 
+## 0.9.1 — Terminal au clavier AZERTY, nouvelles captures
+
+- ⌨️ Le terminal intégré s'ouvre aussi avec **Ctrl+²** (la touche sous Échap des claviers AZERTY),
+  en plus de F4 et Ctrl+`.
+- 📸 Fiche de présentation, README et site web : nouvelles captures (gestionnaire de serveurs, fiche
+  serveur, connexion, coffre verrouillé, sécurité, terminal intégré, double panneau) et explications.
+- 🇬🇧 Ctrl+² opens the terminal on AZERTY keyboards; new screenshots and docs.
+
 ## 0.9.0 — Coffre chiffré, terminal intégré et double panneau
 
 - 🔐 **Liste des serveurs chiffrée** (AES-256 avec GnuPG) : hôtes, identifiants, ports et dossiers ne
