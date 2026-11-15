@@ -22,6 +22,126 @@ msgstr ""
 msgid "Source Code"
 msgstr ""
 
+#: galet/deploy.py:45
+msgid "Git is not installed."
+msgstr ""
+
+#: galet/deploy.py:72
+msgid "This folder is not in a Git repository."
+msgstr ""
+
+#: galet/deploy.py:221
+msgid "Added"
+msgstr ""
+
+#: galet/deploy.py:221
+msgid "Modified"
+msgstr ""
+
+#: galet/deploy.py:221
+msgid "Deleted in Git"
+msgstr ""
+
+#: galet/deploy.py:222
+msgid "More recent at destination"
+msgstr ""
+
+#: galet/deploy.py:233
+msgid "Deploy With Git"
+msgstr ""
+
+#: galet/deploy.py:241
+msgid "Send"
+msgstr ""
+
+#: galet/deploy.py:243
+msgid "Cancel"
+msgstr ""
+
+#: galet/deploy.py:259
+msgid "Commits"
+msgstr ""
+
+#: galet/deploy.py:276
+msgid "{project} → {server}"
+msgstr ""
+
+#: galet/deploy.py:278
+msgid "Looking for the commits to deploy…"
+msgstr ""
+
+#: galet/deploy.py:298
+msgid "First deployment: the files tracked by Git ({ref}, {sha}) are compared with the server (size and date). Next time, only the files changed by your new commits will be sent."
+msgstr ""
+
+#: galet/deploy.py:302
+msgid "Nothing to deploy: the server already has {ref} ({sha})."
+msgstr ""
+
+#: galet/deploy.py:305
+msgid "{n} commit pushed since the last deployment ({base} → {sha}, {ref})."
+msgstr ""
+
+#: galet/deploy.py:305
+msgid "{n} commits pushed since the last deployment ({base} → {sha}, {ref})."
+msgstr ""
+
+#: galet/deploy.py:309
+msgid "This branch has no upstream on GitHub: the local branch “{branch}” is used."
+msgstr ""
+
+#: galet/deploy.py:316
+msgid "{n} commit"
+msgstr ""
+
+#: galet/deploy.py:316
+msgid "{n} commits"
+msgstr ""
+
+#: galet/deploy.py:341
+msgid "Send {n} file"
+msgstr ""
+
+#: galet/deploy.py:341
+msgid "Send {n} files"
+msgstr ""
+
+#: galet/deploy.py:343
+msgid "delete {n} item"
+msgstr ""
+
+#: galet/deploy.py:343
+msgid "delete {n} items"
+msgstr ""
+
+#: galet/deploy.py:346
+msgid "Mark as Deployed"
+msgstr ""
+
+#: galet/deploy.py:359
+msgid "{current} of {total} — {name}"
+msgstr ""
+
+#: galet/deploy.py:369
+msgid "Some files could not be deployed: {error}"
+msgstr ""
+
+#: galet/deploy.py:376
+msgid "Deployed: {n} file ({sha})"
+msgstr ""
+
+#: galet/deploy.py:376
+msgid "Deployed: {n} files ({sha})"
+msgstr ""
+
+#: galet/deploy.py:380
+msgid "Deploying to “{name}”"
+msgstr ""
+
+#: galet/deploy.py:388
+msgid "Open your project on one side and the server folder on the other."
+msgstr ""
+
 #: galet/dialogs.py:19
 msgid "{n} item"
 msgstr ""
@@ -40,10 +160,6 @@ msgstr ""
 
 #: galet/dialogs.py:54
 msgid "New Tag"
-msgstr ""
-
-#: galet/dialogs.py:78
-msgid "Cancel"
 msgstr ""
 
 #: galet/dialogs.py:79
@@ -258,10 +374,6 @@ msgstr ""
 msgid "Copying {n} items"
 msgstr ""
 
-#: galet/fileops.py:602
-msgid "{current} of {total} — {name}"
-msgstr ""
-
 #: galet/fileops.py:607
 msgid "cannot copy a folder into itself"
 msgstr ""
@@ -352,10 +464,6 @@ msgstr ""
 
 #: galet/info.py:137
 msgid "Created"
-msgstr ""
-
-#: galet/info.py:138
-msgid "Modified"
 msgstr ""
 
 #: galet/info.py:151
@@ -618,15 +726,19 @@ msgstr ""
 msgid "Synchronise With the Other Side…"
 msgstr ""
 
-#: galet/pane.py:580
+#: galet/pane.py:579
+msgid "Deploy the Pushed Commits (Git)…"
+msgstr ""
+
+#: galet/pane.py:583
 msgid "Analyse Photos in This Folder (AI)"
 msgstr ""
 
-#: galet/pane.py:581
+#: galet/pane.py:584
 msgid "Open in Terminal"
 msgstr ""
 
-#: galet/pane.py:582
+#: galet/pane.py:585
 msgid "Show Hidden Files"
 msgstr ""
 
@@ -1658,20 +1770,12 @@ msgstr ""
 msgid "New"
 msgstr ""
 
-#: galet/syncdialog.py:16
-msgid "More recent at destination"
-msgstr ""
-
 #: galet/syncdialog.py:17
 msgid "To delete"
 msgstr ""
 
 #: galet/syncdialog.py:27
 msgid "Synchronise"
-msgstr ""
-
-#: galet/syncdialog.py:34
-msgid "Send"
 msgstr ""
 
 #: galet/syncdialog.py:47
@@ -1752,22 +1856,6 @@ msgstr ""
 
 #: galet/syncdialog.py:162
 msgid "… and {n} more"
-msgstr ""
-
-#: galet/syncdialog.py:208
-msgid "Send {n} file"
-msgstr ""
-
-#: galet/syncdialog.py:208
-msgid "Send {n} files"
-msgstr ""
-
-#: galet/syncdialog.py:212
-msgid "delete {n} item"
-msgstr ""
-
-#: galet/syncdialog.py:212
-msgid "delete {n} items"
 msgstr ""
 
 #: galet/syncdialog.py:216
@@ -1918,186 +2006,206 @@ msgstr ""
 msgid "Default Colour"
 msgstr ""
 
-#: galet/window.py:53
+#: galet/window.py:56
 msgid "Show Sidebar"
 msgstr ""
 
-#: galet/window.py:57
+#: galet/window.py:60
 msgid "Back"
 msgstr ""
 
-#: galet/window.py:59
+#: galet/window.py:62
 msgid "Forward"
 msgstr ""
 
-#: galet/window.py:66
+#: galet/window.py:69
 msgid "New Window"
 msgstr ""
 
-#: galet/window.py:67
+#: galet/window.py:70
 msgid "New Tab"
 msgstr ""
 
-#: galet/window.py:69
+#: galet/window.py:72
 msgid "Merge All Windows"
 msgstr ""
 
-#: galet/window.py:78
+#: galet/window.py:81
 msgid "Go"
 msgstr ""
 
-#: galet/window.py:79
+#: galet/window.py:82
 msgid "Go to Location…"
 msgstr ""
 
-#: galet/window.py:80
+#: galet/window.py:83
 msgid "Connect to Server…"
 msgstr ""
 
-#: galet/window.py:82
+#: galet/window.py:85
 msgid "Dual Pane"
 msgstr ""
 
-#: galet/window.py:87
+#: galet/window.py:90
 msgid "About Galet"
 msgstr ""
 
-#: galet/window.py:90
+#: galet/window.py:93
 msgid "Main Menu"
 msgstr ""
 
-#: galet/window.py:92
+#: galet/window.py:95
 msgid "Search (Ctrl+F)"
 msgstr ""
 
-#: galet/window.py:103
+#: galet/window.py:106
 msgid "Sort By"
 msgstr ""
 
-#: galet/window.py:108
+#: galet/window.py:111
 msgid "Group By"
 msgstr ""
 
-#: galet/window.py:110
+#: galet/window.py:113
 msgid "Show Preview"
 msgstr ""
 
-#: galet/window.py:114
+#: galet/window.py:117
 msgid "Sort, Group and Display Options"
 msgstr ""
 
-#: galet/window.py:135
+#: galet/window.py:138
 msgid "This Folder"
 msgstr ""
 
-#: galet/window.py:135
+#: galet/window.py:138
 msgid "Filter the current folder"
 msgstr ""
 
-#: galet/window.py:136
+#: galet/window.py:139
 msgid "Subfolders"
 msgstr ""
 
-#: galet/window.py:136
+#: galet/window.py:139
 msgid "Search this folder and all its subfolders"
 msgstr ""
 
-#: galet/window.py:137
+#: galet/window.py:140
 msgid "Everywhere"
 msgstr ""
 
-#: galet/window.py:137
+#: galet/window.py:140
 msgid "Search your whole home folder"
 msgstr ""
 
-#: galet/window.py:150
+#: galet/window.py:153
 msgid "Also search inside documents (text, PDF, office files)"
 msgstr ""
 
-#: galet/window.py:155
+#: galet/window.py:158
 msgid "AI mode: describe what you are looking for, then press Enter"
 msgstr ""
 
-#: galet/window.py:164
+#: galet/window.py:167
 msgid "Save as Smart Folder"
 msgstr ""
 
-#: galet/window.py:381
+#: galet/window.py:211
+msgid "Deploy…"
+msgstr ""
+
+#: galet/window.py:393
 msgid "Sending {n} file to {device}…"
 msgstr ""
 
-#: galet/window.py:381
+#: galet/window.py:393
 msgid "Sending {n} files to {device}…"
 msgstr ""
 
-#: galet/window.py:410
+#: galet/window.py:422
 msgid "Describe what you are looking for, e.g. “PDF invoices from this week”"
 msgstr ""
 
-#: galet/window.py:500
+#: galet/window.py:512
 msgid "No new photo to analyse here"
 msgstr ""
 
-#: galet/window.py:503
+#: galet/window.py:515
 msgid "{n} photos will be described by {service} so you can find them by what they show."
 msgstr ""
 
-#: galet/window.py:506
+#: galet/window.py:518
 msgid "Reduced copies of the photos (512 pixels) are sent to this online service."
 msgstr ""
 
-#: galet/window.py:535
+#: galet/window.py:547
 msgid "{n} photo analysed"
 msgstr ""
 
-#: galet/window.py:535
+#: galet/window.py:547
 msgid "{n} photos analysed"
 msgstr ""
 
-#: galet/window.py:537
+#: galet/window.py:549
 msgid "Analysing Photos"
 msgstr ""
 
-#: galet/window.py:539
+#: galet/window.py:551
 msgid "Analyse photos with the AI?"
 msgstr ""
 
-#: galet/window.py:539
+#: galet/window.py:551
 msgid "Analyse"
 msgstr ""
 
-#: galet/window.py:691
+#: galet/window.py:703
 msgid "Could not change the folder colour: {error}"
 msgstr ""
 
-#: galet/window.py:796
+#: galet/window.py:808
 msgid "Enclosing Folder"
 msgstr ""
 
-#: galet/window.py:802
+#: galet/window.py:814
 msgid "Synchronise the two folders…"
 msgstr ""
 
-#: galet/window.py:805
+#: galet/window.py:817
+msgid "Deploy the pushed commits (Git)…"
+msgstr ""
+
+#: galet/window.py:821
 msgid "Close Dual Pane"
 msgstr ""
 
-#: galet/window.py:912
+#: galet/window.py:881
+msgid "Open your Git project on one side and the server folder on the other."
+msgstr ""
+
+#: galet/window.py:911
+msgid "{n} commit pushed since the last deployment to “{server}”"
+msgstr ""
+
+#: galet/window.py:911
+msgid "{n} commits pushed since the last deployment to “{server}”"
+msgstr ""
+
+#: galet/window.py:974
 msgid "Tag “{tag}” added"
 msgstr ""
 
-#: galet/window.py:1036
+#: galet/window.py:1100
 msgid "Save Smart Folder"
 msgstr ""
 
-#: galet/window.py:1038
+#: galet/window.py:1102
 msgid "Smart folder “{name}” saved"
 msgstr ""
 
-#: galet/window.py:1082
+#: galet/window.py:1146
 msgid "No folder at “{path}”"
 msgstr ""
 
-#: galet/window.py:1084
+#: galet/window.py:1148
 msgid "Go to Location"
 msgstr ""

@@ -1960,3 +1960,84 @@ msgstr "Wählen Sie zwei verschiedene Ordner, nicht einen im anderen."
 
 msgid "Synchronise the two folders…"
 msgstr "Die beiden Ordner synchronisieren…"
+
+msgid "Git is not installed."
+msgstr "Git ist nicht installiert."
+
+msgid "This folder is not in a Git repository."
+msgstr "Dieser Ordner liegt in keinem Git-Repository."
+
+msgid "Added"
+msgstr "Hinzugefügt"
+
+msgid "Deleted in Git"
+msgstr "In Git gelöscht"
+
+msgid "Deploy With Git"
+msgstr "Mit Git bereitstellen"
+
+msgid "Commits"
+msgstr "Commits"
+
+msgid "{project} → {server}"
+msgstr "{project} → {server}"
+
+msgid "Looking for the commits to deploy…"
+msgstr "Zu verteilende Commits werden gesucht…"
+
+msgid "First deployment: the files tracked by Git ({ref}, {sha}) are compared with the server (size and date). Next time, only the files changed by your new commits will be sent."
+msgstr "Erste Bereitstellung: Die von Git verfolgten Dateien ({ref}, {sha}) werden mit dem Server verglichen (Größe und Datum). Beim nächsten Mal werden nur die von neuen Commits geänderten Dateien gesendet."
+
+msgid "Nothing to deploy: the server already has {ref} ({sha})."
+msgstr "Nichts bereitzustellen: Der Server hat bereits {ref} ({sha})."
+
+msgid "{n} commit pushed since the last deployment ({base} → {sha}, {ref})."
+msgstr "{n} Commit seit der letzten Bereitstellung gepusht ({base} → {sha}, {ref})."
+
+msgid "{n} commits pushed since the last deployment ({base} → {sha}, {ref})."
+msgstr "{n} Commits seit der letzten Bereitstellung gepusht ({base} → {sha}, {ref})."
+
+msgid "This branch has no upstream on GitHub: the local branch “{branch}” is used."
+msgstr "Dieser Branch hat keinen Upstream auf GitHub: Der lokale Branch „{branch}“ wird verwendet."
+
+msgid "{n} commit"
+msgstr "{n} Commit"
+
+msgid "{n} commits"
+msgstr "{n} Commits"
+
+msgid "Mark as Deployed"
+msgstr "Als bereitgestellt markieren"
+
+msgid "Some files could not be deployed: {error}"
+msgstr "Einige Dateien konnten nicht bereitgestellt werden: {error}"
+
+msgid "Deployed: {n} file ({sha})"
+msgstr "Bereitgestellt: {n} Datei ({sha})"
+
+msgid "Deployed: {n} files ({sha})"
+msgstr "Bereitgestellt: {n} Dateien ({sha})"
+
+msgid "Deploying to “{name}”"
+msgstr "Bereitstellung nach „{name}“"
+
+msgid "Open your project on one side and the server folder on the other."
+msgstr "Öffnen Sie Ihr Projekt auf einer Seite und den Serverordner auf der anderen."
+
+msgid "Deploy the Pushed Commits (Git)…"
+msgstr "Gepushte Commits bereitstellen (Git)…"
+
+msgid "Deploy…"
+msgstr "Bereitstellen…"
+
+msgid "Deploy the pushed commits (Git)…"
+msgstr "Gepushte Commits bereitstellen (Git)…"
+
+msgid "Open your Git project on one side and the server folder on the other."
+msgstr "Öffnen Sie Ihr Git-Projekt auf einer Seite und den Serverordner auf der anderen."
+
+msgid "{n} commit pushed since the last deployment to “{server}”"
+msgstr "{n} Commit seit der letzten Bereitstellung nach „{server}“ gepusht"
+
+msgid "{n} commits pushed since the last deployment to “{server}”"
+msgstr "{n} Commits seit der letzten Bereitstellung nach „{server}“ gepusht"

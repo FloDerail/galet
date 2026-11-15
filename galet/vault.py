@@ -273,6 +273,20 @@ class Vault:
             _clear_keyring_key()  # the random key would let anyone open the vault
         self._changed()
 
+    def get_list(self, key):
+        """Other encrypted lists (e.g. "deploys": project ↔ server pairs)."""
+        return [] if self.locked else list(self.data.get(key, []))
+
+    def set_list(self, key, value):
+        if self.locked:
+            return
+        self.data[key] = list(value)
+        if not self.plain:
+            try:
+                self._save()
+            except (VaultError, OSError) as err:
+                log.warning("Cannot save the vault: %s", err)
+
     def export(self):
         return {"servers": self.servers(), "recent": self.recent()}
 

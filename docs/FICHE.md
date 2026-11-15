@@ -128,6 +128,27 @@ Inutile de renvoyer tout un site pour trois pages modifiées :
 
 ![Synchroniser deux dossiers](screenshots/synchroniser.png)
 
+#### Déployer avec Git (nouveau en 0.11)
+
+Vous travaillez sur un site ou un projet suivi par **Git** ? Après un `git push` vers GitHub, Galet
+envoie sur le serveur **uniquement les fichiers modifiés par les commits poussés**.
+
+1. Ouvrez votre projet d'un côté du double panneau (`F3`) et le dossier du serveur de l'autre.
+2. Le bouton « Déployer » de l'en-tête (ou clic droit → « Déployer les commits poussés (Git)… »)
+   ouvre l'aperçu. La première fois, les fichiers suivis par Git sont comparés avec le serveur ;
+   Galet retient ensuite le **dernier commit déployé** (chiffré dans le coffre, comme vos serveurs).
+3. Aux fois suivantes, une **bannière** l'annonce : « 2 commits poussés depuis le dernier
+   déploiement ». L'aperçu liste les commits et les fichiers : ajoutés et modifiés (cochés), supprimés
+   dans Git (décochés par défaut).
+
+C'est le **contenu du commit poussé** qui part (`origin/main`), jamais vos modifications non
+commitées ni vos commits pas encore poussés : le serveur reflète exactement ce qui est sur GitHub.
+Les fichiers non suivis ou ignorés par Git (`.env`, `node_modules`…) ne partent pas.
+
+| Après un push | Aperçu du déploiement |
+|---|---|
+| ![Bannière de déploiement](screenshots/deployer-banniere.png) | ![Déployer avec Git](screenshots/deployer-git.png) |
+
 ### Thèmes
 
 Réglages (`Ctrl+,`) → **Apparence** : Système, macOS, Windows 11 ou Personnalisé, en clair ou en sombre.

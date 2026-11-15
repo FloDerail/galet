@@ -1960,3 +1960,84 @@ msgstr "Escolha duas pastas diferentes, não uma dentro da outra."
 
 msgid "Synchronise the two folders…"
 msgstr "Sincronizar as duas pastas…"
+
+msgid "Git is not installed."
+msgstr "O Git não está instalado."
+
+msgid "This folder is not in a Git repository."
+msgstr "Esta pasta não está num repositório Git."
+
+msgid "Added"
+msgstr "Adicionado"
+
+msgid "Deleted in Git"
+msgstr "Eliminado no Git"
+
+msgid "Deploy With Git"
+msgstr "Implementar com Git"
+
+msgid "Commits"
+msgstr "Commits"
+
+msgid "{project} → {server}"
+msgstr "{project} → {server}"
+
+msgid "Looking for the commits to deploy…"
+msgstr "A procurar os commits a implementar…"
+
+msgid "First deployment: the files tracked by Git ({ref}, {sha}) are compared with the server (size and date). Next time, only the files changed by your new commits will be sent."
+msgstr "Primeira implementação: os ficheiros seguidos pelo Git ({ref}, {sha}) são comparados com o servidor (tamanho e data). Nas próximas vezes, só serão enviados os ficheiros alterados pelos novos commits."
+
+msgid "Nothing to deploy: the server already has {ref} ({sha})."
+msgstr "Nada a implementar: o servidor já tem {ref} ({sha})."
+
+msgid "{n} commit pushed since the last deployment ({base} → {sha}, {ref})."
+msgstr "{n} commit enviado desde a última implementação ({base} → {sha}, {ref})."
+
+msgid "{n} commits pushed since the last deployment ({base} → {sha}, {ref})."
+msgstr "{n} commits enviados desde a última implementação ({base} → {sha}, {ref})."
+
+msgid "This branch has no upstream on GitHub: the local branch “{branch}” is used."
+msgstr "Este ramo não tem upstream no GitHub: é usado o ramo local «{branch}»."
+
+msgid "{n} commit"
+msgstr "{n} commit"
+
+msgid "{n} commits"
+msgstr "{n} commits"
+
+msgid "Mark as Deployed"
+msgstr "Marcar como implementado"
+
+msgid "Some files could not be deployed: {error}"
+msgstr "Não foi possível implementar alguns ficheiros: {error}"
+
+msgid "Deployed: {n} file ({sha})"
+msgstr "Implementado: {n} ficheiro ({sha})"
+
+msgid "Deployed: {n} files ({sha})"
+msgstr "Implementado: {n} ficheiros ({sha})"
+
+msgid "Deploying to “{name}”"
+msgstr "A implementar em «{name}»"
+
+msgid "Open your project on one side and the server folder on the other."
+msgstr "Abra o projeto de um lado e a pasta do servidor do outro."
+
+msgid "Deploy the Pushed Commits (Git)…"
+msgstr "Implementar os commits enviados (Git)…"
+
+msgid "Deploy…"
+msgstr "Implementar…"
+
+msgid "Deploy the pushed commits (Git)…"
+msgstr "Implementar os commits enviados (Git)…"
+
+msgid "Open your Git project on one side and the server folder on the other."
+msgstr "Abra o projeto Git de um lado e a pasta do servidor do outro."
+
+msgid "{n} commit pushed since the last deployment to “{server}”"
+msgstr "{n} commit enviado desde a última implementação em «{server}»"
+
+msgid "{n} commits pushed since the last deployment to “{server}”"
+msgstr "{n} commits enviados desde a última implementação em «{server}»"

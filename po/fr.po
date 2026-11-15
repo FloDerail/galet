@@ -1786,3 +1786,84 @@ msgstr "Choisissez deux dossiers différents, et pas l'un dans l'autre."
 
 msgid "Synchronise the two folders…"
 msgstr "Synchroniser les deux dossiers…"
+
+msgid "Git is not installed."
+msgstr "Git n'est pas installé."
+
+msgid "This folder is not in a Git repository."
+msgstr "Ce dossier n'est pas dans un dépôt Git."
+
+msgid "Added"
+msgstr "Ajouté"
+
+msgid "Deleted in Git"
+msgstr "Supprimé dans Git"
+
+msgid "Deploy With Git"
+msgstr "Déployer avec Git"
+
+msgid "Commits"
+msgstr "Commits"
+
+msgid "{project} → {server}"
+msgstr "{project} → {server}"
+
+msgid "Looking for the commits to deploy…"
+msgstr "Recherche des commits à déployer…"
+
+msgid "First deployment: the files tracked by Git ({ref}, {sha}) are compared with the server (size and date). Next time, only the files changed by your new commits will be sent."
+msgstr "Premier déploiement : les fichiers suivis par Git ({ref}, {sha}) sont comparés avec le serveur (taille et date). Les fois suivantes, seuls les fichiers modifiés par vos nouveaux commits seront envoyés."
+
+msgid "Nothing to deploy: the server already has {ref} ({sha})."
+msgstr "Rien à déployer : le serveur a déjà {ref} ({sha})."
+
+msgid "{n} commit pushed since the last deployment ({base} → {sha}, {ref})."
+msgstr "{n} commit poussé depuis le dernier déploiement ({base} → {sha}, {ref})."
+
+msgid "{n} commits pushed since the last deployment ({base} → {sha}, {ref})."
+msgstr "{n} commits poussés depuis le dernier déploiement ({base} → {sha}, {ref})."
+
+msgid "This branch has no upstream on GitHub: the local branch “{branch}” is used."
+msgstr "Cette branche n'a pas d'équivalent sur GitHub : la branche locale « {branch} » est utilisée."
+
+msgid "{n} commit"
+msgstr "{n} commit"
+
+msgid "{n} commits"
+msgstr "{n} commits"
+
+msgid "Mark as Deployed"
+msgstr "Marquer comme déployé"
+
+msgid "Some files could not be deployed: {error}"
+msgstr "Certains fichiers n'ont pas pu être déployés : {error}"
+
+msgid "Deployed: {n} file ({sha})"
+msgstr "Déployé : {n} fichier ({sha})"
+
+msgid "Deployed: {n} files ({sha})"
+msgstr "Déployé : {n} fichiers ({sha})"
+
+msgid "Deploying to “{name}”"
+msgstr "Déploiement vers « {name} »"
+
+msgid "Open your project on one side and the server folder on the other."
+msgstr "Ouvrez votre projet d'un côté et le dossier du serveur de l'autre."
+
+msgid "Deploy the Pushed Commits (Git)…"
+msgstr "Déployer les commits poussés (Git)…"
+
+msgid "Deploy…"
+msgstr "Déployer…"
+
+msgid "Deploy the pushed commits (Git)…"
+msgstr "Déployer les commits poussés (Git)…"
+
+msgid "Open your Git project on one side and the server folder on the other."
+msgstr "Ouvrez votre projet Git d'un côté et le dossier du serveur de l'autre."
+
+msgid "{n} commit pushed since the last deployment to “{server}”"
+msgstr "{n} commit poussé depuis le dernier déploiement vers « {server} »"
+
+msgid "{n} commits pushed since the last deployment to “{server}”"
+msgstr "{n} commits poussés depuis le dernier déploiement vers « {server} »"

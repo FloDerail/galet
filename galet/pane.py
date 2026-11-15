@@ -574,6 +574,9 @@ class BrowserPane(Gtk.Box):
             if other is not None and not other.location.is_virtual and not self.location.is_virtual:
                 section = Gio.Menu()
                 section.append(_("Synchronise With the Other Side…"), "win.sync-with-other")
+                from . import deploy
+                if deploy.git_side(self.window) is not None:
+                    section.append(_("Deploy the Pushed Commits (Git)…"), "win.deploy")
                 menu.append_section(None, section)
             section = Gio.Menu()
             if self.settings.get("ai_enabled"):

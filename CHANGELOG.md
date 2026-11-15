@@ -2,6 +2,18 @@
 
 Galet — logiciel libre et open source de [Florian Dérail](https://florianderail.fr).
 
+## 0.11.0 — Déployer avec Git
+
+- 🚀 **Déployer avec Git** : votre projet d'un côté du double panneau, le dossier du serveur de
+  l'autre. Après un `git push`, Galet n'envoie que les fichiers modifiés par les **commits poussés**
+  depuis le dernier déploiement, avec un aperçu des commits et des fichiers (supprimés dans Git :
+  décochés par défaut).
+- Le contenu envoyé est celui du commit poussé (`origin/main`) : ni modifications non commitées, ni
+  commits non poussés, ni fichiers ignorés (`.env`, `node_modules`).
+- Une **bannière** signale les nouveaux commits poussés ; le dernier commit déployé est retenu dans le
+  coffre chiffré. Premier déploiement : comparaison des fichiers suivis par Git avec le serveur.
+- 🇬🇧 Deploy with Git: send only the files changed by the pushed commits since the last deployment.
+
 ## 0.10.0 — Fusionner et synchroniser
 
 - 🔀 **Fusionner** : en copiant un dossier qui existe déjà (par exemple `www` sur le serveur), la

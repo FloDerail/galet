@@ -85,6 +85,9 @@
     <keyword>explorer</keyword>
   </keywords>
   <releases>
+    <release version="0.11.0" date="2026-11-15">
+      <description><p>Deploy with Git: after a push, send to the server only the files changed by the pushed commits since the last deployment, with a preview.</p></description>
+    </release>
     <release version="0.10.0" date="2026-11-15">
       <description><p>Merge existing folders (only new and modified files are copied) and synchronise two folders with a preview, in the dual pane.</p></description>
     </release>

@@ -34,6 +34,9 @@ class GaletWindow(Adw.ApplicationWindow):
         self._install_file_shortcuts()
         self.connect("notify::focus-widget", self._on_focus_changed)
         self.connect("notify::is-active", self._on_focus_changed)
+        # back in Galet after a "git push" elsewhere: look for commits to deploy
+        self.connect("notify::is-active", lambda *_a: self.is_active() and self.dual_active()
+                     and self.refresh_deploy_banner())
         if not empty:
             self.new_tab(location or start_location(self.settings.get("new_window_location")))
 
@@ -204,7 +207,15 @@ class GaletWindow(Adw.ApplicationWindow):
             click = Gtk.GestureClick(button=0, propagation_phase=Gtk.PropagationPhase.CAPTURE)
             click.connect("pressed", lambda *_a, s=side: self._set_side_active(s))
             widget.add_controller(click)
-        self.terminal_paned = Gtk.Paned(orientation=Gtk.Orientation.VERTICAL, start_child=self.dual_paned,
+        # "N commits pushed since the last deployment — Deploy"
+        self.deploy_banner = Adw.Banner(button_label=_("Deploy…"), revealed=False)
+        self.deploy_banner.connect("button-clicked", lambda *_a: self.activate_action("win.deploy", None))
+        self._deploy_check = 0
+        dual_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        dual_box.append(self.deploy_banner)
+        dual_box.append(self.dual_paned)
+        self.dual_paned.set_vexpand(True)
+        self.terminal_paned = Gtk.Paned(orientation=Gtk.Orientation.VERTICAL, start_child=dual_box,
                                         end_child=self.terminal_panel, resize_start_child=True,
                                         resize_end_child=False, shrink_end_child=False, wide_handle=True)
         self.terminal_panel.set_visible(False)
@@ -268,6 +279,7 @@ class GaletWindow(Adw.ApplicationWindow):
                                                       lambda folder: self.current_pane.reveal(folder, rename=True)),
             "open-terminal": lambda: fileops.open_terminal(self, self.current_pane.current_dir()),
             "sync-with-other": self.sync_with_other,
+            "deploy": self.deploy,
             "copy-to-other": lambda: self.transfer_to_other(move=False),
             "move-to-other": lambda: self.transfer_to_other(move=True),
             "toggle-terminal": lambda: self.show_terminal(not self.terminal_panel.get_visible()
@@ -801,6 +813,10 @@ class GaletWindow(Adw.ApplicationWindow):
                 sync_button = Gtk.Button(icon_name="media-playlist-repeat-symbolic", css_classes=["flat"],
                                          tooltip_text=_("Synchronise the two folders…"))
                 sync_button.connect("clicked", lambda *_a: self.sync_with_other())
+                self.deploy_button = Gtk.Button(icon_name="send-to-symbolic", css_classes=["flat"], visible=False,
+                                                tooltip_text=_("Deploy the pushed commits (Git)…"))
+                self.deploy_button.connect("clicked", lambda *_a: self.deploy())
+                header.append(self.deploy_button)
                 header.append(sync_button)
                 close = Gtk.Button(icon_name="window-close-symbolic", tooltip_text=_("Close Dual Pane"),
                                    css_classes=["flat", "circular"])
@@ -818,6 +834,7 @@ class GaletWindow(Adw.ApplicationWindow):
                 self.dual_paned.set_position(width // 2)
             self._set_side_active(True)
             self._mark_active_side()
+            self.refresh_deploy_banner()
         else:
             self._set_side_active(False)
             if self.side_pane is not None:
@@ -830,11 +847,13 @@ class GaletWindow(Adw.ApplicationWindow):
                     child = following
                 self.side_pane = None
             self.side_box.set_visible(False)
+            self.refresh_deploy_banner()
             self._mark_active_side()
             self._sync_chrome()
         self.dual_action.set_state(GLib.Variant("b", show))
 
     def _on_side_location(self, pane):
+        self.refresh_deploy_banner()
         self.side_title.set_text(pane.location.title)
         self.side_title.set_tooltip_text(pane.location.gfile.get_uri() if not pane.location.is_virtual else None)
         if pane is self.current_pane:
@@ -853,6 +872,49 @@ class GaletWindow(Adw.ApplicationWindow):
         destination = other.location.gfile
         uris = [item.gfile.get_uri() for item in items]
         servers.ensure_mounted(self, destination, lambda: fileops.transfer(self, uris, destination, move))
+
+    def deploy(self):
+        from . import deploy
+
+        pair = deploy.git_side(self)
+        if pair is None:
+            self.toast(_("Open your Git project on one side and the server folder on the other."))
+            return
+        deploy.open_for(self, *pair)
+
+    def refresh_deploy_banner(self):
+        """Look (in the background) for pushed commits not deployed yet to the other side."""
+        from . import deploy
+
+        self._deploy_check += 1
+        check = self._deploy_check
+        pair = deploy.git_side(self) if self.dual_active() else None
+        if getattr(self, "deploy_button", None) is not None:
+            self.deploy_button.set_visible(pair is not None)
+        if pair is None:
+            self.deploy_banner.set_revealed(False)
+            return
+        local, remote = pair
+        folder, remote_uri, title = local.location.gfile.get_path(), remote.location.gfile.get_uri(), remote.location.title
+
+        def work():
+            result = deploy.pending(self.settings, folder, remote_uri)
+            GLib.idle_add(lambda: show(result) and False)
+
+        def show(result):
+            if check != self._deploy_check:
+                return
+            if result is None or not result[1]:
+                self.deploy_banner.set_revealed(False)
+                return
+            _project, count = result
+            self.deploy_banner.set_title(ngettext(
+                "{n} commit pushed since the last deployment to “{server}”",
+                "{n} commits pushed since the last deployment to “{server}”", count).format(n=count, server=title))
+            self.deploy_banner.set_revealed(True)
+
+        import threading
+        threading.Thread(target=work, daemon=True).start()
 
     def sync_with_other(self):
         """Send what changed from the active side to the other one (preview first)."""
@@ -934,6 +996,8 @@ class GaletWindow(Adw.ApplicationWindow):
             self.close()
 
     def _on_pane_location(self, pane, page):
+        if self.dual_active():
+            self.refresh_deploy_banner()
         page.set_title(pane.location.title)
         icon = ("galet-tag-symbolic" if pane.location.is_tag else
                 "system-search-symbolic" if pane.location.is_search else "folder-symbolic")
