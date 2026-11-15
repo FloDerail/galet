@@ -85,6 +85,9 @@
     <keyword>explorer</keyword>
   </keywords>
   <releases>
+    <release version="0.9.2" date="2026-11-15">
+      <description><p>Photo thumbnails are shown again in the Flatpak build.</p></description>
+    </release>
     <release version="0.9.1" date="2026-11-15">
       <description><p>The built-in terminal also opens with Ctrl+² on AZERTY keyboards.</p></description>
     </release>

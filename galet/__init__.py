@@ -1,6 +1,6 @@
 """Galet — a Finder-inspired file manager for GNOME."""
 
-__version__ = "0.9.1"
+__version__ = "0.9.2"
 
 APP_ID = "io.github.FloDerail.Galet"
 APP_NAME = "Galet"

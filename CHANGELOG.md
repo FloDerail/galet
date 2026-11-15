@@ -2,6 +2,14 @@
 
 Galet — logiciel libre et open source de [Florian Dérail](https://florianderail.fr).
 
+## 0.9.2 — Miniatures des photos dans la version Flatpak
+
+- 🖼️ Les **miniatures des photos JPEG** s'affichent de nouveau dans la version Flatpak / Logithèque :
+  Galet lançait sur le système un générateur de miniatures qui n'existe que dans le Flatpak. Chaque
+  générateur est maintenant lancé là où il est installé, avec repli sur celui du système.
+- 🌐 Site web : nouvelle image d'accueil (dossiers colorés, tags, photos, serveurs, terminal intégré).
+- 🇬🇧 JPEG thumbnails fixed in the Flatpak build; new home page picture on the website.
+
 ## 0.9.1 — Terminal au clavier AZERTY, nouvelles captures
 
 - ⌨️ Le terminal intégré s'ouvre aussi avec **Ctrl+²** (la touche sous Échap des claviers AZERTY),

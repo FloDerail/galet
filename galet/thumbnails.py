@@ -30,12 +30,21 @@ GVFS_ROOT = os.path.join(GLib.get_user_runtime_dir(), "gvfs") + os.sep
 
 
 def _load_thumbnailers():
+    """mime type → [(command, run_on_host)], best first.
+
+    In the Flatpak, a thumbnailer found in the runtime (/usr, /app) must run inside the
+    sandbox, and one found on the host (/run/host/…) on the host: the runtime's
+    glycin-thumbnailer does not exist on Zorin, and the host's programs are not in
+    the sandbox. Both are kept, so the next one is tried when the first fails.
+    """
     table = {}
     from .sandbox import IN_FLATPAK, data_dirs
 
     dirs = [Path(d) / "thumbnailers" for d in data_dirs()]
     dirs.insert(0, Path(GLib.get_user_data_dir()) / "thumbnailers")
+    seen = set()
     for directory in dirs:
+        on_host = IN_FLATPAK and str(directory).startswith("/run/host")
         for path in sorted(directory.glob("*.thumbnailer")):
             parser = configparser.ConfigParser(interpolation=None)
             try:
@@ -50,8 +59,9 @@ def _load_thumbnailers():
             if not command:
                 continue
             for mime in section.get("MimeType", "").split(";"):
-                if mime and mime not in table:
-                    table[mime] = command
+                if mime and (mime, command, on_host) not in seen:
+                    seen.add((mime, command, on_host))
+                    table.setdefault(mime, []).append((command, on_host))
     return table
 
 
@@ -67,7 +77,7 @@ class Thumbnailer:
     def _command_for(self, content_type):
         if self._commands is None:
             self._commands = _load_thumbnailers()
-        return self._commands.get(content_type)
+        return self._commands.get(content_type) or None
 
     def can_thumbnail(self, item):
         if item.thumbnail or item.is_dir or not item.path or item.path.startswith(GVFS_ROOT):
@@ -107,7 +117,7 @@ class Thumbnailer:
         return GLib.SOURCE_REMOVE
 
     def _generate(self, uri, path, content_type, mtime):
-        command = self._command_for(content_type)
+        candidates = self._command_for(content_type) or []
         target = CACHE / _cache_name(uri)
         if target.exists():
             return str(target)
@@ -115,16 +125,22 @@ class Thumbnailer:
         # The temporary folder lives in the cache so host programs can write to it.
         with tempfile.TemporaryDirectory(prefix="galet-thumb-", dir=str(CACHE.parent)) as tmp:
             output = os.path.join(tmp, "thumb.png")
-            args = []
-            for part in shlex.split(command):
-                part = (part.replace("%s", str(SIZE)).replace("%u", uri)
-                        .replace("%i", path).replace("%o", output))
-                args.append(part)
             from .sandbox import host_command
 
-            completed = subprocess.run(host_command(args), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
-                                       timeout=30, check=False)
-            if completed.returncode != 0 or not os.path.exists(output):
+            for command, on_host in candidates:
+                args = []
+                for part in shlex.split(command):
+                    part = (part.replace("%s", str(SIZE)).replace("%u", uri)
+                            .replace("%i", path).replace("%o", output))
+                    args.append(part)
+                try:
+                    completed = subprocess.run(host_command(args) if on_host else args, stdout=subprocess.DEVNULL,
+                                               stderr=subprocess.DEVNULL, timeout=30, check=False)
+                except (OSError, subprocess.SubprocessError):
+                    continue
+                if completed.returncode == 0 and os.path.exists(output):
+                    break
+            else:
                 FAIL_DIR.mkdir(parents=True, exist_ok=True)
                 (FAIL_DIR / _cache_name(uri)).touch()
                 return None
