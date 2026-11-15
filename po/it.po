@@ -1558,3 +1558,120 @@ msgstr "Cosa includere"
 
 msgid "Close search"
 msgstr "Chiudi la ricerca"
+
+msgid "My Servers"
+msgstr "I miei server"
+
+msgid "Shown in the sidebar. Passwords are kept in the GNOME keyring."
+msgstr "Mostrati nella barra laterale. Le password sono conservate nel portachiavi di GNOME."
+
+msgid "New Server"
+msgstr "Nuovo server"
+
+msgid "Galet server: {name}"
+msgstr "Server Galet: {name}"
+
+msgid "Log in to {server}"
+msgstr "Accedi a {server}"
+
+msgid "Wrong user name or password, try again."
+msgstr "Nome utente o password errati, riprova."
+
+msgid "This server asks for a user name and a password."
+msgstr "Questo server richiede nome utente e password."
+
+msgid "User Name"
+msgstr "Nome utente"
+
+msgid "Domain (optional)"
+msgstr "Dominio (facoltativo)"
+
+msgid "Password"
+msgstr "Password"
+
+msgid "Connect as Guest"
+msgstr "Connetti come ospite"
+
+msgid "Remember Password"
+msgstr "Ricorda la password"
+
+msgid "Kept in the GNOME keyring"
+msgstr "Conservata nel portachiavi di GNOME"
+
+msgid "Could not connect to {server}"
+msgstr "Impossibile connettersi a {server}"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Edit Server…"
+msgstr "Modifica il server…"
+
+msgid "Edit Server"
+msgstr "Modifica il server"
+
+msgid "Protocol"
+msgstr "Protocollo"
+
+msgid "Host (name or IP address)"
+msgstr "Host (nome o indirizzo IP)"
+
+msgid "Port"
+msgstr "Porta"
+
+msgid "Folder or Share (optional)"
+msgstr "Cartella o condivisione (facoltativa)"
+
+msgid "Server"
+msgstr "Server"
+
+msgid "Login"
+msgstr "Accesso"
+
+msgid "The password is kept in the GNOME keyring, never in a file. Leave it empty to be asked when connecting. For SFTP, your SSH keys (~/.ssh) are used automatically."
+msgstr "La password è conservata nel portachiavi di GNOME, mai in un file. Lasciala vuota per inserirla alla connessione. Con SFTP le tue chiavi SSH (~/.ssh) sono usate automaticamente."
+
+msgid "Delete Server"
+msgstr "Elimina il server"
+
+msgid "Address: {uri}"
+msgstr "Indirizzo: {uri}"
+
+msgid "The password could not be saved in the keyring."
+msgstr "Impossibile salvare la password nel portachiavi."
+
+msgid "Quick Connect — address"
+msgstr "Connessione rapida — indirizzo"
+
+msgid "Save as a Server…"
+msgstr "Salva come server…"
+
+msgid "Search servers"
+msgstr "Cerca server"
+
+msgid "Save your servers with their login to connect in one click. They also appear in the sidebar."
+msgstr "Salva i tuoi server con le credenziali per connetterti con un clic. Compaiono anche nella barra laterale."
+
+msgid "Connected"
+msgstr "Connesso"
+
+msgid "Open SSH Terminal"
+msgstr "Apri un terminale SSH"
+
+msgid "More"
+msgstr "Altro"
+
+msgid "Copy Address"
+msgstr "Copia l'indirizzo"
+
+msgid "Address copied"
+msgstr "Indirizzo copiato"
+
+msgid "{name} (copy)"
+msgstr "{name} (copia)"
+
+msgid "Delete “{name}”?"
+msgstr "Eliminare «{name}»?"
+
+msgid "The server and its saved password are removed. Your files on the server are not touched."
+msgstr "Il server e la sua password salvata vengono rimossi. I tuoi file sul server non vengono toccati."

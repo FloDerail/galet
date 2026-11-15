@@ -216,6 +216,9 @@ class Sidebar(Gtk.ScrolledWindow):
         if server_uri is not None:
             if mount is not None:
                 menu.append((_("Disconnect"), "win.disconnect", server_uri))
+            menu.append((_("Edit Server…"), "win.edit-server", server_uri))
+            if server_uri.startswith(("sftp:", "ssh:")):
+                menu.append((_("Open SSH Terminal"), "win.ssh-server", server_uri))
             menu.append((_("Remove from Favorites"), "win.remove-server", server_uri))
         if menu:
             gesture = Gtk.GestureClick(button=Gdk.BUTTON_SECONDARY,

@@ -2,6 +2,22 @@
 
 Galet — logiciel libre et open source de [Florian Dérail](https://florianderail.fr).
 
+## 0.8.0 — Gestionnaire de serveurs
+
+- 🌐 **Ctrl+K** ouvre un vrai **gestionnaire de serveurs** : chaque serveur a sa fiche (nom, protocole
+  SFTP/SMB/WebDAV/FTP/NFS/AFP, hôte, port, dossier ou partage, identifiant, domaine Windows) et se
+  connecte en un clic. Recherche, connexion rapide par adresse, serveurs récents, dupliquer, copier
+  l'adresse.
+- 🔑 **Identifiant et mot de passe** : saisis dans la fiche, le mot de passe est gardé dans le
+  trousseau GNOME (jamais dans un fichier ni dans les sauvegardes). Quand un serveur en demande un,
+  Galet affiche sa propre fenêtre de connexion, pré-remplie, avec « Retenir le mot de passe » et
+  « Se connecter en invité ».
+- ⚠️ Si la connexion échoue, un message clair l'explique (avec un bouton pour corriger le serveur).
+- 💻 **Terminal SSH** en un clic pour les serveurs SFTP (gestionnaire et clic droit dans la barre
+  latérale), qui propose aussi « Modifier le serveur… ».
+- 🇬🇧 Server manager with server cards (protocol, host, port, user, password in the GNOME keyring),
+  Galet's own login window, clear connection errors and one-click SSH terminal.
+
 ## 0.7.1 — Raccourcis clavier et recherche
 
 - ⌨️ **Ctrl+A, Ctrl+C, Ctrl+X, Ctrl+V, Suppr, F2, Espace** fonctionnent partout dans la fenêtre, même

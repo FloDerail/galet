@@ -771,234 +771,230 @@ msgid "Servers"
 msgstr ""
 
 #: galet/preferences.py:362
-msgid "Favorite Servers"
+msgid "My Servers"
 msgstr ""
 
 #: galet/preferences.py:363
-msgid "Shown in the sidebar. Rename a server by editing its name."
+msgid "Shown in the sidebar. Passwords are kept in the GNOME keyring."
 msgstr ""
 
 #: galet/preferences.py:364
-msgid "Connect to Server…"
+msgid "New Server"
 msgstr ""
 
-#: galet/preferences.py:373
-msgid "Remove from Favorites"
-msgstr ""
-
-#: galet/preferences.py:391
+#: galet/preferences.py:383
 msgid "AI"
 msgstr ""
 
-#: galet/preferences.py:394
+#: galet/preferences.py:386
 msgid "AI (optional)"
 msgstr ""
 
-#: galet/preferences.py:395
+#: galet/preferences.py:387
 msgid "Search in plain language and get tag suggestions. With Ollama everything stays on your computer; online services receive file names and short document excerpts."
 msgstr ""
 
-#: galet/preferences.py:397
+#: galet/preferences.py:389
 msgid "Enable AI features"
 msgstr ""
 
-#: galet/preferences.py:399
+#: galet/preferences.py:391
 msgid "Provider"
 msgstr ""
 
-#: galet/preferences.py:406
+#: galet/preferences.py:398
 msgid "Analysed photos"
 msgstr ""
 
-#: galet/preferences.py:407
+#: galet/preferences.py:399
 msgid "{n} photos described by the AI, stored only on this computer"
 msgstr ""
 
-#: galet/preferences.py:409
+#: galet/preferences.py:401
 msgid "Forget"
 msgstr ""
 
-#: galet/preferences.py:427
+#: galet/preferences.py:419
 msgid "Send data to {service}?"
 msgstr ""
 
-#: galet/preferences.py:428
+#: galet/preferences.py:420
 msgid "When you use AI features, Galet will send file names and short excerpts of the selected documents to this online service. Nothing is sent until you use an AI feature."
 msgstr ""
 
-#: galet/preferences.py:431
+#: galet/preferences.py:423
 msgid "I Agree"
 msgstr ""
 
-#: galet/preferences.py:463
+#: galet/preferences.py:455
 msgid "Ollama address"
 msgstr ""
 
-#: galet/preferences.py:468
+#: galet/preferences.py:460
 msgid "Model"
 msgstr ""
 
-#: galet/preferences.py:470
+#: galet/preferences.py:462
 msgid "Refresh the list of models"
 msgstr ""
 
-#: galet/preferences.py:475
+#: galet/preferences.py:467
 msgid "Install Ollama"
 msgstr ""
 
-#: galet/preferences.py:476
+#: galet/preferences.py:468
 msgid "In a terminal: install Ollama, then download a model."
 msgstr ""
 
-#: galet/preferences.py:485
+#: galet/preferences.py:477
 msgid "API key"
 msgstr ""
 
-#: galet/preferences.py:494
+#: galet/preferences.py:486
 msgid "API key saved in the GNOME keyring"
 msgstr ""
 
-#: galet/preferences.py:501
+#: galet/preferences.py:493
 msgid "Get a key"
 msgstr ""
 
-#: galet/preferences.py:504
+#: galet/preferences.py:496
 msgid "Forget the API key"
 msgstr ""
 
-#: galet/preferences.py:517
+#: galet/preferences.py:509
 msgid "Requires the “anthropic” Python package"
 msgstr ""
 
-#: galet/preferences.py:525
+#: galet/preferences.py:517
 msgid "“{program}” is installed"
 msgstr ""
 
-#: galet/preferences.py:526
+#: galet/preferences.py:518
 msgid "“{program}” is not installed"
 msgstr ""
 
-#: galet/preferences.py:527
+#: galet/preferences.py:519
 msgid "Uses your existing subscription: no API key needed."
 msgstr ""
 
-#: galet/preferences.py:533
+#: galet/preferences.py:525
 msgid "Privacy: file names and short excerpts of the documents you select are sent to this service only when you use an AI feature."
 msgstr ""
 
-#: galet/preferences.py:572
+#: galet/preferences.py:564
 msgid "Backup"
 msgstr ""
 
-#: galet/preferences.py:573
+#: galet/preferences.py:565
 msgid "Save your settings, tags, folder colours and favourites in a file, to restore them later or on another computer. API keys are not included."
 msgstr ""
 
-#: galet/preferences.py:575
+#: galet/preferences.py:567
 msgid "Tag names and colours"
 msgstr ""
 
-#: galet/preferences.py:576
+#: galet/preferences.py:568
 msgid "Tags of your files and folders"
 msgstr ""
 
-#: galet/preferences.py:576
+#: galet/preferences.py:568
 msgid "Folder colours"
 msgstr ""
 
-#: galet/preferences.py:577
+#: galet/preferences.py:569
 msgid "Sidebar favourites"
 msgstr ""
 
-#: galet/preferences.py:577
+#: galet/preferences.py:569
 msgid "AI photo descriptions"
 msgstr ""
 
-#: galet/preferences.py:578
+#: galet/preferences.py:570
 msgid "What to include"
 msgstr ""
 
-#: galet/preferences.py:578
+#: galet/preferences.py:570
 msgid "Everything, by default"
 msgstr ""
 
-#: galet/preferences.py:585
+#: galet/preferences.py:577
 msgid "Backup file"
 msgstr ""
 
-#: galet/preferences.py:586
+#: galet/preferences.py:578
 msgid "Export…"
 msgstr ""
 
-#: galet/preferences.py:588
+#: galet/preferences.py:580
 msgid "Import…"
 msgstr ""
 
-#: galet/preferences.py:606
+#: galet/preferences.py:598
 msgid "Export Galet Backup"
 msgstr ""
 
-#: galet/preferences.py:626
+#: galet/preferences.py:618
 msgid "Could not save the backup: {error}"
 msgstr ""
 
-#: galet/preferences.py:628
+#: galet/preferences.py:620
 msgid "Backup saved: {tags} tags, {files} tagged items, {colors} folder colours"
 msgstr ""
 
-#: galet/preferences.py:632
+#: galet/preferences.py:624
 msgid "Saving the backup…"
 msgstr ""
 
-#: galet/preferences.py:640
+#: galet/preferences.py:632
 msgid "Galet backups (JSON)"
 msgstr ""
 
-#: galet/preferences.py:644
+#: galet/preferences.py:636
 msgid "Import Galet Backup"
 msgstr ""
 
-#: galet/preferences.py:655
+#: galet/preferences.py:647
 msgid "This file can't be imported: {error}"
 msgstr ""
 
-#: galet/preferences.py:658
+#: galet/preferences.py:650
 msgid "Backup of {date}: {tags} tags, {files} tagged items, {colors} folder colours, {bookmarks} favourites, {photos} photo descriptions.\n\nTags, colours and favourites are added to yours; settings are replaced."
 msgstr ""
 
-#: galet/preferences.py:664
+#: galet/preferences.py:656
 msgid "Import this backup?"
 msgstr ""
 
-#: galet/preferences.py:666
+#: galet/preferences.py:658
 msgid "Import"
 msgstr ""
 
-#: galet/preferences.py:674
+#: galet/preferences.py:666
 msgid "Backup imported: {tags} tags, {files} tagged items, {colors} folder colours"
 msgstr ""
 
-#: galet/preferences.py:683
+#: galet/preferences.py:675
 msgid "Advanced"
 msgstr ""
 
-#: galet/preferences.py:684
+#: galet/preferences.py:676
 msgid "Files"
 msgstr ""
 
-#: galet/preferences.py:685
+#: galet/preferences.py:677
 msgid "Show all filename extensions"
 msgstr ""
 
-#: galet/preferences.py:686
+#: galet/preferences.py:678
 msgid "Show hidden files"
 msgstr ""
 
-#: galet/preferences.py:687
+#: galet/preferences.py:679
 msgid "Keep folders on top"
 msgstr ""
 
-#: galet/preferences.py:688
+#: galet/preferences.py:680
 msgid "In icon, list and column views"
 msgstr ""
 
@@ -1226,48 +1222,176 @@ msgstr ""
 msgid "Smart Folder"
 msgstr ""
 
-#: galet/servers.py:69
-msgid "Could not connect to the server: {error}"
+#: galet/servers.py:169
+msgid "Galet server: {name}"
 msgstr ""
 
-#: galet/servers.py:75
-msgid "Connecting to {server}…"
+#: galet/servers.py:300
+msgid "Log in to {server}"
 msgstr ""
 
-#: galet/servers.py:161
-msgid "Could not disconnect: {error}"
+#: galet/servers.py:301
+msgid "Wrong user name or password, try again."
 msgstr ""
 
-#: galet/servers.py:163
-msgid "“{name}” disconnected"
+#: galet/servers.py:302
+msgid "This server asks for a user name and a password."
 msgstr ""
 
-#: galet/servers.py:179
-msgid "Connect to Server"
+#: galet/servers.py:305
+msgid "User Name"
 msgstr ""
 
-#: galet/servers.py:183
-msgid "Server Address"
+#: galet/servers.py:306
+msgid "Domain (optional)"
 msgstr ""
 
-#: galet/servers.py:186
-msgid "Add to Favorite Servers"
+#: galet/servers.py:308
+msgid "Password"
 msgstr ""
 
-#: galet/servers.py:190
-msgid "Examples: {examples}"
+#: galet/servers.py:312
+msgid "Connect as Guest"
 msgstr ""
 
-#: galet/servers.py:201
+#: galet/servers.py:316
+msgid "Remember Password"
+msgstr ""
+
+#: galet/servers.py:316
+msgid "Kept in the GNOME keyring"
+msgstr ""
+
+#: galet/servers.py:322
 msgid "Connect"
 msgstr ""
 
-#: galet/servers.py:219
-msgid "Type an address and press + to keep it here and in the sidebar."
+#: galet/servers.py:358
+msgid "Could not connect to {server}"
 msgstr ""
 
-#: galet/servers.py:229
+#: galet/servers.py:359
+msgid "OK"
+msgstr ""
+
+#: galet/servers.py:361
+msgid "Edit Server…"
+msgstr ""
+
+#: galet/servers.py:382
+msgid "Connecting to {server}…"
+msgstr ""
+
+#: galet/servers.py:431
+msgid "Could not disconnect: {error}"
+msgstr ""
+
+#: galet/servers.py:433
+msgid "“{name}” disconnected"
+msgstr ""
+
+#: galet/servers.py:468
+msgid "Edit Server"
+msgstr ""
+
+#: galet/servers.py:475
+msgid "Protocol"
+msgstr ""
+
+#: galet/servers.py:479
+msgid "Host (name or IP address)"
+msgstr ""
+
+#: galet/servers.py:481
+msgid "Port"
+msgstr ""
+
+#: galet/servers.py:482
+msgid "Folder or Share (optional)"
+msgstr ""
+
+#: galet/servers.py:483
+msgid "Server"
+msgstr ""
+
+#: galet/servers.py:493
+msgid "Login"
+msgstr ""
+
+#: galet/servers.py:494
+msgid "The password is kept in the GNOME keyring, never in a file. Leave it empty to be asked when connecting. For SFTP, your SSH keys (~/.ssh) are used automatically."
+msgstr ""
+
+#: galet/servers.py:503
+msgid "Delete Server"
+msgstr ""
+
+#: galet/servers.py:513
+msgid "Save"
+msgstr ""
+
+#: galet/servers.py:562
+msgid "Address: {uri}"
+msgstr ""
+
+#: galet/servers.py:569
+msgid "The password could not be saved in the keyring."
+msgstr ""
+
+#: galet/servers.py:591
+msgid "Quick Connect — address"
+msgstr ""
+
+#: galet/servers.py:597
+msgid "Save as a Server…"
+msgstr ""
+
+#: galet/servers.py:601
+msgid "Examples: {examples}"
+msgstr ""
+
+#: galet/servers.py:607
+msgid "Search servers"
+msgstr ""
+
+#: galet/servers.py:644
+msgid "Save your servers with their login to connect in one click. They also appear in the sidebar."
+msgstr ""
+
+#: galet/servers.py:656
 msgid "Recent Servers"
+msgstr ""
+
+#: galet/servers.py:683
+msgid "Connected"
+msgstr ""
+
+#: galet/servers.py:687
+msgid "Open SSH Terminal"
+msgstr ""
+
+#: galet/servers.py:695
+msgid "More"
+msgstr ""
+
+#: galet/servers.py:698
+msgid "Copy Address"
+msgstr ""
+
+#: galet/servers.py:736
+msgid "Address copied"
+msgstr ""
+
+#: galet/servers.py:740
+msgid "{name} (copy)"
+msgstr ""
+
+#: galet/servers.py:745
+msgid "Delete “{name}”?"
+msgstr ""
+
+#: galet/servers.py:746
+msgid "The server and its saved password are removed. Your files on the server are not touched."
 msgstr ""
 
 #: galet/sidebar.py:83
@@ -1294,7 +1418,11 @@ msgstr ""
 msgid "Remove Smart Folder"
 msgstr ""
 
-#: galet/sidebar.py:263
+#: galet/sidebar.py:222
+msgid "Remove from Favorites"
+msgstr ""
+
+#: galet/sidebar.py:266
 msgid "Click to connect"
 msgstr ""
 
@@ -1470,6 +1598,10 @@ msgstr ""
 msgid "Go to Location…"
 msgstr ""
 
+#: galet/window.py:78
+msgid "Connect to Server…"
+msgstr ""
+
 #: galet/window.py:83
 msgid "About Galet"
 msgstr ""
@@ -1534,74 +1666,70 @@ msgstr ""
 msgid "Save as Smart Folder"
 msgstr ""
 
-#: galet/window.py:348
+#: galet/window.py:350
 msgid "Sending {n} file to {device}…"
 msgstr ""
 
-#: galet/window.py:348
+#: galet/window.py:350
 msgid "Sending {n} files to {device}…"
 msgstr ""
 
-#: galet/window.py:377
+#: galet/window.py:379
 msgid "Describe what you are looking for, e.g. “PDF invoices from this week”"
 msgstr ""
 
-#: galet/window.py:465
+#: galet/window.py:467
 msgid "No new photo to analyse here"
 msgstr ""
 
-#: galet/window.py:468
+#: galet/window.py:470
 msgid "{n} photos will be described by {service} so you can find them by what they show."
 msgstr ""
 
-#: galet/window.py:471
+#: galet/window.py:473
 msgid "Reduced copies of the photos (512 pixels) are sent to this online service."
 msgstr ""
 
-#: galet/window.py:500
+#: galet/window.py:502
 msgid "{n} photo analysed"
 msgstr ""
 
-#: galet/window.py:500
+#: galet/window.py:502
 msgid "{n} photos analysed"
 msgstr ""
 
-#: galet/window.py:502
+#: galet/window.py:504
 msgid "Analysing Photos"
 msgstr ""
 
-#: galet/window.py:504
+#: galet/window.py:506
 msgid "Analyse photos with the AI?"
 msgstr ""
 
-#: galet/window.py:504
+#: galet/window.py:506
 msgid "Analyse"
 msgstr ""
 
-#: galet/window.py:648
+#: galet/window.py:650
 msgid "Could not change the folder colour: {error}"
 msgstr ""
 
-#: galet/window.py:706
+#: galet/window.py:721
 msgid "Tag “{tag}” added"
 msgstr ""
 
-#: galet/window.py:830
+#: galet/window.py:845
 msgid "Save Smart Folder"
 msgstr ""
 
-#: galet/window.py:830
-msgid "Save"
-msgstr ""
-
-#: galet/window.py:832
+#: galet/window.py:847
 msgid "Smart folder “{name}” saved"
 msgstr ""
 
-#: galet/window.py:876
+#: galet/window.py:891
 msgid "No folder at “{path}”"
 msgstr ""
 
-#: galet/window.py:878
+#: galet/window.py:893
 msgid "Go to Location"
 msgstr ""

@@ -41,7 +41,7 @@ logiciel libre, il peut maintenant convenir à d'autres aussi.
 | 🖼️ **Photos comprises par l'IA** | Clic droit → « Analyser les photos (IA) » : « photos de plage » trouve ensuite `IMG_2034.jpg`. Les descriptions restent sur votre ordinateur. |
 | 🤖 **IA (facultative)** | Recherche en langage naturel (« les factures PDF de cette semaine ») et suggestions de tags. Au choix : **Ollama** (local, rien ne quitte votre ordinateur), **Claude**, **Mistral**, **Gemini**, **ChatGPT** (clé d'API rangée dans le trousseau GNOME), ou **Claude Code** / **Gemini CLI** (votre abonnement, sans clé). Désactivée par défaut. |
 | 🌍 **Langues** | Français, anglais, espagnol, allemand, italien, portugais. |
-| 🌐 **Serveurs** | `Ctrl+K` : partages Windows (SMB), SFTP, FTP, WebDAV (Nextcloud, kDrive…), serveurs favoris dans la barre latérale. |
+| 🌐 **Serveurs** | `Ctrl+K` : gestionnaire de serveurs — partages Windows (SMB), SFTP, FTP, WebDAV (Nextcloud, kDrive…), NFS. Fiches avec identifiant et mot de passe (trousseau GNOME), connexion en un clic, terminal SSH, serveurs dans la barre latérale. |
 | 📱 **Envoi vers le téléphone** | Avec Zorin Connect ou GSConnect, comme AirDrop. |
 | 🎨 **Thèmes** | Système, **macOS** (pastilles rouge-orange-vert à gauche), **Windows 11** ou **Personnalisé** (couleur, boutons, coins, police), en clair ou en sombre. |
 | 📁 **Dossiers colorés** | Clic droit → « Couleur du dossier ». Un dossier peut prendre la couleur de son tag, et la palette se règle dans Réglages → Dossiers. Chaque dossier retient aussi sa présentation, comme sur Mac. |

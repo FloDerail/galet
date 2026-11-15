@@ -85,6 +85,9 @@
     <keyword>explorer</keyword>
   </keywords>
   <releases>
+    <release version="0.8.0" date="2026-11-15">
+      <description><p>Server manager: server cards with protocol, host, port and user name, passwords in the GNOME keyring, Galet's own login window, clear connection errors and a one-click SSH terminal.</p></description>
+    </release>
     <release version="0.7.1" date="2026-11-15">
       <description><p>Keyboard shortcuts work window-wide, Ctrl+A and multi-selection in Columns view, the search window closes with Esc or its close button.</p></description>
     </release>

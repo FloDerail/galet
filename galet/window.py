@@ -272,6 +272,8 @@ class GaletWindow(Adw.ApplicationWindow):
                                ("delete-tag", lambda tag: dialogs.delete_tag(self, tag)),
                                ("disconnect", self._disconnect_uri),
                                ("remove-server", lambda uri: servers.remove_server(self.settings, uri)),
+                               ("edit-server", self._edit_server),
+                               ("ssh-server", self._ssh_server),
                                ("quick-action", lambda name: quickactions.run(self, name, self.selection)),
                                ("remove-smart-folder", lambda name: search.remove_smart_folder(self.settings, name)),
                                ("send-to-device", self._send_to_device),
@@ -666,6 +668,19 @@ class GaletWindow(Adw.ApplicationWindow):
 
     def open_server(self, gfile):
         self.navigate(Location(gfile))
+
+    def _saved_server(self, uri):
+        return next((s for s in servers.saved_servers(self.settings) if s["uri"] == uri), None)
+
+    def _edit_server(self, uri):
+        server = self._saved_server(uri)
+        if server is not None:
+            servers.ServerEditor(self, server).present(self)
+
+    def _ssh_server(self, uri):
+        server = self._saved_server(uri)
+        if server is not None:
+            servers.open_ssh(self, server)
 
     def _disconnect_uri(self, uri):
         mount = servers.find_mount(Gio.File.new_for_uri(uri))

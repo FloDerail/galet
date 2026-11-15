@@ -359,29 +359,21 @@ class PreferencesDialog(Adw.PreferencesDialog):
         if self.servers_group is not None:
             self.servers_page.remove(self.servers_group)
         group = Adw.PreferencesGroup(
-            title=_("Favorite Servers"),
-            description=_("Shown in the sidebar. Rename a server by editing its name."))
-        add = Gtk.Button(icon_name="list-add-symbolic", css_classes=["flat"], tooltip_text=_("Connect to Server…"))
-        add.connect("clicked", self._add_server)
+            title=_("My Servers"),
+            description=_("Shown in the sidebar. Passwords are kept in the GNOME keyring."))
+        add = Gtk.Button(icon_name="list-add-symbolic", css_classes=["flat"], tooltip_text=_("New Server"))
+        add.connect("clicked", lambda *_a: servers.ServerEditor(self.app.get_active_window()).present(self))
         group.set_header_suffix(add)
         for server in servers.saved_servers(self.settings):
-            uri = server["uri"]
-            row = Adw.EntryRow(title=uri, text=server["name"], show_apply_button=True)
-            row.add_prefix(Gtk.Image(icon_name="network-server-symbolic"))
-            row.connect("apply", lambda r, u=uri: servers.rename_server(self.settings, u, r.get_text()))
-            remove = Gtk.Button(icon_name="user-trash-symbolic", valign=Gtk.Align.CENTER, css_classes=["flat"],
-                                tooltip_text=_("Remove from Favorites"))
-            remove.connect("clicked", lambda _b, u=uri: servers.remove_server(self.settings, u))
-            row.add_suffix(remove)
+            row = Adw.ActionRow(title=GLib.markup_escape_text(server["name"]),
+                                subtitle=GLib.markup_escape_text(servers.describe(server)), activatable=True)
+            row.add_prefix(Gtk.Image(icon_name=servers.protocol_info(server["protocol"])[3]))
+            row.add_suffix(Gtk.Image(icon_name="document-edit-symbolic"))
+            row.connect("activated", lambda _r, s=server: servers.ServerEditor(
+                self.app.get_active_window(), s).present(self))
             group.add(row)
         self.servers_group = group
         self.servers_page.add(group)
-
-    def _add_server(self, *_args):
-        window = self.app.get_active_window()
-        self.close()
-        if window is not None:
-            servers.ConnectDialog(window).present(window)
 
     # --------------------------------------------------------------------- AI
 

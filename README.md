@@ -59,9 +59,12 @@ staying a native GTK4 / libadwaita application that blends in with GNOME and Zor
 - Save a search as a **Smart Folder** in the sidebar.
 
 **Network**
-- **Connect to Server** (<kbd>Ctrl</kbd>+<kbd>K</kbd>): SMB, SFTP, FTP, WebDAV (Nextcloud, kDrive…), favourite
-  and recent servers, servers in the sidebar with eject buttons, passwords in the GNOME keyring,
-  GNOME Online Accounts drives reconnect in one click.
+- **Server manager** (<kbd>Ctrl</kbd>+<kbd>K</kbd>): SMB, SFTP, FTP, WebDAV (Nextcloud, kDrive…), NFS, AFP.
+  Save each server as a card (protocol, host, port, user name, folder, password kept in the GNOME
+  keyring) and connect in one click; Galet's own login window when a password is needed, a clear
+  message when a connection fails, one-click SSH terminal for SFTP servers, quick connect, search,
+  recent servers, servers in the sidebar with eject buttons. GNOME Online Accounts drives reconnect
+  in one click.
 
 **Themes**
 
@@ -205,7 +208,7 @@ galet/
   tags.py          tag storage (xattr + index)
   sidebar.py       Favourites / Locations / Servers / Smart Folders / Tags
   search.py        recursive search, filters, smart folders
-  servers.py       Connect to Server, mounting, favourites
+  servers.py       Server manager, server cards, logins (keyring), mounting, SSH terminal
   info.py          preview pane, previews, Get Info
   quickactions.py  rotate, convert, resize, PDF, zip
   thumbnails.py    thumbnail generation
