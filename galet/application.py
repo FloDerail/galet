@@ -35,6 +35,7 @@ ACCELS = {
     "app.new-window": ["<Control>n"],
     "app.quit": ["<Control>q"],
     "app.preferences": ["<Control>comma"],
+    "app.help": ["F1", "<Control>question"],
     "win.connect-server": ["<Control>k"],
     "win.new-folder-with-selection": ["<Control><Alt>n"],
     "win.go-home": ["<Control><Shift>h"],
@@ -172,6 +173,7 @@ class GaletApplication(Adw.Application):
         for name, callback in (("new-window", lambda *_a: self._new_window()),
                                ("about", self._on_about),
                                ("preferences", self._on_preferences),
+                               ("help", self._on_help),
                                ("quit", lambda *_a: self.quit())):
             action = Gio.SimpleAction.new(name, None)
             action.connect("activate", callback)
@@ -237,6 +239,14 @@ class GaletApplication(Adw.Application):
         from .preferences import PreferencesDialog
 
         PreferencesDialog(self).present(self.get_active_window())
+
+    def _on_help(self, *_args):
+        """Settings → Help: keyboard shortcuts and how to use Galet."""
+        from .preferences import PreferencesDialog
+
+        dialog = PreferencesDialog(self)
+        dialog.set_visible_page(dialog.help_page)
+        dialog.present(self.get_active_window())
 
     def _on_about(self, *_args):
         about = Adw.AboutDialog(

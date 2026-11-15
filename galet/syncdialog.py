@@ -121,12 +121,14 @@ class SyncDialog(Adw.Dialog):
         self.status.set_text(_("Comparing the two folders…"))
         last = {"time": 0}
 
-        def progress(path):
+        def progress(path, folders):
             now = GLib.get_monotonic_time()
             if now - last["time"] > 150000:
                 last["time"] = now
-                GLib.idle_add(lambda: generation == self.generation and
-                              self.status.set_text(_("Comparing… {path}").format(path=path)) and False)
+                text = (ngettext("Comparing… {n} folder compared", "Comparing… {n} folders compared", folders)
+                        .format(n=folders) + "\n" + path + "\n"
+                        + _("Both folders are compared each time; on a server, a big site can take a minute."))
+                GLib.idle_add(lambda: generation == self.generation and self.status.set_text(text) and False)
 
         def work():
             plan = sync.scan(source, destination, excludes, mirror, cancellable, progress)

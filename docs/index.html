@@ -129,6 +129,14 @@
     .soon { display: inline-block; padding: 2px 10px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-size: .78rem; font-weight: 700; margin-left: 6px; vertical-align: middle; }
 
     /* Themes + AI */
+    .guide ol, .guide ul { margin: 10px 0 0; padding-left: 20px; color: var(--muted); font-size: .96rem; }
+    .guide li { margin: 6px 0; }
+    .guide li strong, .guide p strong { color: var(--text); }
+    .guide kbd { font: 600 .82rem "Inter", sans-serif; padding: 1px 7px; border-radius: 6px; border: 1px solid var(--line); background: var(--surface-2); color: var(--text); }
+    .guide .card p + p { margin-top: 8px; }
+    .flow { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 18px 0 6px; }
+    .flow span { padding: 8px 14px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); font-weight: 600; font-size: .92rem; }
+    .flow i { font-style: normal; color: var(--muted); }
     .split { display: grid; gap: 28px; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); align-items: center; }
     .split img { border-radius: var(--radius); border: 1px solid var(--line); box-shadow: var(--shadow); }
     ul.check { list-style: none; padding: 0; margin: 0; }
@@ -162,6 +170,7 @@
       <nav>
         <a href="#fonctions">Fonctions</a>
         <a href="#captures">Captures</a>
+        <a href="#guide">Guide</a>
         <a href="#telecharger">Télécharger</a>
         <a href="#faq">FAQ</a>
       </nav>
@@ -268,6 +277,135 @@
       </div>
     </section>
 
+    <section id="guide" class="guide">
+      <div class="wrap">
+        <h2>Guide : serveurs, transferts et Git</h2>
+        <p class="sub">Comment envoyer vos fichiers sur un serveur, n'envoyer que ce qui a changé, et déployer après un <code>git push</code>.</p>
+
+        <div class="steps">
+          <div class="card step">
+            <h3><span class="num">1</span> Ajouter un serveur</h3>
+            <ol>
+              <li><kbd>Ctrl</kbd>+<kbd>K</kbd> ouvre le gestionnaire de serveurs, puis <strong>Nouveau serveur</strong>.</li>
+              <li>Choisissez le protocole (<strong>SFTP</strong>, SMB, WebDAV, FTP…), l'hôte, le port, le dossier et l'identifiant.</li>
+              <li>Le mot de passe est facultatif : il est gardé dans le <strong>trousseau GNOME</strong>. En SFTP, vos clés SSH (<code>~/.ssh</code>) sont utilisées automatiquement.</li>
+              <li>Le serveur apparaît dans la barre latérale : un clic et vous y êtes.</li>
+            </ol>
+          </div>
+          <div class="card step">
+            <h3><span class="num">2</span> Ouvrir le double panneau</h3>
+            <ol>
+              <li><kbd>F3</kbd> affiche un second panneau à droite, ou bouton <strong>Transférer</strong> ▥ sur la fiche du serveur (<kbd>Ctrl</kbd>+<kbd>K</kbd>).</li>
+              <li>Votre ordinateur à gauche, le serveur à droite. Le côté actif est souligné en couleur ; la barre du bas suit ce côté.</li>
+              <li>Chaque côté a ses boutons Précédent et Dossier parent.</li>
+            </ol>
+          </div>
+          <div class="card step">
+            <h3><span class="num">3</span> Copier ou déplacer</h3>
+            <ol>
+              <li><strong>Glissez-déposez</strong> d'un côté à l'autre,</li>
+              <li>ou clic droit → <strong>Copier de l'autre côté →</strong> / <strong>Déplacer de l'autre côté →</strong>.</li>
+              <li>La progression s'affiche dans la barre d'outils, avec un bouton pour annuler.</li>
+            </ol>
+          </div>
+          <div class="card step">
+            <h3><span class="num">4</span> Fusionner un dossier existant</h3>
+            <p>Vous copiez <code>www</code> alors qu'il existe déjà sur le serveur ? Galet propose <strong>Fusionner</strong> (choix par défaut) :</p>
+            <ul>
+              <li>seuls les fichiers <strong>nouveaux ou modifiés</strong> sont copiés ;</li>
+              <li>les fichiers identiques sont ignorés, <strong>rien n'est supprimé</strong>.</li>
+            </ul>
+            <p>« Remplacer », lui, met l'ancien dossier à la corbeille et renvoie tout.</p>
+          </div>
+          <div class="card step">
+            <h3><span class="num">5</span> Synchroniser deux dossiers</h3>
+            <ol>
+              <li>Dans le double panneau, bouton <strong>⟳</strong> ou clic droit → <strong>Synchroniser avec l'autre côté…</strong></li>
+              <li>Un <strong>aperçu</strong> liste ce qui va partir : modifiés et nouveaux (cochés), identiques (ignorés), plus récents à destination (décochés).</li>
+              <li>Le bouton ⇄ inverse le sens pour <strong>récupérer</strong> depuis le serveur.</li>
+              <li><code>.git</code>, <code>node_modules</code> et fichiers temporaires sont ignorés. La suppression à destination est une option, désactivée par défaut et confirmée.</li>
+            </ol>
+          </div>
+          <div class="card step">
+            <h3><span class="num">6</span> Terminal intégré</h3>
+            <ol>
+              <li><kbd>F4</kbd> (ou <kbd>Ctrl</kbd>+<kbd>²</kbd>) ouvre un terminal sous les fichiers, dans le dossier affiché.</li>
+              <li>Sur un serveur SFTP, il s'ouvre directement en <strong>SSH</strong>, dans le même dossier.</li>
+              <li>Pendant que vous tapez, <kbd>Ctrl</kbd>+<kbd>C</kbd>, <kbd>Ctrl</kbd>+<kbd>R</kbd>, <kbd>Ctrl</kbd>+<kbd>L</kbd>… vont au terminal.</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="split" style="margin-top:56px">
+          <div>
+            <h2 style="text-align:left">Déployer avec Git, pas à pas</h2>
+            <p>Pour un site ou un projet suivi par <strong>Git</strong> : après un <code>git push</code> vers GitHub, Galet n'envoie sur le serveur
+              <strong>que les fichiers modifiés par les commits poussés</strong> depuis le dernier déploiement.</p>
+            <div class="flow"><span>Vous modifiez</span><i>→</i><span>git commit</span><i>→</i><span>git push</span><i>→</i><span>Galet : « Déployer »</span><i>→</i><span>serveur à jour</span></div>
+            <ol>
+              <li>Travaillez comme d'habitude, puis poussez :
+                <pre><button class="copy">Copier</button>git add .
+git commit -m "Nouvelle page Contact"
+git push</pre></li>
+              <li>Dans Galet, ouvrez le projet d'un côté du double panneau (<kbd>F3</kbd>) et le dossier du serveur (<code>www</code>) de l'autre.</li>
+              <li>Une <strong>bannière</strong> annonce « 2 commits poussés depuis le dernier déploiement ». Cliquez sur <strong>Déployer…</strong>
+                (ou le bouton ➦ de l'en-tête, ou clic droit → <strong>Déployer les commits poussés (Git)…</strong>).</li>
+              <li>L'aperçu montre les commits et les fichiers : <strong>ajoutés</strong> et <strong>modifiés</strong> cochés, <strong>supprimés dans Git</strong> décochés par défaut. Validez.</li>
+            </ol>
+          </div>
+          <img loading="lazy" src="screenshots/deployer-git.png" alt="Aperçu du déploiement Git">
+        </div>
+
+        <div class="grid" style="margin-top:28px">
+          <div class="card"><div class="ico">✅</div><h3>Ce qui part</h3><p>Le contenu exact du <strong>commit poussé</strong> (<code>origin/main</code>) : le serveur reflète ce qui est sur GitHub.</p></div>
+          <div class="card"><div class="ico">🚫</div><h3>Ce qui ne part jamais</h3><p>Vos modifications non commitées, vos commits pas encore poussés, les fichiers non suivis ou ignorés (<code>.env</code>, <code>node_modules</code>).</p></div>
+          <div class="card"><div class="ico">1️⃣</div><h3>La première fois</h3><p>Pas encore de référence : les fichiers suivis par Git sont comparés avec le serveur (taille et date), puis Galet retient le commit.</p></div>
+          <div class="card"><div class="ico">🔐</div><h3>Mémorisé et chiffré</h3><p>Le dernier commit déployé de chaque paire projet ↔ serveur est gardé dans le coffre chiffré, comme vos serveurs.</p></div>
+        </div>
+
+        <h2 style="text-align:left;margin-top:56px">Débuter avec Git et GitHub</h2>
+        <p>Jamais utilisé Git ? Voici tout ce qu'il faut, une seule fois. Galet n'a pas besoin de votre compte GitHub :
+          il lit le projet sur votre ordinateur.</p>
+        <div class="steps" style="margin-top:18px">
+          <div class="card step">
+            <h3><span class="num">1</span> Installer et se connecter</h3>
+            <p>Dans un terminal (<kbd>F4</kbd> dans Galet) :</p>
+            <pre><button class="copy">Copier</button>sudo apt install git gh
+gh auth login</pre>
+            <p class="note">Choisissez <strong>GitHub.com</strong> → <strong>HTTPS</strong> → <strong>Login with a web browser</strong>,
+              copiez le code affiché, collez-le dans le navigateur et acceptez.</p>
+          </div>
+          <div class="card step">
+            <h3><span class="num">2</span> Dire à Git qui vous êtes</h3>
+            <pre><button class="copy">Copier</button>git config --global user.name "Votre Nom"
+git config --global user.email "vous@exemple.fr"</pre>
+            <p class="note">Une seule fois par ordinateur.</p>
+          </div>
+          <div class="card step">
+            <h3><span class="num">3</span> Mettre un projet sur GitHub</h3>
+            <p>Dans le dossier du projet :</p>
+            <pre><button class="copy">Copier</button>git init
+git add .
+git commit -m "Première version"
+gh repo create --source=. --private --push</pre>
+            <p class="note">Projet déjà sur GitHub ? <code>gh repo clone votre-nom/projet</code> le copie sur votre ordinateur.</p>
+          </div>
+          <div class="card step">
+            <h3><span class="num">4</span> Au quotidien</h3>
+            <pre><button class="copy">Copier</button>git add .
+git commit -m "Ce que j'ai modifié"
+git push</pre>
+            <p class="note">Puis, dans Galet, « Déployer… ». Le site est déjà en ligne ? Au premier déploiement, cliquez sur
+              <strong>Le serveur est déjà à jour</strong> : rien n'est envoyé, et la fois suivante seuls vos nouveaux commits partent.</p>
+          </div>
+        </div>
+
+        <p class="note" style="margin-top:22px"><strong>Comment Galet sait qu'un fichier a changé ?</strong> Pour Fusionner et Synchroniser :
+          sa <strong>taille</strong> a changé ou il est <strong>plus récent</strong> que celui du serveur (comme rsync). En SFTP, les dates sont conservées :
+          la comparaison est fiable. Pour Git, c'est la liste exacte des fichiers des commits (<code>git diff</code>).</p>
+      </div>
+    </section>
+
     <section>
       <div class="wrap split">
         <div>
@@ -316,7 +454,7 @@
           <div class="card step">
             <h3><span class="num">1</span> Installer en une commande</h3>
             <p>Ouvrez un terminal (Ctrl+Alt+T) et collez :</p>
-            <pre><button class="copy">Copier</button>sudo apt install git python3-gi python3-gi-cairo gir1.2-gtk-4.0 gir1.2-adw-1 gnome-sushi
+            <pre><button class="copy">Copier</button>sudo apt install git python3-gi python3-gi-cairo gir1.2-gtk-4.0 gir1.2-adw-1 gnome-sushi gir1.2-vte-3.91 gnupg
 git clone https://github.com/FloDerail/galet.git
 cd galet && ./install.sh</pre>
             <p class="note">Galet apparaît ensuite dans le menu des applications. Pour en faire l'explorateur par défaut : <code>./install.sh --default</code></p>
@@ -347,6 +485,10 @@ cd galet && ./install.sh</pre>
         <details><summary>Où sont stockés mes tags ?</summary><p>Dans les fichiers eux-mêmes (attribut étendu <code>user.xdg.tags</code>, norme freedesktop, compatible KDE Dolphin). Ils suivent le fichier quand vous le déplacez ou le renommez.</p></details>
         <details><summary>L'IA envoie-t-elle mes fichiers sur Internet ?</summary><p>L'IA est désactivée par défaut. Avec Ollama, tout reste sur votre ordinateur. Si vous choisissez un service en ligne (Claude, Mistral, Gemini, ChatGPT), Galet vous prévient et n'envoie des noms de fichiers et de courts extraits que lorsque vous utilisez une fonction d'IA.</p></details>
         <details><summary>Galet sera-t-il sur Flathub ?</summary><p>Plus tard. Flathub demande un historique de développement plus long. En attendant, le bouton « Installer dans la Logithèque » utilise le dépôt Flatpak officiel de Galet, signé, avec mises à jour automatiques.</p></details>
+        <details><summary>Le déploiement Git envoie-t-il mes fichiers secrets (.env) ?</summary><p>Non. Seuls les fichiers <strong>suivis par Git</strong> et modifiés par les commits poussés partent. Un <code>.env</code> non commité ou ignoré par <code>.gitignore</code> reste sur votre ordinateur.</p></details>
+        <details><summary>J'ai poussé depuis un autre ordinateur : Galet le voit-il ?</summary><p>Galet lit l'état de GitHub connu de votre ordinateur (<code>origin/main</code>). Faites d'abord un <code>git pull</code> (ou <code>git fetch</code>) dans le projet, puis rouvrez le double panneau.</p></details>
+        <details><summary>Et si je réécris l'historique (force push) ?</summary><p>Si le commit déployé n'existe plus, Galet repasse en « premier déploiement » : il compare les fichiers suivis par Git avec le serveur, puis retient le nouveau commit.</p></details>
+        <details><summary>Mes mots de passe de serveur sont-ils en sécurité ?</summary><p>Ils sont dans le trousseau GNOME, jamais dans un fichier. La liste des serveurs elle-même est chiffrée (AES-256), et vous pouvez la verrouiller par un mot de passe maître (Réglages → Serveurs → Sécurité).</p></details>
         <details><summary>Galet est-il gratuit ?</summary><p>Oui, totalement. C'est un logiciel libre sous licence GPL-3.0 : vous pouvez l'utiliser, l'étudier, le modifier et le partager.</p></details>
         <details><summary>Comment signaler un bug ou proposer une idée ?</summary><p>Sur la page <a href="https://github.com/FloDerail/galet/issues">Issues</a> du projet. Joignez le fichier <code>~/.cache/galet/galet.log</code> si possible.</p></details>
       </div>

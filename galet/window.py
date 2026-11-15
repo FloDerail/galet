@@ -87,6 +87,7 @@ class GaletWindow(Adw.ApplicationWindow):
         menu.append_section(None, section)
         section = Gio.Menu()
         section.append(_("Settings"), "app.preferences")
+        section.append(_("Help and Keyboard Shortcuts"), "app.help")
         section.append(_("About Galet"), "app.about")
         menu.append_section(None, section)
         header.pack_end(Gtk.MenuButton(icon_name="open-menu-symbolic", menu_model=menu, primary=True,

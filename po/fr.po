@@ -1867,3 +1867,345 @@ msgstr "{n} commit poussé depuis le dernier déploiement vers « {server} »"
 
 msgid "{n} commits pushed since the last deployment to “{server}”"
 msgstr "{n} commits poussés depuis le dernier déploiement vers « {server} »"
+
+msgid "or"
+msgstr "ou"
+
+msgid "Windows and Tabs"
+msgstr "Fenêtres et onglets"
+
+msgid "New window"
+msgstr "Nouvelle fenêtre"
+
+msgid "New tab"
+msgstr "Nouvel onglet"
+
+msgid "Close tab"
+msgstr "Fermer l'onglet"
+
+msgid "Help and shortcuts"
+msgstr "Aide et raccourcis"
+
+msgid "Quit"
+msgstr "Quitter"
+
+msgid "Navigation"
+msgstr "Navigation"
+
+msgid "Enclosing folder"
+msgstr "Dossier parent"
+
+msgid "Open in a new tab"
+msgstr "Ouvrir dans un nouvel onglet"
+
+msgid "Go to a location"
+msgstr "Aller à un emplacement"
+
+msgid "Home folder"
+msgstr "Dossier personnel"
+
+msgid "Recent files"
+msgstr "Fichiers récents"
+
+msgid "Preview pane"
+msgstr "Panneau d'aperçu"
+
+msgid "Get info"
+msgstr "Lire les informations"
+
+msgid "Reload"
+msgstr "Actualiser"
+
+msgid "Select all"
+msgstr "Tout sélectionner"
+
+msgid "Move to the trash"
+msgstr "Mettre à la corbeille"
+
+msgid "Delete permanently"
+msgstr "Supprimer définitivement"
+
+msgid "New folder with the selection"
+msgstr "Nouveau dossier avec la sélection"
+
+msgid "Copy the path"
+msgstr "Copier le chemin"
+
+msgid "Context menu"
+msgstr "Menu contextuel"
+
+msgid "Servers, Terminal and Transfers"
+msgstr "Serveurs, terminal et transferts"
+
+msgid "Server manager"
+msgstr "Gestionnaire de serveurs"
+
+msgid "Built-in terminal"
+msgstr "Terminal intégré"
+
+msgid "Dual pane"
+msgstr "Double panneau"
+
+msgid "Close the search window"
+msgstr "Fermer la fenêtre de recherche"
+
+msgid "Copy in the terminal"
+msgstr "Copier dans le terminal"
+
+msgid "Paste in the terminal"
+msgstr "Coller dans le terminal"
+
+msgid "Getting around"
+msgstr "Se déplacer"
+
+msgid "Four views"
+msgstr "Quatre présentations"
+
+msgid "Icons, List, Columns (with preview) and Gallery: Ctrl+1 to Ctrl+4. Each folder remembers its own view."
+msgstr "Icônes, Liste, Colonnes (avec aperçu) et Galerie : Ctrl+1 à Ctrl+4. Chaque dossier retient sa présentation."
+
+msgid "Tabs"
+msgstr "Onglets"
+
+msgid "Ctrl+T opens a tab; drop files on a tab to copy them there; drag a tab out to make a new window."
+msgstr "Ctrl+T ouvre un onglet ; déposez des fichiers sur un onglet pour les y copier ; faites glisser un onglet hors de la fenêtre pour en faire une nouvelle fenêtre."
+
+msgid "Type to select"
+msgstr "Sélection au clavier"
+
+msgid "In a folder, just type the beginning of a name to jump to it."
+msgstr "Dans un dossier, tapez simplement le début d'un nom pour y aller."
+
+msgid "Space shows a large preview of the selected file, like on a Mac."
+msgstr "Espace affiche un grand aperçu du fichier sélectionné, comme sur Mac."
+
+msgid "Tags and colours"
+msgstr "Tags et couleurs"
+
+msgid "Tag a file or folder"
+msgstr "Taguer un fichier ou un dossier"
+
+msgid "Right-click → a colour dot. Tags are stored in the files themselves and follow them when they are moved."
+msgstr "Clic droit → une pastille de couleur. Les tags sont enregistrés dans les fichiers eux-mêmes et les suivent quand ils sont déplacés."
+
+msgid "Find everything with a tag"
+msgstr "Retrouver tout ce qui porte un tag"
+
+msgid "Click the tag in the sidebar."
+msgstr "Cliquez sur le tag dans la barre latérale."
+
+msgid "Right-click a folder → Folder Colour. A folder can also take the colour of its tag (Settings → Folders)."
+msgstr "Clic droit sur un dossier → Couleur du dossier. Un dossier peut aussi prendre la couleur de son tag (Réglages → Dossiers)."
+
+msgid "Big search bar"
+msgstr "Grande barre de recherche"
+
+msgid "Ctrl+F: search names and even the content of documents and code. Choose the classic bar or the big one in Settings → General."
+msgstr "Ctrl+F : cherche dans les noms et même dans le contenu des documents et du code. Choisissez la barre classique ou la grande dans Réglages → Général."
+
+msgid "Simple or AI mode"
+msgstr "Mode simple ou IA"
+
+msgid "The AI mode understands sentences (“photos of the beach”, “a piece of code that reads JSON”). It is off by default (Settings → AI)."
+msgstr "Le mode IA comprend les phrases (« photos de plage », « un morceau de code qui lit du JSON »). Il est désactivé par défaut (Réglages → IA)."
+
+msgid "Smart folders"
+msgstr "Dossiers intelligents"
+
+msgid "Save a search to find it again in the sidebar."
+msgstr "Enregistrez une recherche pour la retrouver dans la barre latérale."
+
+msgid "Add a server"
+msgstr "Ajouter un serveur"
+
+msgid "Ctrl+K → New Server: protocol (SFTP, SMB, WebDAV, FTP…), host, port, folder and user name. The password goes to the GNOME keyring."
+msgstr "Ctrl+K → Nouveau serveur : protocole (SFTP, SMB, WebDAV, FTP…), hôte, port, dossier et identifiant. Le mot de passe va dans le trousseau GNOME."
+
+msgid "Click the server in the sidebar. If a password is needed, Galet asks for it; if the connection fails, a message explains why."
+msgstr "Cliquez sur le serveur dans la barre latérale. Si un mot de passe est nécessaire, Galet le demande ; si la connexion échoue, un message explique pourquoi."
+
+msgid "SSH keys"
+msgstr "Clés SSH"
+
+msgid "For SFTP, your keys in ~/.ssh are used automatically: no password needed."
+msgstr "En SFTP, vos clés de ~/.ssh sont utilisées automatiquement : pas de mot de passe à saisir."
+
+msgid "Transfers"
+msgstr "Transferts"
+
+msgid "F3 (or “Transfer” on a server card): your computer on one side, the server on the other. Drag and drop, or right-click → Copy to the Other Side."
+msgstr "F3 (ou « Transférer » sur la fiche d'un serveur) : votre ordinateur d'un côté, le serveur de l'autre. Glissez-déposez, ou clic droit → Copier de l'autre côté."
+
+msgid "Copying a folder that already exists? Choose Merge: only new and modified files are copied, nothing is deleted."
+msgstr "Vous copiez un dossier qui existe déjà ? Choisissez Fusionner : seuls les fichiers nouveaux ou modifiés sont copiés, rien n'est supprimé."
+
+msgid "The ⟳ button of the dual pane compares both folders and shows a preview before sending only what changed. ⇄ reverses the direction."
+msgstr "Le bouton ⟳ du double panneau compare les deux dossiers et montre un aperçu avant d'envoyer uniquement ce qui a changé. ⇄ inverse le sens."
+
+msgid "Deploy with Git"
+msgstr "Déployer avec Git"
+
+msgid "1. Push"
+msgstr "1. Pousser"
+
+msgid "Work as usual, then git add, git commit and git push."
+msgstr "Travaillez comme d'habitude, puis git add, git commit et git push."
+
+msgid "2. Open the project and the server"
+msgstr "2. Ouvrir le projet et le serveur"
+
+msgid "Your Git project on one side of the dual pane (F3), the server folder (e.g. www) on the other."
+msgstr "Votre projet Git d'un côté du double panneau (F3), le dossier du serveur (par exemple www) de l'autre."
+
+msgid "3. Deploy"
+msgstr "3. Déployer"
+
+msgid "A banner shows the commits pushed since the last deployment. “Deploy…” sends only the files those commits changed."
+msgstr "Une bannière indique les commits poussés depuis le dernier déploiement. « Déployer… » n'envoie que les fichiers modifiés par ces commits."
+
+msgid "What is never sent"
+msgstr "Ce qui ne part jamais"
+
+msgid "Uncommitted changes, commits not pushed yet, and files ignored by Git (.env, node_modules)."
+msgstr "Les modifications non commitées, les commits pas encore poussés et les fichiers ignorés par Git (.env, node_modules)."
+
+msgid "Pushed from another computer?"
+msgstr "Poussé depuis un autre ordinateur ?"
+
+msgid "Run git pull (or git fetch) in the project first."
+msgstr "Faites d'abord git pull (ou git fetch) dans le projet."
+
+msgid "Open it"
+msgstr "L'ouvrir"
+
+msgid "F4 or Ctrl+² (the key under Esc): a terminal under the files, in the current folder."
+msgstr "F4 ou Ctrl+² (la touche sous Échap) : un terminal sous les fichiers, dans le dossier courant."
+
+msgid "On a server"
+msgstr "Sur un serveur"
+
+msgid "On an SFTP server, it opens an SSH session in the same folder."
+msgstr "Sur un serveur SFTP, il ouvre une session SSH dans le même dossier."
+
+msgid "Keyboard"
+msgstr "Clavier"
+
+msgid "While you type in it, Ctrl+C, Ctrl+R, Ctrl+L… go to the terminal. Copy and paste with Ctrl+Shift+C and Ctrl+Shift+V."
+msgstr "Pendant que vous tapez dedans, Ctrl+C, Ctrl+R, Ctrl+L… vont au terminal. Copiez et collez avec Ctrl+Maj+C et Ctrl+Maj+V."
+
+msgid "Security and backups"
+msgstr "Sécurité et sauvegardes"
+
+msgid "Encrypted server list"
+msgstr "Liste des serveurs chiffrée"
+
+msgid "Your servers are encrypted (AES-256). A master password can lock them like a vault (Settings → Servers → Security)."
+msgstr "Vos serveurs sont chiffrés (AES-256). Un mot de passe maître peut les verrouiller comme un coffre (Réglages → Serveurs → Sécurité)."
+
+msgid "Backups"
+msgstr "Sauvegardes"
+
+msgid "Settings → Advanced → Backup: settings, tags, colours, favourites and servers in one file, encrypted with a password. API keys and passwords are never included."
+msgstr "Réglages → Avancé → Sauvegarde : réglages, tags, couleurs, favoris et serveurs dans un seul fichier, chiffré par mot de passe. Les clés d'API et les mots de passe ne sont jamais inclus."
+
+msgid "Help"
+msgstr "Aide"
+
+msgid "Using Galet Well"
+msgstr "Bien utiliser Galet"
+
+msgid "The essentials, topic by topic. The full guide with pictures is on the website."
+msgstr "L'essentiel, thème par thème. Le guide complet illustré est sur le site."
+
+msgid "More Help"
+msgstr "Plus d'aide"
+
+msgid "Full guide on the website"
+msgstr "Guide complet sur le site"
+
+msgid "Report a problem or suggest an idea"
+msgstr "Signaler un problème ou proposer une idée"
+
+msgid "Attach the log file: ~/.cache/galet/galet.log (Flatpak: ~/.var/app/io.github.FloDerail.Galet/cache/galet/galet.log)"
+msgstr "Joignez le fichier journal : ~/.cache/galet/galet.log (Flatpak : ~/.var/app/io.github.FloDerail.Galet/cache/galet/galet.log)"
+
+msgid "Keyboard Shortcuts"
+msgstr "Raccourcis clavier"
+
+msgid "Ctrl+letter shortcuts are left to the terminal while you type in it."
+msgstr "Les raccourcis Ctrl+lettre sont laissés au terminal pendant que vous tapez dedans."
+
+msgid "Help and Keyboard Shortcuts"
+msgstr "Aide et raccourcis clavier"
+
+msgid "The Server Is Already Up to Date"
+msgstr "Le serveur est déjà à jour"
+
+msgid "Remember the current commit as deployed without sending anything. Next time, only the files of your new commits will be sent."
+msgstr "Retenir le commit actuel comme déployé sans rien envoyer. La prochaine fois, seuls les fichiers de vos nouveaux commits seront envoyés."
+
+msgid "Comparing with the server… {n} folder"
+msgstr "Comparaison avec le serveur… {n} dossier"
+
+msgid "Comparing with the server… {n} folders"
+msgstr "Comparaison avec le serveur… {n} dossiers"
+
+msgid "First deployment: comparing the files tracked by Git with the server…"
+msgstr "Premier déploiement : comparaison des fichiers suivis par Git avec le serveur…"
+
+msgid "Marked as deployed ({sha}): next time, only new commits are sent."
+msgstr "Marqué comme déployé ({sha}) : la prochaine fois, seuls les nouveaux commits seront envoyés."
+
+msgid "Git and GitHub for beginners"
+msgstr "Git et GitHub pour débuter"
+
+msgid "Install"
+msgstr "Installer"
+
+msgid "In a terminal (F4): sudo apt install git gh"
+msgstr "Dans un terminal (F4) : sudo apt install git gh"
+
+msgid "Sign in to GitHub"
+msgstr "Se connecter à GitHub"
+
+msgid "gh auth login → GitHub.com → HTTPS → “Login with a web browser”: copy the code shown, the browser opens, paste it and accept. Done once."
+msgstr "gh auth login → GitHub.com → HTTPS → « Login with a web browser » : copiez le code affiché, le navigateur s'ouvre, collez-le et acceptez. À faire une seule fois."
+
+msgid "Tell Git who you are"
+msgstr "Dire à Git qui vous êtes"
+
+msgid "git config --global user.name \"Your Name\" then git config --global user.email \"you@example.com\" (once)."
+msgstr "git config --global user.name \"Votre Nom\" puis git config --global user.email \"vous@exemple.fr\" (une seule fois)."
+
+msgid "A new project"
+msgstr "Un nouveau projet"
+
+msgid "In the project folder: git init, git add ., git commit -m \"First version\", then gh repo create --source=. --private --push creates it on GitHub."
+msgstr "Dans le dossier du projet : git init, git add ., git commit -m \"Première version\", puis gh repo create --source=. --private --push le crée sur GitHub."
+
+msgid "A project already on GitHub"
+msgstr "Un projet déjà sur GitHub"
+
+msgid "gh repo clone your-name/project copies it to your computer."
+msgstr "gh repo clone votre-nom/projet le copie sur votre ordinateur."
+
+msgid "Every day"
+msgstr "Au quotidien"
+
+msgid "git add . then git commit -m \"What I changed\" then git push. Galet does not need your GitHub account: it reads the project on your computer."
+msgstr "git add . puis git commit -m \"Ce que j'ai modifié\" puis git push. Galet n'a pas besoin de votre compte GitHub : il lit le projet sur votre ordinateur."
+
+msgid "The server already has the site?"
+msgstr "Le serveur a déjà le site ?"
+
+msgid "On the first deployment, click “The Server Is Already Up to Date”: nothing is sent, and next time only your new commits are."
+msgstr "Au premier déploiement, cliquez sur « Le serveur est déjà à jour » : rien n'est envoyé, et la fois suivante seuls vos nouveaux commits partent."
+
+msgid "Comparing… {n} folder compared"
+msgstr "Comparaison… {n} dossier comparé"
+
+msgid "Comparing… {n} folders compared"
+msgstr "Comparaison… {n} dossiers comparés"
+
+msgid "Both folders are compared each time; on a server, a big site can take a minute."
+msgstr "Les deux dossiers sont comparés à chaque fois ; sur un serveur, un gros site peut prendre une minute."

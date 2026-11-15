@@ -14,11 +14,11 @@ msgstr ""
 msgid "Gemini CLI (command line)"
 msgstr ""
 
-#: galet/application.py:247
+#: galet/application.py:257
 msgid "A Finder-inspired file manager with tabs, columns and colour tags.\nFree and open source software."
 msgstr ""
 
-#: galet/application.py:255
+#: galet/application.py:265
 msgid "Source Code"
 msgstr ""
 
@@ -30,115 +30,139 @@ msgstr ""
 msgid "This folder is not in a Git repository."
 msgstr ""
 
-#: galet/deploy.py:221
+#: galet/deploy.py:227
 msgid "Added"
 msgstr ""
 
-#: galet/deploy.py:221
+#: galet/deploy.py:227
 msgid "Modified"
 msgstr ""
 
-#: galet/deploy.py:221
+#: galet/deploy.py:227
 msgid "Deleted in Git"
 msgstr ""
 
-#: galet/deploy.py:222
+#: galet/deploy.py:228
 msgid "More recent at destination"
 msgstr ""
 
-#: galet/deploy.py:233
+#: galet/deploy.py:239
 msgid "Deploy With Git"
 msgstr ""
 
-#: galet/deploy.py:241
+#: galet/deploy.py:247
 msgid "Send"
 msgstr ""
 
-#: galet/deploy.py:243
+#: galet/deploy.py:249
 msgid "Cancel"
 msgstr ""
 
-#: galet/deploy.py:259
+#: galet/deploy.py:265
+msgid "The Server Is Already Up to Date"
+msgstr ""
+
+#: galet/deploy.py:267
+msgid "Remember the current commit as deployed without sending anything. Next time, only the files of your new commits will be sent."
+msgstr ""
+
+#: galet/deploy.py:272
 msgid "Commits"
 msgstr ""
 
-#: galet/deploy.py:276
+#: galet/deploy.py:289
 msgid "{project} → {server}"
 msgstr ""
 
-#: galet/deploy.py:278
+#: galet/deploy.py:291
 msgid "Looking for the commits to deploy…"
 msgstr ""
 
-#: galet/deploy.py:298
+#: galet/deploy.py:304
+msgid "Comparing with the server… {n} folder"
+msgstr ""
+
+#: galet/deploy.py:304
+msgid "Comparing with the server… {n} folders"
+msgstr ""
+
+#: galet/deploy.py:319
+msgid "First deployment: comparing the files tracked by Git with the server…"
+msgstr ""
+
+#: galet/deploy.py:326
+msgid "Marked as deployed ({sha}): next time, only new commits are sent."
+msgstr ""
+
+#: galet/deploy.py:340
 msgid "First deployment: the files tracked by Git ({ref}, {sha}) are compared with the server (size and date). Next time, only the files changed by your new commits will be sent."
 msgstr ""
 
-#: galet/deploy.py:302
+#: galet/deploy.py:344
 msgid "Nothing to deploy: the server already has {ref} ({sha})."
 msgstr ""
 
-#: galet/deploy.py:305
+#: galet/deploy.py:347
 msgid "{n} commit pushed since the last deployment ({base} → {sha}, {ref})."
 msgstr ""
 
-#: galet/deploy.py:305
+#: galet/deploy.py:347
 msgid "{n} commits pushed since the last deployment ({base} → {sha}, {ref})."
 msgstr ""
 
-#: galet/deploy.py:309
+#: galet/deploy.py:351
 msgid "This branch has no upstream on GitHub: the local branch “{branch}” is used."
 msgstr ""
 
-#: galet/deploy.py:316
+#: galet/deploy.py:358
 msgid "{n} commit"
 msgstr ""
 
-#: galet/deploy.py:316
+#: galet/deploy.py:358
 msgid "{n} commits"
 msgstr ""
 
-#: galet/deploy.py:341
+#: galet/deploy.py:383
 msgid "Send {n} file"
 msgstr ""
 
-#: galet/deploy.py:341
+#: galet/deploy.py:383
 msgid "Send {n} files"
 msgstr ""
 
-#: galet/deploy.py:343
+#: galet/deploy.py:385
 msgid "delete {n} item"
 msgstr ""
 
-#: galet/deploy.py:343
+#: galet/deploy.py:385
 msgid "delete {n} items"
 msgstr ""
 
-#: galet/deploy.py:346
+#: galet/deploy.py:388
 msgid "Mark as Deployed"
 msgstr ""
 
-#: galet/deploy.py:359
+#: galet/deploy.py:401
 msgid "{current} of {total} — {name}"
 msgstr ""
 
-#: galet/deploy.py:369
+#: galet/deploy.py:411
 msgid "Some files could not be deployed: {error}"
 msgstr ""
 
-#: galet/deploy.py:376
+#: galet/deploy.py:418
 msgid "Deployed: {n} file ({sha})"
 msgstr ""
 
-#: galet/deploy.py:376
+#: galet/deploy.py:418
 msgid "Deployed: {n} files ({sha})"
 msgstr ""
 
-#: galet/deploy.py:380
+#: galet/deploy.py:422
 msgid "Deploying to “{name}”"
 msgstr ""
 
-#: galet/deploy.py:388
+#: galet/deploy.py:430
 msgid "Open your project on one side and the server folder on the other."
 msgstr ""
 
@@ -454,6 +478,526 @@ msgstr ""
 msgid "Gray"
 msgstr ""
 
+#: galet/help.py:29
+msgid "or"
+msgstr ""
+
+#: galet/help.py:37
+msgid "Windows and Tabs"
+msgstr ""
+
+#: galet/help.py:38
+msgid "New window"
+msgstr ""
+
+#: galet/help.py:38
+msgid "New tab"
+msgstr ""
+
+#: galet/help.py:38
+msgid "Close tab"
+msgstr ""
+
+#: galet/help.py:39
+msgid "Settings"
+msgstr ""
+
+#: galet/help.py:39
+msgid "Help and shortcuts"
+msgstr ""
+
+#: galet/help.py:39
+msgid "Quit"
+msgstr ""
+
+#: galet/help.py:40
+msgid "Navigation"
+msgstr ""
+
+#: galet/help.py:41
+msgid "Back"
+msgstr ""
+
+#: galet/help.py:41
+msgid "Forward"
+msgstr ""
+
+#: galet/help.py:41
+msgid "Enclosing folder"
+msgstr ""
+
+#: galet/help.py:42
+msgid "Open"
+msgstr ""
+
+#: galet/help.py:42
+msgid "Open in a new tab"
+msgstr ""
+
+#: galet/help.py:43
+msgid "Go to a location"
+msgstr ""
+
+#: galet/help.py:43
+msgid "Home folder"
+msgstr ""
+
+#: galet/help.py:44
+msgid "Desktop"
+msgstr ""
+
+#: galet/help.py:44
+msgid "Documents"
+msgstr ""
+
+#: galet/help.py:45
+msgid "Downloads"
+msgstr ""
+
+#: galet/help.py:45
+msgid "Recent files"
+msgstr ""
+
+#: galet/help.py:46
+msgid "Network"
+msgstr ""
+
+#: galet/help.py:47
+msgid "View"
+msgstr ""
+
+#: galet/help.py:48
+msgid "Icons"
+msgstr ""
+
+#: galet/help.py:48
+msgid "List"
+msgstr ""
+
+#: galet/help.py:49
+msgid "Columns"
+msgstr ""
+
+#: galet/help.py:49
+msgid "Gallery"
+msgstr ""
+
+#: galet/help.py:50
+msgid "Show hidden files"
+msgstr ""
+
+#: galet/help.py:50
+msgid "Preview pane"
+msgstr ""
+
+#: galet/help.py:51
+msgid "Get info"
+msgstr ""
+
+#: galet/help.py:51
+msgid "Reload"
+msgstr ""
+
+#: galet/help.py:52
+msgid "Files"
+msgstr ""
+
+#: galet/help.py:53
+msgid "Select all"
+msgstr ""
+
+#: galet/help.py:53
+msgid "Cut"
+msgstr ""
+
+#: galet/help.py:54
+msgid "Paste"
+msgstr ""
+
+#: galet/help.py:54
+msgid "Duplicate"
+msgstr ""
+
+#: galet/help.py:55
+msgid "Move to the trash"
+msgstr ""
+
+#: galet/help.py:55
+msgid "Delete permanently"
+msgstr ""
+
+#: galet/help.py:56
+msgid "Undo"
+msgstr ""
+
+#: galet/help.py:56
+msgid "New folder"
+msgstr ""
+
+#: galet/help.py:57
+msgid "New folder with the selection"
+msgstr ""
+
+#: galet/help.py:58
+msgid "Quick Look"
+msgstr ""
+
+#: galet/help.py:58
+msgid "Copy the path"
+msgstr ""
+
+#: galet/help.py:59
+msgid "Context menu"
+msgstr ""
+
+#: galet/help.py:60
+msgid "Search"
+msgstr ""
+
+#: galet/help.py:61
+msgid "Servers, Terminal and Transfers"
+msgstr ""
+
+#: galet/help.py:62
+msgid "Server manager"
+msgstr ""
+
+#: galet/help.py:62
+msgid "Built-in terminal"
+msgstr ""
+
+#: galet/help.py:63
+msgid "Dual pane"
+msgstr ""
+
+#: galet/help.py:74
+msgid "Close the search window"
+msgstr ""
+
+#: galet/help.py:75
+msgid "Copy in the terminal"
+msgstr ""
+
+#: galet/help.py:76
+msgid "Paste in the terminal"
+msgstr ""
+
+#: galet/help.py:81
+msgid "Getting around"
+msgstr ""
+
+#: galet/help.py:82
+msgid "Four views"
+msgstr ""
+
+#: galet/help.py:82
+msgid "Icons, List, Columns (with preview) and Gallery: Ctrl+1 to Ctrl+4. Each folder remembers its own view."
+msgstr ""
+
+#: galet/help.py:84
+msgid "Tabs"
+msgstr ""
+
+#: galet/help.py:84
+msgid "Ctrl+T opens a tab; drop files on a tab to copy them there; drag a tab out to make a new window."
+msgstr ""
+
+#: galet/help.py:86
+msgid "Type to select"
+msgstr ""
+
+#: galet/help.py:86
+msgid "In a folder, just type the beginning of a name to jump to it."
+msgstr ""
+
+#: galet/help.py:87
+msgid "Space shows a large preview of the selected file, like on a Mac."
+msgstr ""
+
+#: galet/help.py:88
+msgid "Tags and colours"
+msgstr ""
+
+#: galet/help.py:89
+msgid "Tag a file or folder"
+msgstr ""
+
+#: galet/help.py:89
+msgid "Right-click → a colour dot. Tags are stored in the files themselves and follow them when they are moved."
+msgstr ""
+
+#: galet/help.py:91
+msgid "Find everything with a tag"
+msgstr ""
+
+#: galet/help.py:91
+msgid "Click the tag in the sidebar."
+msgstr ""
+
+#: galet/help.py:92
+msgid "Folder colours"
+msgstr ""
+
+#: galet/help.py:92
+msgid "Right-click a folder → Folder Colour. A folder can also take the colour of its tag (Settings → Folders)."
+msgstr ""
+
+#: galet/help.py:95
+msgid "Big search bar"
+msgstr ""
+
+#: galet/help.py:95
+msgid "Ctrl+F: search names and even the content of documents and code. Choose the classic bar or the big one in Settings → General."
+msgstr ""
+
+#: galet/help.py:97
+msgid "Simple or AI mode"
+msgstr ""
+
+#: galet/help.py:97
+msgid "The AI mode understands sentences (“photos of the beach”, “a piece of code that reads JSON”). It is off by default (Settings → AI)."
+msgstr ""
+
+#: galet/help.py:99
+msgid "Smart folders"
+msgstr ""
+
+#: galet/help.py:99
+msgid "Save a search to find it again in the sidebar."
+msgstr ""
+
+#: galet/help.py:100
+msgid "Servers"
+msgstr ""
+
+#: galet/help.py:101
+msgid "Add a server"
+msgstr ""
+
+#: galet/help.py:101
+msgid "Ctrl+K → New Server: protocol (SFTP, SMB, WebDAV, FTP…), host, port, folder and user name. The password goes to the GNOME keyring."
+msgstr ""
+
+#: galet/help.py:103
+msgid "Connect"
+msgstr ""
+
+#: galet/help.py:103
+msgid "Click the server in the sidebar. If a password is needed, Galet asks for it; if the connection fails, a message explains why."
+msgstr ""
+
+#: galet/help.py:105
+msgid "SSH keys"
+msgstr ""
+
+#: galet/help.py:105
+msgid "For SFTP, your keys in ~/.ssh are used automatically: no password needed."
+msgstr ""
+
+#: galet/help.py:106
+msgid "Transfers"
+msgstr ""
+
+#: galet/help.py:107
+msgid "F3 (or “Transfer” on a server card): your computer on one side, the server on the other. Drag and drop, or right-click → Copy to the Other Side."
+msgstr ""
+
+#: galet/help.py:109
+msgid "Copying a folder that already exists? Choose Merge: only new and modified files are copied, nothing is deleted."
+msgstr ""
+
+#: galet/help.py:111
+msgid "Synchronise"
+msgstr ""
+
+#: galet/help.py:111
+msgid "The ⟳ button of the dual pane compares both folders and shows a preview before sending only what changed. ⇄ reverses the direction."
+msgstr ""
+
+#: galet/help.py:113
+msgid "Git and GitHub for beginners"
+msgstr ""
+
+#: galet/help.py:114
+msgid "Install"
+msgstr ""
+
+#: galet/help.py:114
+msgid "In a terminal (F4): sudo apt install git gh"
+msgstr ""
+
+#: galet/help.py:115
+msgid "Sign in to GitHub"
+msgstr ""
+
+#: galet/help.py:115
+msgid "gh auth login → GitHub.com → HTTPS → “Login with a web browser”: copy the code shown, the browser opens, paste it and accept. Done once."
+msgstr ""
+
+#: galet/help.py:117
+msgid "Tell Git who you are"
+msgstr ""
+
+#: galet/help.py:117
+msgid "git config --global user.name \"Your Name\" then git config --global user.email \"you@example.com\" (once)."
+msgstr ""
+
+#: galet/help.py:119
+msgid "A new project"
+msgstr ""
+
+#: galet/help.py:119
+msgid "In the project folder: git init, git add ., git commit -m \"First version\", then gh repo create --source=. --private --push creates it on GitHub."
+msgstr ""
+
+#: galet/help.py:121
+msgid "A project already on GitHub"
+msgstr ""
+
+#: galet/help.py:121
+msgid "gh repo clone your-name/project copies it to your computer."
+msgstr ""
+
+#: galet/help.py:122
+msgid "Every day"
+msgstr ""
+
+#: galet/help.py:122
+msgid "git add . then git commit -m \"What I changed\" then git push. Galet does not need your GitHub account: it reads the project on your computer."
+msgstr ""
+
+#: galet/help.py:124
+msgid "Deploy with Git"
+msgstr ""
+
+#: galet/help.py:125
+msgid "1. Push"
+msgstr ""
+
+#: galet/help.py:125
+msgid "Work as usual, then git add, git commit and git push."
+msgstr ""
+
+#: galet/help.py:126
+msgid "2. Open the project and the server"
+msgstr ""
+
+#: galet/help.py:126
+msgid "Your Git project on one side of the dual pane (F3), the server folder (e.g. www) on the other."
+msgstr ""
+
+#: galet/help.py:128
+msgid "3. Deploy"
+msgstr ""
+
+#: galet/help.py:128
+msgid "A banner shows the commits pushed since the last deployment. “Deploy…” sends only the files those commits changed."
+msgstr ""
+
+#: galet/help.py:130
+msgid "What is never sent"
+msgstr ""
+
+#: galet/help.py:130
+msgid "Uncommitted changes, commits not pushed yet, and files ignored by Git (.env, node_modules)."
+msgstr ""
+
+#: galet/help.py:132
+msgid "Pushed from another computer?"
+msgstr ""
+
+#: galet/help.py:132
+msgid "Run git pull (or git fetch) in the project first."
+msgstr ""
+
+#: galet/help.py:133
+msgid "The server already has the site?"
+msgstr ""
+
+#: galet/help.py:133
+msgid "On the first deployment, click “The Server Is Already Up to Date”: nothing is sent, and next time only your new commits are."
+msgstr ""
+
+#: galet/help.py:137
+msgid "Open it"
+msgstr ""
+
+#: galet/help.py:137
+msgid "F4 or Ctrl+² (the key under Esc): a terminal under the files, in the current folder."
+msgstr ""
+
+#: galet/help.py:138
+msgid "On a server"
+msgstr ""
+
+#: galet/help.py:138
+msgid "On an SFTP server, it opens an SSH session in the same folder."
+msgstr ""
+
+#: galet/help.py:139
+msgid "Keyboard"
+msgstr ""
+
+#: galet/help.py:139
+msgid "While you type in it, Ctrl+C, Ctrl+R, Ctrl+L… go to the terminal. Copy and paste with Ctrl+Shift+C and Ctrl+Shift+V."
+msgstr ""
+
+#: galet/help.py:141
+msgid "Security and backups"
+msgstr ""
+
+#: galet/help.py:142
+msgid "Encrypted server list"
+msgstr ""
+
+#: galet/help.py:142
+msgid "Your servers are encrypted (AES-256). A master password can lock them like a vault (Settings → Servers → Security)."
+msgstr ""
+
+#: galet/help.py:144
+msgid "Backups"
+msgstr ""
+
+#: galet/help.py:144
+msgid "Settings → Advanced → Backup: settings, tags, colours, favourites and servers in one file, encrypted with a password. API keys and passwords are never included."
+msgstr ""
+
+#: galet/help.py:150
+msgid "Help"
+msgstr ""
+
+#: galet/help.py:152
+msgid "Using Galet Well"
+msgstr ""
+
+#: galet/help.py:153
+msgid "The essentials, topic by topic. The full guide with pictures is on the website."
+msgstr ""
+
+#: galet/help.py:164
+msgid "More Help"
+msgstr ""
+
+#: galet/help.py:166
+msgid "Full guide on the website"
+msgstr ""
+
+#: galet/help.py:167
+msgid "Report a problem or suggest an idea"
+msgstr ""
+
+#: galet/help.py:168
+msgid "Attach the log file: ~/.cache/galet/galet.log (Flatpak: ~/.var/app/io.github.FloDerail.Galet/cache/galet/galet.log)"
+msgstr ""
+
+#: galet/help.py:177
+msgid "Keyboard Shortcuts"
+msgstr ""
+
+#: galet/help.py:178
+msgid "Ctrl+letter shortcuts are left to the terminal while you type in it."
+msgstr ""
+
 #: galet/info.py:107
 msgid "No Selection"
 msgstr ""
@@ -634,10 +1178,6 @@ msgstr ""
 msgid "{n} items selected"
 msgstr ""
 
-#: galet/pane.py:487
-msgid "Open"
-msgstr ""
-
 #: galet/pane.py:489
 msgid "Open in New Tab"
 msgstr ""
@@ -662,20 +1202,8 @@ msgstr ""
 msgid "Delete Permanently…"
 msgstr ""
 
-#: galet/pane.py:507
-msgid "Quick Look"
-msgstr ""
-
 #: galet/pane.py:509
 msgid "Rename…"
-msgstr ""
-
-#: galet/pane.py:511
-msgid "Duplicate"
-msgstr ""
-
-#: galet/pane.py:513
-msgid "Cut"
 msgstr ""
 
 #: galet/pane.py:514
@@ -714,14 +1242,6 @@ msgstr ""
 msgid "Analyse Photos (AI)"
 msgstr ""
 
-#: galet/pane.py:570
-msgid "Paste"
-msgstr ""
-
-#: galet/pane.py:571
-msgid "Undo"
-msgstr ""
-
 #: galet/pane.py:576
 msgid "Synchronise With the Other Side…"
 msgstr ""
@@ -742,491 +1262,463 @@ msgstr ""
 msgid "Show Hidden Files"
 msgstr ""
 
-#: galet/preferences.py:53
-msgid "Settings"
-msgstr ""
-
-#: galet/preferences.py:80
+#: galet/preferences.py:84
 msgid "Appearance"
 msgstr ""
 
-#: galet/preferences.py:81
+#: galet/preferences.py:85
 msgid "Theme"
 msgstr ""
 
-#: galet/preferences.py:82
+#: galet/preferences.py:86
 msgid "Change the look of Galet: colours, window buttons, font."
 msgstr ""
 
-#: galet/preferences.py:104
+#: galet/preferences.py:108
 msgid "Style"
 msgstr ""
 
-#: galet/preferences.py:107
+#: galet/preferences.py:111
 msgid "Custom Theme"
 msgstr ""
 
-#: galet/preferences.py:108
+#: galet/preferences.py:112
 msgid "Accent colour"
 msgstr ""
 
-#: galet/preferences.py:116
+#: galet/preferences.py:120
 msgid "Window buttons position"
 msgstr ""
 
-#: galet/preferences.py:118
+#: galet/preferences.py:122
 msgid "Window buttons style"
 msgstr ""
 
-#: galet/preferences.py:120
+#: galet/preferences.py:124
 msgid "Rounded corners"
 msgstr ""
 
-#: galet/preferences.py:129
+#: galet/preferences.py:133
 msgid "Font"
 msgstr ""
 
-#: galet/preferences.py:139
+#: galet/preferences.py:143
 msgid "Tint the sidebar with the accent colour"
 msgstr ""
 
-#: galet/preferences.py:157
+#: galet/preferences.py:161
 msgid "Windows"
 msgstr ""
 
-#: galet/preferences.py:158
+#: galet/preferences.py:162
 msgid "New windows show"
 msgstr ""
 
-#: galet/preferences.py:159
+#: galet/preferences.py:163
 msgid "Open folders in tabs instead of new windows"
 msgstr ""
 
-#: galet/preferences.py:160
+#: galet/preferences.py:164
 msgid "When another application asks to open a folder"
 msgstr ""
 
-#: galet/preferences.py:163
-msgid "Search"
-msgstr ""
-
-#: galet/preferences.py:164
+#: galet/preferences.py:168
 msgid "Search window (Ctrl+F)"
 msgstr ""
 
-#: galet/preferences.py:167
+#: galet/preferences.py:171
 msgid "Default search mode"
 msgstr ""
 
-#: galet/preferences.py:172
-msgid "View"
-msgstr ""
-
-#: galet/preferences.py:173
+#: galet/preferences.py:177
 msgid "Default view"
 msgstr ""
 
-#: galet/preferences.py:175
+#: galet/preferences.py:179
 msgid "Icon size"
 msgstr ""
 
-#: galet/preferences.py:186
+#: galet/preferences.py:190
 msgid "Show path and status bar"
 msgstr ""
 
-#: galet/preferences.py:193
+#: galet/preferences.py:197
 msgid "Sidebar"
 msgstr ""
 
-#: galet/preferences.py:194
+#: galet/preferences.py:198
 msgid "Show these items in the sidebar"
 msgstr ""
 
-#: galet/preferences.py:207
+#: galet/preferences.py:211
 msgid "Folders"
 msgstr ""
 
-#: galet/preferences.py:209
+#: galet/preferences.py:213
 msgid "Folder Colours"
 msgstr ""
 
-#: galet/preferences.py:210
+#: galet/preferences.py:214
 msgid "Right-click a folder → Folder Colour to colour it."
 msgstr ""
 
-#: galet/preferences.py:211
+#: galet/preferences.py:215
 msgid "Colour folders with their tag colour"
 msgstr ""
 
-#: galet/preferences.py:212
+#: galet/preferences.py:216
 msgid "A folder tagged “Red” shows a red folder icon"
 msgstr ""
 
-#: galet/preferences.py:213
+#: galet/preferences.py:217
 msgid "Theme icon"
 msgstr ""
 
-#: galet/preferences.py:214
+#: galet/preferences.py:218
 msgid "Default colour of all folders"
 msgstr ""
 
-#: galet/preferences.py:224
+#: galet/preferences.py:228
 msgid "Add a Folder Colour"
 msgstr ""
 
-#: galet/preferences.py:225
+#: galet/preferences.py:229
 msgid "Name"
 msgstr ""
 
-#: galet/preferences.py:254
+#: galet/preferences.py:258
 msgid "Colours in the Menu"
 msgstr ""
 
-#: galet/preferences.py:255
+#: galet/preferences.py:259
 msgid "Reset"
 msgstr ""
 
-#: galet/preferences.py:265
+#: galet/preferences.py:269
 msgid "Remove"
 msgstr ""
 
-#: galet/preferences.py:304
+#: galet/preferences.py:308
 msgid "Your Tags"
 msgstr ""
 
-#: galet/preferences.py:305
+#: galet/preferences.py:309
 msgid "Rename a tag by editing its name. The switch shows it in the sidebar."
 msgstr ""
 
-#: galet/preferences.py:312
+#: galet/preferences.py:316
 msgid "Tag"
 msgstr ""
 
-#: galet/preferences.py:323
+#: galet/preferences.py:327
 msgid "Show in sidebar"
 msgstr ""
 
-#: galet/preferences.py:328
+#: galet/preferences.py:332
 msgid "Delete Tag…"
 msgstr ""
 
-#: galet/preferences.py:335
+#: galet/preferences.py:339
 msgid "This name is already used."
 msgstr ""
 
-#: galet/preferences.py:353
-msgid "Servers"
-msgstr ""
-
-#: galet/preferences.py:362
+#: galet/preferences.py:366
 msgid "My Servers"
 msgstr ""
 
-#: galet/preferences.py:363
+#: galet/preferences.py:367
 msgid "Shown in the sidebar. Passwords are kept in the GNOME keyring."
 msgstr ""
 
-#: galet/preferences.py:364
+#: galet/preferences.py:368
 msgid "New Server"
 msgstr ""
 
-#: galet/preferences.py:386
+#: galet/preferences.py:390
 msgid "Not encrypted: the GNOME keyring is not available."
 msgstr ""
 
-#: galet/preferences.py:388
+#: galet/preferences.py:392
 msgid "Encrypted (AES-256), locked by your master password."
 msgstr ""
 
-#: galet/preferences.py:390
+#: galet/preferences.py:394
 msgid "Encrypted (AES-256) with a key kept in the GNOME keyring."
 msgstr ""
 
-#: galet/preferences.py:391
+#: galet/preferences.py:395
 msgid "Security"
 msgstr ""
 
-#: galet/preferences.py:392
+#: galet/preferences.py:396
 msgid "Server List"
 msgstr ""
 
-#: galet/preferences.py:395
+#: galet/preferences.py:399
 msgid "Master Password"
 msgstr ""
 
-#: galet/preferences.py:396
+#: galet/preferences.py:400
 msgid "Lock the server list like a vault: asked once per session."
 msgstr ""
 
-#: galet/preferences.py:398
+#: galet/preferences.py:402
 msgid "On"
 msgstr ""
 
-#: galet/preferences.py:398
+#: galet/preferences.py:402
 msgid "Off"
 msgstr ""
 
-#: galet/preferences.py:404
+#: galet/preferences.py:408
 msgid "Lock Servers"
 msgstr ""
 
-#: galet/preferences.py:415
+#: galet/preferences.py:419
 msgid "AI"
 msgstr ""
 
-#: galet/preferences.py:418
+#: galet/preferences.py:422
 msgid "AI (optional)"
 msgstr ""
 
-#: galet/preferences.py:419
+#: galet/preferences.py:423
 msgid "Search in plain language and get tag suggestions. With Ollama everything stays on your computer; online services receive file names and short document excerpts."
 msgstr ""
 
-#: galet/preferences.py:421
+#: galet/preferences.py:425
 msgid "Enable AI features"
 msgstr ""
 
-#: galet/preferences.py:423
+#: galet/preferences.py:427
 msgid "Provider"
 msgstr ""
 
-#: galet/preferences.py:430
+#: galet/preferences.py:434
 msgid "Analysed photos"
 msgstr ""
 
-#: galet/preferences.py:431
+#: galet/preferences.py:435
 msgid "{n} photos described by the AI, stored only on this computer"
 msgstr ""
 
-#: galet/preferences.py:433
+#: galet/preferences.py:437
 msgid "Forget"
 msgstr ""
 
-#: galet/preferences.py:451
+#: galet/preferences.py:455
 msgid "Send data to {service}?"
 msgstr ""
 
-#: galet/preferences.py:452
+#: galet/preferences.py:456
 msgid "When you use AI features, Galet will send file names and short excerpts of the selected documents to this online service. Nothing is sent until you use an AI feature."
 msgstr ""
 
-#: galet/preferences.py:455
+#: galet/preferences.py:459
 msgid "I Agree"
 msgstr ""
 
-#: galet/preferences.py:487
+#: galet/preferences.py:491
 msgid "Ollama address"
 msgstr ""
 
-#: galet/preferences.py:492
+#: galet/preferences.py:496
 msgid "Model"
 msgstr ""
 
-#: galet/preferences.py:494
+#: galet/preferences.py:498
 msgid "Refresh the list of models"
 msgstr ""
 
-#: galet/preferences.py:499
+#: galet/preferences.py:503
 msgid "Install Ollama"
 msgstr ""
 
-#: galet/preferences.py:500
+#: galet/preferences.py:504
 msgid "In a terminal: install Ollama, then download a model."
 msgstr ""
 
-#: galet/preferences.py:509
+#: galet/preferences.py:513
 msgid "API key"
 msgstr ""
 
-#: galet/preferences.py:518
+#: galet/preferences.py:522
 msgid "API key saved in the GNOME keyring"
 msgstr ""
 
-#: galet/preferences.py:525
+#: galet/preferences.py:529
 msgid "Get a key"
 msgstr ""
 
-#: galet/preferences.py:528
+#: galet/preferences.py:532
 msgid "Forget the API key"
 msgstr ""
 
-#: galet/preferences.py:541
+#: galet/preferences.py:545
 msgid "Requires the “anthropic” Python package"
 msgstr ""
 
-#: galet/preferences.py:549
+#: galet/preferences.py:553
 msgid "“{program}” is installed"
 msgstr ""
 
-#: galet/preferences.py:550
+#: galet/preferences.py:554
 msgid "“{program}” is not installed"
 msgstr ""
 
-#: galet/preferences.py:551
+#: galet/preferences.py:555
 msgid "Uses your existing subscription: no API key needed."
 msgstr ""
 
-#: galet/preferences.py:557
+#: galet/preferences.py:561
 msgid "Privacy: file names and short excerpts of the documents you select are sent to this service only when you use an AI feature."
 msgstr ""
 
-#: galet/preferences.py:596
+#: galet/preferences.py:600
 msgid "Backup"
 msgstr ""
 
-#: galet/preferences.py:597
+#: galet/preferences.py:601
 msgid "Save your settings, tags, folder colours, favourites and servers in a file, to restore them later or on another computer. API keys and passwords are not included."
 msgstr ""
 
-#: galet/preferences.py:599
+#: galet/preferences.py:603
 msgid "Tag names and colours"
 msgstr ""
 
-#: galet/preferences.py:600
+#: galet/preferences.py:604
 msgid "Tags of your files and folders"
 msgstr ""
 
-#: galet/preferences.py:600
-msgid "Folder colours"
-msgstr ""
-
-#: galet/preferences.py:601
+#: galet/preferences.py:605
 msgid "Sidebar favourites"
 msgstr ""
 
-#: galet/preferences.py:601
+#: galet/preferences.py:605
 msgid "AI photo descriptions"
 msgstr ""
 
-#: galet/preferences.py:602
+#: galet/preferences.py:606
 msgid "Servers (without their passwords)"
 msgstr ""
 
-#: galet/preferences.py:603
+#: galet/preferences.py:607
 msgid "What to include"
 msgstr ""
 
-#: galet/preferences.py:603
+#: galet/preferences.py:607
 msgid "Everything, by default"
 msgstr ""
 
-#: galet/preferences.py:610
+#: galet/preferences.py:614
 msgid "Encrypt the backup"
 msgstr ""
 
-#: galet/preferences.py:611
+#: galet/preferences.py:615
 msgid "Protected by a password you choose (AES-256)"
 msgstr ""
 
-#: galet/preferences.py:613
+#: galet/preferences.py:617
 msgid "Backup file"
 msgstr ""
 
-#: galet/preferences.py:614
+#: galet/preferences.py:618
 msgid "Export…"
 msgstr ""
 
-#: galet/preferences.py:616
+#: galet/preferences.py:620
 msgid "Import…"
 msgstr ""
 
-#: galet/preferences.py:630
+#: galet/preferences.py:634
 msgid "Backup Password"
 msgstr ""
 
-#: galet/preferences.py:632
+#: galet/preferences.py:636
 msgid "Password"
 msgstr ""
 
-#: galet/preferences.py:634
+#: galet/preferences.py:638
 msgid "Confirm"
 msgstr ""
 
-#: galet/preferences.py:639
+#: galet/preferences.py:643
 msgid "Continue"
 msgstr ""
 
-#: galet/preferences.py:671
+#: galet/preferences.py:675
 msgid "Choose a password (6 characters or more). It will be asked to import the backup; without it, the file cannot be opened."
 msgstr ""
 
-#: galet/preferences.py:682
+#: galet/preferences.py:686
 msgid "Export Galet Backup"
 msgstr ""
 
-#: galet/preferences.py:703
+#: galet/preferences.py:707
 msgid "Could not save the backup: {error}"
 msgstr ""
 
-#: galet/preferences.py:705
+#: galet/preferences.py:709
 msgid "Backup saved: {tags} tags, {files} tagged items, {colors} folder colours"
 msgstr ""
 
-#: galet/preferences.py:709
+#: galet/preferences.py:713
 msgid "Saving the backup…"
 msgstr ""
 
-#: galet/preferences.py:717
+#: galet/preferences.py:721
 msgid "Galet backups"
 msgstr ""
 
-#: galet/preferences.py:722
+#: galet/preferences.py:726
 msgid "Import Galet Backup"
 msgstr ""
 
-#: galet/preferences.py:737
+#: galet/preferences.py:741
 msgid "Encrypted Backup"
 msgstr ""
 
-#: galet/preferences.py:738
+#: galet/preferences.py:742
 msgid "Wrong password, try again."
 msgstr ""
 
-#: galet/preferences.py:739
+#: galet/preferences.py:743
 msgid "This backup is encrypted. Type its password."
 msgstr ""
 
-#: galet/preferences.py:742
+#: galet/preferences.py:746
 msgid "This file can't be imported: {error}"
 msgstr ""
 
-#: galet/preferences.py:748
+#: galet/preferences.py:752
 msgid "Backup of {date}: {tags} tags, {files} tagged items, {colors} folder colours, {bookmarks} favourites, {photos} photo descriptions, {servers} servers.\n\nTags, colours, favourites and servers are added to yours; settings are replaced."
 msgstr ""
 
-#: galet/preferences.py:754
+#: galet/preferences.py:758
 msgid "Import this backup?"
 msgstr ""
 
-#: galet/preferences.py:756
+#: galet/preferences.py:760
 msgid "Import"
 msgstr ""
 
-#: galet/preferences.py:764
+#: galet/preferences.py:768
 msgid "Backup imported: {tags} tags, {files} tagged items, {colors} folder colours"
 msgstr ""
 
-#: galet/preferences.py:773
+#: galet/preferences.py:777
 msgid "Advanced"
 msgstr ""
 
-#: galet/preferences.py:774
-msgid "Files"
-msgstr ""
-
-#: galet/preferences.py:775
+#: galet/preferences.py:779
 msgid "Show all filename extensions"
 msgstr ""
 
-#: galet/preferences.py:776
-msgid "Show hidden files"
-msgstr ""
-
-#: galet/preferences.py:777
+#: galet/preferences.py:781
 msgid "Keep folders on top"
 msgstr ""
 
-#: galet/preferences.py:778
+#: galet/preferences.py:782
 msgid "In icon, list and column views"
 msgstr ""
 
@@ -1236,34 +1728,6 @@ msgstr ""
 
 #: galet/preferences.py
 msgid "Recent"
-msgstr ""
-
-#: galet/preferences.py
-msgid "Desktop"
-msgstr ""
-
-#: galet/preferences.py
-msgid "Documents"
-msgstr ""
-
-#: galet/preferences.py
-msgid "Downloads"
-msgstr ""
-
-#: galet/preferences.py
-msgid "Icons"
-msgstr ""
-
-#: galet/preferences.py
-msgid "List"
-msgstr ""
-
-#: galet/preferences.py
-msgid "Columns"
-msgstr ""
-
-#: galet/preferences.py
-msgid "Gallery"
 msgstr ""
 
 #: galet/preferences.py
@@ -1284,10 +1748,6 @@ msgstr ""
 
 #: galet/preferences.py
 msgid "External Drives"
-msgstr ""
-
-#: galet/preferences.py
-msgid "Network"
 msgstr ""
 
 #: galet/preferences.py
@@ -1488,10 +1948,6 @@ msgstr ""
 
 #: galet/servers.py:328
 msgid "Kept in the GNOME keyring"
-msgstr ""
-
-#: galet/servers.py:334
-msgid "Connect"
 msgstr ""
 
 #: galet/servers.py:381
@@ -1763,19 +2219,11 @@ msgid "{n} results"
 msgstr ""
 
 #: galet/syncdialog.py:15
-msgid "New folder"
-msgstr ""
-
-#: galet/syncdialog.py:15
 msgid "New"
 msgstr ""
 
 #: galet/syncdialog.py:17
 msgid "To delete"
-msgstr ""
-
-#: galet/syncdialog.py:27
-msgid "Synchronise"
 msgstr ""
 
 #: galet/syncdialog.py:47
@@ -1802,95 +2250,103 @@ msgstr ""
 msgid "Comparing the two folders…"
 msgstr ""
 
-#: galet/syncdialog.py:129
-msgid "Comparing… {path}"
+#: galet/syncdialog.py:128
+msgid "Comparing… {n} folder compared"
 msgstr ""
 
-#: galet/syncdialog.py:144
+#: galet/syncdialog.py:128
+msgid "Comparing… {n} folders compared"
+msgstr ""
+
+#: galet/syncdialog.py:130
+msgid "Both folders are compared each time; on a server, a big site can take a minute."
+msgstr ""
+
+#: galet/syncdialog.py:146
 msgid "{n} modified file"
 msgstr ""
 
-#: galet/syncdialog.py:144
+#: galet/syncdialog.py:146
 msgid "{n} modified files"
 msgstr ""
 
-#: galet/syncdialog.py:145
+#: galet/syncdialog.py:147
 msgid "{n} new item"
 msgstr ""
 
-#: galet/syncdialog.py:145
+#: galet/syncdialog.py:147
 msgid "{n} new items"
 msgstr ""
 
-#: galet/syncdialog.py:146
+#: galet/syncdialog.py:148
 msgid "{n} item more recent at destination"
 msgstr ""
 
-#: galet/syncdialog.py:146
+#: galet/syncdialog.py:148
 msgid "{n} items more recent at destination"
 msgstr ""
 
-#: galet/syncdialog.py:149
+#: galet/syncdialog.py:151
 msgid "{n} item to delete"
 msgstr ""
 
-#: galet/syncdialog.py:149
+#: galet/syncdialog.py:151
 msgid "{n} items to delete"
 msgstr ""
 
-#: galet/syncdialog.py:152
+#: galet/syncdialog.py:154
 msgid "{n} identical file (skipped)"
 msgstr ""
 
-#: galet/syncdialog.py:152
+#: galet/syncdialog.py:154
 msgid "{n} identical files (skipped)"
 msgstr ""
 
-#: galet/syncdialog.py:155
+#: galet/syncdialog.py:157
 msgid "Everything is already up to date."
 msgstr ""
 
-#: galet/syncdialog.py:157
+#: galet/syncdialog.py:159
 msgid "Some folders could not be read: {error}"
 msgstr ""
 
-#: galet/syncdialog.py:162
+#: galet/syncdialog.py:164
 msgid "… and {n} more"
 msgstr ""
 
-#: galet/syncdialog.py:216
+#: galet/syncdialog.py:218
 msgid "Select None"
 msgstr ""
 
-#: galet/syncdialog.py:249
+#: galet/syncdialog.py:251
 msgid "Some items could not be synchronised: {error}"
 msgstr ""
 
-#: galet/syncdialog.py:251
+#: galet/syncdialog.py:253
 msgid "Synchronised: {n} item"
 msgstr ""
 
-#: galet/syncdialog.py:251
+#: galet/syncdialog.py:253
 msgid "Synchronised: {n} items"
 msgstr ""
 
-#: galet/syncdialog.py:254
+#: galet/syncdialog.py:256
 msgid "Synchronising to “{name}”"
 msgstr ""
 
-#: galet/syncdialog.py:257
+#: galet/syncdialog.py:259
 msgid "Delete {n} items at the destination?"
 msgstr ""
 
-#: galet/syncdialog.py:258
+#: galet/syncdialog.py:260
 msgid "They no longer exist at the source. They go to the trash when the destination supports it; on most servers they are deleted for good."
 msgstr ""
 
-#: galet/syncdialog.py:277
+#: galet/syncdialog.py:279
 msgid "Synchronising works between two real folders."
 msgstr ""
 
-#: galet/syncdialog.py:281
+#: galet/syncdialog.py:283
 msgid "Choose two different folders, not one inside the other."
 msgstr ""
 
@@ -2010,14 +2466,6 @@ msgstr ""
 msgid "Show Sidebar"
 msgstr ""
 
-#: galet/window.py:60
-msgid "Back"
-msgstr ""
-
-#: galet/window.py:62
-msgid "Forward"
-msgstr ""
-
 #: galet/window.py:69
 msgid "New Window"
 msgstr ""
@@ -2047,165 +2495,169 @@ msgid "Dual Pane"
 msgstr ""
 
 #: galet/window.py:90
+msgid "Help and Keyboard Shortcuts"
+msgstr ""
+
+#: galet/window.py:91
 msgid "About Galet"
 msgstr ""
 
-#: galet/window.py:93
+#: galet/window.py:94
 msgid "Main Menu"
 msgstr ""
 
-#: galet/window.py:95
+#: galet/window.py:96
 msgid "Search (Ctrl+F)"
 msgstr ""
 
-#: galet/window.py:106
+#: galet/window.py:107
 msgid "Sort By"
 msgstr ""
 
-#: galet/window.py:111
+#: galet/window.py:112
 msgid "Group By"
 msgstr ""
 
-#: galet/window.py:113
+#: galet/window.py:114
 msgid "Show Preview"
 msgstr ""
 
-#: galet/window.py:117
+#: galet/window.py:118
 msgid "Sort, Group and Display Options"
 msgstr ""
 
-#: galet/window.py:138
+#: galet/window.py:139
 msgid "This Folder"
 msgstr ""
 
-#: galet/window.py:138
+#: galet/window.py:139
 msgid "Filter the current folder"
 msgstr ""
 
-#: galet/window.py:139
+#: galet/window.py:140
 msgid "Subfolders"
 msgstr ""
 
-#: galet/window.py:139
+#: galet/window.py:140
 msgid "Search this folder and all its subfolders"
 msgstr ""
 
-#: galet/window.py:140
+#: galet/window.py:141
 msgid "Everywhere"
 msgstr ""
 
-#: galet/window.py:140
+#: galet/window.py:141
 msgid "Search your whole home folder"
 msgstr ""
 
-#: galet/window.py:153
+#: galet/window.py:154
 msgid "Also search inside documents (text, PDF, office files)"
 msgstr ""
 
-#: galet/window.py:158
+#: galet/window.py:159
 msgid "AI mode: describe what you are looking for, then press Enter"
 msgstr ""
 
-#: galet/window.py:167
+#: galet/window.py:168
 msgid "Save as Smart Folder"
 msgstr ""
 
-#: galet/window.py:211
+#: galet/window.py:212
 msgid "Deploy…"
 msgstr ""
 
-#: galet/window.py:393
+#: galet/window.py:394
 msgid "Sending {n} file to {device}…"
 msgstr ""
 
-#: galet/window.py:393
+#: galet/window.py:394
 msgid "Sending {n} files to {device}…"
 msgstr ""
 
-#: galet/window.py:422
+#: galet/window.py:423
 msgid "Describe what you are looking for, e.g. “PDF invoices from this week”"
 msgstr ""
 
-#: galet/window.py:512
+#: galet/window.py:513
 msgid "No new photo to analyse here"
 msgstr ""
 
-#: galet/window.py:515
+#: galet/window.py:516
 msgid "{n} photos will be described by {service} so you can find them by what they show."
 msgstr ""
 
-#: galet/window.py:518
+#: galet/window.py:519
 msgid "Reduced copies of the photos (512 pixels) are sent to this online service."
 msgstr ""
 
-#: galet/window.py:547
+#: galet/window.py:548
 msgid "{n} photo analysed"
 msgstr ""
 
-#: galet/window.py:547
+#: galet/window.py:548
 msgid "{n} photos analysed"
 msgstr ""
 
-#: galet/window.py:549
+#: galet/window.py:550
 msgid "Analysing Photos"
 msgstr ""
 
-#: galet/window.py:551
+#: galet/window.py:552
 msgid "Analyse photos with the AI?"
 msgstr ""
 
-#: galet/window.py:551
+#: galet/window.py:552
 msgid "Analyse"
 msgstr ""
 
-#: galet/window.py:703
+#: galet/window.py:704
 msgid "Could not change the folder colour: {error}"
 msgstr ""
 
-#: galet/window.py:808
+#: galet/window.py:809
 msgid "Enclosing Folder"
 msgstr ""
 
-#: galet/window.py:814
+#: galet/window.py:815
 msgid "Synchronise the two folders…"
 msgstr ""
 
-#: galet/window.py:817
+#: galet/window.py:818
 msgid "Deploy the pushed commits (Git)…"
 msgstr ""
 
-#: galet/window.py:821
+#: galet/window.py:822
 msgid "Close Dual Pane"
 msgstr ""
 
-#: galet/window.py:881
+#: galet/window.py:882
 msgid "Open your Git project on one side and the server folder on the other."
 msgstr ""
 
-#: galet/window.py:911
+#: galet/window.py:912
 msgid "{n} commit pushed since the last deployment to “{server}”"
 msgstr ""
 
-#: galet/window.py:911
+#: galet/window.py:912
 msgid "{n} commits pushed since the last deployment to “{server}”"
 msgstr ""
 
-#: galet/window.py:974
+#: galet/window.py:975
 msgid "Tag “{tag}” added"
 msgstr ""
 
-#: galet/window.py:1100
+#: galet/window.py:1101
 msgid "Save Smart Folder"
 msgstr ""
 
-#: galet/window.py:1102
+#: galet/window.py:1103
 msgid "Smart folder “{name}” saved"
 msgstr ""
 
-#: galet/window.py:1146
+#: galet/window.py:1147
 msgid "No folder at “{path}”"
 msgstr ""
 
-#: galet/window.py:1148
+#: galet/window.py:1149
 msgid "Go to Location"
 msgstr ""

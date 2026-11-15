@@ -85,6 +85,9 @@
     <keyword>explorer</keyword>
   </keywords>
   <releases>
+    <release version="0.12.0" date="2026-11-15">
+      <description><p>Built-in help with all keyboard shortcuts and a guide; faster first Git deployment with progress.</p></description>
+    </release>
     <release version="0.11.0" date="2026-11-15">
       <description><p>Deploy with Git: after a push, send to the server only the files changed by the pushed commits since the last deployment, with a preview.</p></description>
     </release>

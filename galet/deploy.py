@@ -152,15 +152,19 @@ def pending(settings, folder, remote_uri):
 
 # ------------------------------------------------------------------ plan
 
-def build_plan(settings, folder, remote, cancellable=None):
-    """Return (project, plan, commits, base) — plan entries use the sync kinds plus DELETED."""
+def prepare(settings, folder, remote):
+    """Fast part (Git only): (project, base commit or None, commits)."""
     project = Project(folder)
     pair = last_deploy(settings, folder, remote.get_uri())
     base = pair["commit"] if pair and project.has_commit(pair["commit"]) else None
+    return project, base, project.commits(base) if base else []
+
+
+def build_plan(settings, folder, remote, cancellable=None, progress=None, prepared=None):
+    """Return (project, plan, commits, base) — plan entries use the sync kinds plus DELETED."""
+    project, base, commits = prepared or prepare(settings, folder, remote)
     plan = sync.Plan(Gio.File.new_for_path(project.folder), remote)
-    commits = []
     if base is not None:
-        commits = project.commits(base)
         for status, path in project.changes(base):
             if status == "D":
                 entry = sync.Entry(path, DELETED)
@@ -170,7 +174,9 @@ def build_plan(settings, folder, remote, cancellable=None):
             plan.entries.append(entry)
     else:  # first deployment: tracked files compared with the server (size and date)
         tracked = project.tracked()
-        scanned = sync.scan(Gio.File.new_for_path(project.folder), remote, (".git",), False, cancellable)
+        # only the folders that contain tracked files are visited on the server
+        scanned = sync.scan(Gio.File.new_for_path(project.folder), remote, (".git",), False, cancellable,
+                            progress, only=tracked)
         plan.errors = scanned.errors
         for entry in scanned.entries:
             if entry.is_dir or entry.path not in tracked:
@@ -256,6 +262,13 @@ class DeployDialog(Adw.Dialog):
         text.append(self.info)
         top.append(text)
 
+        self.uptodate_button = Gtk.Button(label=_("The Server Is Already Up to Date"), visible=False,
+                                          halign=Gtk.Align.START, css_classes=["pill"])
+        self.uptodate_button.set_tooltip_text(_("Remember the current commit as deployed without sending anything. "
+                                                "Next time, only the files of your new commits will be sent."))
+        self.uptodate_button.connect("clicked", lambda *_a: self._mark_up_to_date())
+        self.cancellable = Gio.Cancellable()
+        self.connect("closed", lambda *_a: self.cancellable.cancel())
         self.commits_row = Adw.ExpanderRow(title=_("Commits"), visible=False)
         commits_group = Adw.PreferencesGroup()
         commits_group.add(self.commits_row)
@@ -266,7 +279,7 @@ class DeployDialog(Adw.Dialog):
 
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=12, margin_top=12, margin_bottom=18,
                       margin_start=18, margin_end=18)
-        for widget in (top, commits_group, scroller):
+        for widget in (top, self.uptodate_button, commits_group, scroller):
             box.append(widget)
         toolbar = Adw.ToolbarView()
         toolbar.add_top_bar(header)
@@ -280,11 +293,40 @@ class DeployDialog(Adw.Dialog):
 
     def _load(self):
         try:
-            result = build_plan(self.window.settings, self.folder, self.remote)
-            GLib.idle_add(lambda: self._show(*result) and False)
+            prepared = prepare(self.window.settings, self.folder, self.remote)
+            GLib.idle_add(lambda: self._prepared(*prepared) and False)
+            last = {"time": 0}
+
+            def progress(path, folders):
+                now = GLib.get_monotonic_time()
+                if now - last["time"] > 150000:
+                    last["time"] = now
+                    text = ngettext("Comparing with the server… {n} folder", "Comparing with the server… {n} folders",
+                                    folders).format(n=folders) + "\n" + path
+                    GLib.idle_add(lambda: not self.cancellable.is_cancelled() and self.info.set_text(text) and False)
+
+            result = build_plan(self.window.settings, self.folder, self.remote, self.cancellable, progress, prepared)
+            if not self.cancellable.is_cancelled():
+                GLib.idle_add(lambda: self._show(*result) and False)
         except (GitError, GLib.Error) as err:
             message = getattr(err, "message", None) or str(err)
             GLib.idle_add(lambda: self._failed(message) and False)
+
+    def _prepared(self, project, base, commits):
+        self.project = project
+        if base is None:  # first deployment: the comparison with the server can take a while
+            self.uptodate_button.set_visible(True)
+            self.info.set_text(_("First deployment: comparing the files tracked by Git with the server…"))
+
+    def _mark_up_to_date(self):
+        if self.project is None:
+            return
+        self.cancellable.cancel()
+        remember(self.window.settings, self.folder, self.remote.get_uri(), self.project)
+        self.window.toast(_("Marked as deployed ({sha}): next time, only new commits are sent.").format(
+            sha=self.project.target[:7]))
+        self.close()
+        self.window.refresh_deploy_banner()
 
     def _failed(self, message):
         self.spinner.set_visible(False)

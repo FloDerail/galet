@@ -2,6 +2,19 @@
 
 Galet — logiciel libre et open source de [Florian Dérail](https://florianderail.fr).
 
+## 0.12.0 — Aide intégrée, déploiement plus rapide
+
+- ❓ **Réglages → Aide** (ou **F1**, ou menu → « Aide et raccourcis clavier ») : tous les raccourcis
+  clavier (lus directement dans Galet, donc toujours exacts) et un guide thème par thème, y compris
+  **Git et GitHub pour débuter**.
+- 🚀 Déploiement Git : le premier déploiement ne parcourt plus que les dossiers contenant des fichiers
+  suivis par Git (beaucoup plus rapide sur un serveur), affiche sa progression, et propose
+  **« Le serveur est déjà à jour »** pour ne rien envoyer la première fois.
+- ⟳ Synchroniser : la progression (dossiers comparés) est affichée pendant la comparaison.
+- 🌐 Site web : guide pas à pas (serveurs, transferts, fusion, synchronisation, Git pour débuter).
+- 🇬🇧 Built-in help page with all keyboard shortcuts and a guide; faster first Git deployment with
+  progress and “The Server Is Already Up to Date”; sync progress.
+
 ## 0.11.0 — Déployer avec Git
 
 - 🚀 **Déployer avec Git** : votre projet d'un côté du double panneau, le dossier du serveur de

@@ -50,6 +50,7 @@ logiciel libre, il peut maintenant convenir à d'autres aussi.
 | 📁 **Dossiers colorés** | Clic droit → « Couleur du dossier ». Un dossier peut prendre la couleur de son tag, et la palette se règle dans Réglages → Dossiers. Chaque dossier retient aussi sa présentation, comme sur Mac. |
 | 💾 **Sauvegarde** | Réglages → Avancé : exportez réglages, tags, couleurs de dossiers, favoris et serveurs dans un fichier **chiffré par mot de passe**, et réimportez-les plus tard ou sur un autre PC. |
 | ⚙️ **Réglages** | `Ctrl+,` : dossier de départ, présentation par défaut, taille des icônes, éléments de la barre latérale, tags, serveurs… |
+| ❓ **Aide** | `F1` : Réglages → Aide, avec **tous les raccourcis clavier** et un guide thème par thème (dont Git et GitHub pour débuter). |
 
 | Colonnes | Galerie |
 |---|---|

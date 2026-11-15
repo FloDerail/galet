@@ -61,6 +61,10 @@ class PreferencesDialog(Adw.PreferencesDialog):
         self.add(self._servers_page())
         self.add(self._ai_page())
         self.add(self._advanced_page())
+        from .help import help_page
+
+        self.help_page = help_page(app.get_active_window)
+        self.add(self.help_page)
         self._tags_handler = self.tagstore.connect("tags-changed", lambda *_a: self._fill_tags())
         self._settings_handler = self.settings.connect(
             "changed", lambda _s, key: self._fill_servers() if key == "servers"

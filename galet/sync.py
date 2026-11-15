@@ -79,15 +79,28 @@ def is_modified(source_info, destination_info):
     return False, False
 
 
-def scan(source, destination, excludes=(), mirror=False, cancellable=None, progress=None):
-    """Compare two folders recursively. ``progress(text)`` is called from time to time."""
+def scan(source, destination, excludes=(), mirror=False, cancellable=None, progress=None, only=None):
+    """Compare two folders recursively. ``progress(text, folders_done)`` is called for each folder.
+
+    ``only``: a set of relative file paths (e.g. the files tracked by Git); folders that
+    contain none of them are not visited at all — on a server this saves a lot of time.
+    """
     plan = Plan(source, destination)
+    wanted_dirs = None
+    if only is not None:
+        wanted_dirs = {""}
+        for path in only:
+            parts = path.split("/")[:-1]
+            for i in range(1, len(parts) + 1):
+                wanted_dirs.add("/".join(parts[:i]))
+    folders = [0]
 
     def walk(src, dst, rel, dst_exists):
         if cancellable is not None and cancellable.is_cancelled():
             return
+        folders[0] += 1
         if progress:
-            progress(rel or src.get_basename())
+            progress(rel or src.get_basename(), folders[0])
         try:
             src_children = _children(src, cancellable)
         except GLib.Error as err:
@@ -104,6 +117,8 @@ def scan(source, destination, excludes=(), mirror=False, cancellable=None, progr
                 continue
             path = f"{rel}/{name}" if rel else name
             is_dir = info.get_file_type() == Gio.FileType.DIRECTORY
+            if only is not None and (path not in wanted_dirs if is_dir else path not in only):
+                continue
             other = dst_children.get(name)
             if is_dir:
                 exists = other is not None and other.get_file_type() == Gio.FileType.DIRECTORY
